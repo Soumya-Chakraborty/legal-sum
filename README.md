@@ -13,8 +13,9 @@ The main requirements are [pytorch](http://pytorch.org/) (`v0.4.0`) and python `
 ## Get started
 1. Download preprocessed datasets
 ```bash
-git clone https://github.com/KaiyangZhou/pytorch-vsumm-reinforce
-cd pytorch-vsumm-reinforce
+git clone https://github.com/Soumya-Chakraborty/Unsupervised-video-summarization-with-deep-GAN-reinforcement-learning.git
+cd Unsupervised-video-summarization-with-deep-GAN-reinforcement-learning
+
 # download datasets.tar.gz (173.5MB)
 wget http://www.eecs.qmul.ac.uk/~kz303/vsumm-reinforce/datasets.tar.gz
 tar -xvzf datasets.tar.gz
