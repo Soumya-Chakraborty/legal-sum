@@ -21,7 +21,8 @@ wget http://www.eecs.qmul.ac.uk/~kz303/vsumm-reinforce/datasets.tar.gz
 tar -xvzf datasets.tar.gz
 ```
 
-**Updates**: The QMUL server is inaccessible. Download the datasets from this [google drive link](https://drive.google.com/open?id=1Bf0beMN_ieiM3JpprghaoOwQe9QJIyAN).
+**Updates**: If the above given process does not work The follow the following process. 
+Download the datasets from this [google drive link](https://drive.google.com/file/d/1pE4LPGUTBVqXAKmlh6DfywX5bLWmoTOS/view?usp=drive_link).
 
 2. Make splits
 ```bash
@@ -75,10 +76,10 @@ You can use `summary2video.py` to transform the binary `machine_summary` to real
 ```bash
 python summary2video.py -p path_to/result.h5 -d path_to/video_frames -i 0 --fps 30 --save-dir log --save-name summary.mp4
 ```
-Please remember to specify the naming format of your video frames on this [line](https://github.com/KaiyangZhou/pytorch-vsumm-reinforce/blob/master/summary2video.py#L22).
+Please remember to specify the naming format of your video frames on this [line](https://github.com/Soumya-Chakraborty/Unsupervised-video-summarization-with-deep-GAN-reinforcement-learning/blob/31d5159c355e6180dc37a8f52be7dbb086834e17/summary2video.py#L22).
 
 ## How to use your own data
-We preprocess data by extracting image features for videos and save them to `h5` file. The file format looks like [this](https://github.com/KaiyangZhou/vsumm-reinforce/issues/1#issuecomment-363492711). After that, you can make split via `create_split.py`. If you wanna train policy network using the entire dataset, just do `train_keys = dataset.keys()`. [Here](https://github.com/KaiyangZhou/pytorch-vsumm-reinforce/blob/master/main.py#L75) is the code where we initialize dataset. If you have any problems, feel free to contact me by email or raise an `issue`.
+We preprocess data by extracting image features for videos and save them to `h5` file. The file format looks like [this](https://github.com/Soumya-Chakraborty/Unsupervised-video-summarization-with-deep-GAN-reinforcement-learning/blob/31d5159c355e6180dc37a8f52be7dbb086834e17/summary2video.py#L22). After that, you can make split via `create_split.py`. If you wanna train policy network using the entire dataset, just do `train_keys = dataset.keys()`. [Here](https://github.com/Soumya-Chakraborty/Unsupervised-video-summarization-with-deep-GAN-reinforcement-learning/blob/31d5159c355e6180dc37a8f52be7dbb086834e17/main.py#L75) is the code where we initialize dataset. If you have any problems, feel free to contact me by email or raise an `issue`.
 
 ## Credit Goes to:
 This repo contains the Pytorch implementation of the AAAI'18 paper - [Deep Reinforcement Learning for Unsupervised Video Summarization with Diversity-Representativeness Reward](https://arxiv.org/abs/1801.00054). The original Theano implementation can be found [here](https://github.com/KaiyangZhou/vsumm-reinforce).
