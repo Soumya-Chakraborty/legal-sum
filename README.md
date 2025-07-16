@@ -8,7 +8,7 @@
 © form [Deep Reinforcement Learning for Unsupervised Video Summarization with Diversity-Representativeness Reward](https://arxiv.org/abs/1801.00054)
 
 
-The main requirements are [pytorch](http://pytorch.org/) (`v0.4.0`) and python `2.7`. Some dependencies that may not be installed in your machine are [tabulate](https://pypi.org/project/tabulate/) and [h5py](https://github.com/h5py/h5py). Please install other missing dependencies.
+The main requirements are [pytorch](http://pytorch.org/) (`v0.4.0`) and python `3.7`. Some dependencies that may not be installed in your machine are [tabulate](https://pypi.org/project/tabulate/) and [h5py](https://github.com/h5py/h5py). Please install other missing dependencies.
 
 ## Get started
 1. Download preprocessed datasets
