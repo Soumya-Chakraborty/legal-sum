@@ -36,7 +36,7 @@ def create():
     print("Goal: randomly split data for {} times, {:.1%} for training and the rest for testing".format(args.num_splits, args.train_percent))
     print("Loading dataset from {}".format(args.dataset))
     dataset = h5py.File(args.dataset, 'r')
-    keys = dataset.keys()
+    keys = list(dataset.keys())
     num_videos = len(keys)
     num_train = int(math.ceil(num_videos * args.train_percent))
     num_test = num_videos - num_train
