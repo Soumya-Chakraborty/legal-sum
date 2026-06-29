@@ -67,7 +67,23 @@ Ensure Python 3.7+ and PyTorch 1.0+ are installed. Install dependencies:
 pip install tabulate h5py matplotlib scipy openai-whisper --break-system-packages
 ```
 
-### 2. Dataset Setup
+### 2. Single-Video Inference Quickstart
+To run the pre-trained SOTA model on any custom video (e.g. to create a quick summary video + text transcript mapping + cache files):
+```bash
+python -c "
+from demo.legal_sum import run_legal_sum
+run_legal_sum(
+    video_path='demo/court_trial_naruto.webm',
+    output_video_path='demo/court_summary_naruto.mp4',
+    manifest_path='demo/court_manifest_naruto.json',
+    checkpoint_path='log/summe-counterfactual-optimized/model_best.pth.tar',
+    mode='narrative',
+    max_frames=10000
+)
+"
+```
+
+### 3. Dataset Setup
 Unpack the H5 dataset files under the `datasets/` directory:
 - `datasets/eccv16_dataset_summe_google_pool5.h5`
 - `datasets/eccv16_dataset_tvsum_google_pool5.h5`
@@ -77,7 +93,7 @@ Generate splits:
 python create_split.py -d datasets/eccv16_dataset_summe_google_pool5.h5 --save-dir datasets --save-name summe_splits --num-splits 5
 ```
 
-### 3. Training Execution (Optimized SOTA Configurations)
+### 4. Training Execution (Optimized SOTA Configurations)
 
 Train the model on **SumMe** (Split 1):
 ```bash
@@ -129,7 +145,7 @@ python main.py \
     --verbose
 ```
 
-### 4. Evaluating Pre-trained Checkpoint Only
+### 5. Evaluating Pre-trained Checkpoint Only
 To run evaluation only without training:
 ```bash
 python main.py \
