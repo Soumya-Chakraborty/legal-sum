@@ -1,0 +1,4889 @@
+[
+  {
+    "summary_frame_index": 0,
+    "original_frame_index": 0,
+    "sha256_hash": "25ae3166ec5dc6b37d5ed6d0cb4b8bedd6bc1510198504248ad6f850c5d8b0c9",
+    "model_score": 0.2928445339202881,
+    "motion_score": 0.0,
+    "audio_loudness": 0.0,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 1,
+    "original_frame_index": 1,
+    "sha256_hash": "ca4553b9922c2a8e6160f90f278383a9f9492448fd3eb64d345af353ebe5e33a",
+    "model_score": 0.2928445339202881,
+    "motion_score": 0.008395787944807552,
+    "audio_loudness": 0.0,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 2,
+    "original_frame_index": 2,
+    "sha256_hash": "a1cc3d5470bc37c82402d00d768ee4885ae30642e555a0b3559c639a6fb28309",
+    "model_score": 0.2928445339202881,
+    "motion_score": 0.013277414669571533,
+    "audio_loudness": 0.8007813096046448,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 3,
+    "original_frame_index": 3,
+    "sha256_hash": "7877bb8a6f95a3bb1d175de2a98fd5351c9953c86f1ad8fadc81057ea44ca55f",
+    "model_score": 0.2928445339202881,
+    "motion_score": 0.009163761801016702,
+    "audio_loudness": 0.7479732632637024,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 4,
+    "original_frame_index": 4,
+    "sha256_hash": "7829fd5e10cc51cb6e7a69d539da03c8012382936d4b150b1ed48b1581095119",
+    "model_score": 0.2928445339202881,
+    "motion_score": 0.017414669571532315,
+    "audio_loudness": 0.8182978630065918,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 5,
+    "original_frame_index": 5,
+    "sha256_hash": "91941c944beac227ebd32a2f34f9c51d6f37600511b2568b9d2c36982aa1c264",
+    "model_score": 0.2928445339202881,
+    "motion_score": 0.005191721132897603,
+    "audio_loudness": 0.7045543193817139,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 6,
+    "original_frame_index": 6,
+    "sha256_hash": "0285fa83f6719190e7eede5bcab52e00f691f2181dcab3d00807e956da31fa95",
+    "model_score": 0.2928445339202881,
+    "motion_score": 0.005270878721859114,
+    "audio_loudness": 0.7761226892471313,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 7,
+    "original_frame_index": 7,
+    "sha256_hash": "651f7ce6e79a6b1cd696914caec419b16af10e4bff1cc3fffdd62f39711e5019",
+    "model_score": 0.2928445339202881,
+    "motion_score": 0.0012011619462599854,
+    "audio_loudness": 0.5883065462112427,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 8,
+    "original_frame_index": 8,
+    "sha256_hash": "76e81479133c01237bae683c9395830586ffd698c2995d080222e8d8ba3cd787",
+    "model_score": 0.2928445339202881,
+    "motion_score": 0.006279230210602759,
+    "audio_loudness": 0.6355257630348206,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 9,
+    "original_frame_index": 9,
+    "sha256_hash": "00a0fc50774768255e3632c415a4266613e4966b7a6123330dbe47d31e2beeb9",
+    "model_score": 0.2928445339202881,
+    "motion_score": 0.010425925925925925,
+    "audio_loudness": 0.710185170173645,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 10,
+    "original_frame_index": 10,
+    "sha256_hash": "495b2f40f895f736b7e2e81d2c46bc7275074b9ab6d88e6a8fa5f02a1ca9dc83",
+    "model_score": 0.2928445339202881,
+    "motion_score": 0.008836238198983297,
+    "audio_loudness": 0.6586602330207825,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 11,
+    "original_frame_index": 11,
+    "sha256_hash": "61aa8ad2e5c8576268a46f194b7deb407b4f911fb61344e85379e600f5511278",
+    "model_score": 0.2928445339202881,
+    "motion_score": 0.005037400145243283,
+    "audio_loudness": 0.6063277721405029,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 12,
+    "original_frame_index": 12,
+    "sha256_hash": "ef0017fae0da3437a8b32942602858fb5aaee41197af882c34926772c1b555b3",
+    "model_score": 0.2928445339202881,
+    "motion_score": 0.005151053013798112,
+    "audio_loudness": 0.721378743648529,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 13,
+    "original_frame_index": 13,
+    "sha256_hash": "4958fc2f83c3642ad450ac834b9e2df546ab304c0072916b0948d8f34c896348",
+    "model_score": 0.2928445339202881,
+    "motion_score": 0.0028050108932461872,
+    "audio_loudness": 0.6616251468658447,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 14,
+    "original_frame_index": 14,
+    "sha256_hash": "fa2cc2a3c5768d7c973af645fbdb27aaf7d736865dfca05eb218fd5a2dc10906",
+    "model_score": 0.2928445339202881,
+    "motion_score": 0.01030319535221496,
+    "audio_loudness": 0.6025843620300293,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 15,
+    "original_frame_index": 15,
+    "sha256_hash": "f414dcc27353f8fcad3fc8f74e1ff45c2a8c0a87fc273dda5cb45beb5b733221",
+    "model_score": 0.2857178747653961,
+    "motion_score": 0.0026673928830791577,
+    "audio_loudness": 0.5867775678634644,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 16,
+    "original_frame_index": 16,
+    "sha256_hash": "590897ebe4bb253f163b88a620793b37d3610a12b960b9292a576ac6af765b0f",
+    "model_score": 0.2857178747653961,
+    "motion_score": 0.012246913580246913,
+    "audio_loudness": 0.6032201051712036,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 17,
+    "original_frame_index": 17,
+    "sha256_hash": "0d5193f794b1c85e9f374d3e0d33e1b42dd4370cf4176518ee9a81a62fa7454b",
+    "model_score": 0.2857178747653961,
+    "motion_score": 0.010159041394335511,
+    "audio_loudness": 0.6609358191490173,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 18,
+    "original_frame_index": 18,
+    "sha256_hash": "aef5e05af62d89c003c41c9fc885ac0a7e610ad120647edcdac0a9874017dd01",
+    "model_score": 0.2857178747653961,
+    "motion_score": 0.0056437908496732025,
+    "audio_loudness": 0.6854137182235718,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 19,
+    "original_frame_index": 19,
+    "sha256_hash": "0686d56eb91acaf9a67049e7fb3ee6ffd3d353510f0d4dba1372b38dbc8737cd",
+    "model_score": 0.2857178747653961,
+    "motion_score": 0.0010806100217864924,
+    "audio_loudness": 0.6870782971382141,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 20,
+    "original_frame_index": 20,
+    "sha256_hash": "c031c656b5c4f4dc28a4750328fa91346abe4812901416ce85c7d509e2f52846",
+    "model_score": 0.2857178747653961,
+    "motion_score": 0.0057850399419026866,
+    "audio_loudness": 0.6501955389976501,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 21,
+    "original_frame_index": 21,
+    "sha256_hash": "4fc8376a63ff118e0e933ab7738d868060e5dea9111d745803a6b6fc93388dc8",
+    "model_score": 0.2857178747653961,
+    "motion_score": 0.00293681917211329,
+    "audio_loudness": 0.6983350515365601,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 22,
+    "original_frame_index": 22,
+    "sha256_hash": "ed53d0bb059a9e0e6d372b284066549a81146ceef6071697773843eb67338eb3",
+    "model_score": 0.2857178747653961,
+    "motion_score": 0.002322803195352215,
+    "audio_loudness": 0.684120237827301,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 23,
+    "original_frame_index": 23,
+    "sha256_hash": "58deac63589a2db386860dd1a5455300c4d6ad152a9dd47893279c41f9df7a8e",
+    "model_score": 0.2857178747653961,
+    "motion_score": 0.008184095860566449,
+    "audio_loudness": 0.6914919018745422,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 24,
+    "original_frame_index": 24,
+    "sha256_hash": "18ebf58ccf822d381397bf68333467e29ec6d95fe7538abe2417cbac251de117",
+    "model_score": 0.2857178747653961,
+    "motion_score": 0.0028061002178649233,
+    "audio_loudness": 0.6428372263908386,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 25,
+    "original_frame_index": 25,
+    "sha256_hash": "5668e16b63ae1388c28c136d414009240f5ee77b84434175cd0205c114c2a02d",
+    "model_score": 0.2857178747653961,
+    "motion_score": 0.0021092955700798837,
+    "audio_loudness": 0.6208606362342834,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 26,
+    "original_frame_index": 26,
+    "sha256_hash": "7e9acc9b9fae501739ab0f0867a91b7f2348456afc0175cbcc734efe3a19e02b",
+    "model_score": 0.2857178747653961,
+    "motion_score": 0.011592592592592592,
+    "audio_loudness": 0.6448945999145508,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 27,
+    "original_frame_index": 27,
+    "sha256_hash": "e9b9d91db5cf14c03b6075ff8ae31575a5f9b7a18caedb42731f24978a31fc16",
+    "model_score": 0.2857178747653961,
+    "motion_score": 0.0026771968046477848,
+    "audio_loudness": 0.5437459349632263,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 28,
+    "original_frame_index": 28,
+    "sha256_hash": "3f1ae6ddda04941afbdd69fcb5dc4c129cdad87507bd7136b16972b2a0ac55dd",
+    "model_score": 0.2857178747653961,
+    "motion_score": 0.004249092229484387,
+    "audio_loudness": 0.618204653263092,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 29,
+    "original_frame_index": 29,
+    "sha256_hash": "eb50a498041e53676cca81be361c85a60ac64511c5ca27fc2138a92302d13e6f",
+    "model_score": 0.2857178747653961,
+    "motion_score": 0.001424473493100944,
+    "audio_loudness": 0.5630433559417725,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 30,
+    "original_frame_index": 30,
+    "sha256_hash": "685b0e6fd2dac2bd89a388f92c48ad585b3ac7c0aed06f79478cbe88dc526aa7",
+    "model_score": 0.28429412841796875,
+    "motion_score": 0.00815214233841685,
+    "audio_loudness": 0.6264587044715881,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 31,
+    "original_frame_index": 31,
+    "sha256_hash": "031e8c64cae4d191e46c42401f1175cf865b518cff8057bffc81a48e729d5c30",
+    "model_score": 0.28429412841796875,
+    "motion_score": 0.023038852578068265,
+    "audio_loudness": 0.7242634296417236,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 32,
+    "original_frame_index": 32,
+    "sha256_hash": "d3635eddcaeb98c3961edafacbf35f0ecb7dd6b656cc342c510d5ccb7af53c95",
+    "model_score": 0.28429412841796875,
+    "motion_score": 0.008828249818445896,
+    "audio_loudness": 0.6736092567443848,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 33,
+    "original_frame_index": 33,
+    "sha256_hash": "c247cc74a5a78969d318eb4e820fffe2b1ed6400be665a96480e813f6d0f4e20",
+    "model_score": 0.28429412841796875,
+    "motion_score": 0.008369644153957878,
+    "audio_loudness": 0.6691068410873413,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 34,
+    "original_frame_index": 34,
+    "sha256_hash": "b61449e29985d5104d5cf153e498d86f110b042724714b512ee8aa6c99bff795",
+    "model_score": 0.28429412841796875,
+    "motion_score": 0.015157952069716775,
+    "audio_loudness": 0.6869059801101685,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 35,
+    "original_frame_index": 35,
+    "sha256_hash": "0092ab823fa79833326861a32e77d81d9e954a52f9c17958f43a12ed278e87ba",
+    "model_score": 0.28429412841796875,
+    "motion_score": 0.0028718228031953522,
+    "audio_loudness": 0.6246024370193481,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 36,
+    "original_frame_index": 36,
+    "sha256_hash": "e500ba0a2b2a80354695803a680c93c647c695a55a5f64a16ec3bdb7c8e6cc3c",
+    "model_score": 0.28429412841796875,
+    "motion_score": 0.01824872912127814,
+    "audio_loudness": 0.5492916703224182,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 37,
+    "original_frame_index": 37,
+    "sha256_hash": "80cc19d437e49ece9698a36377874ca7c63f8e04b7fc7b0523245fb88cfcf8be",
+    "model_score": 0.28429412841796875,
+    "motion_score": 0.0032806826434277413,
+    "audio_loudness": 0.8420006632804871,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 38,
+    "original_frame_index": 38,
+    "sha256_hash": "5672c44bd1fcce5c24d73ae03bd4ab01e5b426e6859f2ebaa2aa3abac4911840",
+    "model_score": 0.28429412841796875,
+    "motion_score": 0.006795570079883805,
+    "audio_loudness": 0.6494563221931458,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 39,
+    "original_frame_index": 39,
+    "sha256_hash": "451f820922e3c65a86dcb828a3f5b461967e3a02893c6358c1e09561d1449c41",
+    "model_score": 0.28429412841796875,
+    "motion_score": 0.0015628177196804647,
+    "audio_loudness": 0.708198070526123,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 40,
+    "original_frame_index": 40,
+    "sha256_hash": "96b674cba25bd7c36482ae463344f85b994c1c400709a7862ec9ef621833829d",
+    "model_score": 0.28429412841796875,
+    "motion_score": 0.007913943355119826,
+    "audio_loudness": 0.5977084636688232,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 41,
+    "original_frame_index": 41,
+    "sha256_hash": "26560915ea89e9f979b19396430362260110814b705a4fbef3373495b9390ae0",
+    "model_score": 0.28429412841796875,
+    "motion_score": 0.009174655047204067,
+    "audio_loudness": 0.6209559440612793,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 42,
+    "original_frame_index": 42,
+    "sha256_hash": "91fab04dc9cb9053f2348542d6b549e5982d17398e683113853591483eff1c5e",
+    "model_score": 0.28429412841796875,
+    "motion_score": 0.006892883079157589,
+    "audio_loudness": 0.6513988971710205,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 43,
+    "original_frame_index": 43,
+    "sha256_hash": "167d2e06b1c8ae1d68e406208bc6d86f5324d019ae0fb08d8c67db1c20e926e9",
+    "model_score": 0.28429412841796875,
+    "motion_score": 0.004137254901960784,
+    "audio_loudness": 0.6771577596664429,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 44,
+    "original_frame_index": 44,
+    "sha256_hash": "59be839d6c5dee799dfe9660c321de8ac8010770657aaa546d47a4216758d798",
+    "model_score": 0.28429412841796875,
+    "motion_score": 0.003789034132171387,
+    "audio_loudness": 0.6510099172592163,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 45,
+    "original_frame_index": 45,
+    "sha256_hash": "244d9d1e1c2a6e2e99236e3301eb7c78c9e7513cfbcaa8fb781e0165137cfef7",
+    "model_score": 0.2877606451511383,
+    "motion_score": 0.006343863471314452,
+    "audio_loudness": 0.7060741186141968,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 46,
+    "original_frame_index": 46,
+    "sha256_hash": "6c4cd86f70e7f2571ea3e98d793ea5dc1c219cfb2c30145e6e3869c2dc56f729",
+    "model_score": 0.2877606451511383,
+    "motion_score": 0.002866739288307916,
+    "audio_loudness": 0.6340423226356506,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 47,
+    "original_frame_index": 47,
+    "sha256_hash": "8b0de7a4503d1705a0b3bdc93bd54b493fe39076f496b72f282ec8cb2dd00046",
+    "model_score": 0.2877606451511383,
+    "motion_score": 0.009707697893972404,
+    "audio_loudness": 0.5523887276649475,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 48,
+    "original_frame_index": 48,
+    "sha256_hash": "c68f5e964c31e7d0b455dc6c0555258cf5d69712f7088f94dfb430df99acafee",
+    "model_score": 0.2877606451511383,
+    "motion_score": 0.025803558460421205,
+    "audio_loudness": 0.7216010689735413,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 49,
+    "original_frame_index": 49,
+    "sha256_hash": "b6eabdfcd6b5aa668bb9d92136c7c222325e37f7831d99224ddf6fa5609d6753",
+    "model_score": 0.2877606451511383,
+    "motion_score": 0.012121641249092228,
+    "audio_loudness": 0.6270477771759033,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 50,
+    "original_frame_index": 50,
+    "sha256_hash": "a1909b21e01ba464600b29687cd60c0bb6d77407399a9c33f9e31ade63847582",
+    "model_score": 0.2877606451511383,
+    "motion_score": 0.011969135802469135,
+    "audio_loudness": 0.6035115122795105,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 51,
+    "original_frame_index": 51,
+    "sha256_hash": "9be2633afbc999559f81c06694826f602c237865d88416d5a3217f3a4e802f79",
+    "model_score": 0.2877606451511383,
+    "motion_score": 0.015529774872912128,
+    "audio_loudness": 0.7247954607009888,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 52,
+    "original_frame_index": 52,
+    "sha256_hash": "8bffe4f4a6d937df7f9b8b7f617c77c52003f08baafd4c641a64d629811f671b",
+    "model_score": 0.2877606451511383,
+    "motion_score": 0.011504357298474944,
+    "audio_loudness": 0.6551492810249329,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 53,
+    "original_frame_index": 53,
+    "sha256_hash": "974dab63a53c85a78f04035332f68ea8c4a06bcc9fcad3d26193220256690bb3",
+    "model_score": 0.2877606451511383,
+    "motion_score": 0.0035519244734931008,
+    "audio_loudness": 0.6264215111732483,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 54,
+    "original_frame_index": 54,
+    "sha256_hash": "fe79132d7de9a4e5051a0d5fcbb23ef8ba3a973479c1dc7ec1950ce51ae6140c",
+    "model_score": 0.2877606451511383,
+    "motion_score": 0.0045294117647058825,
+    "audio_loudness": 0.6295140385627747,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 55,
+    "original_frame_index": 55,
+    "sha256_hash": "866e81bf1b09e57431a0a0b745d8f3890bd7b57c46b18483449f844a43a50412",
+    "model_score": 0.2877606451511383,
+    "motion_score": 0.006706971677559913,
+    "audio_loudness": 0.6416298151016235,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 56,
+    "original_frame_index": 56,
+    "sha256_hash": "d78248cc6775af811cf295b9515514235f43c52a863956262e7a40ad141a5197",
+    "model_score": 0.2877606451511383,
+    "motion_score": 0.010764705882352942,
+    "audio_loudness": 0.6039842367172241,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 57,
+    "original_frame_index": 57,
+    "sha256_hash": "7360660913c77de1f3dab32a4d40d883cef657350081d4bc406442307691a7e0",
+    "model_score": 0.2877606451511383,
+    "motion_score": 0.026791575889615105,
+    "audio_loudness": 0.6061872243881226,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 58,
+    "original_frame_index": 58,
+    "sha256_hash": "75f299d3789a454b8918cea5b85dd709997d6fc9c453f2081535414c1092e502",
+    "model_score": 0.2877606451511383,
+    "motion_score": 0.014811546840958607,
+    "audio_loudness": 0.5732171535491943,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 59,
+    "original_frame_index": 59,
+    "sha256_hash": "4250379735f29cc0130d504011d7aec87a3566acf9b5267f4b08c45957d6309f",
+    "model_score": 0.2877606451511383,
+    "motion_score": 0.009285403050108934,
+    "audio_loudness": 0.6188529133796692,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 60,
+    "original_frame_index": 60,
+    "sha256_hash": "5a45b0ffae013c97e16121f629f9ad9789941792975172caa4d35c11a8939b2c",
+    "model_score": 0.29307931661605835,
+    "motion_score": 0.004778867102396514,
+    "audio_loudness": 0.6236034631729126,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 61,
+    "original_frame_index": 61,
+    "sha256_hash": "635d5bdd22e8f4918852f949469d16a314238968847ae8c482130a13c496c177",
+    "model_score": 0.29307931661605835,
+    "motion_score": 0.023416848220769792,
+    "audio_loudness": 0.678768515586853,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 62,
+    "original_frame_index": 62,
+    "sha256_hash": "fb7308ab70e778faad9e0d54c3ebb573248a778a58fd6c22e753cf35c40aaf60",
+    "model_score": 0.29307931661605835,
+    "motion_score": 0.0020413943355119825,
+    "audio_loudness": 0.7140194177627563,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 63,
+    "original_frame_index": 63,
+    "sha256_hash": "552d123a8da7bc49405b411aa14047a2d8a97e6b1457bd5bee9befceb48d755b",
+    "model_score": 0.29307931661605835,
+    "motion_score": 0.0304480755265069,
+    "audio_loudness": 0.6421328186988831,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 64,
+    "original_frame_index": 64,
+    "sha256_hash": "e093d2454b267fbe534da77cfb596beae02778ed92effa9e20de2a64ceb20e9e",
+    "model_score": 0.29307931661605835,
+    "motion_score": 0.03769498910675381,
+    "audio_loudness": 0.6000761985778809,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 65,
+    "original_frame_index": 65,
+    "sha256_hash": "666da6487235207508fd44cc9da36a2aa9c1d50f87ce41c6cd0dc740004c2b0d",
+    "model_score": 0.29307931661605835,
+    "motion_score": 0.006796659404502542,
+    "audio_loudness": 0.6634194850921631,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 66,
+    "original_frame_index": 66,
+    "sha256_hash": "11189df3a121ddba77c0f3100fe677eeb3f8f6d9a7fe2358aaba0e63b3a02eb8",
+    "model_score": 0.29307931661605835,
+    "motion_score": 0.008637618010167028,
+    "audio_loudness": 0.5816418528556824,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 67,
+    "original_frame_index": 67,
+    "sha256_hash": "47bb12d8577ce239daf8a58556dd93b905389b78d0a436a33ced9a854bf9284b",
+    "model_score": 0.29307931661605835,
+    "motion_score": 0.014036673928830791,
+    "audio_loudness": 0.5225520730018616,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 68,
+    "original_frame_index": 68,
+    "sha256_hash": "18bb51859f4674743e62b78755412337e899c8b371d9d6f9e6ae2d6fdebc467a",
+    "model_score": 0.29307931661605835,
+    "motion_score": 0.007452432824981844,
+    "audio_loudness": 0.6752464771270752,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 69,
+    "original_frame_index": 69,
+    "sha256_hash": "1a3c1738b5b36c501fad58a742808d94b35b52c33bea68e243e431e87ffc25e6",
+    "model_score": 0.29307931661605835,
+    "motion_score": 0.008379084967320262,
+    "audio_loudness": 0.7644921541213989,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 70,
+    "original_frame_index": 70,
+    "sha256_hash": "254fe8a940d12185dc3089a94117d7824f8a26e34c9bb18b87629fbd4ce9e050",
+    "model_score": 0.29307931661605835,
+    "motion_score": 0.01010639070442992,
+    "audio_loudness": 0.6525519490242004,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 71,
+    "original_frame_index": 71,
+    "sha256_hash": "10757283d1b11c63edb9f15e7765c40ad11b7628620795c3003f50875d07992f",
+    "model_score": 0.29307931661605835,
+    "motion_score": 0.004217138707334786,
+    "audio_loudness": 0.6708097457885742,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 72,
+    "original_frame_index": 72,
+    "sha256_hash": "03467c39d14ed430706fd68536b4c14184582d39d149e9a35d3580042bbef7da",
+    "model_score": 0.29307931661605835,
+    "motion_score": 0.010020334059549746,
+    "audio_loudness": 0.6420454382896423,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 73,
+    "original_frame_index": 73,
+    "sha256_hash": "7138f626e3823a07e53304f4ca9536b649b47a74a9485ee9d78f870a4c3b668e",
+    "model_score": 0.29307931661605835,
+    "motion_score": 0.006828612926652143,
+    "audio_loudness": 0.6228196024894714,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 74,
+    "original_frame_index": 74,
+    "sha256_hash": "3e5f4e83085a5bbfd8c619f46a8d8f3730ebfe8508307578af32f0e5be8ad711",
+    "model_score": 0.29307931661605835,
+    "motion_score": 0.01222403776325345,
+    "audio_loudness": 0.7000679969787598,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 75,
+    "original_frame_index": 75,
+    "sha256_hash": "c34917570c8117db2c039f542f823b790542760f83cdabf7a9a89198e122c188",
+    "model_score": 0.2977047562599182,
+    "motion_score": 0.013758896151053013,
+    "audio_loudness": 0.6054914593696594,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 76,
+    "original_frame_index": 76,
+    "sha256_hash": "e66a1b59e349121e7538372c4ff1dbbfe2db4bdeb54424081364cdefeff95aad",
+    "model_score": 0.2977047562599182,
+    "motion_score": 0.0063543936092955704,
+    "audio_loudness": 0.6331886649131775,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 77,
+    "original_frame_index": 77,
+    "sha256_hash": "d71bee0e213c61fce53e06f675bc7079d2243a8560373a2b7ff9b2e97bdf429d",
+    "model_score": 0.2977047562599182,
+    "motion_score": 0.014983660130718954,
+    "audio_loudness": 0.6785864233970642,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 78,
+    "original_frame_index": 78,
+    "sha256_hash": "61c705cd37c259d5f034672cb87ba434069468e2828e5435c2e5c382429fd4f1",
+    "model_score": 0.2977047562599182,
+    "motion_score": 0.013769426289034133,
+    "audio_loudness": 0.5439854860305786,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 79,
+    "original_frame_index": 79,
+    "sha256_hash": "2bc331d7359938c5e768f00bb9bed6b490dec56a5faa5c279d48471c25c9b498",
+    "model_score": 0.2977047562599182,
+    "motion_score": 0.007978213507625273,
+    "audio_loudness": 0.6483295559883118,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 80,
+    "original_frame_index": 80,
+    "sha256_hash": "ce77ecb5b420db0d844c24fc2a22fdc09614e90ffe7a37db6e4d2a9b840edbfd",
+    "model_score": 0.2977047562599182,
+    "motion_score": 0.008699709513435004,
+    "audio_loudness": 0.6030853986740112,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 81,
+    "original_frame_index": 81,
+    "sha256_hash": "117691ba58c690f6c499a7b0d7bb72c50e199b0b0c9b55ad4eb0ac376a11c425",
+    "model_score": 0.2977047562599182,
+    "motion_score": 0.0026706608569353665,
+    "audio_loudness": 0.5573031902313232,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 82,
+    "original_frame_index": 82,
+    "sha256_hash": "f1fa3036f4ba262006fa44b16860ad89a91417a23d872bae130fdf48dd51e3f6",
+    "model_score": 0.2977047562599182,
+    "motion_score": 0.004550108932461873,
+    "audio_loudness": 0.6060556769371033,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 83,
+    "original_frame_index": 83,
+    "sha256_hash": "d59b0491ba065ba6701949c8242184c079aebc8291b6846391561eca462c7482",
+    "model_score": 0.2977047562599182,
+    "motion_score": 0.0034854756717501816,
+    "audio_loudness": 0.6220011115074158,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 84,
+    "original_frame_index": 84,
+    "sha256_hash": "5ef96ce002f8cf6614dcc5525d0b59e367884a59de54807636bb1c3b95f3c9c6",
+    "model_score": 0.2977047562599182,
+    "motion_score": 0.004722222222222222,
+    "audio_loudness": 0.6205074191093445,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 85,
+    "original_frame_index": 85,
+    "sha256_hash": "1f510a99b3d0f37c3bdeeef8280c1e43455251e14b0b589cb54bc3f5957b436c",
+    "model_score": 0.2977047562599182,
+    "motion_score": 0.015509803921568628,
+    "audio_loudness": 0.5834169983863831,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 86,
+    "original_frame_index": 86,
+    "sha256_hash": "52c08c6f588c28a2131ad860e2408dce58fce8210595f9e228c7c417b1271271",
+    "model_score": 0.2977047562599182,
+    "motion_score": 0.019411038489469862,
+    "audio_loudness": 0.629150390625,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 87,
+    "original_frame_index": 87,
+    "sha256_hash": "910d5eba21c0b100bc6b7fa38eca74ad6eefef80afce6f1a97492f9046431787",
+    "model_score": 0.2977047562599182,
+    "motion_score": 0.0017665214233841685,
+    "audio_loudness": 0.6258222460746765,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 88,
+    "original_frame_index": 88,
+    "sha256_hash": "799ea5dd67b0311d4abc0377cec2484fcb71a539547be289fe5f2423481d4fcf",
+    "model_score": 0.2977047562599182,
+    "motion_score": 0.004737472766884532,
+    "audio_loudness": 0.6110188961029053,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 89,
+    "original_frame_index": 89,
+    "sha256_hash": "dd5b5c3afd03724778de511f8525c9fe24359a74969564b791299c97f717280c",
+    "model_score": 0.2977047562599182,
+    "motion_score": 0.014470951343500363,
+    "audio_loudness": 0.6357214450836182,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 90,
+    "original_frame_index": 90,
+    "sha256_hash": "7f09110d094f8650484625b17de53577ee92d79f91b3fa187b1feb67aa6c29e1",
+    "model_score": 0.3003593981266022,
+    "motion_score": 0.003948438634713144,
+    "audio_loudness": 0.595917820930481,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 91,
+    "original_frame_index": 91,
+    "sha256_hash": "e932943ed34dd08c14e5c052720fd7b26533b46d4a1f275d66968ab093691df8",
+    "model_score": 0.3003593981266022,
+    "motion_score": 0.005547930283224401,
+    "audio_loudness": 0.5297808051109314,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 92,
+    "original_frame_index": 92,
+    "sha256_hash": "89acdb697d241131cb0bb0eb4e5ad5e007f56b56d6b691d52548724bd3b614e1",
+    "model_score": 0.3003593981266022,
+    "motion_score": 0.008463689179375454,
+    "audio_loudness": 0.5859436392784119,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 93,
+    "original_frame_index": 93,
+    "sha256_hash": "c638019f2b302cf72212c32370329cd6fa7996b9e093471bd243e4ad6697d7e4",
+    "model_score": 0.3003593981266022,
+    "motion_score": 0.012023238925199709,
+    "audio_loudness": 0.6530577540397644,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 94,
+    "original_frame_index": 94,
+    "sha256_hash": "97bd5c6d3b836fbe609f82494ae00ecef57db668db4a5efbb45805062b08ef6e",
+    "model_score": 0.3003593981266022,
+    "motion_score": 0.001232389251997095,
+    "audio_loudness": 0.6065584421157837,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 95,
+    "original_frame_index": 95,
+    "sha256_hash": "cf11408f0a19bb94791ccd7972c6710b41f7676d0473eb42d3ea4c370e1071c7",
+    "model_score": 0.3003593981266022,
+    "motion_score": 0.010442265795206972,
+    "audio_loudness": 0.547723114490509,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 96,
+    "original_frame_index": 96,
+    "sha256_hash": "5f93770840dd849c3144fb37a8eaebe37810f5a031efecb41a88b2b8b8c43953",
+    "model_score": 0.3003593981266022,
+    "motion_score": 0.015365649963689179,
+    "audio_loudness": 0.6190518140792847,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 97,
+    "original_frame_index": 97,
+    "sha256_hash": "91b3beee6071dd6f43d33311cd3595a67928ac32d14378815831396887902604",
+    "model_score": 0.3003593981266022,
+    "motion_score": 0.021420116194626,
+    "audio_loudness": 0.5189173817634583,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 98,
+    "original_frame_index": 98,
+    "sha256_hash": "c81f31b859114422f70633546ae53cc51f79a5932e903ef11c84cfa03c45a017",
+    "model_score": 0.3003593981266022,
+    "motion_score": 0.008072621641249092,
+    "audio_loudness": 0.6173433661460876,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 99,
+    "original_frame_index": 99,
+    "sha256_hash": "5937299cd0135f246bf29527531bd02a711d271ddebbd27289caa76cf2856279",
+    "model_score": 0.3003593981266022,
+    "motion_score": 0.0038467683369644155,
+    "audio_loudness": 0.5561186075210571,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 100,
+    "original_frame_index": 100,
+    "sha256_hash": "6d05de355ebf0fbc76f24a3fcd01a2248491ebd82b878db328cc5c3871c69ac3",
+    "model_score": 0.3003593981266022,
+    "motion_score": 0.0011775599128540303,
+    "audio_loudness": 0.6446864604949951,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 101,
+    "original_frame_index": 101,
+    "sha256_hash": "4eccdfc4ac8952ed1da807221941176950610ec70f947b77c4ddc3e9013c5eed",
+    "model_score": 0.3003593981266022,
+    "motion_score": 0.005634713144517066,
+    "audio_loudness": 0.5931017398834229,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 102,
+    "original_frame_index": 102,
+    "sha256_hash": "12438fdd8b09c863a4949624158a1c1ccf6499b505de2ab0616f2983967db5aa",
+    "model_score": 0.3003593981266022,
+    "motion_score": 0.0040134350036310825,
+    "audio_loudness": 0.6098378896713257,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 103,
+    "original_frame_index": 103,
+    "sha256_hash": "5174b2eb06fbb4b24b0f064e42358156781f053f5de6fdcb58d959d6fa130e81",
+    "model_score": 0.3003593981266022,
+    "motion_score": 0.0114520697167756,
+    "audio_loudness": 0.619380533695221,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 104,
+    "original_frame_index": 104,
+    "sha256_hash": "b6bb6fc6acab5d004c49103a2388b28c385448680a9571e38b3bc20bbfd54a6f",
+    "model_score": 0.3003593981266022,
+    "motion_score": 0.0023373275236020334,
+    "audio_loudness": 0.5868370532989502,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 105,
+    "original_frame_index": 105,
+    "sha256_hash": "219c8529582046ce49f9a4b9ce3557d03ef7ce6624957d70ce964b935fc36531",
+    "model_score": 0.3010183274745941,
+    "motion_score": 0.014165577342047929,
+    "audio_loudness": 0.5774756073951721,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 106,
+    "original_frame_index": 106,
+    "sha256_hash": "c3f2aa9ea3fa9880593a2539742f3dc2e16b44040f72b124b2fcaceb18ba5fe2",
+    "model_score": 0.3010183274745941,
+    "motion_score": 0.008641249092229485,
+    "audio_loudness": 0.6147005558013916,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 107,
+    "original_frame_index": 107,
+    "sha256_hash": "4cbeeeb9cf55f85ce3c9e3bbd8ee70d89cf116100e80c2a60d82e71bea896cc3",
+    "model_score": 0.3010183274745941,
+    "motion_score": 0.0029168482207697893,
+    "audio_loudness": 0.5876065492630005,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 108,
+    "original_frame_index": 108,
+    "sha256_hash": "45d2a347d31a614667f1f15bd628a2305bc431f52aed5d388f75b1a12e4e7c4b",
+    "model_score": 0.3010183274745941,
+    "motion_score": 0.0021274509803921567,
+    "audio_loudness": 0.5700093507766724,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 109,
+    "original_frame_index": 109,
+    "sha256_hash": "20596e514ef816b0029d705505328f59afbc700a43c0730393af11c6e767ed89",
+    "model_score": 0.3010183274745941,
+    "motion_score": 0.0010980392156862747,
+    "audio_loudness": 0.6125457286834717,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 110,
+    "original_frame_index": 110,
+    "sha256_hash": "33803c3ee90c8c39087769ae64fc957d1262b70c41b0adc5ec3c9e18831c2514",
+    "model_score": 0.3010183274745941,
+    "motion_score": 0.004485475671750182,
+    "audio_loudness": 0.5974124670028687,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 111,
+    "original_frame_index": 111,
+    "sha256_hash": "1eb24a6d5009aa14037021ddc206b2cc7560b42e777b230775e4681b083ef1e6",
+    "model_score": 0.3010183274745941,
+    "motion_score": 0.005452432824981845,
+    "audio_loudness": 0.6724897027015686,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 112,
+    "original_frame_index": 112,
+    "sha256_hash": "7ede3b84b5ad86a0d063518dd919b20756715e23905d27ace00a9dbdc3b0686c",
+    "model_score": 0.3010183274745941,
+    "motion_score": 0.008468772694262891,
+    "audio_loudness": 0.5548589825630188,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 113,
+    "original_frame_index": 113,
+    "sha256_hash": "0cf454b86ce0ae81bbf4592adf24b13555b476fa397d2dc32d21d1ab4845ec8c",
+    "model_score": 0.3010183274745941,
+    "motion_score": 0.003208061002178649,
+    "audio_loudness": 0.6337807178497314,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 114,
+    "original_frame_index": 114,
+    "sha256_hash": "33a1e7060a1bcdb71e33e9594fbcd09f52f994d49f1a7fed389a22493b591251",
+    "model_score": 0.3010183274745941,
+    "motion_score": 0.006072621641249092,
+    "audio_loudness": 0.5626278519630432,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 115,
+    "original_frame_index": 115,
+    "sha256_hash": "25a6617d9bc5943955b05d8964e44e0c42811aaef33121509ab38f7c967c3674",
+    "model_score": 0.3010183274745941,
+    "motion_score": 0.01106644880174292,
+    "audio_loudness": 0.5898780226707458,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 116,
+    "original_frame_index": 116,
+    "sha256_hash": "79c016b0c4f4bd0c1b2c003f89f91a3210109cd7a62733143a05e3678bf18dc0",
+    "model_score": 0.3010183274745941,
+    "motion_score": 0.01996078431372549,
+    "audio_loudness": 0.5720381140708923,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 117,
+    "original_frame_index": 117,
+    "sha256_hash": "7bd7ca86e752b1cd7bffeff5ba07ecf56133b848f3b7e9b863faf152d24e2df7",
+    "model_score": 0.3010183274745941,
+    "motion_score": 0.003676470588235294,
+    "audio_loudness": 0.6316126585006714,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 118,
+    "original_frame_index": 118,
+    "sha256_hash": "5b6d0ae8c7dadc9443cb6f0fd40209799aacae37232c9d95b2301133c93b6ccd",
+    "model_score": 0.3010183274745941,
+    "motion_score": 0.0008242556281771969,
+    "audio_loudness": 0.5883122086524963,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 119,
+    "original_frame_index": 119,
+    "sha256_hash": "a05db46b5e96b5d40de03c308c2e89e31d4b262bfa42b9a197af2def43191b77",
+    "model_score": 0.3010183274745941,
+    "motion_score": 0.00904066811909949,
+    "audio_loudness": 0.6550213098526001,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 120,
+    "original_frame_index": 120,
+    "sha256_hash": "f643704277e36737f06436bd7c2a97c6a4074509969535f872b92428736cd741",
+    "model_score": 0.30083686113357544,
+    "motion_score": 0.006426289034132172,
+    "audio_loudness": 0.5972989201545715,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 121,
+    "original_frame_index": 121,
+    "sha256_hash": "4eeb9adae98c90dbac7e5d0b25fea0dbd7ab85d916d21004af94593ab1d5cb19",
+    "model_score": 0.30083686113357544,
+    "motion_score": 0.00536710239651416,
+    "audio_loudness": 0.571251630783081,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 122,
+    "original_frame_index": 122,
+    "sha256_hash": "bff10acd6bb8fe1b90e31acb6409282de215a07dc405671a6fddd9239e1a64e9",
+    "model_score": 0.30083686113357544,
+    "motion_score": 0.002144517066085693,
+    "audio_loudness": 0.6161941885948181,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 123,
+    "original_frame_index": 123,
+    "sha256_hash": "2aa23d40dd034acf1aa91e5954f4a149c2d98e8db7d182cf529d31ebcd848fe3",
+    "model_score": 0.30083686113357544,
+    "motion_score": 0.003522875816993464,
+    "audio_loudness": 0.6609484553337097,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 124,
+    "original_frame_index": 124,
+    "sha256_hash": "77f48e89cbdfb12b7f19970b4341d3a58b18da2e130442e1d552f7a4fb83ff61",
+    "model_score": 0.30083686113357544,
+    "motion_score": 0.004104938271604938,
+    "audio_loudness": 0.6332293748855591,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 125,
+    "original_frame_index": 125,
+    "sha256_hash": "76d323dbb5cf536caa764fcf0b859b952e0e86ff8f1e0e7b3cd99c17f9a3017e",
+    "model_score": 0.30083686113357544,
+    "motion_score": 0.009044662309368191,
+    "audio_loudness": 0.6428523063659668,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 126,
+    "original_frame_index": 126,
+    "sha256_hash": "46985ca55540f9c4661866f5f1cc791d0b3e42ecf0f329493339bc415edfa3bb",
+    "model_score": 0.30083686113357544,
+    "motion_score": 0.018014161220043574,
+    "audio_loudness": 0.6654146909713745,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 127,
+    "original_frame_index": 127,
+    "sha256_hash": "96b90db36c791768ee8caf4b5b4eb3bf51b3494889bb99608411f2385aa28cc3",
+    "model_score": 0.30083686113357544,
+    "motion_score": 0.004661946259985476,
+    "audio_loudness": 0.629440426826477,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 128,
+    "original_frame_index": 128,
+    "sha256_hash": "e9e6854e9dbf147a2a9bb92b69a3443e36ed91a27ccdb47a9f9c098d54c5da32",
+    "model_score": 0.30083686113357544,
+    "motion_score": 0.010342047930283225,
+    "audio_loudness": 0.6033167243003845,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 129,
+    "original_frame_index": 129,
+    "sha256_hash": "d5833ceb8d50acb14d0976a326444f0f55ce0f0d5e1dc7f005609db156944125",
+    "model_score": 0.30083686113357544,
+    "motion_score": 0.002729847494553377,
+    "audio_loudness": 0.7096800208091736,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 130,
+    "original_frame_index": 130,
+    "sha256_hash": "9cb3aee7c402721df6f6f7159893c7b12d692fb42af78c672c58ebbe3ff6eb6b",
+    "model_score": 0.30083686113357544,
+    "motion_score": 0.0038950617283950617,
+    "audio_loudness": 0.6264299750328064,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 131,
+    "original_frame_index": 131,
+    "sha256_hash": "421204154d1d1bcb4018141b6d43cc05121035a1699c362b8c417a0906dce1da",
+    "model_score": 0.30083686113357544,
+    "motion_score": 0.0034201161946259984,
+    "audio_loudness": 0.627716600894928,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 132,
+    "original_frame_index": 132,
+    "sha256_hash": "aa60b53c510f8b0e052b4a44d23b4b2ddd2e1c1c93927739f25998641267835e",
+    "model_score": 0.30083686113357544,
+    "motion_score": 0.004055555555555555,
+    "audio_loudness": 0.7257308959960938,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 133,
+    "original_frame_index": 133,
+    "sha256_hash": "f7c06a4d74ce9ffbf626bd49a144000a45aea575fe9cc990f8edae46b6ad31ba",
+    "model_score": 0.30083686113357544,
+    "motion_score": 0.0015374001452432824,
+    "audio_loudness": 0.5544209480285645,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 134,
+    "original_frame_index": 134,
+    "sha256_hash": "abdbfefbddf0b9c37bdecc0ab48b81a3fdea74ce92fc7e86f10d2420e669f202",
+    "model_score": 0.30083686113357544,
+    "motion_score": 0.013017792302106028,
+    "audio_loudness": 0.5491717457771301,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 135,
+    "original_frame_index": 135,
+    "sha256_hash": "aafab9ee7b28a7d44ecb99e15d26d1e347bcc33bce6c1387b4bf08fe2aa05069",
+    "model_score": 0.3012658655643463,
+    "motion_score": 0.010062454611474219,
+    "audio_loudness": 0.6922985315322876,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 136,
+    "original_frame_index": 136,
+    "sha256_hash": "643cd815dc1a77d5eb0d2db7e00d2b584fdee8c62f214f68508492cf0d639f8e",
+    "model_score": 0.3012658655643463,
+    "motion_score": 0.009678649237472766,
+    "audio_loudness": 0.5819751024246216,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 137,
+    "original_frame_index": 137,
+    "sha256_hash": "08acc0780ef7ad9f103656a41b3bf3631a82e32473b0dd19dfabe5c9680fbaec",
+    "model_score": 0.3012658655643463,
+    "motion_score": 0.014440450254175743,
+    "audio_loudness": 0.6362649202346802,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 138,
+    "original_frame_index": 138,
+    "sha256_hash": "8fad72de2ebf6aa013d53b8e7f23278ac04a76a2818a14e70fdc8a2955e89f05",
+    "model_score": 0.3012658655643463,
+    "motion_score": 0.0035119825708061,
+    "audio_loudness": 0.5914201736450195,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 139,
+    "original_frame_index": 139,
+    "sha256_hash": "9df0eb3a493dffa6ddab43d1685d98b9e2c99329e948fc07ab0e857ce9dcee36",
+    "model_score": 0.3012658655643463,
+    "motion_score": 0.005916848220769789,
+    "audio_loudness": 0.5681189894676208,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 140,
+    "original_frame_index": 140,
+    "sha256_hash": "7eef860daed94d94cab3b06985a083015696ea5ef7d9e11ca9f82b5b6ae159f4",
+    "model_score": 0.3012658655643463,
+    "motion_score": 0.0011045751633986928,
+    "audio_loudness": 0.6201875805854797,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 141,
+    "original_frame_index": 141,
+    "sha256_hash": "88faaf44326e9e76148e0c124d57009b0e0a7f89723040a60616dc4dcc0c92d8",
+    "model_score": 0.3012658655643463,
+    "motion_score": 0.009877269426289035,
+    "audio_loudness": 0.5636621713638306,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 142,
+    "original_frame_index": 142,
+    "sha256_hash": "0a6d8c8e4c1819bc199c25f785f3dd887228470f80911a1e6cab95b32022767d",
+    "model_score": 0.3012658655643463,
+    "motion_score": 0.002966230936819172,
+    "audio_loudness": 0.6561724543571472,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 143,
+    "original_frame_index": 143,
+    "sha256_hash": "4f207c573d34533ad577fdd7afdc482dee6ca61f5142ff35b483d268e12b7b2d",
+    "model_score": 0.3012658655643463,
+    "motion_score": 0.004392519970951344,
+    "audio_loudness": 0.6405333280563354,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 144,
+    "original_frame_index": 144,
+    "sha256_hash": "240443b589d060dcbe0649ca21d47b942c79a3d17c511e3265813b16287ce7a1",
+    "model_score": 0.3012658655643463,
+    "motion_score": 0.010397240377632535,
+    "audio_loudness": 0.7847397923469543,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 145,
+    "original_frame_index": 145,
+    "sha256_hash": "ed5e63afeb6916258472500d6d27765cc4a4647c7ae88161c0dbc4f773c25523",
+    "model_score": 0.3012658655643463,
+    "motion_score": 0.004493100944081336,
+    "audio_loudness": 0.6947963237762451,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 146,
+    "original_frame_index": 146,
+    "sha256_hash": "24de00e8be4fa30667d7576199a216e13e26edca29ed6f0c22ec0e69d097e631",
+    "model_score": 0.3012658655643463,
+    "motion_score": 0.006166303558460422,
+    "audio_loudness": 0.6554698944091797,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 147,
+    "original_frame_index": 147,
+    "sha256_hash": "84a48c4083e7fbdba5036e7f24e9944cc90eb73116a772b88cb8c164fdbdb557",
+    "model_score": 0.3012658655643463,
+    "motion_score": 0.018214596949891068,
+    "audio_loudness": 0.6891053318977356,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 148,
+    "original_frame_index": 148,
+    "sha256_hash": "f5b1e75a0ae02e138134179ee37f9dda7c9f000165c0d8b8ca5aa8abf3b6ce5a",
+    "model_score": 0.3012658655643463,
+    "motion_score": 0.005205519244734931,
+    "audio_loudness": 0.6124497652053833,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 149,
+    "original_frame_index": 149,
+    "sha256_hash": "e391a0dba0cabf5d6d8920bbc88c8e46d31ca41569bbad8c573855f1332a0982",
+    "model_score": 0.3012658655643463,
+    "motion_score": 0.010474219317356573,
+    "audio_loudness": 0.6315533518791199,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 150,
+    "original_frame_index": 150,
+    "sha256_hash": "bcca49a1789b70e0d0fddf2b1af4b1bf14957afc58a37b94131e5a5d70f37e00",
+    "model_score": 0.3024951219558716,
+    "motion_score": 0.009003631082062456,
+    "audio_loudness": 0.8017479181289673,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 151,
+    "original_frame_index": 151,
+    "sha256_hash": "cb450b37a2c6a0060a33b6e87109e785114349ea78fbc8801ff103c23d4b7066",
+    "model_score": 0.3024951219558716,
+    "motion_score": 0.010061728395061729,
+    "audio_loudness": 0.6930227279663086,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 152,
+    "original_frame_index": 152,
+    "sha256_hash": "1803fee550605b68ac329404b33b221760c7017d89afaae95130fa47780b30e1",
+    "model_score": 0.3024951219558716,
+    "motion_score": 0.00014742193173565723,
+    "audio_loudness": 0.555386483669281,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 153,
+    "original_frame_index": 153,
+    "sha256_hash": "971f73949bfccba310f4ff4a0112bb03347fc58737094a732f655ebd811381a1",
+    "model_score": 0.3024951219558716,
+    "motion_score": 0.010600580973129993,
+    "audio_loudness": 0.6027613282203674,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 154,
+    "original_frame_index": 154,
+    "sha256_hash": "7ae42d3e4270fce21a26f834cf716fc4cf96e716b1efd33fb1123cc1d75f22c8",
+    "model_score": 0.3024951219558716,
+    "motion_score": 0.0021575889615105303,
+    "audio_loudness": 0.5946506857872009,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 155,
+    "original_frame_index": 155,
+    "sha256_hash": "989d87b00316c2cbd7b21870b4ab6896daf8a50e70f7dddc088507a9ea39e239",
+    "model_score": 0.3024951219558716,
+    "motion_score": 0.00144880174291939,
+    "audio_loudness": 0.627572774887085,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 156,
+    "original_frame_index": 156,
+    "sha256_hash": "f3c303f13d45dfd954f8c1d5c26e371265d2e7b429b3731d0e7cb4e709fb4fc0",
+    "model_score": 0.3024951219558716,
+    "motion_score": 0.013673202614379085,
+    "audio_loudness": 0.6926633715629578,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 157,
+    "original_frame_index": 157,
+    "sha256_hash": "d09679def951c06ed8317531d80e82d8841ff78459e9e63ff3afb5106f4a865c",
+    "model_score": 0.3024951219558716,
+    "motion_score": 0.008331517792302106,
+    "audio_loudness": 0.7553388476371765,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 158,
+    "original_frame_index": 158,
+    "sha256_hash": "f0cd8113127e600890b8aa47b4b05d5e865704449161f8650068699b14f1de3e",
+    "model_score": 0.3024951219558716,
+    "motion_score": 0.015017429193899782,
+    "audio_loudness": 0.605999767780304,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 159,
+    "original_frame_index": 159,
+    "sha256_hash": "0af10e4b6ad989e3ba07539c920267ba0de4d573faf0c4508e6ba89c29d6127b",
+    "model_score": 0.3024951219558716,
+    "motion_score": 0.003929920116194626,
+    "audio_loudness": 0.566967785358429,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 160,
+    "original_frame_index": 160,
+    "sha256_hash": "9d798162ce53644a9b38effde8de6636ec805cda34801951c851e4798489c7aa",
+    "model_score": 0.3024951219558716,
+    "motion_score": 0.013301742919389977,
+    "audio_loudness": 0.5543299913406372,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 161,
+    "original_frame_index": 161,
+    "sha256_hash": "44cc773105fb8e021b49225e1322119eeb093c3f2bb85b38f6c9ca8329e1cb61",
+    "model_score": 0.3024951219558716,
+    "motion_score": 0.006703340595497458,
+    "audio_loudness": 0.5864022374153137,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 162,
+    "original_frame_index": 162,
+    "sha256_hash": "87f9c53af895f46ed1aaff71c6a454ad0b06b59b16e8c8117d9077d575d80f5f",
+    "model_score": 0.3024951219558716,
+    "motion_score": 0.0029658678286129266,
+    "audio_loudness": 0.6995338201522827,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 163,
+    "original_frame_index": 163,
+    "sha256_hash": "b9f7c814ae28949c598b55a1d4c132d8e7728ce9e267ddf1b16541dcfe7d0882",
+    "model_score": 0.3024951219558716,
+    "motion_score": 0.0020417574437182283,
+    "audio_loudness": 0.7273204326629639,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 164,
+    "original_frame_index": 164,
+    "sha256_hash": "5eabf3f89697efc35f4e7dd8d4c3b7841e20656b231cf087cc24eed7700e6da4",
+    "model_score": 0.3024951219558716,
+    "motion_score": 0.002609658678286129,
+    "audio_loudness": 0.6383865475654602,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 165,
+    "original_frame_index": 165,
+    "sha256_hash": "a45b862fd25aee68a669aaf213a46d319d4df486589dcc9fe5e5205430fc2cab",
+    "model_score": 0.3033157289028168,
+    "motion_score": 0.0013111837327523601,
+    "audio_loudness": 0.5230160355567932,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 166,
+    "original_frame_index": 166,
+    "sha256_hash": "40020c56e9d5c8c38396ea3badc33273602dbaccffb70261d9932dcb93288300",
+    "model_score": 0.3033157289028168,
+    "motion_score": 0.018400508351488744,
+    "audio_loudness": 0.5930429100990295,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 167,
+    "original_frame_index": 167,
+    "sha256_hash": "87f67ea987a94ebe5f75c80f7cb67bc59ad100a3665e4f448412666317afb1c0",
+    "model_score": 0.3033157289028168,
+    "motion_score": 0.001746550472040668,
+    "audio_loudness": 0.6043930649757385,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 168,
+    "original_frame_index": 168,
+    "sha256_hash": "69e897812e1b553456150313af567ed7ace514b51fa10f9e326d90aae988690a",
+    "model_score": 0.3033157289028168,
+    "motion_score": 0.012558097312999273,
+    "audio_loudness": 0.6992636322975159,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 169,
+    "original_frame_index": 169,
+    "sha256_hash": "b93ebb713fde4cdb416045770d493dd268dac826ac1145c1a3d30ae45a1bfaa7",
+    "model_score": 0.3033157289028168,
+    "motion_score": 0.004623456790123457,
+    "audio_loudness": 0.641838014125824,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 170,
+    "original_frame_index": 170,
+    "sha256_hash": "d3bc114a3d0a6689ca4dfc03e308fe8dceeaf0bcd206ddbb129a95e1f76889a9",
+    "model_score": 0.3033157289028168,
+    "motion_score": 0.012915395787944806,
+    "audio_loudness": 0.6367272734642029,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 171,
+    "original_frame_index": 171,
+    "sha256_hash": "dce62b3084e29434b1648af813c1084ffff8fdb054a5ecccc99807adc73f43b2",
+    "model_score": 0.3033157289028168,
+    "motion_score": 0.005099854756717502,
+    "audio_loudness": 0.5842129588127136,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 172,
+    "original_frame_index": 172,
+    "sha256_hash": "51133e3c67f2e875733d6205504a4eacdd781f5eb2cc0a58eb7d199dd4703c79",
+    "model_score": 0.3033157289028168,
+    "motion_score": 0.0050940450254175745,
+    "audio_loudness": 0.6403490900993347,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 173,
+    "original_frame_index": 173,
+    "sha256_hash": "42cc7026a30eef14c61903e073d3b6cff9a257e5a3539d13c0c86534850183f0",
+    "model_score": 0.3033157289028168,
+    "motion_score": 0.0046851851851851855,
+    "audio_loudness": 0.5669715404510498,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 174,
+    "original_frame_index": 174,
+    "sha256_hash": "016784f7f797bd977866769f2a243a468f86f09bbf9baf76476de54ca853709d",
+    "model_score": 0.3033157289028168,
+    "motion_score": 0.010165214233841684,
+    "audio_loudness": 0.6158168911933899,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 175,
+    "original_frame_index": 175,
+    "sha256_hash": "7b0cba355d415d7671a245dd649111170e8db7a48934312fffbc811250fe5a6d",
+    "model_score": 0.3033157289028168,
+    "motion_score": 0.011453159041394335,
+    "audio_loudness": 0.7339162230491638,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 176,
+    "original_frame_index": 176,
+    "sha256_hash": "891bfead73ce277a85a804f1e3c40ac5dbfd6e54f989ec766482280ff0cf2afb",
+    "model_score": 0.3033157289028168,
+    "motion_score": 0.0020039941902687004,
+    "audio_loudness": 0.6551083922386169,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 177,
+    "original_frame_index": 177,
+    "sha256_hash": "1dc6c583f1dce476efa970ead439537d005d499cbda20def7cf0364c6c29f47f",
+    "model_score": 0.3033157289028168,
+    "motion_score": 0.008546840958605665,
+    "audio_loudness": 0.5924105048179626,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 178,
+    "original_frame_index": 178,
+    "sha256_hash": "f6a590dd8d42f75f8610e60b33b5b6877ac1f78e53fa03c27da4604809e72635",
+    "model_score": 0.3033157289028168,
+    "motion_score": 0.009775599128540306,
+    "audio_loudness": 0.6625720858573914,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 179,
+    "original_frame_index": 179,
+    "sha256_hash": "d5b9cb30c31e4bc87788c3804d17f26a13ea811c4a303311c64131abd0a17d71",
+    "model_score": 0.3033157289028168,
+    "motion_score": 0.0114880174291939,
+    "audio_loudness": 0.6037039160728455,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 180,
+    "original_frame_index": 180,
+    "sha256_hash": "d2cf10d0ce221a8e709c9641ae5a7f4c0f1f0b766c4026369678bfa6a43c2cc4",
+    "model_score": 0.30259546637535095,
+    "motion_score": 0.01739832970225127,
+    "audio_loudness": 0.5616485476493835,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 181,
+    "original_frame_index": 181,
+    "sha256_hash": "dbb996c9813c9b93aeb0b4d1f7c62a6beaf3726c02b4c12c6caae759b715d37c",
+    "model_score": 0.30259546637535095,
+    "motion_score": 0.019034495279593316,
+    "audio_loudness": 0.6022777557373047,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 182,
+    "original_frame_index": 182,
+    "sha256_hash": "a47c9095340adf4a2e3663155e5071e2d708e08c17a3c8a6c9575ff7f0f4881f",
+    "model_score": 0.30259546637535095,
+    "motion_score": 0.00210239651416122,
+    "audio_loudness": 0.7194181680679321,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 183,
+    "original_frame_index": 183,
+    "sha256_hash": "5384ba4f2aab48903bfe9d1e4a834b047f10122176040a8f97fe140231769bf2",
+    "model_score": 0.30259546637535095,
+    "motion_score": 0.01060639070442992,
+    "audio_loudness": 0.5547076463699341,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 184,
+    "original_frame_index": 184,
+    "sha256_hash": "7ffc7727fbfdd322f154011c201098c1144f24e8c177df5190638b82e54296d4",
+    "model_score": 0.30259546637535095,
+    "motion_score": 0.006171387073347858,
+    "audio_loudness": 0.6059324145317078,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 185,
+    "original_frame_index": 185,
+    "sha256_hash": "26a68a223b5e84853c3a3316fec9406dfdbf0b176d8d8a8718643d96f986d24b",
+    "model_score": 0.30259546637535095,
+    "motion_score": 0.004183369644153958,
+    "audio_loudness": 0.7142552733421326,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 186,
+    "original_frame_index": 186,
+    "sha256_hash": "d6b683ca95246025ef2882b777831b5b9e36eae2cd829b70f541db8f89dfb17d",
+    "model_score": 0.30259546637535095,
+    "motion_score": 0.014824255628177197,
+    "audio_loudness": 0.607745349407196,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 187,
+    "original_frame_index": 187,
+    "sha256_hash": "993f3fbe5181aa6d987b8d8270a2fd4f81b49e4e6819bcec74795494b687aa57",
+    "model_score": 0.30259546637535095,
+    "motion_score": 0.0023264342774146694,
+    "audio_loudness": 0.7469073534011841,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 188,
+    "original_frame_index": 188,
+    "sha256_hash": "5b96658d07eba9235053c8936f8df98935f6a52a1cdd7cc4b551ec4581b52888",
+    "model_score": 0.30259546637535095,
+    "motion_score": 0.004058460421205519,
+    "audio_loudness": 0.8375244140625,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 189,
+    "original_frame_index": 189,
+    "sha256_hash": "ecd4fe81a0e668e6cfad497712d4927ca97e017437b73be6ec835e2d006f4c58",
+    "model_score": 0.30259546637535095,
+    "motion_score": 0.005233115468409586,
+    "audio_loudness": 0.6546605825424194,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 190,
+    "original_frame_index": 190,
+    "sha256_hash": "1d31d198352ec89decb90de2f2fe9c2c467c12b4520d2f24522ca75d15bbcb74",
+    "model_score": 0.30259546637535095,
+    "motion_score": 0.009286129266521424,
+    "audio_loudness": 0.7008393406867981,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 191,
+    "original_frame_index": 191,
+    "sha256_hash": "c19917550dc3ee486ca610dbc586c09de65550d6cfbcd05af8a69757801a95eb",
+    "model_score": 0.30259546637535095,
+    "motion_score": 0.0034970951343500363,
+    "audio_loudness": 0.5967360138893127,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 192,
+    "original_frame_index": 192,
+    "sha256_hash": "e47f65d1128758da84db20d3a9feb0cf318dd8d7313cd5b0c83128605b4eb87c",
+    "model_score": 0.30259546637535095,
+    "motion_score": 0.008922657952069717,
+    "audio_loudness": 0.5683553814888,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 193,
+    "original_frame_index": 193,
+    "sha256_hash": "36d98b2fc84dc01483d98a272c5c79a3101af1c1f783e78173951a19101f49df",
+    "model_score": 0.30259546637535095,
+    "motion_score": 0.014766158315177923,
+    "audio_loudness": 0.8531346917152405,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 194,
+    "original_frame_index": 194,
+    "sha256_hash": "5947627ac4aa400d24e8b7e1dfa6458e96e1b88d63e49b79df12d19566b61865",
+    "model_score": 0.30259546637535095,
+    "motion_score": 0.01088634713144517,
+    "audio_loudness": 0.70009446144104,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 195,
+    "original_frame_index": 195,
+    "sha256_hash": "1e058e54f64732f72ca046f001076db40b4a38301443934a55e10a149ff33290",
+    "model_score": 0.3001193702220917,
+    "motion_score": 0.010185185185185186,
+    "audio_loudness": 0.724043071269989,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 196,
+    "original_frame_index": 196,
+    "sha256_hash": "6a6b46dc19418fcb8859baa7b657055adec014f09d3801d82e1192595e446082",
+    "model_score": 0.3001193702220917,
+    "motion_score": 0.007758533042846768,
+    "audio_loudness": 0.6463392376899719,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 197,
+    "original_frame_index": 197,
+    "sha256_hash": "4ba7d07edc4bb3fab3d55598de8159368918180b0a57f6662069eb874b678b37",
+    "model_score": 0.3001193702220917,
+    "motion_score": 0.00475599128540305,
+    "audio_loudness": 0.5973082184791565,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 198,
+    "original_frame_index": 198,
+    "sha256_hash": "560282783fc37798e3e09e7f29f7f7b8a68baecbba8861e090681642ab8b01fe",
+    "model_score": 0.3001193702220917,
+    "motion_score": 0.007340232389251997,
+    "audio_loudness": 0.7088117003440857,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 199,
+    "original_frame_index": 199,
+    "sha256_hash": "08c17554de51d2080ed8a09a7d8134f4fb9ab05e5863a10864ba00404ecd8db0",
+    "model_score": 0.3001193702220917,
+    "motion_score": 0.005841321713870733,
+    "audio_loudness": 0.8032388687133789,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 200,
+    "original_frame_index": 200,
+    "sha256_hash": "28f21112f3fdd691152a440d632bae5620df10328978c30963e7afb7f95c7131",
+    "model_score": 0.3001193702220917,
+    "motion_score": 0.011688453159041394,
+    "audio_loudness": 0.557688295841217,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 201,
+    "original_frame_index": 201,
+    "sha256_hash": "946b4abbc8d846cd023233e994f303dc549e15c128d3ef77a63391f786d6fa55",
+    "model_score": 0.3001193702220917,
+    "motion_score": 0.004265432098765432,
+    "audio_loudness": 0.5847280621528625,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 202,
+    "original_frame_index": 202,
+    "sha256_hash": "da4842f1aee857f31f1c4b3e91cde77bda184eca1703fdccedd22b124bfc32ea",
+    "model_score": 0.3001193702220917,
+    "motion_score": 0.011104212055192448,
+    "audio_loudness": 0.6347793936729431,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 203,
+    "original_frame_index": 203,
+    "sha256_hash": "42296954010a828f9956f7f8aa5b2a419755b0a13c17f960f2e54967bfc19f44",
+    "model_score": 0.3001193702220917,
+    "motion_score": 0.012679738562091503,
+    "audio_loudness": 0.5639942288398743,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 204,
+    "original_frame_index": 204,
+    "sha256_hash": "7952a3ccb4df0303d58948e1f2b09a390526e992061c1c2d1dbd54b2583cbf60",
+    "model_score": 0.3001193702220917,
+    "motion_score": 0.002344226579520697,
+    "audio_loudness": 0.5375472903251648,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 205,
+    "original_frame_index": 205,
+    "sha256_hash": "61c0eff72d3445fb36a45d214c43f0ce3490791b1ffe9017bb7bcd0479039b18",
+    "model_score": 0.3001193702220917,
+    "motion_score": 0.005881989832970226,
+    "audio_loudness": 0.6694984436035156,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 206,
+    "original_frame_index": 206,
+    "sha256_hash": "644f8fcb5f950cd0c6c33981b185d39377f781315c0eb2e5c7d145b89999ee4f",
+    "model_score": 0.3001193702220917,
+    "motion_score": 0.013202977487291214,
+    "audio_loudness": 0.649986207485199,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 207,
+    "original_frame_index": 207,
+    "sha256_hash": "8fcbcdba53f2fd1a00f3a694fe3991214f7fef16030b6b3d940a2b6ab7144bb2",
+    "model_score": 0.3001193702220917,
+    "motion_score": 0.005282135076252723,
+    "audio_loudness": 0.6314781308174133,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 208,
+    "original_frame_index": 208,
+    "sha256_hash": "fe5155379245d37de6576ab554597f577f56dca7bb663d82ede7b9fb40dddc42",
+    "model_score": 0.3001193702220917,
+    "motion_score": 0.0037955700798838056,
+    "audio_loudness": 0.6839515566825867,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 209,
+    "original_frame_index": 209,
+    "sha256_hash": "efac9a337e3797045cded2b9b789a3789b035f8a1eac16c77f746b34601bd21f",
+    "model_score": 0.3001193702220917,
+    "motion_score": 0.013137981118373275,
+    "audio_loudness": 0.7634302973747253,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 210,
+    "original_frame_index": 210,
+    "sha256_hash": "6842a52553b8c90291e70db0e3af48fc0ee754a402198edfc6b4b3780124d924",
+    "model_score": 0.29682886600494385,
+    "motion_score": 0.0035381263616557734,
+    "audio_loudness": 0.5559606552124023,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 211,
+    "original_frame_index": 211,
+    "sha256_hash": "7bb3f78c0e91d52480418cfd1225f1ffffb94a47b00c2aa1895e738705802d00",
+    "model_score": 0.29682886600494385,
+    "motion_score": 0.006211328976034858,
+    "audio_loudness": 0.4700095057487488,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 212,
+    "original_frame_index": 212,
+    "sha256_hash": "8d627ac2aaa0f041ad9d1078bb7970f12c8524fc11659e70921b680a70970d32",
+    "model_score": 0.29682886600494385,
+    "motion_score": 0.009452795933188091,
+    "audio_loudness": 0.5293323397636414,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 213,
+    "original_frame_index": 213,
+    "sha256_hash": "bbef06f9ff39419c8e934dfda1877952ace933a7955c4d4532916fa03bcf73b3",
+    "model_score": 0.29682886600494385,
+    "motion_score": 0.0033736383442265795,
+    "audio_loudness": 0.4893149435520172,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 214,
+    "original_frame_index": 214,
+    "sha256_hash": "f8254af9b8801b9ecdbff271b6bbc91194b61a92dd795fdcda629204f57a1d26",
+    "model_score": 0.29682886600494385,
+    "motion_score": 0.016862381989832972,
+    "audio_loudness": 0.4438455104827881,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 215,
+    "original_frame_index": 215,
+    "sha256_hash": "094d0c197c3a1473bd4703b83cfea3fd482f548b2b9b1c3cf358fbc882d4aa4c",
+    "model_score": 0.29682886600494385,
+    "motion_score": 0.004866739288307916,
+    "audio_loudness": 0.5237243175506592,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 216,
+    "original_frame_index": 216,
+    "sha256_hash": "26d293ac4d5c99456fff9d55e79ef9235d2025f182bc4ced650ac44fb89d1a14",
+    "model_score": 0.29682886600494385,
+    "motion_score": 0.013131082062454611,
+    "audio_loudness": 0.5098916888237,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 217,
+    "original_frame_index": 217,
+    "sha256_hash": "2c699646f92c2d6dcb6f39cf84461422eecc0218ec8139e7d65c49a38d5f6ec6",
+    "model_score": 0.29682886600494385,
+    "motion_score": 0.0031964415395787944,
+    "audio_loudness": 0.49288409948349,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 218,
+    "original_frame_index": 218,
+    "sha256_hash": "a47697363d92ebb9e17fb705a0e9fb0c6fd7f07efd700af000fb06c05daf0585",
+    "model_score": 0.29682886600494385,
+    "motion_score": 0.0006594045025417575,
+    "audio_loudness": 0.535709023475647,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 219,
+    "original_frame_index": 219,
+    "sha256_hash": "880b92f00fff2a3a84b5f69721ce89df56172cc078f3140c77c66a518bb60beb",
+    "model_score": 0.29682886600494385,
+    "motion_score": 0.011330065359477124,
+    "audio_loudness": 0.48757439851760864,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 220,
+    "original_frame_index": 220,
+    "sha256_hash": "c52964b7bf7539885fa4bdbaa8618babaa343f4295695c8b14002ff651ad8a6c",
+    "model_score": 0.29682886600494385,
+    "motion_score": 0.011822076978939723,
+    "audio_loudness": 0.5463311076164246,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 221,
+    "original_frame_index": 221,
+    "sha256_hash": "e74aee705449b5045917c383acbda8bb7334bb927711883ef8a8772600e080d6",
+    "model_score": 0.29682886600494385,
+    "motion_score": 0.021077342047930284,
+    "audio_loudness": 0.5594505071640015,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 222,
+    "original_frame_index": 222,
+    "sha256_hash": "a4881c41f4d8c5a2542c049f69bd0b3c378809567c8a9f7a138f50c59e300c94",
+    "model_score": 0.29682886600494385,
+    "motion_score": 0.003979665940450254,
+    "audio_loudness": 0.42157867550849915,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 223,
+    "original_frame_index": 223,
+    "sha256_hash": "1dfbe6317595497fb67264320c930b0852ea4499c0b6ef1d4fbb35b9af956b5d",
+    "model_score": 0.29682886600494385,
+    "motion_score": 0.015603122730573711,
+    "audio_loudness": 0.520370602607727,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 224,
+    "original_frame_index": 224,
+    "sha256_hash": "49b8fb8f034903b9a4761049f0df3b72749c77cab1ed8e5d8324657402bfa41c",
+    "model_score": 0.29682886600494385,
+    "motion_score": 0.007966957153231662,
+    "audio_loudness": 0.5865963697433472,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 225,
+    "original_frame_index": 225,
+    "sha256_hash": "b145ce6ed8e4617faeecb80cb5fff4403913f90b1d0c8f7c08b7a542568a80ab",
+    "model_score": 0.294181764125824,
+    "motion_score": 0.003690994916485112,
+    "audio_loudness": 0.5718207359313965,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 226,
+    "original_frame_index": 226,
+    "sha256_hash": "fcbc7252f1942acdff5475505948b93d413002084774feb77116e614b9365ada",
+    "model_score": 0.294181764125824,
+    "motion_score": 0.02134967320261438,
+    "audio_loudness": 0.444025456905365,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 227,
+    "original_frame_index": 227,
+    "sha256_hash": "9979160f16bc65ac7cb960bd6de7c88c5215b6e58d450d01c3bf50911a1af19a",
+    "model_score": 0.294181764125824,
+    "motion_score": 0.008712418300653595,
+    "audio_loudness": 0.48139485716819763,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 228,
+    "original_frame_index": 228,
+    "sha256_hash": "f6ab1b66db2f7680f2c9565e10ac943effaac24c2a32405d311a101cd9e6b77a",
+    "model_score": 0.294181764125824,
+    "motion_score": 0.007952069716775598,
+    "audio_loudness": 0.5664490461349487,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 229,
+    "original_frame_index": 229,
+    "sha256_hash": "931cb094e0b3c112aed2701939446a5b4e0ef32ef586203c255dc31f69997525",
+    "model_score": 0.294181764125824,
+    "motion_score": 0.010901234567901234,
+    "audio_loudness": 0.5794243216514587,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 230,
+    "original_frame_index": 230,
+    "sha256_hash": "220c56d7aadcfeecceb66800ec45a44500431b18466384519ae4c46d3f5c3ebe",
+    "model_score": 0.294181764125824,
+    "motion_score": 0.00859041394335512,
+    "audio_loudness": 0.5694666504859924,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 231,
+    "original_frame_index": 231,
+    "sha256_hash": "3aaca83e8116936c05da8758265d904486d4ea476ba8f7acecd747e6f18f7a3f",
+    "model_score": 0.294181764125824,
+    "motion_score": 0.018920479302832246,
+    "audio_loudness": 0.5392788648605347,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 232,
+    "original_frame_index": 232,
+    "sha256_hash": "d5245e3d1506f14ebc587e845cf440d30c1b1d566ae619ead64e84e2e733ac7a",
+    "model_score": 0.294181764125824,
+    "motion_score": 0.008979302832244008,
+    "audio_loudness": 0.587319552898407,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 233,
+    "original_frame_index": 233,
+    "sha256_hash": "28e89b5100447426ae4f934ad8d0c5c209b3d6c99fd079c9565db84bb9fdc1d9",
+    "model_score": 0.294181764125824,
+    "motion_score": 0.017850036310820622,
+    "audio_loudness": 0.5735054016113281,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 234,
+    "original_frame_index": 234,
+    "sha256_hash": "239494e0c4bfd876d376d7b7633d391b4648e2425ee407f82fc73d0da004bdc8",
+    "model_score": 0.294181764125824,
+    "motion_score": 0.006668482207697894,
+    "audio_loudness": 0.635673463344574,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 235,
+    "original_frame_index": 235,
+    "sha256_hash": "463976bbd00550bbff4b41fd3428cdd415cde37632a0912ba98ed8df00649994",
+    "model_score": 0.294181764125824,
+    "motion_score": 0.005139433551198257,
+    "audio_loudness": 0.5134297609329224,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 236,
+    "original_frame_index": 236,
+    "sha256_hash": "5d4d5b1d451995e47d2ce456b1c8664ad0a4111f62a160dd5370d9e187ea39da",
+    "model_score": 0.294181764125824,
+    "motion_score": 0.01940958605664488,
+    "audio_loudness": 0.4934980869293213,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 237,
+    "original_frame_index": 237,
+    "sha256_hash": "ecaaa946ac82181f8d888edcc105a508570dedf10ff1fd6289acda039a13cc2e",
+    "model_score": 0.294181764125824,
+    "motion_score": 0.004290123456790123,
+    "audio_loudness": 0.5907557010650635,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 238,
+    "original_frame_index": 238,
+    "sha256_hash": "a0ce62d3a1e4d178368e2fa720920b1b482b0a320336fea2ac3e25be0b11c7ef",
+    "model_score": 0.294181764125824,
+    "motion_score": 0.012324255628177197,
+    "audio_loudness": 0.6570367217063904,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 239,
+    "original_frame_index": 239,
+    "sha256_hash": "64947bf89e19dbf34c100f4e8fa232b366d24bb4e7c669df3401a59006971471",
+    "model_score": 0.294181764125824,
+    "motion_score": 0.004751633986928104,
+    "audio_loudness": 0.7671604156494141,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 240,
+    "original_frame_index": 240,
+    "sha256_hash": "7a7253caa4e7c68b1142375b2187e2b9ae221a97789fe8e01b0065f1b10a936e",
+    "model_score": 0.29322266578674316,
+    "motion_score": 0.004985838779956427,
+    "audio_loudness": 0.6091553568840027,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 241,
+    "original_frame_index": 241,
+    "sha256_hash": "4fd6516076a0f23338ba816b81c9c9ffda27afe371a27e7a0872154b74d170f9",
+    "model_score": 0.29322266578674316,
+    "motion_score": 0.013839869281045752,
+    "audio_loudness": 0.7315664887428284,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 242,
+    "original_frame_index": 242,
+    "sha256_hash": "4090155a7c00afcb1a6784dd0eba8014dcc823e6d76c10739a03d4499ff9da2d",
+    "model_score": 0.29322266578674316,
+    "motion_score": 0.000953522149600581,
+    "audio_loudness": 0.5378841757774353,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 243,
+    "original_frame_index": 243,
+    "sha256_hash": "e03c6ecde27f59ad8ba64a7b28594f13933082858961e7077c2f103ad3f62c73",
+    "model_score": 0.29322266578674316,
+    "motion_score": 0.006961510530137981,
+    "audio_loudness": 0.7691482901573181,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 244,
+    "original_frame_index": 244,
+    "sha256_hash": "e32c1c7dc0241bb06a2d2827539c402f6150bbd4bc2f088e98230d4a670e9a88",
+    "model_score": 0.29322266578674316,
+    "motion_score": 0.0028511256354393608,
+    "audio_loudness": 0.5576785802841187,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 245,
+    "original_frame_index": 245,
+    "sha256_hash": "e4ded94e48cc98c98675aa2dbc5a918ca5488feb86c3a4c5f9a36ce7989b914f",
+    "model_score": 0.29322266578674316,
+    "motion_score": 0.00735838779956427,
+    "audio_loudness": 0.43680718541145325,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 246,
+    "original_frame_index": 246,
+    "sha256_hash": "b6ed6bf1b1629ad1a5112c63e8b2e84033b7074667cffda36ea273c902eb11e4",
+    "model_score": 0.29322266578674316,
+    "motion_score": 0.0024433551198257083,
+    "audio_loudness": 0.4634906053543091,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 247,
+    "original_frame_index": 247,
+    "sha256_hash": "26eba0a34d86ce3af61111b283110ab6aea43f8631c1f373fa03ecd0e3b763bc",
+    "model_score": 0.29322266578674316,
+    "motion_score": 0.0064709513435003635,
+    "audio_loudness": 0.4549918472766876,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 248,
+    "original_frame_index": 248,
+    "sha256_hash": "ec59245d9daa690cb418ddc260755a0bec78e03fe902b8a3a31c4340da495695",
+    "model_score": 0.29322266578674316,
+    "motion_score": 0.001340958605664488,
+    "audio_loudness": 0.45724666118621826,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 249,
+    "original_frame_index": 249,
+    "sha256_hash": "31b4468a9dbe601715a36bd005452bb9283672783ade959bf41beade093c2e2f",
+    "model_score": 0.29322266578674316,
+    "motion_score": 0.0010980392156862747,
+    "audio_loudness": 0.4479800760746002,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 250,
+    "original_frame_index": 250,
+    "sha256_hash": "f6da61886f42a58076c29a4e1dcf1718375590a8f3218c8788bd4aecae4bac09",
+    "model_score": 0.29322266578674316,
+    "motion_score": 0.005239288307915759,
+    "audio_loudness": 0.5418781638145447,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 251,
+    "original_frame_index": 251,
+    "sha256_hash": "046d8dcb355582b65e667dc3a365d2fbce551975f5d445aeb6a441ba16f45c95",
+    "model_score": 0.29322266578674316,
+    "motion_score": 0.00596078431372549,
+    "audio_loudness": 0.4586450457572937,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 252,
+    "original_frame_index": 252,
+    "sha256_hash": "5ae39807246f9d13fabda9638db75be8c86a7d102b346c58223420c0f449141d",
+    "model_score": 0.29322266578674316,
+    "motion_score": 0.009624909222948438,
+    "audio_loudness": 0.4529745876789093,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 253,
+    "original_frame_index": 253,
+    "sha256_hash": "6ed7a00a655d9bf5bfdc97e5a29008c46d05ea54b71611ee919ed6cb2f75d5c8",
+    "model_score": 0.29322266578674316,
+    "motion_score": 0.002749818445896877,
+    "audio_loudness": 0.5253209471702576,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 254,
+    "original_frame_index": 254,
+    "sha256_hash": "339dc039e9072c863fbe251deddc1d1a2f38ea8b404dee53073e2920510b8f2d",
+    "model_score": 0.29322266578674316,
+    "motion_score": 0.0015348583877995642,
+    "audio_loudness": 0.5197432637214661,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 255,
+    "original_frame_index": 255,
+    "sha256_hash": "32807fe4d30a93a63f432a36473f670ab32e226cdb3931167456ce319c7c8ebb",
+    "model_score": 0.2939819097518921,
+    "motion_score": 0.00691757443718228,
+    "audio_loudness": 0.47937989234924316,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 256,
+    "original_frame_index": 256,
+    "sha256_hash": "9ffd94c164c3d2b5bc8826bc90c3e957b817169c9f92aadd963ca6a495e997bf",
+    "model_score": 0.2939819097518921,
+    "motion_score": 0.0068554829339143065,
+    "audio_loudness": 0.48396942019462585,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 257,
+    "original_frame_index": 257,
+    "sha256_hash": "1d076f63012ad51a5a0bc983332cad4fdd0a11dc022cc98382365a00471e6ae6",
+    "model_score": 0.2939819097518921,
+    "motion_score": 0.0010620915032679738,
+    "audio_loudness": 0.4493568241596222,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 258,
+    "original_frame_index": 258,
+    "sha256_hash": "ed7738bd9e799133e5826c201e1fb1ab50ff82d886bf23ab3845b800425d6f95",
+    "model_score": 0.2939819097518921,
+    "motion_score": 0.0004462599854756718,
+    "audio_loudness": 0.5248429775238037,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 259,
+    "original_frame_index": 259,
+    "sha256_hash": "38bf27d4081ea74cd99c006748dfbc5ff862f013ef624750e51a9edcfa915172",
+    "model_score": 0.2939819097518921,
+    "motion_score": 0.0008267973856209151,
+    "audio_loudness": 0.5527528524398804,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 260,
+    "original_frame_index": 260,
+    "sha256_hash": "9e1b2a6ff7c7365a942e4f0857d5b922cb09d689d54f7f9cf8b72ad38194022f",
+    "model_score": 0.2939819097518921,
+    "motion_score": 0.0005679012345679012,
+    "audio_loudness": 0.5177688002586365,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 261,
+    "original_frame_index": 261,
+    "sha256_hash": "126223f0ae49080dbc659a9c5949c2a42d33ece6acae4d969c5ab07e805c6028",
+    "model_score": 0.2939819097518921,
+    "motion_score": 0.00908169934640523,
+    "audio_loudness": 0.5231008529663086,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 262,
+    "original_frame_index": 262,
+    "sha256_hash": "c7103ada84d2e0e68b3b61fecb4b785137847997a53610ba2065e889d5844741",
+    "model_score": 0.2939819097518921,
+    "motion_score": 0.010917211328976035,
+    "audio_loudness": 0.6094954609870911,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 263,
+    "original_frame_index": 263,
+    "sha256_hash": "30b99b4e2e178a8e8f0a2fafbfc67a5cc5d7ddc7418418b980093f9bf4165501",
+    "model_score": 0.2939819097518921,
+    "motion_score": 0.00942955700798838,
+    "audio_loudness": 0.6143480539321899,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 264,
+    "original_frame_index": 264,
+    "sha256_hash": "374d184a9495b6fc606b30f507766b5eeb8a6b4d65a6b54f5f077ec263fe52f8",
+    "model_score": 0.2939819097518921,
+    "motion_score": 0.010296296296296296,
+    "audio_loudness": 0.6621230244636536,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 265,
+    "original_frame_index": 265,
+    "sha256_hash": "f70b543fe8929b972725f965a6b7792dca0be890110d6b03e1d0670592d76253",
+    "model_score": 0.2939819097518921,
+    "motion_score": 0.0038071895424836603,
+    "audio_loudness": 0.5710234642028809,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 266,
+    "original_frame_index": 266,
+    "sha256_hash": "6fac90d4046cefd560b807cacc25db21da597ad75f963dc023913b7f9f3adccc",
+    "model_score": 0.2939819097518921,
+    "motion_score": 0.029446623093681915,
+    "audio_loudness": 0.5684179067611694,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 267,
+    "original_frame_index": 267,
+    "sha256_hash": "fc933abbedb0dad63502cc0f8529c9baaea88e7492f984615133bacffd9d8ece",
+    "model_score": 0.2939819097518921,
+    "motion_score": 0.0014669571532316629,
+    "audio_loudness": 0.6327102184295654,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 268,
+    "original_frame_index": 268,
+    "sha256_hash": "482d1363105273a2009ebaec01f4d9290f237def9a5515c024059cbde6d5dbf9",
+    "model_score": 0.2939819097518921,
+    "motion_score": 0.00919607843137255,
+    "audio_loudness": 0.6044472455978394,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 269,
+    "original_frame_index": 269,
+    "sha256_hash": "5894d120187c6c60912a2b996b17a78bb9c3cd341e0e2061610558bfa466a2ac",
+    "model_score": 0.2939819097518921,
+    "motion_score": 0.002685911401597676,
+    "audio_loudness": 0.5694772005081177,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 270,
+    "original_frame_index": 270,
+    "sha256_hash": "f2445e6d1ab16ed6eeb6105657f70606fa6b70628354af8eac9e769e90e30a18",
+    "model_score": 0.29584801197052,
+    "motion_score": 0.013555555555555555,
+    "audio_loudness": 0.6073316931724548,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 271,
+    "original_frame_index": 271,
+    "sha256_hash": "ca459f9bb09e0717dcc10703ad435ee2b30fb1cb25ab667c847eeb113b258b82",
+    "model_score": 0.29584801197052,
+    "motion_score": 0.004979665940450254,
+    "audio_loudness": 0.6054418087005615,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 272,
+    "original_frame_index": 272,
+    "sha256_hash": "ddcdcb9d7f71e2ce5bca546b9a1f60a89de8a222e8c6e76355860e2e3c13ee64",
+    "model_score": 0.29584801197052,
+    "motion_score": 0.011455700798838052,
+    "audio_loudness": 0.6032412648200989,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 273,
+    "original_frame_index": 273,
+    "sha256_hash": "5c22100eec7de02c2bd79b0bdd7cb3f477bcd2ce2b62b20dad662317d85aa6d2",
+    "model_score": 0.29584801197052,
+    "motion_score": 0.014367465504720407,
+    "audio_loudness": 0.7146791219711304,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 274,
+    "original_frame_index": 274,
+    "sha256_hash": "8100f56998315c237ed18d24678250d228180b335f9973a14e0fed468ac881ef",
+    "model_score": 0.29584801197052,
+    "motion_score": 0.010702977487291213,
+    "audio_loudness": 0.6003565788269043,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 275,
+    "original_frame_index": 275,
+    "sha256_hash": "4e09685d26d2792bb70a5e5f810e8bf2d1c801b9bbdb705a55beeb968c9f27da",
+    "model_score": 0.29584801197052,
+    "motion_score": 0.016145243282498185,
+    "audio_loudness": 0.7674012780189514,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 276,
+    "original_frame_index": 276,
+    "sha256_hash": "c98eaa8b6789c18375c92bd62bf2d62be2a019f1d5d0ba68453192baed073a42",
+    "model_score": 0.29584801197052,
+    "motion_score": 0.014996368917937545,
+    "audio_loudness": 0.7297788262367249,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 277,
+    "original_frame_index": 277,
+    "sha256_hash": "ecabe709a70456ba126a3754d04ffc5ccd2a51f97ddff96ccc86c0acdb50f556",
+    "model_score": 0.29584801197052,
+    "motion_score": 0.008058097312999273,
+    "audio_loudness": 0.6814905405044556,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 278,
+    "original_frame_index": 278,
+    "sha256_hash": "89acd256c4e3e2197fd7324ed1050feeb91dfe8ac24720523c6c8961a06baddf",
+    "model_score": 0.29584801197052,
+    "motion_score": 0.013000363108206245,
+    "audio_loudness": 0.7227795720100403,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 279,
+    "original_frame_index": 279,
+    "sha256_hash": "cdb722b75949be1655376a0daac2893a7fa5fc313db0b9b4cc5962b09dd89a77",
+    "model_score": 0.29584801197052,
+    "motion_score": 0.009417937545388525,
+    "audio_loudness": 0.6968706250190735,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 280,
+    "original_frame_index": 280,
+    "sha256_hash": "69bff3c8875b8ca53a815c40f07160cb352daa4205c6aac419317c129838efca",
+    "model_score": 0.29584801197052,
+    "motion_score": 0.0036652142338416847,
+    "audio_loudness": 0.6213299036026001,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 281,
+    "original_frame_index": 281,
+    "sha256_hash": "994e1577f7d93391724f7e1b9170ce1f39c955187ef15024011dcd65e43e00a2",
+    "model_score": 0.29584801197052,
+    "motion_score": 0.03238961510530138,
+    "audio_loudness": 0.697249174118042,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 282,
+    "original_frame_index": 282,
+    "sha256_hash": "a5cad41ab78e2dc503266a509fe932828099af4619afc194ed9462c6ce115598",
+    "model_score": 0.29584801197052,
+    "motion_score": 0.010910675381263618,
+    "audio_loudness": 0.7158226370811462,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 283,
+    "original_frame_index": 283,
+    "sha256_hash": "b34a0875c05ecc0686908f97e207d4a714b5839312ef774c4bd2d4b6a604b3be",
+    "model_score": 0.29584801197052,
+    "motion_score": 0.008805374001452433,
+    "audio_loudness": 0.7700485587120056,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 284,
+    "original_frame_index": 284,
+    "sha256_hash": "eea3b9d7d4189f65e3e7f11a88e787cabe104eb3fadc12bf5215ce3cdb8f8c7a",
+    "model_score": 0.29584801197052,
+    "motion_score": 0.004223674655047204,
+    "audio_loudness": 0.6376465559005737,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 285,
+    "original_frame_index": 285,
+    "sha256_hash": "06185f94bd0006d19154d55ce6862b1048ae73a05db42b7b88451bcb3b40699a",
+    "model_score": 0.29778069257736206,
+    "motion_score": 0.0076027596223674655,
+    "audio_loudness": 0.5709404349327087,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 286,
+    "original_frame_index": 286,
+    "sha256_hash": "784ea4f64965570d45e03a71bcdc7265418f9d2ce607a12f1fb653207e963941",
+    "model_score": 0.29778069257736206,
+    "motion_score": 0.013404865649963689,
+    "audio_loudness": 0.5871296525001526,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 287,
+    "original_frame_index": 287,
+    "sha256_hash": "f0ab7e6337fa720db602bcaf42828a70c84b15084f505ce2dd1ccbe4eed173f5",
+    "model_score": 0.29778069257736206,
+    "motion_score": 0.015210602759622367,
+    "audio_loudness": 0.6305385231971741,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 288,
+    "original_frame_index": 288,
+    "sha256_hash": "3865338b0f25b3fc674032a56810f860192ef137acda91e88904ca3ed538f13e",
+    "model_score": 0.29778069257736206,
+    "motion_score": 0.0030050835148874365,
+    "audio_loudness": 0.7062692046165466,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 289,
+    "original_frame_index": 289,
+    "sha256_hash": "8e38038660bee40ed92f97bc1daf8e7b4d18f1d5b3f144dcc2169cd6be1aca22",
+    "model_score": 0.29778069257736206,
+    "motion_score": 0.005915758896151054,
+    "audio_loudness": 0.613951563835144,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 290,
+    "original_frame_index": 290,
+    "sha256_hash": "5abd30a03b4e27c4ada37af67d8b16ef007e6cc63a319d35e78034e17246cf85",
+    "model_score": 0.29778069257736206,
+    "motion_score": 0.010964415395787946,
+    "audio_loudness": 0.6068480014801025,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 291,
+    "original_frame_index": 291,
+    "sha256_hash": "625e6ee9a6e5e8154831a3c05caf612a050b78b196f3c7187a1379b40cd2c378",
+    "model_score": 0.29778069257736206,
+    "motion_score": 0.009690994916485113,
+    "audio_loudness": 0.7642142176628113,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 292,
+    "original_frame_index": 292,
+    "sha256_hash": "9c0c9d158cdacc1055bf62a1c4bc106ecad60a66a41076cfb62675da88b306e6",
+    "model_score": 0.29778069257736206,
+    "motion_score": 0.00825272331154684,
+    "audio_loudness": 0.6379924416542053,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 293,
+    "original_frame_index": 293,
+    "sha256_hash": "e5599347bc479224a211c67384ea4b7f7552bb72f7b0c63e49403a04f091d7fb",
+    "model_score": 0.29778069257736206,
+    "motion_score": 0.012941176470588235,
+    "audio_loudness": 0.6267896890640259,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 294,
+    "original_frame_index": 294,
+    "sha256_hash": "d3d676ccaa18fe2b319e8f2d4d43a4f4f75ab8484f215524278d543063dcb24b",
+    "model_score": 0.29778069257736206,
+    "motion_score": 0.011652868554829339,
+    "audio_loudness": 0.6195175051689148,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 295,
+    "original_frame_index": 295,
+    "sha256_hash": "0b75b83e3d7b6ebd08a1ec190ed7f4cb55e98582ba8b3ca8693625270fbb12ad",
+    "model_score": 0.29778069257736206,
+    "motion_score": 0.009578068264342775,
+    "audio_loudness": 0.6304554343223572,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 296,
+    "original_frame_index": 296,
+    "sha256_hash": "8838ad6f19c87f623de408551bd59ed7e9287508fc1f449abb299294530fe2e8",
+    "model_score": 0.29778069257736206,
+    "motion_score": 0.022945533769063182,
+    "audio_loudness": 0.6019699573516846,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 297,
+    "original_frame_index": 297,
+    "sha256_hash": "00f285a99e30639822ec782a6e9f4072a07e19da7194f34c0c120531adbbc226",
+    "model_score": 0.29778069257736206,
+    "motion_score": 0.010559549745824256,
+    "audio_loudness": 0.7198930382728577,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 298,
+    "original_frame_index": 298,
+    "sha256_hash": "6fdf50e41e519eee126cb17d88f9861a78aeb3af54ad2e5c4fc5892fa84d7b45",
+    "model_score": 0.29778069257736206,
+    "motion_score": 0.0023075526506899056,
+    "audio_loudness": 0.7902239561080933,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 299,
+    "original_frame_index": 299,
+    "sha256_hash": "00bcb371efaec00cc9c41b57b8c8398c52d413a4046cad3300461f1c7a389664",
+    "model_score": 0.29778069257736206,
+    "motion_score": 0.0033551198257080607,
+    "audio_loudness": 0.6512818336486816,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 300,
+    "original_frame_index": 300,
+    "sha256_hash": "6671f052f95a89f638021ad34e00b8403f5ac8f0a6c8cd185271b29aa90c6393",
+    "model_score": 0.298841655254364,
+    "motion_score": 0.01353667392883079,
+    "audio_loudness": 0.6096788644790649,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 301,
+    "original_frame_index": 301,
+    "sha256_hash": "a3c9aed0d1df8dfa2ebd5ead3816124a291613ced1671bd5fde70525f3c16e9e",
+    "model_score": 0.298841655254364,
+    "motion_score": 0.014539578794480756,
+    "audio_loudness": 0.6679211258888245,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 302,
+    "original_frame_index": 302,
+    "sha256_hash": "da5650210a7f998c002b53da56b04210dd9aa1fbf01915b57edd3770687bc791",
+    "model_score": 0.298841655254364,
+    "motion_score": 0.014473856209150327,
+    "audio_loudness": 0.5751863718032837,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 303,
+    "original_frame_index": 303,
+    "sha256_hash": "88129dac9364ba93f52a994eacb45ff92a5ddb26ee15d5ae2a2283292e229744",
+    "model_score": 0.298841655254364,
+    "motion_score": 0.0034397240377632534,
+    "audio_loudness": 0.6755508184432983,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 304,
+    "original_frame_index": 304,
+    "sha256_hash": "8bf09e9e4ed12420672f2ff05559242330d5d8dff3cb4f341d1914623fadbaf3",
+    "model_score": 0.298841655254364,
+    "motion_score": 0.008255628177196803,
+    "audio_loudness": 0.960985541343689,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 305,
+    "original_frame_index": 305,
+    "sha256_hash": "95f05e68e5fe3786a0c4e25238c4672581e1dc756722909eeccbc325e9e884cc",
+    "model_score": 0.298841655254364,
+    "motion_score": 0.014021060275962236,
+    "audio_loudness": 1.0,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 306,
+    "original_frame_index": 306,
+    "sha256_hash": "9581e84a1a7b6ededbf4b043117623c32e603ad305da502cd261a6f6f3c29dee",
+    "model_score": 0.298841655254364,
+    "motion_score": 0.009241103848946986,
+    "audio_loudness": 0.5350252985954285,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 307,
+    "original_frame_index": 307,
+    "sha256_hash": "b321f6dd6cc988a67b524face49c128649f64b67c2d44e45d6cb1540a4461350",
+    "model_score": 0.298841655254364,
+    "motion_score": 0.006757443718228032,
+    "audio_loudness": 0.5911638736724854,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 308,
+    "original_frame_index": 308,
+    "sha256_hash": "8312d0d7c35e07034b1d5678988f773aae5c24942bf00b49a4233bc9a3284910",
+    "model_score": 0.298841655254364,
+    "motion_score": 0.007110021786492375,
+    "audio_loudness": 0.5974639654159546,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 309,
+    "original_frame_index": 309,
+    "sha256_hash": "4911e3bbab2efd2b805d6a1750180b3fb99550c60c237d24d7d2f5133c529710",
+    "model_score": 0.298841655254364,
+    "motion_score": 0.007834059549745824,
+    "audio_loudness": 0.6186535358428955,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 310,
+    "original_frame_index": 310,
+    "sha256_hash": "3e5d20f952eabba30c59d531ecac17bffe172136ee8bbeba54b98e0806c14223",
+    "model_score": 0.298841655254364,
+    "motion_score": 0.006479302832244009,
+    "audio_loudness": 0.7501678466796875,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 311,
+    "original_frame_index": 311,
+    "sha256_hash": "019d6e93c5374684fd89402508bdf46d606d48bb29541c8592b658703c782257",
+    "model_score": 0.298841655254364,
+    "motion_score": 0.00690232389251997,
+    "audio_loudness": 0.865889310836792,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 312,
+    "original_frame_index": 312,
+    "sha256_hash": "b424d089c351a123f11d97a1ccef97bd6c729ebf588ef0473e88cedcc13ec9ed",
+    "model_score": 0.298841655254364,
+    "motion_score": 0.01285366739288308,
+    "audio_loudness": 0.8497163653373718,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 313,
+    "original_frame_index": 313,
+    "sha256_hash": "fb529a5c9f9e6326aaa8505484d797e020be96c5ae9961bfc3900c9ba90a38a0",
+    "model_score": 0.298841655254364,
+    "motion_score": 0.009298838053740014,
+    "audio_loudness": 0.6748033761978149,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 314,
+    "original_frame_index": 314,
+    "sha256_hash": "df8a53d6581a98d4a3074b5d4bf7ed056e373b6c6d4427254bfd407afdcd2d6a",
+    "model_score": 0.298841655254364,
+    "motion_score": 0.0025628177196804647,
+    "audio_loudness": 0.7131248116493225,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 315,
+    "original_frame_index": 315,
+    "sha256_hash": "5e1fd7e58895420b94254c62f5ffc2336ea5916813b932a4cea2e0782c6a0b3a",
+    "model_score": 0.298738956451416,
+    "motion_score": 0.0046946259985475676,
+    "audio_loudness": 0.6913247108459473,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 316,
+    "original_frame_index": 316,
+    "sha256_hash": "d947307814200ba2ef0519610188c655dced808d8a02e52090630f308970d971",
+    "model_score": 0.298738956451416,
+    "motion_score": 0.01608169934640523,
+    "audio_loudness": 0.7821783423423767,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 317,
+    "original_frame_index": 317,
+    "sha256_hash": "b3de707ee6465bed0f91b67f93bc1ef344c23bbfaf9b371c2e7e6964706cd2eb",
+    "model_score": 0.298738956451416,
+    "motion_score": 0.004258896151053014,
+    "audio_loudness": 0.818286120891571,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 318,
+    "original_frame_index": 318,
+    "sha256_hash": "9bcade1abf4c3570ea0ee18a27b53477d63d97fa80fa6180789e89077bcf0916",
+    "model_score": 0.298738956451416,
+    "motion_score": 0.0046361655773420486,
+    "audio_loudness": 0.8405959606170654,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 319,
+    "original_frame_index": 319,
+    "sha256_hash": "4fcbccfeb7b48d9aacf2b4d4f591e864deb5fc8dead3810fa33b500a4a3db4d2",
+    "model_score": 0.298738956451416,
+    "motion_score": 0.002545025417574437,
+    "audio_loudness": 0.7937931418418884,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 320,
+    "original_frame_index": 320,
+    "sha256_hash": "74a3a3448025d1a7f7a6c410d7239d9bb46783359be8c7549b85311c30a3648d",
+    "model_score": 0.298738956451416,
+    "motion_score": 0.007141249092229485,
+    "audio_loudness": 0.9007795453071594,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 321,
+    "original_frame_index": 321,
+    "sha256_hash": "1ce0378fed8a448a7276d9ca03986b74093bda4a41f4153e592538d278d14065",
+    "model_score": 0.298738956451416,
+    "motion_score": 0.013983660130718955,
+    "audio_loudness": 0.8864734768867493,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 322,
+    "original_frame_index": 322,
+    "sha256_hash": "9446e525557b90d28f48529fb996a0dc577093c9301ee1d248008364c8649f5a",
+    "model_score": 0.298738956451416,
+    "motion_score": 0.010924836601307188,
+    "audio_loudness": 0.9493335485458374,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 323,
+    "original_frame_index": 323,
+    "sha256_hash": "d8676d81cacbeb715694f17130e018017a3d881c4991b0d1f7a8dacc564f6109",
+    "model_score": 0.298738956451416,
+    "motion_score": 0.008445170660856935,
+    "audio_loudness": 0.8995807766914368,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 324,
+    "original_frame_index": 324,
+    "sha256_hash": "22314fdb4641ec83c2332dccdad7924057a4b78d66366e8b9e45f4f32773ece9",
+    "model_score": 0.298738956451416,
+    "motion_score": 0.004136165577342047,
+    "audio_loudness": 0.8811361193656921,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 325,
+    "original_frame_index": 325,
+    "sha256_hash": "b8b73e185ba903b68f59bb8f6f1ae46a72cc2eb152ca877842ab14315969d185",
+    "model_score": 0.298738956451416,
+    "motion_score": 0.004601307189542484,
+    "audio_loudness": 0.9064745306968689,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 326,
+    "original_frame_index": 326,
+    "sha256_hash": "45f2c48e57910159c8dcd5b3a77720a1fcd516654d31fcad38d22a6709d59080",
+    "model_score": 0.298738956451416,
+    "motion_score": 0.012328249818445897,
+    "audio_loudness": 0.9172883033752441,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 327,
+    "original_frame_index": 327,
+    "sha256_hash": "1843db605dabf96ec3918b67674b4cf644632481018e083226ca2ac9cf593b52",
+    "model_score": 0.298738956451416,
+    "motion_score": 0.006919389978213507,
+    "audio_loudness": 0.9487734436988831,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 328,
+    "original_frame_index": 328,
+    "sha256_hash": "f771a28450f6c9f1e5fc5aa8f1b07eacc47641b7b16b991957806b04b7b9096a",
+    "model_score": 0.298738956451416,
+    "motion_score": 0.0019578794480755264,
+    "audio_loudness": 0.9884235262870789,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 329,
+    "original_frame_index": 329,
+    "sha256_hash": "58aea1cb65c3af428df4f1b04cf9d994c196a1d5c91c16c88ed147d7887b301d",
+    "model_score": 0.298738956451416,
+    "motion_score": 0.005848946986201888,
+    "audio_loudness": 0.9501203298568726,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 330,
+    "original_frame_index": 330,
+    "sha256_hash": "5aaa10fe8656499b065d2b2c5744744ee5f868142d966e36a5c5f0c4d3aa6a79",
+    "model_score": 0.2977897822856903,
+    "motion_score": 0.00521677559912854,
+    "audio_loudness": 0.9583821296691895,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 331,
+    "original_frame_index": 331,
+    "sha256_hash": "9e116279685056e14b39ab62a3c0d0276e1ee4fcc7c9bad34853988d40970bc9",
+    "model_score": 0.2977897822856903,
+    "motion_score": 0.017204429920116195,
+    "audio_loudness": 0.8772730827331543,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 332,
+    "original_frame_index": 332,
+    "sha256_hash": "c04df427d681d1923fba92f1e1c3c1c5cbbf15b85dc72b0b3a6121f4fdc85e9a",
+    "model_score": 0.2977897822856903,
+    "motion_score": 0.005481118373275236,
+    "audio_loudness": 0.9883474111557007,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 333,
+    "original_frame_index": 333,
+    "sha256_hash": "dcf07268a48c0e3de6bab3f07bd91242b1f9a791e1e9b1714c6e61922225e502",
+    "model_score": 0.2977897822856903,
+    "motion_score": 0.009666666666666665,
+    "audio_loudness": 0.8960409760475159,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 334,
+    "original_frame_index": 334,
+    "sha256_hash": "24502bfe29adc996ae4456bf6d79c81f99074eb2045aae3cc44f7fc96aaa6397",
+    "model_score": 0.2977897822856903,
+    "motion_score": 0.005438997821350763,
+    "audio_loudness": 0.878244936466217,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 335,
+    "original_frame_index": 335,
+    "sha256_hash": "9b2983b29a3c663571e9a6f53d1aac312de9c2911a87320642dcd77702f2fb61",
+    "model_score": 0.2977897822856903,
+    "motion_score": 0.006268700072621641,
+    "audio_loudness": 0.9689633250236511,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 336,
+    "original_frame_index": 336,
+    "sha256_hash": "9d0034dec38ecc146239c74995fcfbaa159ef308b31ced0a9e42700930ca42bd",
+    "model_score": 0.2977897822856903,
+    "motion_score": 0.0033990559186637616,
+    "audio_loudness": 0.9345956444740295,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 337,
+    "original_frame_index": 337,
+    "sha256_hash": "88908bcd262a8f59b3e18b0e63b6240421ae3816e5a1db3bf911cb8525a99276",
+    "model_score": 0.2977897822856903,
+    "motion_score": 0.01138888888888889,
+    "audio_loudness": 0.9132869839668274,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 338,
+    "original_frame_index": 338,
+    "sha256_hash": "65465bcc5aecbaf7799f65cdbe520dd92ff49f239b14a6a10a837ae7ca3861d8",
+    "model_score": 0.2977897822856903,
+    "motion_score": 0.012278867102396514,
+    "audio_loudness": 0.7962925434112549,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 339,
+    "original_frame_index": 339,
+    "sha256_hash": "c87ea5d12bb8eb80a4fe1117fe44633c26d2249009c274424409205a8043dca9",
+    "model_score": 0.2977897822856903,
+    "motion_score": 0.014006172839506172,
+    "audio_loudness": 0.9411385655403137,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 340,
+    "original_frame_index": 340,
+    "sha256_hash": "ad701f1418582b4c8aa041f298102aa84e30693eed9ece514bbe7bbc729bc699",
+    "model_score": 0.2977897822856903,
+    "motion_score": 0.0054920116194626,
+    "audio_loudness": 0.9365866780281067,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 341,
+    "original_frame_index": 341,
+    "sha256_hash": "95fbf977b1f5dd39c4e3abad07fd7992f9998454d5841db3b3a9a775c28c575e",
+    "model_score": 0.2977897822856903,
+    "motion_score": 0.006473129992737836,
+    "audio_loudness": 0.8737801313400269,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 342,
+    "original_frame_index": 342,
+    "sha256_hash": "5b83c21859a9758e1876b53d6449e379fcfbcd198bf2157663f3757d5a4beb2e",
+    "model_score": 0.2977897822856903,
+    "motion_score": 0.01120878721859114,
+    "audio_loudness": 0.8604941964149475,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 343,
+    "original_frame_index": 343,
+    "sha256_hash": "c3b7e10ef3904a90d78a7fcc5147155f4e844f1115cb6d86b3b247099117a89f",
+    "model_score": 0.2977897822856903,
+    "motion_score": 0.004050835148874364,
+    "audio_loudness": 0.8289759159088135,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 344,
+    "original_frame_index": 344,
+    "sha256_hash": "0eb2a24dd3993c7a432363bf6d5a0c80a4472f90eb5bbfb01d9ae4e47979f1a6",
+    "model_score": 0.2977897822856903,
+    "motion_score": 0.00587037037037037,
+    "audio_loudness": 0.8348382115364075,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 345,
+    "original_frame_index": 345,
+    "sha256_hash": "5e30992fadf3976cb00f41873fcfbf17d01b028a1666fc2fe8077881a91b6207",
+    "model_score": 0.29629606008529663,
+    "motion_score": 0.002614742193173566,
+    "audio_loudness": 0.9504414200782776,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 346,
+    "original_frame_index": 346,
+    "sha256_hash": "5d09bc8d161d7a525b8913052a5cb496bebad65001c0de2b9e3e986b0d96aa09",
+    "model_score": 0.29629606008529663,
+    "motion_score": 0.01077523602033406,
+    "audio_loudness": 0.7516325116157532,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 347,
+    "original_frame_index": 347,
+    "sha256_hash": "1f95e3e54622e3f6b112900542ccd6d5feb8e57790cbc13c3536779560343e9f",
+    "model_score": 0.29629606008529663,
+    "motion_score": 0.006806100217864924,
+    "audio_loudness": 0.686639130115509,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 348,
+    "original_frame_index": 348,
+    "sha256_hash": "e28491804073e6be06a61006e3ca005340931bbc6eee9cee936e5c3565448eef",
+    "model_score": 0.29629606008529663,
+    "motion_score": 0.013753086419753086,
+    "audio_loudness": 0.7434890866279602,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 349,
+    "original_frame_index": 349,
+    "sha256_hash": "672ddd9961fcb248f05e465f29c3a54d2ca5c127434f1d424ac821a545e2cd97",
+    "model_score": 0.29629606008529663,
+    "motion_score": 0.012116920842411038,
+    "audio_loudness": 0.7970669269561768,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 350,
+    "original_frame_index": 350,
+    "sha256_hash": "b50e1164e489b1f4d429c4c2720e0793b71189963023d2813e591097808e6d3e",
+    "model_score": 0.29629606008529663,
+    "motion_score": 0.004779593318809006,
+    "audio_loudness": 0.765842616558075,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 351,
+    "original_frame_index": 351,
+    "sha256_hash": "7d67c8c689b8d7c8e365f8b07a9120fb6de2ef153165df8d4043d90c77a9a58a",
+    "model_score": 0.29629606008529663,
+    "motion_score": 0.01104647785039942,
+    "audio_loudness": 0.732327938079834,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 352,
+    "original_frame_index": 352,
+    "sha256_hash": "6179ee531a89f9d0c993d37871d3c53a2438dea111393e2245e91ed02c822bac",
+    "model_score": 0.29629606008529663,
+    "motion_score": 0.004525054466230937,
+    "audio_loudness": 0.7403271794319153,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 353,
+    "original_frame_index": 353,
+    "sha256_hash": "1ae0b54bfb1ed19904b7252333c75ab09f7bf82858161829df801fcfe7df2063",
+    "model_score": 0.29629606008529663,
+    "motion_score": 0.00424400871459695,
+    "audio_loudness": 0.8196924924850464,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 354,
+    "original_frame_index": 354,
+    "sha256_hash": "37c050ee3276e605b8e254686a7db0b91c39e8a556e9fd6575d898a5aa71b937",
+    "model_score": 0.29629606008529663,
+    "motion_score": 0.005167392883079157,
+    "audio_loudness": 0.8504099249839783,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 355,
+    "original_frame_index": 355,
+    "sha256_hash": "77d831b80b785b0ce11e69ee888bbfdd3ac4d3fff5a3e3bd569585f91e44c787",
+    "model_score": 0.29629606008529663,
+    "motion_score": 0.008242556281771967,
+    "audio_loudness": 0.6777238249778748,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 356,
+    "original_frame_index": 356,
+    "sha256_hash": "107b1fe6329e4d1beb1ef83bb72b6dcdbc9ad8dfcbdc7a611ffe3fd37bb24bfc",
+    "model_score": 0.29629606008529663,
+    "motion_score": 0.02191503267973856,
+    "audio_loudness": 0.7207890152931213,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 357,
+    "original_frame_index": 357,
+    "sha256_hash": "338ea52cc735cd1f00399d38b527b4732674aea1e241cd0ca4fbdb496bbefaad",
+    "model_score": 0.29629606008529663,
+    "motion_score": 0.009616557734204794,
+    "audio_loudness": 0.7816639542579651,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 358,
+    "original_frame_index": 358,
+    "sha256_hash": "3374d4477d0223a898ac08229f8d32ba3a7ad3793076adc688a4dfe65f6796ae",
+    "model_score": 0.29629606008529663,
+    "motion_score": 0.011872549019607843,
+    "audio_loudness": 0.80265212059021,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 359,
+    "original_frame_index": 359,
+    "sha256_hash": "bf3b5afac69b8be5696c11d0dc49932a270ae56e298fcb24fcd093f37cb851c0",
+    "model_score": 0.29629606008529663,
+    "motion_score": 0.0054172113289760356,
+    "audio_loudness": 0.666356086730957,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 360,
+    "original_frame_index": 360,
+    "sha256_hash": "d2596fdb744631aff57b1e903c0f72fc2a7a17ae413333f6390afe081985a6ff",
+    "model_score": 0.29486575722694397,
+    "motion_score": 0.005685548293391431,
+    "audio_loudness": 0.5943233370780945,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 361,
+    "original_frame_index": 361,
+    "sha256_hash": "151520f689fe63ea202a3d851b5bc980e71331ccb530dc8d95bb341f25f6b839",
+    "model_score": 0.29486575722694397,
+    "motion_score": 0.015254901960784314,
+    "audio_loudness": 0.7813117504119873,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 362,
+    "original_frame_index": 362,
+    "sha256_hash": "6bf90a40ccf738ea5acfb466a72b4f0020c3c3f2134e59e99957c7c53a741f53",
+    "model_score": 0.29486575722694397,
+    "motion_score": 0.010291575889615106,
+    "audio_loudness": 0.7572399973869324,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 363,
+    "original_frame_index": 363,
+    "sha256_hash": "bb7c158ab1272293f38ebdb5e5a95b45d111a0390bb8a3854442e83e29cc6fef",
+    "model_score": 0.29486575722694397,
+    "motion_score": 0.00661038489469862,
+    "audio_loudness": 0.6779067516326904,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 364,
+    "original_frame_index": 364,
+    "sha256_hash": "708a21d67b97ceae728f8af0f17344e42a2437303762b3e693f5ed74da8daf40",
+    "model_score": 0.29486575722694397,
+    "motion_score": 0.0030846042120551923,
+    "audio_loudness": 0.5622527599334717,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 365,
+    "original_frame_index": 365,
+    "sha256_hash": "5ac1ef87ea837df113a13accbba8db1568ec0ac33cf52c0cda6ed8ccf01db7e9",
+    "model_score": 0.29486575722694397,
+    "motion_score": 0.0029328249818445897,
+    "audio_loudness": 0.6237733364105225,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 366,
+    "original_frame_index": 366,
+    "sha256_hash": "046a2ac8a804cadeccf02893c708a83f8bf81282148cda36f816c326d0f4afe7",
+    "model_score": 0.29486575722694397,
+    "motion_score": 0.004549019607843137,
+    "audio_loudness": 0.7127276062965393,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 367,
+    "original_frame_index": 367,
+    "sha256_hash": "9f3517c63aac3f3136f82af31df28179eb9264e6dcf0e7eb32c81fb723a60e65",
+    "model_score": 0.29486575722694397,
+    "motion_score": 0.01047748729121278,
+    "audio_loudness": 0.5898750424385071,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 368,
+    "original_frame_index": 368,
+    "sha256_hash": "44b9f168807949bdd4b1467569d593da3c25916ca1440b799e8e27b6a2203dae",
+    "model_score": 0.29486575722694397,
+    "motion_score": 0.012480029048656499,
+    "audio_loudness": 0.5678186416625977,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 369,
+    "original_frame_index": 369,
+    "sha256_hash": "cc78d6f03689f0c6200021a8fb31111b7c1dab85d85ff90d37e6752686841fa1",
+    "model_score": 0.29486575722694397,
+    "motion_score": 0.008520334059549746,
+    "audio_loudness": 0.6688735485076904,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 370,
+    "original_frame_index": 370,
+    "sha256_hash": "a49b404228cbd14bce129356d8b8b8d867803147033071cbf9993a2741dde39d",
+    "model_score": 0.29486575722694397,
+    "motion_score": 0.010466957153231664,
+    "audio_loudness": 0.645988941192627,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 371,
+    "original_frame_index": 371,
+    "sha256_hash": "b18df3f8e02b887e273791add2e2f1153463cc4a7b551f980da55658aa269397",
+    "model_score": 0.29486575722694397,
+    "motion_score": 0.006131445170660857,
+    "audio_loudness": 0.6862943768501282,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 372,
+    "original_frame_index": 372,
+    "sha256_hash": "45d7742b5378f97a04d3cbde25c09ac091d59b873747fc7349d989f55c8f7f50",
+    "model_score": 0.29486575722694397,
+    "motion_score": 0.0065039941902687,
+    "audio_loudness": 0.5648456811904907,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 373,
+    "original_frame_index": 373,
+    "sha256_hash": "eb624fd2d61b2a624dd5bfe9cb17b0c99c31a300809b76fd795fefda61c22118",
+    "model_score": 0.29486575722694397,
+    "motion_score": 0.005537763253449528,
+    "audio_loudness": 0.6698424816131592,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 374,
+    "original_frame_index": 374,
+    "sha256_hash": "e5d7e8295236b40db1fd8cd2d03061877adbef06fb4b7251998829fc9bbf8afb",
+    "model_score": 0.29486575722694397,
+    "motion_score": 0.007026143790849673,
+    "audio_loudness": 0.5765739679336548,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 375,
+    "original_frame_index": 375,
+    "sha256_hash": "403b18b541c8704f5bdf18ded47d49d06acea7386e49fd0b51f4c6bb50a2817a",
+    "model_score": 0.294418603181839,
+    "motion_score": 0.011005446623093681,
+    "audio_loudness": 0.6334470510482788,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 376,
+    "original_frame_index": 376,
+    "sha256_hash": "3b6fe2b96359ee91f18d3fc7a8a3493d9b77c9dbbac3c1280b7d5d51053747cf",
+    "model_score": 0.294418603181839,
+    "motion_score": 0.019255991285403052,
+    "audio_loudness": 0.6945450305938721,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 377,
+    "original_frame_index": 377,
+    "sha256_hash": "4716e7e7d7de85b5c27a59dfd3180c521bf4c8a7fb5b5d62201c202a882d92b5",
+    "model_score": 0.294418603181839,
+    "motion_score": 0.00646477850399419,
+    "audio_loudness": 0.7179869413375854,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 378,
+    "original_frame_index": 378,
+    "sha256_hash": "cf3e10b88e0c4240e65cfc71c91205159aa1a759078168f472631dd72b06f7be",
+    "model_score": 0.294418603181839,
+    "motion_score": 0.014059912854030502,
+    "audio_loudness": 0.6104685068130493,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 379,
+    "original_frame_index": 379,
+    "sha256_hash": "d2308e38fc17630736289b17f735733c1d4f73d24c40bc94c2f84b7daeb4cf26",
+    "model_score": 0.294418603181839,
+    "motion_score": 0.01062236746550472,
+    "audio_loudness": 0.7212350368499756,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 380,
+    "original_frame_index": 380,
+    "sha256_hash": "45f58212d2a18116748236b3e3b6e3d57b6ce2dd73dbf5f1f38743ccaa36b93b",
+    "model_score": 0.294418603181839,
+    "motion_score": 0.023858750907770516,
+    "audio_loudness": 0.6729640960693359,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 381,
+    "original_frame_index": 381,
+    "sha256_hash": "8f7cd684abe6ffb987e686edabe0ea73dd15a0081ced11619492ece8bbbc3a65",
+    "model_score": 0.294418603181839,
+    "motion_score": 0.04536564996368918,
+    "audio_loudness": 0.6451767086982727,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 382,
+    "original_frame_index": 382,
+    "sha256_hash": "0703d61613fe0c33f916f530f2ab2fb90b810c1f0f7926489e3e4c0ba957bb70",
+    "model_score": 0.294418603181839,
+    "motion_score": 0.03954938271604939,
+    "audio_loudness": 0.6992616057395935,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 383,
+    "original_frame_index": 383,
+    "sha256_hash": "af88b7809830772a5db4bca57a8b7142f68088f6f56996430a069c635894d256",
+    "model_score": 0.294418603181839,
+    "motion_score": 0.01922984749455338,
+    "audio_loudness": 0.6291370987892151,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 384,
+    "original_frame_index": 384,
+    "sha256_hash": "96c973c4658804752a00ad6c4b47f591ad742be5331e004990781f088429677f",
+    "model_score": 0.294418603181839,
+    "motion_score": 0.023968409586056644,
+    "audio_loudness": 0.6736469268798828,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 385,
+    "original_frame_index": 385,
+    "sha256_hash": "3d8b14c43f4896374b4076089f7323f55fc4770ae163dce3683a78eadc2e1bb7",
+    "model_score": 0.294418603181839,
+    "motion_score": 0.012568264342774147,
+    "audio_loudness": 0.6642866134643555,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 386,
+    "original_frame_index": 386,
+    "sha256_hash": "34d3e50688194a333d3b88bc5b4803faad666562e5b559ba50541d345ff1c96a",
+    "model_score": 0.294418603181839,
+    "motion_score": 0.01700544662309368,
+    "audio_loudness": 0.7419459223747253,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 387,
+    "original_frame_index": 387,
+    "sha256_hash": "03b80120c0f22c8d00356e6b9dc42b489313171eeb9421f1b9c1aa559f46c9b1",
+    "model_score": 0.294418603181839,
+    "motion_score": 0.0259520697167756,
+    "audio_loudness": 0.6408077478408813,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 388,
+    "original_frame_index": 388,
+    "sha256_hash": "1e56f6e9c7eeb7eca03a5864ef22b29a843c598222e6d969a4fffa6cc5133743",
+    "model_score": 0.294418603181839,
+    "motion_score": 0.006890704429920116,
+    "audio_loudness": 0.6554940342903137,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 389,
+    "original_frame_index": 389,
+    "sha256_hash": "84b6266eb1d677cdc7b65d6c494fbe8f4971e9e2c67d768ee6beca18d73d1825",
+    "model_score": 0.294418603181839,
+    "motion_score": 0.011417211328976034,
+    "audio_loudness": 0.6368392109870911,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 390,
+    "original_frame_index": 390,
+    "sha256_hash": "521b591bd527ece0fada55d84dea324fcd43981daddf9b6c591893fcca709931",
+    "model_score": 0.29586613178253174,
+    "motion_score": 0.00808315177923021,
+    "audio_loudness": 0.5149898529052734,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 391,
+    "original_frame_index": 391,
+    "sha256_hash": "57b6c8b1fa7a6e417d65dae68fc3f8b254ce140fd0599a92320f6535d9d45231",
+    "model_score": 0.29586613178253174,
+    "motion_score": 0.016774872912127814,
+    "audio_loudness": 0.6418439149856567,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 392,
+    "original_frame_index": 392,
+    "sha256_hash": "1b057fb553470276c7fa794e300f178a92414ca1d2a548b5eed88d8271576956",
+    "model_score": 0.29586613178253174,
+    "motion_score": 0.010323892519970951,
+    "audio_loudness": 0.6851956248283386,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 393,
+    "original_frame_index": 393,
+    "sha256_hash": "e9ee6004ae11de1e2437774801deb1aa18cf128b10452fbe5153471e59dc3334",
+    "model_score": 0.29586613178253174,
+    "motion_score": 0.0054491648511256355,
+    "audio_loudness": 0.6513772010803223,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 394,
+    "original_frame_index": 394,
+    "sha256_hash": "fffcda0dd165920b77f30109a517f4e5bf52159bc90d3031024253aa2cace722",
+    "model_score": 0.29586613178253174,
+    "motion_score": 0.01741902687000726,
+    "audio_loudness": 0.7140512466430664,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 395,
+    "original_frame_index": 395,
+    "sha256_hash": "3184b113062689cc79d2e57791c5c4e1d21aa9c229bf5644b45633450e1dbecc",
+    "model_score": 0.29586613178253174,
+    "motion_score": 0.01042229484386347,
+    "audio_loudness": 0.6414147615432739,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 396,
+    "original_frame_index": 396,
+    "sha256_hash": "0be255aef561d6912a73f214e0fd8ab81af728eb5f3a8170eadb69ad76914c34",
+    "model_score": 0.29586613178253174,
+    "motion_score": 0.020882716049382716,
+    "audio_loudness": 0.7076057195663452,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 397,
+    "original_frame_index": 397,
+    "sha256_hash": "b929b099302195a0bfe12a59671cd51a136b8ed8b4d107e54859d652c81b8a3b",
+    "model_score": 0.29586613178253174,
+    "motion_score": 0.005398329702251271,
+    "audio_loudness": 0.6179421544075012,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 398,
+    "original_frame_index": 398,
+    "sha256_hash": "b562c7a2605641c129ab7512f8e51f34c99f95437e814ec3a53871c68b84d5ba",
+    "model_score": 0.29586613178253174,
+    "motion_score": 0.011428830791575889,
+    "audio_loudness": 0.6595229506492615,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 399,
+    "original_frame_index": 399,
+    "sha256_hash": "29dfb1f78bedf019fd2f11a226c74238d9ce0dd0fd3ee8c9fe89a679bacee621",
+    "model_score": 0.29586613178253174,
+    "motion_score": 0.013915395787944809,
+    "audio_loudness": 0.753882884979248,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 400,
+    "original_frame_index": 400,
+    "sha256_hash": "50be49c56e5bca2f0f6524a649a8a050b9fdc06835ca52281fc0f3a63c2b730b",
+    "model_score": 0.29586613178253174,
+    "motion_score": 0.009750181554103123,
+    "audio_loudness": 0.7373910546302795,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 401,
+    "original_frame_index": 401,
+    "sha256_hash": "928c821182cc3f40dc1e8794d0f371294ce886842da80cd04fd0502e87029ad9",
+    "model_score": 0.29586613178253174,
+    "motion_score": 0.014183369644153959,
+    "audio_loudness": 0.6270366311073303,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 402,
+    "original_frame_index": 402,
+    "sha256_hash": "556c69ed033cd92575aef873abae4ddc364648fa043fa09a77abe3cf2ec4e954",
+    "model_score": 0.29586613178253174,
+    "motion_score": 0.002799927378358751,
+    "audio_loudness": 0.6655270457267761,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 403,
+    "original_frame_index": 403,
+    "sha256_hash": "bd00959ce1e0c9fa558dc3a23ecb2c058d14b9695b3c4043faedcde8ecb82a3b",
+    "model_score": 0.29586613178253174,
+    "motion_score": 0.014578068264342775,
+    "audio_loudness": 0.6796296834945679,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 404,
+    "original_frame_index": 404,
+    "sha256_hash": "1fa8af282218d6d414db372aa8790feb0451f52a96a7491b0c1daa3179bbe079",
+    "model_score": 0.29586613178253174,
+    "motion_score": 0.008497458242556282,
+    "audio_loudness": 0.677424430847168,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 405,
+    "original_frame_index": 405,
+    "sha256_hash": "7faf914e06de78333c3aebf2bb10dc6b27c25b93514119a71ad594c8ccd0ea37",
+    "model_score": 0.29931581020355225,
+    "motion_score": 0.013297022512708787,
+    "audio_loudness": 0.6315045356750488,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 406,
+    "original_frame_index": 406,
+    "sha256_hash": "128dbd49ec3bb6d6dd125d8a6dcc12cbe9c4070d5c2c503711d392326256c965",
+    "model_score": 0.29931581020355225,
+    "motion_score": 0.021593681917211328,
+    "audio_loudness": 0.6898733973503113,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 407,
+    "original_frame_index": 407,
+    "sha256_hash": "20a7aa4cc2a32dfa79b93d5628b6375ee2a22df04fd15a73dfa44c999acab8c8",
+    "model_score": 0.29931581020355225,
+    "motion_score": 0.01138888888888889,
+    "audio_loudness": 0.6174457669258118,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 408,
+    "original_frame_index": 408,
+    "sha256_hash": "b555a4342e154914e5fcb5f0d7e784190129464f5414ac8bae8e7555479f1951",
+    "model_score": 0.29931581020355225,
+    "motion_score": 0.009547567175018154,
+    "audio_loudness": 0.7427921891212463,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 409,
+    "original_frame_index": 409,
+    "sha256_hash": "61e6a6dfc43a4961bc7c2bd09498a39603e7142edb44ea33da4d6cc613841728",
+    "model_score": 0.29931581020355225,
+    "motion_score": 0.021239651416122007,
+    "audio_loudness": 0.7086183428764343,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 410,
+    "original_frame_index": 410,
+    "sha256_hash": "749f5970c526cec19ce8d75031ef7f4bbb510b4b924f807c77b056e19dc18810",
+    "model_score": 0.29931581020355225,
+    "motion_score": 0.017429920116194625,
+    "audio_loudness": 0.6910438537597656,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 411,
+    "original_frame_index": 411,
+    "sha256_hash": "627e07e41f4f251ddc67f2c2d7442769c712bb33cf9be585f0ec728aa71c2b6d",
+    "model_score": 0.29931581020355225,
+    "motion_score": 0.024879448075526507,
+    "audio_loudness": 0.7364112138748169,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 412,
+    "original_frame_index": 412,
+    "sha256_hash": "02b32106d53e5b00e7a61b7c1712bfab887ba704a0b472cc71ec9996413b48e9",
+    "model_score": 0.29931581020355225,
+    "motion_score": 0.021548656499636894,
+    "audio_loudness": 0.833258330821991,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 413,
+    "original_frame_index": 413,
+    "sha256_hash": "9eda41cbaed0c34f932137910fc0846cc9dae55c05f75ee97e42ac426694b8d0",
+    "model_score": 0.29931581020355225,
+    "motion_score": 0.030733478576615833,
+    "audio_loudness": 0.6769432425498962,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 414,
+    "original_frame_index": 414,
+    "sha256_hash": "a0b6eff24a83110e8922552b08137622e0883f8e88dbc2bef88468302059d0c5",
+    "model_score": 0.29931581020355225,
+    "motion_score": 0.021218228031953522,
+    "audio_loudness": 0.6955482959747314,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 415,
+    "original_frame_index": 415,
+    "sha256_hash": "3adab413dd1b86c4acc8b4fca6f80a257bc8662889d60f9a77e66fe33f29a17a",
+    "model_score": 0.29931581020355225,
+    "motion_score": 0.02230864197530864,
+    "audio_loudness": 0.7024029493331909,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 416,
+    "original_frame_index": 416,
+    "sha256_hash": "3a5bf5df52e84b568d4f5622569cc3ed59d6dbfea9134af59963cb4794266fa8",
+    "model_score": 0.29931581020355225,
+    "motion_score": 0.034118010167029776,
+    "audio_loudness": 0.6764979958534241,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 417,
+    "original_frame_index": 417,
+    "sha256_hash": "fb9d79347f84ae0cc075e4f976580869f236aa00e88249156379b04d8c8feb2c",
+    "model_score": 0.29931581020355225,
+    "motion_score": 0.013261437908496732,
+    "audio_loudness": 0.6349765062332153,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 418,
+    "original_frame_index": 418,
+    "sha256_hash": "7e8a55b8408e8c37a1b8f6c4637308a2f519b8b138d28e2df8fa24c37e17cc65",
+    "model_score": 0.29931581020355225,
+    "motion_score": 0.025647785039941903,
+    "audio_loudness": 0.7219690084457397,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 419,
+    "original_frame_index": 419,
+    "sha256_hash": "80ac5992ca8e0a6ab3c7e8b77a3e1f3c5e1eae13d422f51d48c53ab6b5d9cac9",
+    "model_score": 0.29931581020355225,
+    "motion_score": 0.026312273057371098,
+    "audio_loudness": 0.6094642877578735,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 420,
+    "original_frame_index": 420,
+    "sha256_hash": "4b9a1633b3d48bb9706b59c94ca1b802bcff53954e600ecbc96b43bf72e712b5",
+    "model_score": 0.3039017617702484,
+    "motion_score": 0.013128903413217138,
+    "audio_loudness": 0.7356248497962952,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 421,
+    "original_frame_index": 421,
+    "sha256_hash": "f2125aebd81f25515fa934945fe767a76cfeb553cc3a962a076d4d0fa0e5a4ad",
+    "model_score": 0.3039017617702484,
+    "motion_score": 0.026658678286129264,
+    "audio_loudness": 0.6137543320655823,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 422,
+    "original_frame_index": 422,
+    "sha256_hash": "5b7202919c385f79324fb8d2470ca880644c3598d26cc30d0e5a51f904b225ab",
+    "model_score": 0.3039017617702484,
+    "motion_score": 0.015417211328976034,
+    "audio_loudness": 0.6464687585830688,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 423,
+    "original_frame_index": 423,
+    "sha256_hash": "e12443c2937d67279e720fd76c4fd3ab5e39196bd1880c71d54838534a3a771e",
+    "model_score": 0.3039017617702484,
+    "motion_score": 0.01655519244734931,
+    "audio_loudness": 0.6313503980636597,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 424,
+    "original_frame_index": 424,
+    "sha256_hash": "c43ef46f5343cef4045db381e8af276b2e35a65fd63a2ee5893d85c275d10e9e",
+    "model_score": 0.3039017617702484,
+    "motion_score": 0.016005446623093684,
+    "audio_loudness": 0.6515253782272339,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 425,
+    "original_frame_index": 425,
+    "sha256_hash": "9a092f047d174e6dfacc8dab9d14cd700b78721bbbba492bfbc051c67d5ae0b0",
+    "model_score": 0.3039017617702484,
+    "motion_score": 0.016561728395061728,
+    "audio_loudness": 0.7170288562774658,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 426,
+    "original_frame_index": 426,
+    "sha256_hash": "5e4aebe48b622017ad0a27393afa9a4040af594d040167701dd0eef5d9abdd6c",
+    "model_score": 0.3039017617702484,
+    "motion_score": 0.021937908496732026,
+    "audio_loudness": 0.7913144826889038,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 427,
+    "original_frame_index": 427,
+    "sha256_hash": "ae8d7e448c8464035e479eab6a13489fdab031b6881ed21768e28f0371b3b4f2",
+    "model_score": 0.3039017617702484,
+    "motion_score": 0.030637254901960783,
+    "audio_loudness": 0.7346883416175842,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 428,
+    "original_frame_index": 428,
+    "sha256_hash": "5d2dbe3ade5e854d087c5676cfbba0d8d675d7581769a3c02c1fed6b772354d8",
+    "model_score": 0.3039017617702484,
+    "motion_score": 0.02433442265795207,
+    "audio_loudness": 0.8164897561073303,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 429,
+    "original_frame_index": 429,
+    "sha256_hash": "890c55ebb88e414899d8b5e8df687f02479783500a9bd4a473b6cceb5d11445a",
+    "model_score": 0.3039017617702484,
+    "motion_score": 0.023527596223674653,
+    "audio_loudness": 0.7956768274307251,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 430,
+    "original_frame_index": 430,
+    "sha256_hash": "80818d465ea49ef6007588966f920a70ef50705882912f85c35205b35b0b64dd",
+    "model_score": 0.3039017617702484,
+    "motion_score": 0.0205119825708061,
+    "audio_loudness": 0.8030236959457397,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 431,
+    "original_frame_index": 431,
+    "sha256_hash": "1548c67447c910aeccb4a29e1c930f4deb2c912cc19f2a207362d4c1dc5392b6",
+    "model_score": 0.3039017617702484,
+    "motion_score": 0.03346695715323166,
+    "audio_loudness": 0.7378600835800171,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 432,
+    "original_frame_index": 432,
+    "sha256_hash": "1d53f26f8bda0051527541b5c0f7ccd76dec3f5b1a6a937a998ba5b60876b4ff",
+    "model_score": 0.3039017617702484,
+    "motion_score": 0.00590958605664488,
+    "audio_loudness": 0.8098561763763428,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 433,
+    "original_frame_index": 433,
+    "sha256_hash": "8dbfa787d89a0f15cf7a56a1b7fee860d12d6c3a612c3479331159d124f9203f",
+    "model_score": 0.3039017617702484,
+    "motion_score": 0.015501452432824981,
+    "audio_loudness": 0.7157808542251587,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 434,
+    "original_frame_index": 434,
+    "sha256_hash": "d115aca8c5eb061d57234e7ff4a25302c812e00cd6a3d43830db77e41562681b",
+    "model_score": 0.3039017617702484,
+    "motion_score": 0.017505809731299928,
+    "audio_loudness": 0.7671858072280884,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 435,
+    "original_frame_index": 435,
+    "sha256_hash": "34ed022fb855f4f639139871cb488578de68b84eee9d8813a6a2d64ef7109724",
+    "model_score": 0.30807432532310486,
+    "motion_score": 0.015457153231663035,
+    "audio_loudness": 0.5935963988304138,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 436,
+    "original_frame_index": 436,
+    "sha256_hash": "5305fc86da7eb46215acbcea7c72f788b25d83add552b40005960de73d4b0d8d",
+    "model_score": 0.30807432532310486,
+    "motion_score": 0.030889251997095135,
+    "audio_loudness": 0.6289297342300415,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 437,
+    "original_frame_index": 437,
+    "sha256_hash": "10bb6292788af0752beed1466691b1eea6b80606424e929979e3e63ea849cb8a",
+    "model_score": 0.30807432532310486,
+    "motion_score": 0.015230210602759623,
+    "audio_loudness": 0.667934775352478,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 438,
+    "original_frame_index": 438,
+    "sha256_hash": "3bd63e2c670a8292a2f16d2189515ff7ba0f0fea58e13fd2bc556f8cf5861768",
+    "model_score": 0.30807432532310486,
+    "motion_score": 0.020163398692810457,
+    "audio_loudness": 0.6613137125968933,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 439,
+    "original_frame_index": 439,
+    "sha256_hash": "4770ccfbdec5278389c28784004c9a1db3d49d0b737ac395df1a82d7a7d40fe8",
+    "model_score": 0.30807432532310486,
+    "motion_score": 0.0205758896151053,
+    "audio_loudness": 0.7788360118865967,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 440,
+    "original_frame_index": 440,
+    "sha256_hash": "5813411b1369649acb545378c97d8af88dab6bf6817a97a0242895e38da310b7",
+    "model_score": 0.30807432532310486,
+    "motion_score": 0.020106027596223673,
+    "audio_loudness": 0.7696343064308167,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 441,
+    "original_frame_index": 441,
+    "sha256_hash": "48395d64955019db673e9863a509805e9c8d16d58b4e7b66f309ce8e1b7f8df9",
+    "model_score": 0.30807432532310486,
+    "motion_score": 0.03882970225127087,
+    "audio_loudness": 0.7226269245147705,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 442,
+    "original_frame_index": 442,
+    "sha256_hash": "993f181b3c93533c968db265674b1cc447c967bffeec477e2630baf23497941e",
+    "model_score": 0.30807432532310486,
+    "motion_score": 0.02535294117647059,
+    "audio_loudness": 0.742350697517395,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 443,
+    "original_frame_index": 443,
+    "sha256_hash": "0d6e0a6af1f2663bc24811e4cc3b3a8dd6572f1bd5d840e065d6c84a3c1f25e7",
+    "model_score": 0.30807432532310486,
+    "motion_score": 0.02189143064633261,
+    "audio_loudness": 0.6290892362594604,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 444,
+    "original_frame_index": 444,
+    "sha256_hash": "7a8031b9d50aa9324cb0af523ae7539e96e73a6c22bf491e3878350668bd1fef",
+    "model_score": 0.30807432532310486,
+    "motion_score": 0.014915758896151052,
+    "audio_loudness": 0.6609314680099487,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 445,
+    "original_frame_index": 445,
+    "sha256_hash": "20d09274db53675dfac9669c7ed90bd07bfedc188c84e6ec4a39ce6fbf747ed3",
+    "model_score": 0.30807432532310486,
+    "motion_score": 0.021314814814814814,
+    "audio_loudness": 0.5558260679244995,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 446,
+    "original_frame_index": 446,
+    "sha256_hash": "ba697fa50806c13995d6a36250f892f1bf04c3e3e839a1a2e398f9caa8a377d5",
+    "model_score": 0.30807432532310486,
+    "motion_score": 0.019811183732752362,
+    "audio_loudness": 0.6207911372184753,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 447,
+    "original_frame_index": 447,
+    "sha256_hash": "20cd1451a48decd92d0f5147d1b04acfeb5af5a5c5436bbbc1c9cedbdd2f980f",
+    "model_score": 0.30807432532310486,
+    "motion_score": 0.02955228758169935,
+    "audio_loudness": 0.6064158082008362,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 448,
+    "original_frame_index": 448,
+    "sha256_hash": "18db5045e7085e58f332c836e6e302d6bc05ac69de5f7824a4cc8a7739b70bed",
+    "model_score": 0.30807432532310486,
+    "motion_score": 0.013564996368917937,
+    "audio_loudness": 0.6611081957817078,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 449,
+    "original_frame_index": 449,
+    "sha256_hash": "e0d4a08b9fbf30c1b66ebb4c42348e3fa74a8327affcb050261759c36c0a9fd2",
+    "model_score": 0.30807432532310486,
+    "motion_score": 0.02065831517792302,
+    "audio_loudness": 0.6211771368980408,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 450,
+    "original_frame_index": 450,
+    "sha256_hash": "11123170fd71f0846ce83d7aa810bcc55a2eb616fdb50f62bcfdd8b8ffb87bf6",
+    "model_score": 0.3105098605155945,
+    "motion_score": 0.015655773420479302,
+    "audio_loudness": 0.6856366395950317,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 451,
+    "original_frame_index": 451,
+    "sha256_hash": "0667946471f274e706832e65fd9439e76bac7308957b15629ddf55a7e28d6cae",
+    "model_score": 0.3105098605155945,
+    "motion_score": 0.022850762527233115,
+    "audio_loudness": 0.7337945103645325,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 452,
+    "original_frame_index": 452,
+    "sha256_hash": "e7eb5ed4da8983d2797c2525f60d8b554299bb4ab3099ec04e5d6d7f2f183685",
+    "model_score": 0.3105098605155945,
+    "motion_score": 0.03604284676833697,
+    "audio_loudness": 0.6651670336723328,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 453,
+    "original_frame_index": 453,
+    "sha256_hash": "3f6366b63542f13a4f9c9f2ce131c33973073881098a0c5438029e51e37f7654",
+    "model_score": 0.3105098605155945,
+    "motion_score": 0.02062164124909223,
+    "audio_loudness": 0.7680624127388,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 454,
+    "original_frame_index": 454,
+    "sha256_hash": "39ecaa84e989564bbcd11f7235e091ca24a0722dfb01574e65d1ea1fb62a57f4",
+    "model_score": 0.3105098605155945,
+    "motion_score": 0.017090050835148876,
+    "audio_loudness": 0.6636565327644348,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 455,
+    "original_frame_index": 455,
+    "sha256_hash": "500765ae9b0fa857e3cde11b5efd42f137b081d33dd7562bc72e66e91c2b6e8f",
+    "model_score": 0.3105098605155945,
+    "motion_score": 0.013137254901960785,
+    "audio_loudness": 0.6325066089630127,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 456,
+    "original_frame_index": 456,
+    "sha256_hash": "3a187515fc6f4b813b066ce17c3b1c75355fea59af17072a8ba67e9b73bba960",
+    "model_score": 0.3105098605155945,
+    "motion_score": 0.027289760348583877,
+    "audio_loudness": 0.6742311120033264,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 457,
+    "original_frame_index": 457,
+    "sha256_hash": "cb193c3ffe40f621291f3e5a7d458ec78e30905264dd8153526d1ea1843d31c9",
+    "model_score": 0.3105098605155945,
+    "motion_score": 0.043346768336964416,
+    "audio_loudness": 0.7227218747138977,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 458,
+    "original_frame_index": 458,
+    "sha256_hash": "50cc5daeea7e5020eba6d92843f968dc453a292bd15141f763a45be2d3b5b81d",
+    "model_score": 0.3105098605155945,
+    "motion_score": 0.04102323892519971,
+    "audio_loudness": 0.7274424433708191,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 459,
+    "original_frame_index": 459,
+    "sha256_hash": "66bc5b1b18e9ffa41f6075c22d3d49f30706d410a4c3a9b99acc4599ce58cb41",
+    "model_score": 0.3105098605155945,
+    "motion_score": 0.03167320261437908,
+    "audio_loudness": 0.6951126456260681,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 460,
+    "original_frame_index": 460,
+    "sha256_hash": "d5fd815913a6da9ef78fbfba1913b0485ea85356d85fc97091b4fff05ff2f140",
+    "model_score": 0.3105098605155945,
+    "motion_score": 0.0384480755265069,
+    "audio_loudness": 0.7861816883087158,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 461,
+    "original_frame_index": 461,
+    "sha256_hash": "5459db0cef97396445ec322a6b37456a56fd34c7eeeef80fa50235f3f299dbcf",
+    "model_score": 0.3105098605155945,
+    "motion_score": 0.03573311546840959,
+    "audio_loudness": 0.679084300994873,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 462,
+    "original_frame_index": 462,
+    "sha256_hash": "90a5af0a20d679dfebfbf63c552b448a98cdd1439afe8fad2df07baff7fd2880",
+    "model_score": 0.3105098605155945,
+    "motion_score": 0.03488380537400145,
+    "audio_loudness": 0.6682780385017395,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 463,
+    "original_frame_index": 463,
+    "sha256_hash": "de826459cf2022c240e1e905112e68975d7be7fe969bc9144c8fd2b5e0a40f54",
+    "model_score": 0.3105098605155945,
+    "motion_score": 0.02390159767610748,
+    "audio_loudness": 0.6606997847557068,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 464,
+    "original_frame_index": 464,
+    "sha256_hash": "a4b5229e0ce5216e0a90f2c8a67306885bd3cbdd1afdba6087f092de4030a816",
+    "model_score": 0.3105098605155945,
+    "motion_score": 0.012029048656499638,
+    "audio_loudness": 0.6643025279045105,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 465,
+    "original_frame_index": 465,
+    "sha256_hash": "d839304d75476e0cad1cb42233af6a0e246cc8f513bd9d54e75e67d344ce04a4",
+    "model_score": 0.3111012578010559,
+    "motion_score": 0.014702251270878722,
+    "audio_loudness": 0.6287305951118469,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 466,
+    "original_frame_index": 466,
+    "sha256_hash": "ee31f60a03bcb3d52dc9c61b89802299654e1ae0ed2c2a2d4225753efa1b08f2",
+    "model_score": 0.3111012578010559,
+    "motion_score": 0.00987363834422658,
+    "audio_loudness": 0.6717911958694458,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 467,
+    "original_frame_index": 467,
+    "sha256_hash": "e6eb261d5679a15d04c7c956e8a2c2e2723fc1c9735b0844b4d72add41098992",
+    "model_score": 0.3111012578010559,
+    "motion_score": 0.017415395787944807,
+    "audio_loudness": 0.6030215620994568,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 468,
+    "original_frame_index": 468,
+    "sha256_hash": "607d80dc2ceb5beeb0d511d3d05b96df4679a8c6bf1ea0b2acd31920d4a95bbe",
+    "model_score": 0.3111012578010559,
+    "motion_score": 0.0061183732752360205,
+    "audio_loudness": 0.6353416442871094,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 469,
+    "original_frame_index": 469,
+    "sha256_hash": "371276befab63f76e85c794281483b2112e6a8126d04008c550823205a0e04a2",
+    "model_score": 0.3111012578010559,
+    "motion_score": 0.019105301379811184,
+    "audio_loudness": 0.5108552575111389,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 470,
+    "original_frame_index": 470,
+    "sha256_hash": "19e708058be2579f20c354890e9173b4b4cb7a5a748843a4ef1a4334bff68a8f",
+    "model_score": 0.3111012578010559,
+    "motion_score": 0.006786492374727669,
+    "audio_loudness": 0.6647072434425354,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 471,
+    "original_frame_index": 471,
+    "sha256_hash": "ec3851d602618b647317b66aef758efe71b3304c70cc98dafc0d6affaf5b7c21",
+    "model_score": 0.3111012578010559,
+    "motion_score": 0.01706572258533043,
+    "audio_loudness": 0.6814322471618652,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 472,
+    "original_frame_index": 472,
+    "sha256_hash": "41f386067f0891b7871eeda9293f3283c97c5d95242011ca6a6f46dbdb356c24",
+    "model_score": 0.3111012578010559,
+    "motion_score": 0.022300653594771243,
+    "audio_loudness": 0.6688425540924072,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 473,
+    "original_frame_index": 473,
+    "sha256_hash": "317d2fe4aa531d0750ca7e31d2f412fc3301fb88214eeda0970e82ec92c640b1",
+    "model_score": 0.3111012578010559,
+    "motion_score": 0.015077342047930284,
+    "audio_loudness": 0.5568509101867676,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 474,
+    "original_frame_index": 474,
+    "sha256_hash": "f7fa0007af039973ec197e0685bd891a1482da2a3c2f06cf0235a4a80b5703aa",
+    "model_score": 0.3111012578010559,
+    "motion_score": 0.007355846042120552,
+    "audio_loudness": 0.7201929092407227,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 475,
+    "original_frame_index": 475,
+    "sha256_hash": "9025de2af6a505952eeca65acce2114af4181bdb2c077f5683ba8c671d826faf",
+    "model_score": 0.3111012578010559,
+    "motion_score": 0.008630355846042121,
+    "audio_loudness": 0.6743127107620239,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 476,
+    "original_frame_index": 476,
+    "sha256_hash": "ed0d4d726a0c9d00bddc94037140aa567073e351762582f2db53a8e40e7c9430",
+    "model_score": 0.3111012578010559,
+    "motion_score": 0.015409586056644881,
+    "audio_loudness": 0.6558798551559448,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 477,
+    "original_frame_index": 477,
+    "sha256_hash": "561903eb89b47fceced63a9e6526b2271284249ce5dea5b48126d2a9a79c4a8f",
+    "model_score": 0.3111012578010559,
+    "motion_score": 0.039480755265068994,
+    "audio_loudness": 0.5852742195129395,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 478,
+    "original_frame_index": 478,
+    "sha256_hash": "c8396029c898b66cf44412e4a0523e6673a259450827f87f41136100e451c236",
+    "model_score": 0.3111012578010559,
+    "motion_score": 0.02261437908496732,
+    "audio_loudness": 0.6142472624778748,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 479,
+    "original_frame_index": 479,
+    "sha256_hash": "7d780761331fd3dbffda2c75d578bf16d7dc81f3f95d7f94ccab6e761a457efd",
+    "model_score": 0.3111012578010559,
+    "motion_score": 0.027393246187363836,
+    "audio_loudness": 0.7116131782531738,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 480,
+    "original_frame_index": 480,
+    "sha256_hash": "452f2abc29ee00598c157ad9f647f450fadb7b3145ba343fc54e8695bf9b2a45",
+    "model_score": 0.3108130097389221,
+    "motion_score": 0.018271604938271603,
+    "audio_loudness": 0.5896264314651489,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 481,
+    "original_frame_index": 481,
+    "sha256_hash": "f0e49d9b9555032fb40f8ade6e43550a7f54a0bc08df39baf19a4b93a186e124",
+    "model_score": 0.3108130097389221,
+    "motion_score": 0.01813689179375454,
+    "audio_loudness": 0.6464462280273438,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 482,
+    "original_frame_index": 482,
+    "sha256_hash": "b52786c56c98f65a51a66daa25f63aa9f38f014f4d78c062bb8b8328efd37ccb",
+    "model_score": 0.3108130097389221,
+    "motion_score": 0.014499999999999999,
+    "audio_loudness": 0.6614444851875305,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 483,
+    "original_frame_index": 483,
+    "sha256_hash": "b3364d0897dda75f859076d674f4e84a1f6dab55cd3a7b25866829a06c1ab5b0",
+    "model_score": 0.3108130097389221,
+    "motion_score": 0.008765068990559188,
+    "audio_loudness": 0.628511905670166,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 484,
+    "original_frame_index": 484,
+    "sha256_hash": "3108934a0be57c21363b7562ea2dd3fc6f00c3b368604a1e34b42e93a3aeb840",
+    "model_score": 0.3108130097389221,
+    "motion_score": 0.011806826434277416,
+    "audio_loudness": 0.7278293967247009,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 485,
+    "original_frame_index": 485,
+    "sha256_hash": "2ba6bcc7ab5e6d6490988f38ac6756c569fd429908da756a744ed84f50cad5ef",
+    "model_score": 0.3108130097389221,
+    "motion_score": 0.016622730573710966,
+    "audio_loudness": 0.612295925617218,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 486,
+    "original_frame_index": 486,
+    "sha256_hash": "0ba93b9424c88ccfe73b39c52019c7c1bc1d9efe26524266d07ed7d48b0a1480",
+    "model_score": 0.3108130097389221,
+    "motion_score": 0.01351851851851852,
+    "audio_loudness": 0.6590402126312256,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 487,
+    "original_frame_index": 487,
+    "sha256_hash": "aee53001d508884f23b74e41f5963c84643bc7943b5ad4d720690b69e31312d6",
+    "model_score": 0.3108130097389221,
+    "motion_score": 0.03370188816267248,
+    "audio_loudness": 0.6870435476303101,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 488,
+    "original_frame_index": 488,
+    "sha256_hash": "6d33cb4143e0fe717cec053377e03ff3943c233f453cd2d3fee5552271306e49",
+    "model_score": 0.3108130097389221,
+    "motion_score": 0.03198039215686274,
+    "audio_loudness": 0.5524192452430725,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 489,
+    "original_frame_index": 489,
+    "sha256_hash": "f63a6692e2defa1cee17b258723dc08a38c09d56151d415eee70bceeff2bd991",
+    "model_score": 0.3108130097389221,
+    "motion_score": 0.01334241103848947,
+    "audio_loudness": 0.5860549211502075,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 490,
+    "original_frame_index": 490,
+    "sha256_hash": "3c38ce135d26f359327b6bcfef0fe4af9f2a3f801e19fa46bed31bc86b1d2129",
+    "model_score": 0.3108130097389221,
+    "motion_score": 0.015289760348583878,
+    "audio_loudness": 0.5995780825614929,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 491,
+    "original_frame_index": 491,
+    "sha256_hash": "2e440638691e362d893b712969e2589f9777b9e2602a5fab9bc9bf547ca0d11f",
+    "model_score": 0.3108130097389221,
+    "motion_score": 0.00803122730573711,
+    "audio_loudness": 0.7045654058456421,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 492,
+    "original_frame_index": 492,
+    "sha256_hash": "44d3ff53ba1fee236f6513e7ca550c5e313e76adcccee30dbdb63de970df875f",
+    "model_score": 0.3108130097389221,
+    "motion_score": 0.025329339143064636,
+    "audio_loudness": 0.6681205034255981,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 493,
+    "original_frame_index": 493,
+    "sha256_hash": "58239f9a47963b8332f7f879839494b43a849510694f86257282a6686e0af9ef",
+    "model_score": 0.3108130097389221,
+    "motion_score": 0.007575163398692811,
+    "audio_loudness": 0.6738837361335754,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 494,
+    "original_frame_index": 494,
+    "sha256_hash": "c334464722954ad333009867523d55390eebcb100271a7080283b5292d486460",
+    "model_score": 0.3108130097389221,
+    "motion_score": 0.006150689905591866,
+    "audio_loudness": 0.6933664083480835,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 495,
+    "original_frame_index": 495,
+    "sha256_hash": "0d0176823dec2dc6b56b796f60dba5745ac185cad5d9d0652b019579a045f13b",
+    "model_score": 0.3113631010055542,
+    "motion_score": 0.005757080610021786,
+    "audio_loudness": 0.6526731252670288,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 496,
+    "original_frame_index": 496,
+    "sha256_hash": "8f8e9157387a12a40e34e58abacb52ae6d9e1aa18a9ff082020286a413587b72",
+    "model_score": 0.3113631010055542,
+    "motion_score": 0.008384894698620188,
+    "audio_loudness": 0.6712863445281982,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 497,
+    "original_frame_index": 497,
+    "sha256_hash": "9eac64f8962e61ef0b383049b28c02c4afe145dcab2d8029f513132be3bd271f",
+    "model_score": 0.3113631010055542,
+    "motion_score": 0.026555555555555554,
+    "audio_loudness": 0.6720009446144104,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 498,
+    "original_frame_index": 498,
+    "sha256_hash": "24bd6dde51048921d13dfe0a115df407c448e5606a2a2b953d9fdcf698c6bb7e",
+    "model_score": 0.3113631010055542,
+    "motion_score": 0.01615286855482934,
+    "audio_loudness": 0.6515956521034241,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 499,
+    "original_frame_index": 499,
+    "sha256_hash": "dacd45db173ea443a3a70ff4b8af929b03b0a7685dfcebb65cc99013180e7924",
+    "model_score": 0.3113631010055542,
+    "motion_score": 0.021795570079883805,
+    "audio_loudness": 0.593824565410614,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 500,
+    "original_frame_index": 500,
+    "sha256_hash": "bc0f5bc56981c142a4d4a47a436f290607e487ec92f47717ce85026994f15ee4",
+    "model_score": 0.3113631010055542,
+    "motion_score": 0.015774146695715325,
+    "audio_loudness": 0.8015233874320984,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 501,
+    "original_frame_index": 501,
+    "sha256_hash": "b3ae79c7443dffc342d1a606a0b74b5955e4825a4548389b205035262fe592ff",
+    "model_score": 0.3113631010055542,
+    "motion_score": 0.020489469862018883,
+    "audio_loudness": 0.6286765336990356,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 502,
+    "original_frame_index": 502,
+    "sha256_hash": "c63476d047f35125bb1bc810d6823baf889f8c334877047882801e230b5406ea",
+    "model_score": 0.3113631010055542,
+    "motion_score": 0.01207371096586783,
+    "audio_loudness": 0.6817013025283813,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 503,
+    "original_frame_index": 503,
+    "sha256_hash": "5376ff42ad5a39a71fe68ee1d766546feebfaeaef10912fb22e300ee1e5fb7a7",
+    "model_score": 0.3113631010055542,
+    "motion_score": 0.013625272331154684,
+    "audio_loudness": 0.7220036387443542,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 504,
+    "original_frame_index": 504,
+    "sha256_hash": "70ee34a3e356ecb6af4f6075142d8665b92acb1e66a419629ec2ff7bc2a16f86",
+    "model_score": 0.3113631010055542,
+    "motion_score": 0.008641249092229485,
+    "audio_loudness": 0.7199966907501221,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 505,
+    "original_frame_index": 505,
+    "sha256_hash": "aa819d5f0cc341019f2706bed7700926b56e0d58ebdd99b619d86dc4183ce188",
+    "model_score": 0.3113631010055542,
+    "motion_score": 0.013587872185911402,
+    "audio_loudness": 0.6121407151222229,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 506,
+    "original_frame_index": 506,
+    "sha256_hash": "98e3fdbce84c89d7afa0b0640667e218cfb3a93360009b35a2940b9d5a8d2e22",
+    "model_score": 0.3113631010055542,
+    "motion_score": 0.018472403776325346,
+    "audio_loudness": 0.8363209366798401,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 507,
+    "original_frame_index": 507,
+    "sha256_hash": "d967fba32456db8320c85fd0f0e7bf59c0e97b7d68826283b9b263ebf36dffc8",
+    "model_score": 0.3113631010055542,
+    "motion_score": 0.031675381263616555,
+    "audio_loudness": 0.7541243433952332,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 508,
+    "original_frame_index": 508,
+    "sha256_hash": "af766c073f3f6ed49592da9362553dbe8e9913a8248bcfe0cad8e2dae56e6c3a",
+    "model_score": 0.3113631010055542,
+    "motion_score": 0.005758533042846768,
+    "audio_loudness": 0.6639057993888855,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 509,
+    "original_frame_index": 509,
+    "sha256_hash": "c427c84bc21151ba76049c623b277ac90e294114224bbcb2aa217c685d622ae5",
+    "model_score": 0.3113631010055542,
+    "motion_score": 0.009234204793028323,
+    "audio_loudness": 0.6043468713760376,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 510,
+    "original_frame_index": 510,
+    "sha256_hash": "e595877730fb7470058221a6cb80b0a34527c94a2cd06d467f0bbdde0f24c2df",
+    "model_score": 0.314380407333374,
+    "motion_score": 0.010322440087145968,
+    "audio_loudness": 0.6981936097145081,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 511,
+    "original_frame_index": 511,
+    "sha256_hash": "2ca62ad1e8171e7e7c61c4643c8c767cc6a9333f4b92fdbb89078b68cf82f33d",
+    "model_score": 0.314380407333374,
+    "motion_score": 0.015470225127087872,
+    "audio_loudness": 0.6801117062568665,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 512,
+    "original_frame_index": 512,
+    "sha256_hash": "d9b2f9f5b317865d14795580e52175baab9fa73088f07bfd8e3fbe6276aebfa9",
+    "model_score": 0.314380407333374,
+    "motion_score": 0.02107371096586783,
+    "audio_loudness": 0.8124189972877502,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 513,
+    "original_frame_index": 513,
+    "sha256_hash": "473b59cd7c043e655342c66a2b99c786f8a15a1dc6841caceed172170c78bf89",
+    "model_score": 0.314380407333374,
+    "motion_score": 0.016471677559912856,
+    "audio_loudness": 0.6871832013130188,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 514,
+    "original_frame_index": 514,
+    "sha256_hash": "0d2b9ff86b4d53f120a3b49c7b30fc9bfc3bfdc1f7120d48bc2ac57e2be2fcb3",
+    "model_score": 0.314380407333374,
+    "motion_score": 0.021046114742193173,
+    "audio_loudness": 0.7278759479522705,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 515,
+    "original_frame_index": 515,
+    "sha256_hash": "9359cde94bdc1e1465d781d9be5fb21652c943f74ee94a6a5a831f3de6c4490e",
+    "model_score": 0.314380407333374,
+    "motion_score": 0.012946259985475671,
+    "audio_loudness": 0.7320395708084106,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 516,
+    "original_frame_index": 516,
+    "sha256_hash": "93eea59dd034b01c0a0e4b5f27ca11d0f73afebab290dbbadddd5bdd9fe24b07",
+    "model_score": 0.314380407333374,
+    "motion_score": 0.010238925199709514,
+    "audio_loudness": 0.724650502204895,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 517,
+    "original_frame_index": 517,
+    "sha256_hash": "d99fab695d87af7e4e3d9915cbf7f3361e6e0362b2b09d336f3e56f325900400",
+    "model_score": 0.314380407333374,
+    "motion_score": 0.034135439360929554,
+    "audio_loudness": 0.788631796836853,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 518,
+    "original_frame_index": 518,
+    "sha256_hash": "a71ca850541664e920cc15b94a4ce2718a5884ddd69ac587dd7e10929ea53b85",
+    "model_score": 0.314380407333374,
+    "motion_score": 0.018049745824255628,
+    "audio_loudness": 0.7218639254570007,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 519,
+    "original_frame_index": 519,
+    "sha256_hash": "22eeebb7331c201110628228130ce8b4e381c3c6d7e010b47a3bc41135756ac9",
+    "model_score": 0.314380407333374,
+    "motion_score": 0.005419389978213508,
+    "audio_loudness": 0.6308847069740295,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 520,
+    "original_frame_index": 520,
+    "sha256_hash": "23b4d518e0c663a206390279c132697599cd4a0dbcb982b7ef0636292683f0a0",
+    "model_score": 0.314380407333374,
+    "motion_score": 0.028766884531590414,
+    "audio_loudness": 0.6370928883552551,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 521,
+    "original_frame_index": 521,
+    "sha256_hash": "f914e3bb50c64087b3337f4334187d508ebf6c977277982b28db7683aa63cc75",
+    "model_score": 0.314380407333374,
+    "motion_score": 0.03983841684822077,
+    "audio_loudness": 0.6951425075531006,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 522,
+    "original_frame_index": 522,
+    "sha256_hash": "3f1fdba35caf473fb9c0fcdeba97c6f21a0b3e8e12f1f0a94c606432d2140dd2",
+    "model_score": 0.314380407333374,
+    "motion_score": 0.05228903413217138,
+    "audio_loudness": 0.5393311381340027,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 523,
+    "original_frame_index": 523,
+    "sha256_hash": "46116e9265a91f00845ce5d7feb3e83c6e557960c2eb89e6b88e38bcfd2fed51",
+    "model_score": 0.314380407333374,
+    "motion_score": 0.017888888888888888,
+    "audio_loudness": 0.7720893621444702,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 524,
+    "original_frame_index": 524,
+    "sha256_hash": "b90cb55cd7486a94a0c80604acffa30965723e5fb81fc3b809d045769b37411a",
+    "model_score": 0.314380407333374,
+    "motion_score": 0.025882716049382717,
+    "audio_loudness": 0.6510562896728516,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 525,
+    "original_frame_index": 525,
+    "sha256_hash": "ff1d36340859b78c330a3eb1e23616447d98609295113ab7f99e75f091b07317",
+    "model_score": 0.32040223479270935,
+    "motion_score": 0.026300290486564994,
+    "audio_loudness": 0.6980482935905457,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 526,
+    "original_frame_index": 526,
+    "sha256_hash": "b833dcda5d244502ca945266223dbab593d9f5d7ecda0451c215bd8ca6fe8f17",
+    "model_score": 0.32040223479270935,
+    "motion_score": 0.011103848946986202,
+    "audio_loudness": 0.6346360445022583,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 527,
+    "original_frame_index": 527,
+    "sha256_hash": "b171b4814227e57df71cebee71c40bd98d7945be2b4494dc79555f3d5b0eacc7",
+    "model_score": 0.32040223479270935,
+    "motion_score": 0.05011328976034858,
+    "audio_loudness": 0.7155148983001709,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 528,
+    "original_frame_index": 528,
+    "sha256_hash": "f84766edae0ed64c47757a7c6c9b8eb8f1f2e565e90d5984715d2d3fa0eadd42",
+    "model_score": 0.32040223479270935,
+    "motion_score": 0.02672004357298475,
+    "audio_loudness": 0.7003166079521179,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 529,
+    "original_frame_index": 529,
+    "sha256_hash": "9b022e415526dc7fddd8387e64df48872c3a8c48b2703d805d178cbf797ad550",
+    "model_score": 0.32040223479270935,
+    "motion_score": 0.003819898329702251,
+    "audio_loudness": 0.6555808782577515,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 530,
+    "original_frame_index": 530,
+    "sha256_hash": "4499115184413267d0836f57cdd78709067d7bccb80285a42630d7f66cf085ff",
+    "model_score": 0.32040223479270935,
+    "motion_score": 0.014848583877995642,
+    "audio_loudness": 0.6361331343650818,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 531,
+    "original_frame_index": 531,
+    "sha256_hash": "8ffbe4e94617041a1a1b47077923c52265172a151f704f9643deb40bc45931dd",
+    "model_score": 0.32040223479270935,
+    "motion_score": 0.005520334059549746,
+    "audio_loudness": 0.5810196399688721,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 532,
+    "original_frame_index": 532,
+    "sha256_hash": "540eca45cdf32f1e2897539d52ab8ddf15aa0604efe6d1b9b188eddea1947c07",
+    "model_score": 0.32040223479270935,
+    "motion_score": 0.013672839506172839,
+    "audio_loudness": 0.6994950771331787,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 533,
+    "original_frame_index": 533,
+    "sha256_hash": "1bbd3cd330d451cabc9041769e08f5b13720a98ad30036440bade83d366bbf8b",
+    "model_score": 0.32040223479270935,
+    "motion_score": 0.005844226579520697,
+    "audio_loudness": 0.6541324257850647,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 534,
+    "original_frame_index": 534,
+    "sha256_hash": "9a566354d03a639d303319f412cae5a694dedcb24ad12019517445253d5cd644",
+    "model_score": 0.32040223479270935,
+    "motion_score": 0.014815177923021061,
+    "audio_loudness": 0.6472902297973633,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 535,
+    "original_frame_index": 535,
+    "sha256_hash": "67aa4a97ef3ff61ccdf09df083c727b87da185a2d5c779c456421a22d349445e",
+    "model_score": 0.32040223479270935,
+    "motion_score": 0.005253449527959332,
+    "audio_loudness": 0.7247098088264465,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 536,
+    "original_frame_index": 536,
+    "sha256_hash": "cdba5a819c6467f88fbb88e7de58b798269d046894eef54d136f8203b385d5f7",
+    "model_score": 0.32040223479270935,
+    "motion_score": 0.013237835875090776,
+    "audio_loudness": 0.8134279251098633,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 537,
+    "original_frame_index": 537,
+    "sha256_hash": "d1326e87d8a9e407897f23db206962e8d657449e452f8caa193813ec5054be91",
+    "model_score": 0.32040223479270935,
+    "motion_score": 0.033672839506172836,
+    "audio_loudness": 0.666587769985199,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 538,
+    "original_frame_index": 538,
+    "sha256_hash": "ce69eda334de3babcae605e5e0c763dddfedb619449df5c2a5c9a991353b9008",
+    "model_score": 0.32040223479270935,
+    "motion_score": 0.04279883805374001,
+    "audio_loudness": 0.6247255206108093,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 539,
+    "original_frame_index": 539,
+    "sha256_hash": "60d7693a97a9ec06150a22c9a60f7b0e9a2370938739d86b0527c8b5dfdcf4d3",
+    "model_score": 0.32040223479270935,
+    "motion_score": 0.019964778503994193,
+    "audio_loudness": 0.624100923538208,
+    "action_locked": true
+  },
+  {
+    "summary_frame_index": 540,
+    "original_frame_index": 540,
+    "sha256_hash": "fc64b0746ce8b8b3b75f7614291085383c09ddc123f537c0bdea06bd209d7923",
+    "model_score": 0.3289051353931427,
+    "motion_score": 0.008123456790123457,
+    "audio_loudness": 0.7024109959602356,
+    "action_locked": false
+  },
+  {
+    "summary_frame_index": 541,
+    "original_frame_index": 541,
+    "sha256_hash": "2f995812a0a9261d844ca4674a404656d129748e8ae24847b20f777ba5053d35",
+    "model_score": 0.3289051353931427,
+    "motion_score": 0.027258169934640523,
+    "audio_loudness": 0.6323874592781067,
+    "action_locked": false
+  },
+  {
+    "summary_frame_index": 542,
+    "original_frame_index": 542,
+    "sha256_hash": "821d2cacbbf11e4f048753d666a642e99a7eae1e4d382b6d6a81f3984d079f36",
+    "model_score": 0.3289051353931427,
+    "motion_score": 0.04517647058823529,
+    "audio_loudness": 0.618590772151947,
+    "action_locked": false
+  }
+]

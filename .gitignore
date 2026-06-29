@@ -4,4 +4,10 @@ log/
 *.aux
 *.log
 *.pdf
-demo/
+
+# Ignore large media/binaries in demo
+demo/**/*.mp4
+demo/**/*.webm
+demo/**/*.wav
+demo/**/*.h5
+demo/**/*.pth.tar
