@@ -153,3 +153,11 @@ LegalSum writes a comprehensive audit manifest for every generated video summary
 - **Verification Hash**: Every frame in the summary has its SHA-256 hash stored.
 - **Counterfactual Attribution Scores**: Details the exact mathematical contribution score of each frame.
 - **Speech-Alignment Matrix**: Links spoken words to video frames, protecting against editing manipulation.
+
+---
+
+## 💾 Git Tracking & Exclusions Policy
+
+To prevent repository bloat, we enforce a strict file-tracking policy inside [.gitignore](.gitignore):
+- **Tracked Assets**: All 14 Python scripts, text guides, and JSON configuration/manifest files inside the [demo/](demo/) directory are fully version-controlled.
+- **Excluded Binaries**: Large media assets (`*.mp4`, `*.webm`, `*.wav`), H5 datasets (`*.h5`), and pre-trained checkpoints (`*.pth.tar`) are ignored.
