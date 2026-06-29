@@ -30,7 +30,7 @@ Before sequence modeling, parallel 1D convolutional layers with kernels $K \in \
 
 | Architectural Component | Simplified GAN (2024) | Semantic Gen Autoencoder (2026) | Multimodal Transformer (2025) | **SCSL-SGC (Ours)** |
 |---|---|---|---|---|
-| **Input Modality** | Visual only | Visual only | Visual + Audio + Text | **Visual only (Lightweight)** |
+| **Input Modality** | Visual only | Visual only | Visual + Audio + Text | **SCSL-SGC: Visual-only** <br>**LegalSum: Multimodal (Visual + Audio + Speech)** |
 | **Temporal Modeling** | RNN / LSTM / GRU | Transformer Encoder | Cross-Attention + Self-Attention | **MultiScaleConv1D + Bi-LSTM + 2x MHSA + Gate** |
 | **Optimization Strategy** | Alternating GAN | Reconstruction Loss + Masking | Supervised / Self-Supervised | **Vectorized Counterfactual REINFORCE** |
 | **Representativeness** | Discriminator Score | Reconstruction Error | Cross-Modal Alignment | **Submodular Facility-Location Coverage** |
