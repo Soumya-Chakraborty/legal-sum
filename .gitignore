@@ -5,8 +5,7 @@ log/
 *.log
 *.pdf
 
-# Ignore large media/binaries in demo
-demo/**/*.mp4
+# Ignore large raw media/binaries in demo
 demo/**/*.webm
 demo/**/*.wav
 demo/**/*.h5
