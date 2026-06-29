@@ -1,3 +1,13 @@
+"""
+Reinforcement Learning Reward Functions for Video Summarization
+
+This module implements:
+1. compute_reward: A 4-component reward function comprising diversity, 
+   submodular coverage, temporal spread, and compactness.
+2. compute_per_frame_attribution: A loop-free vectorized implementation
+   of counterfactual frame attribution, used to reduce reward variance in REINFORCE.
+"""
+
 import torch
 import torch.nn.functional as F
 import numpy as np
@@ -35,6 +45,7 @@ def compute_reward(seq, actions, use_gpu=False, diss=None):
     """
     _seq = seq.detach()
     _actions = actions.detach()
+    # Find the indices of all selected frames (where actions == 1)
     pick_idxs = _actions.squeeze().nonzero(as_tuple=False).squeeze(1)
     num_picks = len(pick_idxs)
     n = _seq.squeeze().size(0)
@@ -46,12 +57,14 @@ def compute_reward(seq, actions, use_gpu=False, diss=None):
             reward = reward.cuda()
         return reward
 
-    _seq = _seq.squeeze()   # (n, dim)
+    _seq = _seq.squeeze()   # Shape: (n, dim)
 
     # ── Precompute/Get Dissimilarity Matrix ──────────────────────────────────
     if diss is None:
+        # L2-normalize video features to compute cosine similarity
         normed = _seq / (_seq.norm(p=2, dim=1, keepdim=True) + 1e-8)
-        diss = 1.0 - torch.matmul(normed, normed.t())          # (n, n)
+        # Cosine distance: 1.0 - Cosine Similarity
+        diss = 1.0 - torch.matmul(normed, normed.t())          # Shape: (n, n)
 
     # ── 1. DIVERSITY REWARD ───────────────────────────────────────────────────
     if num_picks == 1:
@@ -59,33 +72,43 @@ def compute_reward(seq, actions, use_gpu=False, diss=None):
         if use_gpu:
             reward_div = reward_div.cuda()
     else:
-        diss_sub = diss[pick_idxs, :][:, pick_idxs]            # (k, k)
-        # Ignore similarity between temporally distant picks (original paper trick)
+        # Extract the sub-matrix representing distances between selected frames only
+        diss_sub = diss[pick_idxs, :][:, pick_idxs]            # Shape: (k, k)
+        # Ignore distance/similarity between temporally distant picks (original paper trick)
         pick_mat = pick_idxs.expand(num_picks, num_picks)
         temp_dist = torch.abs(pick_mat - pick_mat.t())
         diss_sub[temp_dist > 20] = 1.0
+        # Calculate mean pairwise dissimilarity
         reward_div = diss_sub.sum() / (num_picks * (num_picks - 1.0))
 
-    # ── 2. SUBMODULAR COVERAGE REWARD (novel) ────────────────────────────────
-    sim_to_selected = 1.0 - diss[:, pick_idxs]                  # (n, k)
-    sim_to_selected = (sim_to_selected + 1.0) / 2.0            # rescale to [0,1]
+    # ── 2. SUBMODULAR COVERAGE REWARD ────────────────────────────────────────
+    # Compute similarity: 1.0 - Cosine Distance
+    sim_to_selected = 1.0 - diss[:, pick_idxs]                  # Shape: (n, k)
+    # Rescale similarity score from [-1, 1] to [0, 1]
+    sim_to_selected = (sim_to_selected + 1.0) / 2.0
     # For each video frame, find its maximum similarity to any selected frame
-    max_cov, _ = sim_to_selected.max(dim=1)                    # (n,)
-    reward_cov = max_cov.mean()                                 # in [0, 1]
+    max_cov, _ = sim_to_selected.max(dim=1)                    # Shape: (n,)
+    reward_cov = max_cov.mean()                                 # Range: [0, 1]
 
-    # ── 3. TEMPORAL SPREAD REWARD (novel) ─────────────────────────────────────
-    norm_picks = pick_idxs.float() / (n - 1.0 + 1e-8)         # in [0, 1]
+    # ── 3. TEMPORAL SPREAD REWARD ─────────────────────────────────────────────
+    # Normalize selected frame indices to [0, 1] range
+    norm_picks = pick_idxs.float() / (n - 1.0 + 1e-8)          # Shape: (k,)
+    # Compute a perfectly uniform distribution spanning [0, 1]
     uniform_q = torch.linspace(0.0, 1.0, num_picks, device=norm_picks.device)
     sorted_picks, _ = norm_picks.sort()
+    # Compute Earth Mover's Distance (EMD) between selected frames and uniform distribution
     emd = (sorted_picks - uniform_q).abs().mean()
-    reward_spread = 1.0 - emd                                   # in [0, 1]: 1 = perfect spread
+    # Invert EMD so that higher spread (closer to uniform) yields a higher reward
+    reward_spread = 1.0 - emd                                   # perfect spread = 1
 
-    # ── 4. COMPACTNESS / BUDGET FIDELITY REWARD (novel) ──────────────────────
+    # ── 4. COMPACTNESS / BUDGET FIDELITY REWARD ──────────────────────────────
     target_ratio = 0.15
     actual_ratio = num_picks / float(n)
     if actual_ratio < target_ratio:
+        # Asymmetric harsh penalty for undershooting target summary length (e.g. policy collapse)
         compactness = 1.0 - 3.0 * (target_ratio - actual_ratio)
     else:
+        # Mild penalty for overshooting target summary length
         compactness = 1.0 - (actual_ratio - target_ratio)
     compactness = max(0.0, min(1.0, compactness))
     reward_compact = torch.tensor(compactness, dtype=torch.float32)
@@ -127,9 +150,10 @@ def compute_per_frame_attribution(seq, actions, use_gpu=False):
                       Unselected frames: 0.
         full_reward: the total reward for the complete selection.
     """
-    _seq = seq.detach().squeeze()   # (n, dim)
+    _seq = seq.detach().squeeze()   # Shape: (n, dim)
+    # Compute cosine dissimilarity matrix
     normed = _seq / (_seq.norm(p=2, dim=1, keepdim=True) + 1e-8)
-    diss = 1.0 - torch.matmul(normed, normed.t())          # (n, n)
+    diss = 1.0 - torch.matmul(normed, normed.t())          # Shape: (n, n)
 
     full_reward = compute_reward(seq, actions, use_gpu=use_gpu, diss=diss)
     
@@ -140,6 +164,7 @@ def compute_per_frame_attribution(seq, actions, use_gpu=False):
 
     attributions = torch.zeros(n, device=seq.device)
 
+    # Base cases for edge conditions
     if k == 0:
         return attributions, full_reward
 
@@ -149,12 +174,14 @@ def compute_per_frame_attribution(seq, actions, use_gpu=False):
         return attributions, full_reward
 
     # ── 1. Diversity minus j ──────────────────────────────────────────────────
+    # Vectorized computation of diversity when removing each item j
     diss_sub = diss[pick_idxs, :][:, pick_idxs]
     pick_mat = pick_idxs.expand(k, k)
     temp_dist = torch.abs(pick_mat - pick_mat.t())
     D = diss_sub.clone()
     D[temp_dist > 20] = 1.0
     
+    # Calculate row sums and compute the remaining matrix sum if row i is removed
     row_sums = D.sum(dim=1)
     sub_sums = D.sum() - 2 * row_sums
     if k > 2:
@@ -163,23 +190,31 @@ def compute_per_frame_attribution(seq, actions, use_gpu=False):
         div_minus = torch.zeros(k, device=seq.device)
 
     # ── 2. Coverage minus j ───────────────────────────────────────────────────
+    # Vectorized computation of submodular coverage when removing each item j
     sim_to_selected = 1.0 - diss[:, pick_idxs]
-    sim_to_selected = (sim_to_selected + 1.0) / 2.0  # (n, k)
+    sim_to_selected = (sim_to_selected + 1.0) / 2.0  # Shape: (n, k)
+    # Find the top 2 similarities to any selected frame for each frame in the video
     top2_vals, top2_idxs = sim_to_selected.topk(k=2, dim=1)
+    
+    # If the removed index was the primary coverage source for a frame, its coverage 
+    # degrades to the second best similarity. Otherwise, it stays the same.
     is_primary = (top2_idxs[:, 0].unsqueeze(1) == torch.arange(k, device=seq.device))
     max_cov_minus = torch.where(is_primary, top2_vals[:, 1].unsqueeze(1), top2_vals[:, 0].unsqueeze(1))
     cov_minus = max_cov_minus.mean(dim=0)
 
     # ── 3. Spread minus j ─────────────────────────────────────────────────────
+    # Vectorized computation of EMD spread when removing each item j
     norm_picks = pick_idxs.float() / (n - 1.0 + 1e-8)
     uniform_q_minus = torch.linspace(0.0, 1.0, k - 1, device=seq.device)
     mask = ~torch.eye(k, dtype=torch.bool, device=seq.device)
     expanded = norm_picks.unsqueeze(1).expand(k, k)
-    norm_picks_minus = expanded.t()[mask].view(k, k - 1).t() # (k - 1, k)
+    # Exclude element j for each of the k combinations
+    norm_picks_minus = expanded.t()[mask].view(k, k - 1).t() # Shape: (k - 1, k)
     emd_minus = (norm_picks_minus - uniform_q_minus.unsqueeze(1)).abs().mean(dim=0)
     spread_minus = 1.0 - emd_minus
 
     # ── 4. Compactness minus j ────────────────────────────────────────────────
+    # Vectorized computation of compactness when removing each item j
     target_ratio = 0.15
     actual_ratio_minus = (k - 1) / float(n)
     if actual_ratio_minus < target_ratio:

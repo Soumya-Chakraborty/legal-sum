@@ -156,30 +156,92 @@
 \begin{frame}{Overall Network Architecture (SCSL-SGC)}
     \begin{center}
         \begin{tikzpicture}[
-            scale=0.75, every node/.style={transform shape},
+            scale=0.70, every node/.style={transform shape},
             box/.style={draw, rectangle, rounded corners, fill=blue!5, minimum width=2.4cm, minimum height=0.55cm, align=center, font=\scriptsize},
             node distance=0.4cm
         ]
-            \node[box] (input) {GoogLeNet\\Features};
-            \node[box, right=of input] (proj) {Linear + LN\\(512-dim)};
-            \node[box, right=of proj] (lstm) {2-Layer\\Bi-LSTM};
-            \node[box, right=of lstm] (mha) {2x Self-Attn\\(8 Heads)};
-            \node[box, right=of mha] (mlp) {MLP Score\\Predictor};
+            \node[box] (input) {GoogLeNet\\Features (1024)};
+            \node[box, right=of input] (proj) {MultiScaleConv1D\\(512-dim)};
+            
+            % Parallel paths
+            \node[box, above right=0.1cm and 0.5cm of proj] (lstm) {2-Layer\\Bi-LSTM (Local)};
+            \node[box, below right=0.1cm and 0.5cm of proj] (mha) {2x Self-Attn\\(Global)};
+            
+            \node[box, right=4.5cm of proj] (gate) {Dynamic Gate\\Fusion};
+            \node[box, right=of gate] (mlp) {MLP Score\\Predictor};
             \node[box, right=of mlp] (out) {Sigmoid\\Selection $p_t$};
             
             \draw[->, thick] (input) -- (proj);
-            \draw[->, thick] (proj) -- (lstm);
-            \draw[->, thick] (lstm) -- (mha);
-            \draw[->, thick] (mha) -- (mlp);
+            \draw[->, thick] (proj.east) -- ++(0.3,0) |- (lstm.west);
+            \draw[->, thick] (proj.east) -- ++(0.3,0) |- (mha.west);
+            
+            \draw[->, thick] (lstm.east) -| (gate.north);
+            \draw[->, thick] (mha.east) -| (gate.south);
+            
+            \draw[->, thick] (gate) -- (mlp);
             \draw[->, thick] (mlp) -- (out);
         \end{tikzpicture}
     \end{center}
-    \begin{block}{Design Intent}
-        Hybridize sequential modeling (Bi-LSTM) with global attention blocks (Self-Attention) to capture both local temporal transitions and long-range frame associations.
+    \begin{block}{Gated Local-Global Fusion Design}
+        Parallel streams extract local sequence boundaries (via Bi-LSTM) and long-range frame dependencies (via Multi-Head Attention), dynamically combined using a learnable fusion gate.
     \end{block}
 \end{frame}
 
-% Slide 7: Spatial-Temporal Encoder: 2-Layer Bi-LSTM
+% Slide 7: Multi-Scale Convolutional Feature Projection
+\begin{frame}{Multi-Scale Convolutional Feature Projection}
+    \begin{columns}
+        \begin{column}{0.5\textwidth}
+            \begin{itemize}
+                \item Traditional architectures project features using a static Linear layer.
+                \item We use parallel 1D convolutional layers with kernel sizes $K \in \{3, 5, 7\}$.
+                \item Captures multi-granularity local context of adjacent frames.
+                \item Extracted features are concatenated with a residual linear projection and normalized.
+            \end{itemize}
+        \end{column}
+        \begin{column}{0.5\textwidth}
+            \begin{block}{Multi-Scale Convolutional Projection}
+                \centering
+                \begin{tikzpicture}[
+                    scale=0.75, every node/.style={transform shape},
+                    convbox/.style={draw, rectangle, rounded corners, fill=blue!10, minimum width=2.5cm, minimum height=0.6cm, font=\scriptsize, align=center}
+                ]
+                    \node[convbox] (c3) {Conv1D (Kernel 3)};
+                    \node[convbox, above=0.3cm of c3] (c5) {Conv1D (Kernel 5)};
+                    \node[convbox, below=0.3cm of c3] (c7) {Conv1D (Kernel 7)};
+                    \node[convbox, below=0.3cm of c7] (proj) {Linear Projection};
+                    
+                    \node[draw, circle, fill=green!20, right=1.2cm of $(c5)!0.5!(proj)$] (cat) {Concat};
+                    \node[draw, rectangle, fill=yellow!20, right=0.6cm of cat] (norm) {LayerNorm};
+                    
+                    \draw[->, thick] (c5.east) -- (cat);
+                    \draw[->, thick] (c3.east) -- (cat);
+                    \draw[->, thick] (c7.east) -- (cat);
+                    \draw[->, thick] (proj.east) -- (cat);
+                    
+                    \draw[->, thick] (cat) -- (norm);
+                \end{tikzpicture}
+            \end{block}
+        \end{column}
+    \end{columns}
+\end{frame}
+
+% Slide 8: Gated Local-Global Attention Fusion
+\begin{frame}{Gated Local-Global Attention Fusion}
+    \begin{block}{Loss of Local Context}
+        Deep self-attention blocks tend to smooth out local sequence boundaries. Recurrent representations (LSTMs) capture short-term transitions but fail over long temporal paths.
+    \end{block}
+    
+    \begin{block}{Learnable Dynamic Gating Formulation}
+        We dynamically fuse local recurrent representation ($h_{\text{RNN}}$) and global multi-head self-attention output ($h_{\text{Attn}}$):
+        \begin{align*}
+            g &= \sigma(W_g [h_{\text{RNN}}; h_{\text{Attn}}] + b_g) \\
+            h_{\text{Fused}} &= g \odot h_{\text{RNN}} + (1 - g) \odot h_{\text{Attn}}
+        \end{align*}
+        where $W_g$ is a learnable projection matrix, $\sigma$ is the sigmoid function, and $\odot$ denotes element-wise multiplication.
+    \end{block}
+\end{frame}
+
+% Slide 9: Spatial-Temporal Encoder: 2-Layer Bi-LSTM
 \begin{frame}{Spatial-Temporal Encoder: 2-Layer Bi-LSTM}
     \begin{columns}
         \begin{column}{0.5\textwidth}
@@ -478,7 +540,54 @@
     \end{block}
 \end{frame}
 
-% Slide 18: Summary \& Future Directions
+% Slide 18: LegalSum: Multimodal Courtroom Video Summarization
+\begin{frame}{LegalSum: Multimodal Courtroom Video Summarization}
+    \begin{columns}
+        \begin{column}{0.5\textwidth}
+            \begin{block}{The Courtroom Challenge}
+                \begin{itemize}
+                    \item Long proceedings (hours) with heavy silence and inactive segments.
+                    \item Critical arguments must never be deleted (Action-Lock).
+                    \item Need for textual dialogue alignment.
+                \end{itemize}
+            \end{block}
+        \end{column}
+        \begin{column}{0.5\textwidth}
+            \begin{block}{LegalSum Architecture}
+                \begin{itemize}
+                    \item \textbf{Whisper Dialogue Mapping}: Local Speech-to-Text aligns speech segments directly to frame coordinates.
+                    \item \textbf{Action Prioritization}: Scene category multiplier boosts (suits, mics, papers).
+                    \item \textbf{Dynamic Compile}: Saves pre-computed scores, compiling highlights in $<8$ seconds.
+                \end{itemize}
+            \end{block}
+        \end{column}
+    \end{columns}
+\end{frame}
+
+% Slide 19: LegalSum: Multi-Camera Sync & Slicing
+\begin{frame}{LegalSum: Multi-Camera Sync \& Slicing}
+    \begin{center}
+        \begin{tikzpicture}[
+            scale=0.75, every node/.style={transform shape},
+            cambox/.style={draw, rectangle, rounded corners, minimum width=3cm, minimum height=0.8cm, font=\scriptsize, align=center}
+        ]
+            \node[cambox, fill=blue!10] (c1) {\textbf{Camera 1 (Podium)}\\Visual + Audio Profile};
+            \node[cambox, fill=green!10, right=1.5cm of c1] (c2) {\textbf{Camera 2 (Jury/Side)}\\Visual + Audio Profile};
+            \node[cambox, fill=orange!10, below=1cm of $(c1.east)!0.5!(c2.west)$] (fuse) {\textbf{Sync Fusion Router}\\Selects highest activity camera angle};
+            
+            \draw[->, thick] (c1) -- (fuse);
+            \draw[->, thick] (c2) -- (fuse);
+        \end{tikzpicture}
+    \end{center}
+    \begin{block}{Verification Specifications}
+        \begin{itemize}
+            \item Compiled 44-minute oral argument video \texttt{court\_trial\_naruto.webm} to a clean 19m 44s multi-camera highlight summary.
+            \item Action-Lock guard activated on 132 segments to protect critical speakers.
+        \end{itemize}
+    \end{block}
+\end{frame}
+
+% Slide 20: Summary \& Future Directions
 \begin{frame}{Summary \& Future Directions}
     \begin{block}{Key Contributions}
         \begin{itemize}

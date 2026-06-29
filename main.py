@@ -124,20 +124,28 @@ if args.use_cpu:
 
 
 def build_model():
+    """
+    Constructs and returns the selected neural network architecture.
+
+    Returns:
+        nn.Module: The initialized model based on command line arguments.
+    """
     if args.model_type == 'transformer':
+        # Instantiates the fully attention-based DSN model
         return DSN_Transformer(
             in_dim=args.input_dim, hid_dim=args.hidden_dim * 2,
             num_layers=args.num_layers, num_heads=args.num_heads,
             dropout=args.dropout,
         )
     elif args.model_type == 'enhanced':
+        # Instantiates the hybrid RNN + Self-Attention model
         return DSN(
             in_dim=args.input_dim, hid_dim=args.hidden_dim,
             num_layers=args.num_layers, cell=args.rnn_cell,
             num_heads=args.num_heads, dropout=args.dropout,
         )
     else:
-        # Original shallow model (kept for ablation)
+        # Original shallow bi-directional RNN model (kept for ablation/baselines)
         class _OriginalDSN(nn.Module):
             def __init__(self):
                 super().__init__()
@@ -148,6 +156,7 @@ def build_model():
                     self.rnn = nn.GRU(args.input_dim, args.hidden_dim,
                                       bidirectional=True, batch_first=True)
                 self.fc = nn.Linear(args.hidden_dim * 2, 1)
+                
             def forward(self, x):
                 h, _ = self.rnn(x)
                 return torch.sigmoid(self.fc(h))
@@ -157,56 +166,83 @@ def build_model():
 def evaluate_with_ensemble(model, dataset, test_keys, use_gpu,
                            k=10, save_results=False, save_dir='.'):
     """
-    MC-Dropout ensemble inference.
-    Runs K stochastic forward passes (dropout enabled) and averages probs.
-    Reduces prediction variance vs single deterministic pass.
+    Performs evaluation on the test set using Monte Carlo (MC) Dropout Ensemble inference.
+    By keeping dropout enabled, it runs K stochastic passes to average the output probabilities,
+    effectively acting as an ensemble method to stabilize predictions.
+
+    Args:
+        model (nn.Module): The video summarization model.
+        dataset (h5py.File): Opened H5 dataset containing video features and labels.
+        test_keys (list): List of video IDs belonging to the test split.
+        use_gpu (bool): Whether to use GPU acceleration.
+        k (int, optional): Number of stochastic forward passes. Defaults to 10.
+        save_results (bool, optional): Whether to write the prediction scores/summaries to an H5 file. Defaults to False.
+        save_dir (str, optional): Target directory for saving results. Defaults to '.'.
+
+    Returns:
+        float: The mean F1-score achieved across the test split.
     """
     print("==> Test (MC-Dropout ensemble, K={})".format(k))
+    # TVSum evaluates with mean of users ('avg'), SumMe with the maximum matching user ('max')
     eval_metric = 'avg' if args.metric == 'tvsum' else 'max'
 
     if args.verbose:
-        table = [["No.", "Video", "F-score"]]
+        table = [["No.", "Video", "F-score", "Precision", "Recall"]]
 
     if save_results:
         h5_res = h5py.File(osp.join(save_dir, 'result.h5'), 'w')
 
-    fms = []
-    # Enable training mode to keep dropout active → stochastic passes
-    model.train()
+    fms, precs, recs = [], [], []
+    # Use eval() mode for deterministic inference when k is 1 (no ensemble),
+    # otherwise use train() to keep dropout active for MC sampling
+    if k == 1:
+        model.eval()
+    else:
+        model.train()
     with torch.no_grad():
         for key_idx, key in enumerate(test_keys):
+            # Load video features from H5 dataset
             seq = dataset[key]['features'][...]
             seq = torch.from_numpy(seq).unsqueeze(0)
             if use_gpu:
                 seq = seq.cuda()
 
-            # K stochastic forward passes
+            # Execute K stochastic passes to obtain diverse predictions
             probs_list = []
             for _ in range(k):
                 p = model(seq).data.cpu().squeeze().numpy()
                 probs_list.append(p)
-            probs = np.mean(probs_list, axis=0)   # ensemble mean
+            probs = np.mean(probs_list, axis=0)   # Compute ensemble mean prediction
 
+            # Extract segment change points, frame counts, and ground truth human annotations
             cps = dataset[key]['change_points'][...]
             num_frames = dataset[key]['n_frames'][()]
             nfps = dataset[key]['n_frame_per_seg'][...].tolist()
             positions = dataset[key]['picks'][...]
             user_summary = dataset[key]['user_summary'][...]
 
+            # Generate the binary summary selection vector using knapsack/ranking
             machine_summary = vsum_tools.generate_summary(
                 probs, cps, num_frames, nfps, positions)
-            fm, _, _ = vsum_tools.evaluate_summary(
+            
+            # Compare the generated machine summary with the human summaries
+            fm, prec, rec = vsum_tools.evaluate_summary(
                 machine_summary, user_summary, eval_metric)
             fms.append(fm)
+            precs.append(prec)
+            recs.append(rec)
 
             if args.verbose:
-                table.append([key_idx + 1, key, "{:.1%}".format(fm)])
+                table.append([key_idx + 1, key, "{:.1%}".format(fm), "{:.1%}".format(prec), "{:.1%}".format(rec)])
 
             if save_results:
+                # Save predictions to the results file
                 h5_res.create_dataset(key + '/score', data=probs)
                 h5_res.create_dataset(key + '/machine_summary', data=machine_summary)
                 h5_res.create_dataset(key + '/gtscore', data=dataset[key]['gtscore'][...])
                 h5_res.create_dataset(key + '/fm', data=fm)
+                h5_res.create_dataset(key + '/precision', data=prec)
+                h5_res.create_dataset(key + '/recall', data=rec)
 
     if args.verbose:
         print(tabulate(table))
@@ -215,7 +251,9 @@ def evaluate_with_ensemble(model, dataset, test_keys, use_gpu,
         h5_res.close()
 
     mean_fm = np.mean(fms)
-    print("Average F-score {:.1%}".format(mean_fm))
+    mean_prec = np.mean(precs)
+    mean_rec = np.mean(recs)
+    print("Average F-score {:.1%}, Precision {:.1%}, Recall {:.1%}".format(mean_fm, mean_prec, mean_rec))
     return mean_fm
 
 
@@ -224,20 +262,31 @@ def train_one_phase(model, optimizer, scheduler, dataset, train_keys,
                     entropy_start, entropy_end, start_epoch=0,
                     use_counterfactual=True):
     """
-    Core training loop for one phase.
+    Runs the main reinforcement learning loop for a single phase.
 
-    INNOVATIONS:
-    ─────────────
-    - Adaptive entropy coefficient decays exponentially from entropy_start → entropy_end
-    - Per-frame counterfactual attribution (optional) replaces uniform REINFORCE signal
-    - Video-adaptive baseline with bias correction (like Adam)
-    - Hard negative reward (-1) for empty selections prevents collapse
+    Args:
+        model (nn.Module): The model to be trained.
+        optimizer (torch.optim.Optimizer): Model parameters optimizer.
+        scheduler (lr_scheduler._LRScheduler): Learning rate decay schedule.
+        dataset (h5py.File): Opened H5 dataset containing video info.
+        train_keys (list): List of video IDs belonging to the train split.
+        test_keys (list): List of video IDs belonging to the test split.
+        num_epochs (int): Number of epochs to run training.
+        baselines (dict): Dictionary mapping video ID to its running average baseline reward.
+        reward_writers (dict): Dictionary mapping video ID to its reward history.
+        entropy_start (float): Starting entropy regularization coefficient.
+        entropy_end (float): Final entropy regularization coefficient.
+        start_epoch (int, optional): Epoch offset number. Defaults to 0.
+        use_counterfactual (bool, optional): If True, uses counterfactual frame attribution. Defaults to True.
+
+    Returns:
+        tuple: (best_fm, best_epoch, best_state, baselines, reward_writers)
     """
     best_fm = 0.0
     best_epoch = 0
     best_state = None
 
-    # Bias correction accumulators (Adam-style)
+    # Bias correction step counters (analogous to Adam optimizer's time step counters)
     baseline_step = {key: 0 for key in train_keys}
 
     for epoch in range(start_epoch, start_epoch + num_epochs):
@@ -245,8 +294,8 @@ def train_one_phase(model, optimizer, scheduler, dataset, train_keys,
         idxs = np.arange(len(train_keys))
         np.random.shuffle(idxs)
 
-        # Exponential entropy decay
-        progress = epoch / max(1, num_epochs - 1)
+        # Compute adaptive entropy decay (exponential decay from start value to end value)
+        progress = (epoch - start_epoch) / max(1, num_epochs - 1)
         entropy_coef = entropy_start * (entropy_end / entropy_start) ** progress
 
         for idx in idxs:
@@ -256,37 +305,41 @@ def train_one_phase(model, optimizer, scheduler, dataset, train_keys,
             if use_gpu:
                 seq = seq.cuda()
 
-            probs = model(seq)   # (1, seq_len, 1)
+            # Predict select probabilities for each frame
+            probs = model(seq)   # Shape: (1, seq_len, 1)
 
-            # Length penalty: penalise deviation of mean from 0.15 (target ratio)
+            # Length Penalty: Penalty cost to encourage summary selections to average 15% budget
             target_ratio = 0.15
             length_pen = args.beta * (probs.mean() - target_ratio) ** 2
 
+            # Model frame selections as independent Bernoulli trials
             m = Bernoulli(probs)
 
-            # Entropy regularization (adaptive)
+            # Measure distribution entropy to encourage policy exploration
             entropy = m.entropy().mean()
             cost = length_pen - entropy_coef * entropy
 
-            # ── NOVEL: Counterfactual REINFORCE ──────────────────────────────
+            # ── NOVEL: Counterfactual REINFORCE Loop ─────────────────────────
             epis_rewards = []
             for _ in range(args.num_episode):
-                actions = m.sample()
+                actions = m.sample()  # Sample actions (binary selections 0/1)
 
                 if use_counterfactual:
-                    # Per-frame attributions: shape (seq_len,)
+                    # Calculate marginal counterfactual attributions for each picked frame
                     attributions, full_reward = compute_per_frame_attribution(
                         seq, actions, use_gpu=use_gpu)
-                    # Baseline-corrected per-frame signal
+                    
+                    # Compute shaped reward = attribution - baseline
                     baseline_val = baselines[key]
                     shaped_reward = attributions - baseline_val
 
-                    log_probs = m.log_prob(actions).squeeze()  # (seq_len,)
-                    # Only selected frames get non-zero attributions
+                    log_probs = m.log_prob(actions).squeeze()  # Shape: (seq_len,)
+                    # Frames that contributed positively get strengthened; redundant ones are penalized
                     expected_reward = (log_probs * shaped_reward).mean()
                 else:
                     log_probs = m.log_prob(actions)
                     full_reward = compute_reward(seq, actions, use_gpu=use_gpu)
+                    # Standard REINFORCE: apply same reward to all frame decisions
                     expected_reward = log_probs.mean() * (full_reward - baselines[key])
 
                 cost -= expected_reward
@@ -294,17 +347,21 @@ def train_one_phase(model, optimizer, scheduler, dataset, train_keys,
                                     if hasattr(full_reward, 'item')
                                     else float(full_reward))
 
+            # Optimization step
             optimizer.zero_grad()
             cost.backward()
+            # Gradient clipping to ensure training stability and prevent exploding gradients
             torch.nn.utils.clip_grad_norm_(model.parameters(), 5.0)
             optimizer.step()
 
-            # Momentum-corrected baseline update
+            # Update video-level baseline using momentum + bias correction
             baseline_step[key] += 1
             t = baseline_step[key]
             raw_baseline = 0.9 * baselines[key] + 0.1 * np.mean(epis_rewards)
-            baselines[key] = raw_baseline / (1 - 0.9 ** t)   # bias correction
-            # Clamp to prevent baseline from drifting too far
+            # Correct bias for early training epochs (reduces cold-start variance)
+            baselines[key] = raw_baseline / (1 - 0.9 ** t)   
+            
+            # Clip the baseline values to ensure stability
             baselines[key] = float(np.clip(baselines[key], -2.0, 2.0))
             reward_writers[key].append(np.mean(epis_rewards))
 
@@ -316,7 +373,7 @@ def train_one_phase(model, optimizer, scheduler, dataset, train_keys,
             epoch + 1, start_epoch + num_epochs, epoch_reward,
             entropy_coef, optimizer.param_groups[0]['lr']))
 
-        # Evaluate every 5 epochs (and at last epoch)
+        # Periodic evaluation & checkpointing
         if (epoch + 1) % 5 == 0 or epoch == start_epoch + num_epochs - 1:
             fm = evaluate_with_ensemble(model, dataset, test_keys, use_gpu,
                                         k=args.ensemble_k)
@@ -335,6 +392,11 @@ def train_one_phase(model, optimizer, scheduler, dataset, train_keys,
 
 
 def main():
+    """
+    Main entry point for setting up the environment, loading datasets,
+    initializing models, and running the two training phases (exploration and exploitation).
+    """
+    # Redirect standard output prints to corresponding log files
     if not args.evaluate:
         sys.stdout = Logger(osp.join(args.save_dir, 'log_train.txt'))
     else:
@@ -342,6 +404,7 @@ def main():
 
     print("==========\nArgs:{}\n==========".format(args))
 
+    # Hardware configuration: setup GPU settings if available
     if use_gpu:
         print("Currently using GPU {}".format(args.gpu))
         cudnn.benchmark = True
@@ -349,9 +412,12 @@ def main():
     else:
         print("Currently using CPU")
 
+    # Load video datasets from H5 format
     print("Initialize dataset {}".format(args.dataset))
     dataset = h5py.File(args.dataset, 'r')
     num_videos = len(dataset.keys())
+    
+    # Read the train-test index splits
     splits = read_json(args.split)
     assert args.split_id < len(splits)
     split = splits[args.split_id]
@@ -360,18 +426,22 @@ def main():
     print("# total {} | # train {} | # test {}".format(
         num_videos, len(train_keys), len(test_keys)))
 
+    # Instantiate the selected model architecture
     print("Initialize model (type: {})".format(args.model_type))
     model = build_model()
     param_count = sum(p.numel() for p in model.parameters())
     print("Model size: {:.5f}M".format(param_count / 1e6))
 
+    # Optional: resume checkpoint loading if path is supplied
     if args.resume:
         print("Loading checkpoint from '{}'".format(args.resume))
         model.load_state_dict(torch.load(args.resume))
 
+    # Multi-GPU DataParallel wrapping if applicable
     if use_gpu:
         model = nn.DataParallel(model).cuda()
 
+    # If the --evaluate flag is set, run test evaluation and exit
     if args.evaluate:
         print("Evaluate only")
         evaluate_with_ensemble(model, dataset, test_keys, use_gpu,
@@ -381,11 +451,13 @@ def main():
         return
 
     # ── PHASE 1: EXPLORATION ──────────────────────────────────────────────────
+    # Starts training with high learning rate and high entropy coefficients
     phase1_epochs = args.max_epoch - args.phase2_epochs
-    print("\n{'='*60}")
+    print("\n" + "="*60)
     print("==> PHASE 1: Exploration ({} epochs, high entropy)".format(phase1_epochs))
     print("="*60)
 
+    # Initialize optimizer and cosine annealing scheduler for Phase 1
     optimizer1 = torch.optim.Adam(model.parameters(),
                                   lr=args.lr,
                                   weight_decay=args.weight_decay)
@@ -393,9 +465,11 @@ def main():
         optimizer1, T_max=phase1_epochs, eta_min=args.lr * 0.05)
 
     start_time = time.time()
+    # Baseline dictionaries mapping keys to running averages
     baselines = {key: 0.0 for key in train_keys}
     reward_writers = {key: [] for key in train_keys}
 
+    # Run training for Phase 1
     best_fm1, best_epoch1, best_state1, baselines, reward_writers = train_one_phase(
         model, optimizer1, scheduler1, dataset, train_keys, test_keys,
         num_epochs=phase1_epochs, baselines=baselines, reward_writers=reward_writers,
@@ -407,12 +481,13 @@ def main():
         best_fm1, best_epoch1))
 
     # ── PHASE 2: EXPLOITATION (reload best Phase-1 model) ────────────────────
+    # Fine-tunes the best checkpoint from Phase 1 with a smaller LR and low entropy
     print("\n" + "="*60)
     print("==> PHASE 2: Exploitation ({} epochs, low entropy)".format(
         args.phase2_epochs))
     print("="*60)
 
-    # Reload best model from Phase 1
+    # Reload model weights corresponding to the best validation score in Phase 1
     if best_state1 is not None:
         if use_gpu:
             model.module.load_state_dict(best_state1)
@@ -420,16 +495,17 @@ def main():
             model.load_state_dict(best_state1)
         print("Reloaded best Phase-1 model (F-score {:.1%})".format(best_fm1))
 
-    # Phase-2 optimizer: lower LR, fine-tuning regime
+    # Fine-tuning optimizer and cosine annealing scheduler for Phase 2
     optimizer2 = torch.optim.Adam(model.parameters(),
                                   lr=args.lr * 0.1,
                                   weight_decay=args.weight_decay)
     scheduler2 = lr_scheduler.CosineAnnealingLR(
         optimizer2, T_max=args.phase2_epochs, eta_min=args.lr * 0.001)
 
-    # Reset reward writers for Phase 2 (they'll be re-indexed from 0)
+    # Reset rewards list for tracking Phase 2 rewards
     reward_writers2 = {key: [] for key in train_keys}
 
+    # Run training for Phase 2
     best_fm2, best_epoch2, best_state2, _, reward_writers2 = train_one_phase(
         model, optimizer2, scheduler2, dataset, train_keys, test_keys,
         num_epochs=args.phase2_epochs, baselines=baselines,
@@ -441,7 +517,7 @@ def main():
     print("\nPhase 2 complete. Best F-score: {:.1%} at epoch {}".format(
         best_fm2, best_epoch2))
 
-    # Merge reward writers for logging
+    # Concatenate reward records across training phases and export to a JSON log file
     for key in train_keys:
         reward_writers[key].extend(reward_writers2[key])
     write_json(reward_writers, osp.join(args.save_dir, 'rewards.json'))
@@ -451,7 +527,7 @@ def main():
     print("OVERALL BEST F-score: {:.1%}".format(overall_best_fm))
     print("="*60)
 
-    # Save final model
+    # Save final model weights
     final_state = model.module.state_dict() if use_gpu else model.state_dict()
     save_checkpoint(final_state,
                     osp.join(args.save_dir, 'model_epoch{}.pth.tar'.format(args.max_epoch)))
