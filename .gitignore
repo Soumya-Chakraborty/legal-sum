@@ -10,3 +10,6 @@ demo/**/*.webm
 demo/**/*.wav
 demo/**/*.h5
 demo/**/*.pth.tar
+
+# Except original courtroom video (61MB, under 100MB limit)
+!demo/court_trial.webm
