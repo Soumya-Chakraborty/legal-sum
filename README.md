@@ -68,8 +68,9 @@ pip install tabulate h5py matplotlib scipy openai-whisper --break-system-package
 ```
 
 ### 2. Single-Video Inference Quickstart
-To run the pre-trained SOTA model on any custom video (e.g. to create a quick summary video + text transcript mapping + cache files):
+To run the pre-trained SOTA model on a custom video to extract features, transcribe speech, and compile highlights:
 ```bash
+# 1. Generate full-length analysis, transcription, and cache
 python -c "
 from demo.legal_sum import run_legal_sum
 run_legal_sum(
@@ -78,9 +79,16 @@ run_legal_sum(
     manifest_path='demo/court_manifest_naruto.json',
     checkpoint_path='log/summe-counterfactual-optimized/model_best.pth.tar',
     mode='narrative',
-    max_frames=10000
+    max_frames=None  # Set to None for full-length processing
 )
 "
+
+# 2. (Optional) Compile summary dynamically to exactly 10 minutes (600s) in under 8s
+python demo/compile_summary.py \
+    --cache demo/court_analysis_cache_naruto.json \
+    --input demo/court_trial_naruto.webm \
+    --output demo/court_summary_naruto.mp4 \
+    --duration 600
 ```
 
 ### 3. Dataset Setup
