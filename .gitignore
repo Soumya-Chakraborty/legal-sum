@@ -1,15 +1,9 @@
 __pycache__/
-datasets/
 log/
 *.aux
 *.log
 *.pdf
 
-# Ignore large raw media/binaries in demo
-demo/**/*.webm
+# Ignore audio wavs and models
 demo/**/*.wav
-demo/**/*.h5
 demo/**/*.pth.tar
-
-# Except original courtroom video (61MB, under 100MB limit)
-!demo/court_trial.webm
