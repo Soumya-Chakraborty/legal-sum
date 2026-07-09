@@ -63,13 +63,32 @@ def compile_dynamic_summary(cache_path, video_path, output_video_path, target_du
     locked_segs = []
     seg_scores = []
     
+    legal_keywords = ["guilty", "confess", "murder", "verdict", "objection", "witness", "swear", "truth", "deny", "admit", "lie", "kill", "theft", "steal", "charge", "arrest", "conspiracy", "conspire", "court", "judge", "trial"]
+    transcription_segments = cache.get("transcription_segments", [])
+    
     for i in range(n_segs):
         start, end = int(cps[i, 0]), int(cps[i, 1] + 1)
+        
+        # Check semantic boost
+        semantic_boost = 0.0
+        for trans_seg in transcription_segments:
+            overlap_start = max(start, trans_seg['start_frame'])
+            overlap_end = min(end, trans_seg['end_frame'])
+            if overlap_start < overlap_end:
+                text_lower = trans_seg['text'].lower()
+                if any(kw in text_lower for kw in legal_keywords):
+                    semantic_boost = 0.35
+                    break
+        
         if seg_anomalies[i] > anomaly_threshold:
             locked_segs.append(i)
             seg_scores.append(1.0)
         else:
-            seg_scores.append(float(frame_scores[start:end].mean()))
+            base_score = float(frame_scores[start:end].mean())
+            boosted_score = min(1.0, base_score + semantic_boost)
+            if semantic_boost > 0:
+                print(f"Applying semantic boost to segment {i} ({start}-{end}) due to legal keywords.")
+            seg_scores.append(boosted_score)
             
     # 3. Solve Knapsack with target duration capacity
     target_frames_limit = int(target_duration_secs * fps)

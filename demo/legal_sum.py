@@ -76,124 +76,149 @@ def run_legal_sum(video_path, output_video_path, manifest_path, checkpoint_path,
 
     # 1. Feature Extraction, Audio Extraction, and Hashing
     print("Phase 1: Extraction & Hashing (Multimodal Validation)...")
-    cap = cv2.VideoCapture(video_path)
-    total_frames = int(cap.get(cv2.CAP_PROP_FRAME_COUNT))
-    if max_frames is not None:
-        total_frames = min(total_frames, max_frames)
-    fps = cap.get(cv2.CAP_PROP_FPS)
-    if fps > 100 or fps <= 0:
-        fps = 30.0
-    width = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))
-    height = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
-    
-    wav_path = video_path.replace('.webm', '.wav').replace('.mp4', '.wav')
-    audio_loudness = extract_audio_loudness(video_path, wav_path, total_frames, fps)
-    
-    transcription_segments = []
-    try:
-        import whisper
-        print("Initializing open-source Whisper transcription...")
-        whisper_model = whisper.load_model("tiny")
-        print("Transcribing audio track...")
-        result = whisper_model.transcribe(wav_path)
-        for seg in result.get("segments", []):
-            start_sec = float(seg["start"])
-            if start_sec * fps < total_frames:
-                transcription_segments.append({
-                    "start_time": start_sec,
-                    "end_time": float(seg["end"]),
-                    "start_frame": int(start_sec * fps),
-                    "end_frame": int(float(seg["end"]) * fps),
-                    "text": seg["text"].strip()
-                })
-        print(f"Whisper transcription completed: {len(transcription_segments)} segments mapped.")
-    except Exception as e:
-        print(f"Warning: Whisper transcription skipped: {e}")
-    
-    try:
-        weights = tv_models.GoogLeNet_Weights.DEFAULT
-        feature_model = tv_models.googlenet(weights=weights)
-    except AttributeError:
-        feature_model = tv_models.googlenet(pretrained=True)
-    
-    feature_model.fc = torch.nn.Identity()
-    feature_model.eval()
-    
-    transform = transforms.Compose([
-        transforms.Resize(256),
-        transforms.CenterCrop(224),
-        transforms.ToTensor(),
-        transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]),
-    ])
-    
-    features = []
-    positions = []
-    frame_hashes = []
-    motion_scores = []
-    
-    frame_idx = 0
-    prev_frame = None
-    
-    while cap.isOpened():
-        if max_frames is not None and frame_idx >= max_frames:
-            break
-        ret, frame = cap.read()
-        if not ret:
-            break
-        
-        # Compute SHA-256 frame-level hash
-        frame_hashes.append(compute_frame_hash(frame))
-        
-        # Compute motion score
-        if prev_frame is not None:
-            motion_scores.append(compute_motion_score(frame, prev_frame))
-        else:
-            motion_scores.append(0.0)
-        prev_frame = frame.copy()
-        
-        # Extract GoogLeNet feature vector
-        if frame_idx % 15 == 0:
-            img = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
-            pil_img = Image.fromarray(img)
-            img_t = transform(pil_img).unsqueeze(0)
-            with torch.no_grad():
-                feat = feature_model(img_t).squeeze().numpy()
-            features.append(feat)
-            positions.append(frame_idx)
-            
-        frame_idx += 1
-    cap.release()
-    total_frames = frame_idx
-    features = np.array(features)
-    positions = np.array(positions)
-    motion_scores = np.array(motion_scores)
-    audio_loudness = audio_loudness[:total_frames]
-    
-    # Clean up temp wav file
-    if os.path.exists(wav_path):
-        os.remove(wav_path)
-        
-    print("Multimodal feature extraction & hashing complete.")
+    cache_path = manifest_path.replace('manifest', 'analysis_cache')
+    cache_loaded = False
+    if os.path.exists(cache_path):
+        print(f"Cache file found: {cache_path}. Loading cached features & transcription...")
+        with open(cache_path, 'r') as f:
+            cache = json.load(f)
+        total_frames = cache["total_frames"]
+        fps = cache["fps"]
+        frame_scores = np.array(cache["frame_scores"])
+        motion_scores = np.array(cache["motion_scores"])
+        audio_loudness = np.array(cache["audio_loudness"])
+        transcription_segments = cache["transcription_segments"]
+        old_hashes = {}
+        if os.path.exists(manifest_path):
+            try:
+                with open(manifest_path, 'r') as f:
+                    old_manifest = json.load(f)
+                    for entry in old_manifest.get('frame_manifest', []):
+                        old_hashes[entry['original_frame_index']] = entry['sha256_hash']
+                print(f"Loaded {len(old_hashes)} precomputed frame hashes.")
+            except Exception:
+                pass
+        cache_loaded = True
 
-    # 2. Sequence Model Inference
-    print("\nPhase 2: Sequence Model Inference...")
-    model = DSN(in_dim=1024, hid_dim=256, num_layers=2, cell='lstm', num_heads=8, dropout=0.40)
-    model.load_state_dict(torch.load(checkpoint_path))
-    model.eval()
-    
-    features_t = torch.from_numpy(features).unsqueeze(0).float()
-    with torch.no_grad():
-        probs = model(features_t).squeeze().numpy()
+    if not cache_loaded:
+        cap = cv2.VideoCapture(video_path)
+        total_frames = int(cap.get(cv2.CAP_PROP_FRAME_COUNT))
+        if max_frames is not None:
+            total_frames = min(total_frames, max_frames)
+        fps = cap.get(cv2.CAP_PROP_FPS)
+        if fps > 100 or fps <= 0:
+            fps = 30.0
+        width = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))
+        height = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
         
-    # Interpolate scores
-    frame_scores = np.zeros((total_frames,), dtype=np.float32)
-    padded_positions = np.concatenate([positions, [total_frames]])
-    for i in range(len(padded_positions) - 1):
-        pos_left, pos_right = padded_positions[i], padded_positions[i + 1]
-        if i == len(probs):
-            frame_scores[pos_left:pos_right] = 0
-        else:
-            frame_scores[pos_left:pos_right] = probs[i]
+        wav_path = video_path.replace('.webm', '.wav').replace('.mp4', '.wav')
+        audio_loudness = extract_audio_loudness(video_path, wav_path, total_frames, fps)
+        
+        transcription_segments = []
+        try:
+            import whisper
+            print("Initializing open-source Whisper transcription...")
+            whisper_model = whisper.load_model("tiny")
+            print("Transcribing audio track...")
+            result = whisper_model.transcribe(wav_path)
+            for seg in result.get("segments", []):
+                start_sec = float(seg["start"])
+                if start_sec * fps < total_frames:
+                    transcription_segments.append({
+                        "start_time": start_sec,
+                        "end_time": float(seg["end"]),
+                        "start_frame": int(start_sec * fps),
+                        "end_frame": int(float(seg["end"]) * fps),
+                        "text": seg["text"].strip()
+                    })
+            print(f"Whisper transcription completed: {len(transcription_segments)} segments mapped.")
+        except Exception as e:
+            print(f"Warning: Whisper transcription skipped: {e}")
+        
+        try:
+            weights = tv_models.GoogLeNet_Weights.DEFAULT
+            feature_model = tv_models.googlenet(weights=weights)
+        except AttributeError:
+            feature_model = tv_models.googlenet(pretrained=True)
+        
+        feature_model.fc = torch.nn.Identity()
+        feature_model.eval()
+        
+        transform = transforms.Compose([
+            transforms.Resize(256),
+            transforms.CenterCrop(224),
+            transforms.ToTensor(),
+            transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]),
+        ])
+        
+        features = []
+        positions = []
+        frame_hashes = []
+        motion_scores = []
+        
+        frame_idx = 0
+        prev_frame = None
+        
+        while cap.isOpened():
+            if max_frames is not None and frame_idx >= max_frames:
+                break
+            ret, frame = cap.read()
+            if not ret:
+                break
+            
+            # Compute SHA-256 frame-level hash
+            frame_hashes.append(compute_frame_hash(frame))
+            
+            # Compute motion score
+            if prev_frame is not None:
+                motion_scores.append(compute_motion_score(frame, prev_frame))
+            else:
+                motion_scores.append(0.0)
+            prev_frame = frame.copy()
+            
+            # Extract GoogLeNet feature vector
+            if frame_idx % 15 == 0:
+                img = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+                pil_img = Image.fromarray(img)
+                img_t = transform(pil_img).unsqueeze(0)
+                with torch.no_grad():
+                    feat = feature_model(img_t).squeeze().numpy()
+                features.append(feat)
+                positions.append(frame_idx)
+                
+            frame_idx += 1
+        cap.release()
+        total_frames = frame_idx
+        features = np.array(features)
+        positions = np.array(positions)
+        motion_scores = np.array(motion_scores)
+        audio_loudness = audio_loudness[:total_frames]
+        
+        # Clean up temp wav file
+        if os.path.exists(wav_path):
+            os.remove(wav_path)
+            
+        print("Multimodal feature extraction & hashing complete.")
+    
+        # 2. Sequence Model Inference
+        print("\nPhase 2: Sequence Model Inference...")
+        model = DSN(in_dim=1024, hid_dim=256, num_layers=2, cell='lstm', num_heads=8, dropout=0.40)
+        model.load_state_dict(torch.load(checkpoint_path))
+        model.eval()
+        
+        features_t = torch.from_numpy(features).unsqueeze(0).float()
+        with torch.no_grad():
+            probs = model(features_t).squeeze().numpy()
+            
+        # Interpolate scores
+        frame_scores = np.zeros((total_frames,), dtype=np.float32)
+        padded_positions = np.concatenate([positions, [total_frames]])
+        for i in range(len(padded_positions) - 1):
+            pos_left, pos_right = padded_positions[i], padded_positions[i + 1]
+            if i == len(probs):
+                frame_scores[pos_left:pos_right] = 0
+            else:
+                frame_scores[pos_left:pos_right] = probs[i]
 
     # 3. Multimodal Fusion and Action Locking
     print("\nPhase 3: Multimodal Fusion & Action Locking...")
@@ -224,13 +249,31 @@ def run_legal_sum(video_path, output_video_path, manifest_path, checkpoint_path,
     locked_segs = []
     seg_scores = []
     
+    legal_keywords = ["guilty", "confess", "murder", "verdict", "objection", "witness", "swear", "truth", "deny", "admit", "lie", "kill", "theft", "steal", "charge", "arrest", "conspiracy", "conspire", "court", "judge", "trial"]
+    
     for i in range(n_segs):
         start, end = int(cps[i, 0]), int(cps[i, 1] + 1)
+        
+        # Check semantic boost
+        semantic_boost = 0.0
+        for trans_seg in transcription_segments:
+            overlap_start = max(start, trans_seg['start_frame'])
+            overlap_end = min(end, trans_seg['end_frame'])
+            if overlap_start < overlap_end:
+                text_lower = trans_seg['text'].lower()
+                if any(kw in text_lower for kw in legal_keywords):
+                    semantic_boost = 0.35  # Boost score by 0.35
+                    break
+        
         if seg_anomalies[i] > anomaly_threshold:
             locked_segs.append(i)
             seg_scores.append(1.0)
         else:
-            seg_scores.append(float(frame_scores[start:end].mean()))
+            base_score = float(frame_scores[start:end].mean())
+            boosted_score = min(1.0, base_score + semantic_boost)
+            if semantic_boost > 0:
+                print(f"Applying semantic boost to segment {i} ({start}-{end}) due to legal keywords.")
+            seg_scores.append(boosted_score)
             
     print(f"Action-Lock activated on {len(locked_segs)} segments due to high motion or loud audio events.")
 
@@ -294,12 +337,37 @@ def run_legal_sum(video_path, output_video_path, manifest_path, checkpoint_path,
     # Build manifest JSON
     manifest_entries = []
     summary_frame_idx = 0
+    
+    # Pre-populate hashes sequentially if cache was loaded
+    if cache_loaded:
+        print("Checking and computing missing frame hashes sequentially...")
+        # Check if we need to compute any hashes
+        needs_hash = False
+        for frame_idx in range(total_frames):
+            if summary[frame_idx] == 1 and frame_idx not in old_hashes:
+                needs_hash = True
+                break
+        
+        if needs_hash:
+            cap = cv2.VideoCapture(video_path)
+            frame_idx = 0
+            while cap.isOpened():
+                ret, frame = cap.read()
+                if not ret:
+                    break
+                if frame_idx < total_frames and summary[frame_idx] == 1:
+                    if frame_idx not in old_hashes:
+                        old_hashes[frame_idx] = compute_frame_hash(frame)
+                frame_idx += 1
+            cap.release()
+            
     for frame_idx in range(total_frames):
         if summary[frame_idx] == 1:
+            h = old_hashes.get(frame_idx, "") if cache_loaded else frame_hashes[frame_idx]
             manifest_entries.append({
                 "summary_frame_index": summary_frame_idx,
                 "original_frame_index": frame_idx,
-                "sha256_hash": frame_hashes[frame_idx],
+                "sha256_hash": h,
                 "model_score": float(frame_scores[frame_idx]),
                 "motion_score": float(motion_scores[frame_idx]),
                 "audio_loudness": float(audio_loudness[frame_idx]),
@@ -337,9 +405,9 @@ def run_legal_sum(video_path, output_video_path, manifest_path, checkpoint_path,
 if __name__ == '__main__':
     base_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
     
-    input_video = os.path.join(base_dir, 'demo/fifa_match.webm')
-    output_video = os.path.join(base_dir, 'demo/legal_summary.mp4')
-    manifest = os.path.join(base_dir, 'demo/legal_audit_manifest.json')
+    input_video = os.path.join(base_dir, 'demo/court_trial_naruto.webm')
+    output_video = os.path.join(base_dir, 'demo/court_summary_naruto.mp4')
+    manifest = os.path.join(base_dir, 'demo/court_manifest_naruto.json')
     checkpoint = os.path.join(base_dir, 'log/summe-counterfactual-optimized/model_best.pth.tar')
     
-    run_legal_sum(input_video, output_video, manifest, checkpoint, mode='narrative')
+    run_legal_sum(input_video, output_video, manifest, checkpoint, mode='narrative', max_frames=None)
