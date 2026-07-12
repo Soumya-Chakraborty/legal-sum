@@ -598,6 +598,10 @@ def train_one_phase(model, optimizer, scheduler, dataset, train_keys,
 
                 if use_counterfactual and attributions is not None:
                     shaped_reward = attributions - baseline_val
+                    # Normalize shaped reward to stabilize policy updates
+                    r_std = shaped_reward.std()
+                    if r_std > 1e-5:
+                        shaped_reward = shaped_reward / r_std
                     log_probs = m.log_prob(actions).squeeze()
                     expected_reward = (log_probs * shaped_reward).mean()
                 else:
