@@ -514,7 +514,98 @@ class TemporalSegmentGraph(nn.Module):
 
 
 # ---------------------------------------------------------------------------
-# DSN (with TSG)
+# NEW: ConversationalHypergraphAttention
+# ---------------------------------------------------------------------------
+
+class ConversationalHypergraphAttention(nn.Module):
+    """
+    NOVEL TECHNIQUE: Conversational Hypergraph Attention (CHA)
+    
+    Constructs a hypergraph over video frames using speaker turns and event categories.
+    Propagates messages across non-contiguous frames belonging to the same speaker role
+    or event phase, enabling the model to learn long-range conversational dependencies.
+    """
+    def __init__(self, hid_dim: int, dropout: float = 0.1):
+        super(ConversationalHypergraphAttention, self).__init__()
+        self.hid_dim = hid_dim
+        
+        # Projections for nodes and hyperedges
+        self.node_proj = nn.Linear(hid_dim, hid_dim)
+        self.edge_proj = nn.Linear(hid_dim, hid_dim)
+        
+        self.attn = nn.MultiheadAttention(embed_dim=hid_dim, num_heads=4, batch_first=True)
+        self.norm = nn.LayerNorm(hid_dim)
+        self.dropout = nn.Dropout(dropout)
+        
+    def forward(self, h: torch.Tensor, speaker_mask=None, event_mask=None) -> torch.Tensor:
+        """
+        Args:
+            h: (B, T, D)
+            speaker_mask: (B, T) or (T,)
+            event_mask: (B, T, num_classes) or (T, num_classes)
+        Returns:
+            Tensor: Hypergraph-enhanced features of shape (B, T, D)
+        """
+        import numpy as np
+        B, T, D = h.shape
+        if speaker_mask is None and event_mask is None:
+            return torch.zeros_like(h)
+            
+        out = torch.zeros_like(h)
+        for b in range(B):
+            # Get current sequence features
+            seq_h = h[b] # (T, D)
+            
+            # Build hyperedges (lists of node/frame indices)
+            hyperedges = []
+            
+            # 1. Speaker role hyperedges
+            if speaker_mask is not None:
+                s_mask = speaker_mask[b] if speaker_mask.dim() == 2 else speaker_mask
+                s_arr = s_mask.detach().cpu().numpy()
+                unique_speakers = np.unique(s_arr)
+                for spk in unique_speakers:
+                    idxs = np.where(s_arr == spk)[0]
+                    if len(idxs) > 0:
+                        hyperedges.append(torch.tensor(idxs, device=h.device))
+                        
+            # 2. Event category hyperedges
+            if event_mask is not None:
+                e_mask = event_mask[b] if event_mask.dim() == 3 else event_mask
+                e_arr = e_mask.detach().cpu().numpy()
+                num_classes = e_arr.shape[-1]
+                for c in range(num_classes):
+                    idxs = np.where(e_arr[:, c] > 0.5)[0]
+                    if len(idxs) > 0:
+                        hyperedges.append(torch.tensor(idxs, device=h.device))
+                        
+            if not hyperedges:
+                continue
+                
+            # Perform Hypergraph message passing
+            # Step 1: Hyperedge representations via pooling member nodes
+            edge_feats = []
+            for edge in hyperedges:
+                member_feats = seq_h[edge] # (num_members, D)
+                pooled = member_feats.mean(dim=0, keepdim=True) # (1, D)
+                edge_feats.append(pooled)
+            edge_feats = torch.cat(edge_feats, dim=0) # (num_edges, D)
+            
+            # Step 2: Node-to-Edge Attentive Aggregation
+            # Query: nodes (T, D), Key/Value: hyperedges (num_edges, D)
+            q = self.node_proj(seq_h).unsqueeze(0) # (1, T, D)
+            k = self.edge_proj(edge_feats).unsqueeze(0) # (1, num_edges, D)
+            v = edge_feats.unsqueeze(0) # (1, num_edges, D)
+            
+            # Attention routing
+            attn_out, _ = self.attn(q, k, v) # (1, T, D)
+            out[b] = self.dropout(attn_out.squeeze(0))
+            
+        return self.norm(h + out)
+
+
+# ---------------------------------------------------------------------------
+# DSN (with TSG and CHA)
 # ---------------------------------------------------------------------------
 
 class DSN(nn.Module):
@@ -567,6 +658,9 @@ class DSN(nn.Module):
         # Temporal Segment Graph (TSG) -- graph-enhanced reasoning over routed features
         self.tsg = TemporalSegmentGraph(hid_dim=hid_dim * 2, k=5, dropout=dropout)
 
+        # Conversational Hypergraph Attention (CHA)
+        self.cha = ConversationalHypergraphAttention(hid_dim=hid_dim * 2, dropout=dropout)
+
         # Final regression head mapping hidden features to predicted importance scores
         self.fc = nn.Sequential(
             nn.Linear(rnn_out_dim, hid_dim),
@@ -592,7 +686,7 @@ class DSN(nn.Module):
             pe[:, 1::2] = torch.cos(position * div_term[: d_model // 2])
         return x + pe.unsqueeze(0)
 
-    def forward(self, x, acoustic=None, semantic=None):
+    def forward(self, x, acoustic=None, semantic=None, speaker_mask=None, event_mask=None):
         """
         Forward pass for DSN.
 
@@ -600,6 +694,8 @@ class DSN(nn.Module):
             x (Tensor): Input video features of shape (batch_size, seq_len, in_dim).
             acoustic (Tensor, optional): Acoustic MFCC features (batch_size, seq_len, 40).
             semantic (Tensor, optional): Semantic Whisper features (batch_size, seq_len, 512).
+            speaker_mask (Tensor, optional): Speaker roles.
+            event_mask (Tensor, optional): Event categories.
 
         Returns:
             Tensor: Frame importance probabilities in [0, 1] of shape (batch_size, seq_len, 1).
@@ -620,7 +716,10 @@ class DSN(nn.Module):
         h_routed = self.gtr(h_rnn, h_attn)
 
         # Graph-enhanced reasoning over temporally routed features
-        h_graph = self.tsg(h_routed)          # (B, T, hid_dim*2)
+        if speaker_mask is not None or event_mask is not None:
+            h_graph = self.cha(h_routed, speaker_mask, event_mask)
+        else:
+            h_graph = self.tsg(h_routed)          # (B, T, hid_dim*2)
         final_feats = h_routed + h_graph      # residual fusion
 
         # Apply sigmoid to output the probability representing the importance score
@@ -690,7 +789,7 @@ class DSN_Transformer(nn.Module):
             pe[:, 1::2] = torch.cos(position * div_term[: d_model // 2])
         return x + pe.unsqueeze(0)
 
-    def forward(self, x):
+    def forward(self, x, acoustic=None, semantic=None, speaker_mask=None, event_mask=None):
         """
         Forward pass for DSN_Transformer.
 
@@ -785,7 +884,7 @@ class DualPathwayDSN(nn.Module):
             nn.Sigmoid(),
         )
 
-    def forward(self, x: torch.Tensor, acoustic=None, semantic=None) -> torch.Tensor:
+    def forward(self, x, acoustic=None, semantic=None, speaker_mask=None, event_mask=None) -> torch.Tensor:
         """
         Args:
             x (Tensor):        Visual features (B, T, in_dim).
@@ -796,8 +895,8 @@ class DualPathwayDSN(nn.Module):
             Tensor: Blended frame importance scores in [0, 1], shape (B, T, 1).
         """
         # Forward through both pathways (same inputs, independent parameters)
-        p_v = self.visual_dsn(x, acoustic, semantic)   # (B, T, 1)
-        p_a = self.audio_dsn(x, acoustic, semantic)    # (B, T, 1)
+        p_v = self.visual_dsn(x, acoustic, semantic, speaker_mask, event_mask)   # (B, T, 1)
+        p_a = self.audio_dsn(x, acoustic, semantic, speaker_mask, event_mask)    # (B, T, 1)
 
         # Compute per-frame adaptive mixture coefficient
         mixer_input = torch.cat([p_v, p_a], dim=-1)   # (B, T, 2)

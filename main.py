@@ -313,10 +313,24 @@ def evaluate_with_ensemble(model, dataset, test_keys, use_gpu,
                 if use_gpu:
                     semantic = semantic.cuda()
 
+            speaker_mask = None
+            if 'speaker_mask' in dataset[key]:
+                sp_data = dataset[key]['speaker_mask'][...]
+                speaker_mask = torch.from_numpy(sp_data).unsqueeze(0).long()
+                if use_gpu:
+                    speaker_mask = speaker_mask.cuda()
+
+            event_mask = None
+            if 'event_mask' in dataset[key]:
+                ev_data = dataset[key]['event_mask'][...]
+                event_mask = torch.from_numpy(ev_data).unsqueeze(0).float()
+                if use_gpu:
+                    event_mask = event_mask.cuda()
+
             # Execute K stochastic passes to obtain diverse predictions
             probs_list = []
             for _ in range(k):
-                p = model(seq, acoustic, semantic).data.cpu().squeeze().numpy()
+                p = model(seq, acoustic, semantic, speaker_mask, event_mask).data.cpu().squeeze().numpy()
                 probs_list.append(p)
             probs = np.mean(probs_list, axis=0)   # Compute ensemble mean prediction
 
@@ -544,7 +558,7 @@ def train_one_phase(model, optimizer, scheduler, dataset, train_keys,
                     speaker_mask = speaker_mask.cuda()
 
             # ── Forward pass ─────────────────────────────────────────────────
-            probs = model(seq, acoustic, semantic)   # (1, T, 1)
+            probs = model(seq, acoustic, semantic, speaker_mask, event_mask)   # (1, T, 1)
 
             target_ratio = 0.15
             length_pen = args.beta * (probs.mean() - target_ratio) ** 2
