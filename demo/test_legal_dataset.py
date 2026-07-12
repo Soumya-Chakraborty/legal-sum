@@ -81,7 +81,7 @@ def test_legal_courtroom_dataset(tmp_path):
     assert "gtscore" in item
 
     assert item["n_frames"][()] == 100
-    assert item["change_points"].shape == (2, 2)
-    assert item["n_frame_per_seg"].tolist() == [50, 50]
+    assert item["change_points"].shape == (20, 2)
+    assert item["n_frame_per_seg"].tolist() == [5] * 20
     assert item["picks"].tolist() == list(range(100))
     assert item["user_summary"].shape == (1, 100)

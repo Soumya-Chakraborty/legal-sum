@@ -51,7 +51,7 @@ class LegalCourtroomDataset(Dataset):
             importance_scores[max(0, start_frame):min(n_frames, end_frame)] = score
 
         # Generate change points and segment level information for H5 compatibility
-        segment_len = 50
+        segment_len = 5
         num_segments = int(np.ceil(n_frames / segment_len))
         change_points = []
         n_frame_per_seg = []
