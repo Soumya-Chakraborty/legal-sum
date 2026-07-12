@@ -138,6 +138,8 @@ parser.add_argument('--num-classes', type=int, default=3,
                     help="number of event classes")
 parser.add_argument('--num-roles', type=int, default=3,
                     help="number of speaker roles")
+parser.add_argument('--eval-courtroom', action='store_true',
+                    help="evaluate courtroom metrics and plot curves during/after training")
 
 args = parser.parse_args()
 
@@ -250,7 +252,7 @@ def build_model():
         return _OriginalDSN()
 
 def evaluate_with_ensemble(model, dataset, test_keys, use_gpu,
-                           k=10, save_results=False, save_dir='.'):
+                           k=10, save_results=False, save_dir='.', return_all=False):
     """
     Performs evaluation on the test set using Monte Carlo (MC) Dropout Ensemble inference.
     By keeping dropout enabled, it runs K stochastic passes to average the output probabilities,
@@ -264,9 +266,11 @@ def evaluate_with_ensemble(model, dataset, test_keys, use_gpu,
         k (int, optional): Number of stochastic forward passes. Defaults to 10.
         save_results (bool, optional): Whether to write the prediction scores/summaries to an H5 file. Defaults to False.
         save_dir (str, optional): Target directory for saving results. Defaults to '.'.
+        return_all (bool, optional): If True, returns both mean F-score and a dict of detailed metrics.
 
     Returns:
         float: The mean F1-score achieved across the test split.
+        tuple (float, dict): If return_all is True.
     """
     print("==> Test (MC-Dropout ensemble, K={})".format(k))
     # TVSum evaluates with mean of users ('avg'), SumMe with the maximum matching user ('max')
@@ -279,6 +283,7 @@ def evaluate_with_ensemble(model, dataset, test_keys, use_gpu,
         h5_res = h5py.File(osp.join(save_dir, 'result.h5'), 'w')
 
     fms, precs, recs = [], [], []
+    spearmans, kendalls, event_covs, speaker_cons = [], [], [], []
     # Use eval() mode for deterministic inference when k is 1 (no ensemble),
     # otherwise use train() to keep dropout active for MC sampling
     if k == 1:
@@ -334,6 +339,40 @@ def evaluate_with_ensemble(model, dataset, test_keys, use_gpu,
             precs.append(prec)
             recs.append(rec)
 
+            # Compute rank correlation metrics if gtscore is available
+            r_sp, r_kd = 0.0, 0.0
+            if 'gtscore' in dataset[key]:
+                gtscore = dataset[key]['gtscore'][...]
+                p_align = probs
+                if len(p_align) != len(gtscore):
+                    p_align = np.interp(np.linspace(0, 1, len(gtscore)), np.linspace(0, 1, len(p_align)), p_align)
+                import scipy.stats
+                r_sp, _ = scipy.stats.spearmanr(p_align, gtscore)
+                r_kd, _ = scipy.stats.kendalltau(p_align, gtscore)
+                if np.isnan(r_sp): r_sp = 0.0
+                if np.isnan(r_kd): r_kd = 0.0
+            spearmans.append(r_sp)
+            kendalls.append(r_kd)
+
+            # Compute courtroom objectives
+            event_cov = 0.0
+            speaker_con = 1.0
+            pick_idxs = np.where(machine_summary == 1)[0]
+            if 'event_mask' in dataset[key] and len(pick_idxs) > 0:
+                event_mask = dataset[key]['event_mask'][...]
+                active_classes = np.where(event_mask.sum(axis=0) > 0)[0]
+                if len(active_classes) > 0:
+                    covered_classes = np.where(event_mask[pick_idxs].sum(axis=0) > 0)[0]
+                    event_cov = len(np.intersect1d(covered_classes, active_classes)) / len(active_classes)
+                else:
+                    event_cov = 1.0
+            if 'speaker_mask' in dataset[key] and len(pick_idxs) > 1:
+                speaker_mask = dataset[key]['speaker_mask'][...]
+                switches = (speaker_mask[pick_idxs[:-1]] != speaker_mask[pick_idxs[1:]]).sum()
+                speaker_con = 1.0 - (switches / (len(pick_idxs) - 1))
+            event_covs.append(event_cov)
+            speaker_cons.append(speaker_con)
+
             if args.verbose:
                 table.append([key_idx + 1, key, "{:.1%}".format(fm), "{:.1%}".format(prec), "{:.1%}".format(rec)])
 
@@ -355,7 +394,26 @@ def evaluate_with_ensemble(model, dataset, test_keys, use_gpu,
     mean_fm = np.mean(fms)
     mean_prec = np.mean(precs)
     mean_rec = np.mean(recs)
-    print("Average F-score {:.1%}, Precision {:.1%}, Recall {:.1%}".format(mean_fm, mean_prec, mean_rec))
+    mean_spearman = np.mean(spearmans)
+    mean_kendall = np.mean(kendalls)
+    mean_event_cov = np.mean(event_covs)
+    mean_speaker_con = np.mean(speaker_cons)
+
+    if args.eval_courtroom:
+        print("Average F-score {:.1%}, Precision {:.1%}, Recall {:.1%}, Spearman {:.4f}, Kendall {:.4f}, Event Coverage {:.1%}, Speaker Consistency {:.1%}".format(
+            mean_fm, mean_prec, mean_rec, mean_spearman, mean_kendall, mean_event_cov, mean_speaker_con))
+    else:
+        print("Average F-score {:.1%}, Precision {:.1%}, Recall {:.1%}".format(mean_fm, mean_prec, mean_rec))
+
+    if return_all:
+        metrics_dict = {
+            'f_score': float(mean_fm),
+            'spearman': float(mean_spearman),
+            'kendall': float(mean_kendall),
+            'event_coverage': float(mean_event_cov),
+            'speaker_consistency': float(mean_speaker_con)
+        }
+        return mean_fm, metrics_dict
     return mean_fm
 
 
@@ -572,15 +630,53 @@ def train_one_phase(model, optimizer, scheduler, dataset, train_keys,
             epoch + 1, start_epoch + num_epochs, epoch_reward,
             entropy_coef, lock_pct * 100, optimizer.param_groups[0]['lr']))
 
-        if (epoch + 1) % 5 == 0 or epoch == start_epoch + num_epochs - 1:
-            fm = evaluate_with_ensemble(model, dataset, test_keys, use_gpu, k=args.ensemble_k)
-            if fm > best_fm:
-                best_fm = fm
-                best_epoch = epoch + 1
-                best_state = {k: v.clone() for k, v in (
-                    model.module.state_dict() if use_gpu else model.state_dict()).items()}
-                save_checkpoint(best_state, osp.join(args.save_dir, 'model_best.pth.tar'))
-                print("  ** New best F-score {:.1%} at epoch {}".format(best_fm, best_epoch))
+        # Initialize history tracking if this is the first epoch
+        if epoch == start_epoch:
+            model._history = {
+                'epoch': [],
+                'f_score': [],
+                'spearman': [],
+                'kendall': [],
+                'event_coverage': [],
+                'speaker_consistency': [],
+                'reward': [],
+                'entropy': []
+            }
+
+        if args.eval_courtroom:
+            if (epoch + 1) % 5 == 0 or epoch == start_epoch or epoch == start_epoch + num_epochs - 1:
+                fm, detailed_metrics = evaluate_with_ensemble(
+                    model, dataset, test_keys, use_gpu, k=args.ensemble_k, return_all=True)
+                
+                model._history['epoch'].append(epoch + 1)
+                model._history['f_score'].append(detailed_metrics['f_score'])
+                model._history['spearman'].append(detailed_metrics['spearman'])
+                model._history['kendall'].append(detailed_metrics['kendall'])
+                model._history['event_coverage'].append(detailed_metrics['event_coverage'])
+                model._history['speaker_consistency'].append(detailed_metrics['speaker_consistency'])
+                model._history['reward'].append(float(epoch_reward))
+                model._history['entropy'].append(float(entropy_coef))
+                
+                from demo.plotting_utils import plot_training_curves
+                plot_training_curves(model._history, osp.join(args.save_dir, 'plots'))
+                
+                if fm > best_fm:
+                    best_fm = fm
+                    best_epoch = epoch + 1
+                    best_state = {k: v.clone() for k, v in (
+                        model.module.state_dict() if use_gpu else model.state_dict()).items()}
+                    save_checkpoint(best_state, osp.join(args.save_dir, 'model_best.pth.tar'))
+                    print("  ** New best F-score {:.1%} at epoch {}".format(best_fm, best_epoch))
+        else:
+            if (epoch + 1) % 5 == 0 or epoch == start_epoch + num_epochs - 1:
+                fm = evaluate_with_ensemble(model, dataset, test_keys, use_gpu, k=args.ensemble_k)
+                if fm > best_fm:
+                    best_fm = fm
+                    best_epoch = epoch + 1
+                    best_state = {k: v.clone() for k, v in (
+                        model.module.state_dict() if use_gpu else model.state_dict()).items()}
+                    save_checkpoint(best_state, osp.join(args.save_dir, 'model_best.pth.tar'))
+                    print("  ** New best F-score {:.1%} at epoch {}".format(best_fm, best_epoch))
 
     return best_fm, best_epoch, best_state, baselines, reward_writers
 
