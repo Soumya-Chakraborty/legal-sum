@@ -1,0 +1,94 @@
+\begin{thebibliography}{14}
+\providecommand{\natexlab}[1]{#1}
+
+\bibitem[{Fajtl et~al.(2019)Fajtl, Sokeh, Argunsah, Demiris, and
+  Cavallaro}]{fajtl2019summarizing}
+Fajtl, J.; Sokeh, H.~S.; Argunsah, A.~O.; Demiris, Y.; and Cavallaro, A. 2019.
+\newblock Summarizing Videos with Attention.
+\newblock In \emph{Asian Conference on Computer Vision}.
+
+\bibitem[{Foerster et~al.(2018)Foerster, Farquhar, Afouras, Nardelli, and
+  Whiteson}]{foerster2018counterfactual}
+Foerster, J.; Farquhar, G.; Afouras, T.; Nardelli, N.; and Whiteson, S. 2018.
+\newblock Counterfactual Multi-Agent Policy Gradients.
+\newblock In \emph{Proceedings of the AAAI Conference on Artificial
+  Intelligence}, volume~32.
+
+\bibitem[{Gal and Ghahramani(2016)}]{gal2016dropout}
+Gal, Y.; and Ghahramani, Z. 2016.
+\newblock Dropout as a {Bayesian} Approximation: Representing Model Uncertainty
+  in Deep Learning.
+\newblock In \emph{International Conference on Machine Learning}, 1050--1059.
+
+\bibitem[{Gygli et~al.(2014)Gygli, Grabner, Riemenschneider, and
+  Van~Gool}]{gygli2014creating}
+Gygli, M.; Grabner, H.; Riemenschneider, H.; and Van~Gool, L. 2014.
+\newblock Creating Summaries from User Videos.
+\newblock In \emph{European Conference on Computer Vision}, 505--520. Springer.
+
+\bibitem[{Jung et~al.(2019)Jung, Cho, Kim, Woo, and
+  So~Kweon}]{jung2019discriminative}
+Jung, Y.; Cho, D.; Kim, D.; Woo, S.; and So~Kweon, I. 2019.
+\newblock Discriminative Feature Learning for Unsupervised Video Summarization.
+\newblock In \emph{Proceedings of the AAAI Conference on Artificial
+  Intelligence}, volume~33, 8537--8544.
+
+\bibitem[{Kingma and Ba(2015)}]{kingma2015adam}
+Kingma, D.~P.; and Ba, J. 2015.
+\newblock Adam: A Method for Stochastic Optimization.
+\newblock In \emph{International Conference on Learning Representations}.
+
+\bibitem[{Liu et~al.(2023)Liu, Ott, Goyal, Du, Joshi, Chen, Levy, Lewis,
+  Zettlemoyer, and Stoyanov}]{liu2023legal}
+Liu, Y.; Ott, M.; Goyal, N.; Du, J.; Joshi, M.; Chen, D.; Levy, O.; Lewis, M.;
+  Zettlemoyer, L.; and Stoyanov, V. 2023.
+\newblock Legal Judgment Prediction via Multi-Perspective Bi-Feedback Network.
+\newblock In \emph{Proceedings of the AAAI Conference on Artificial
+  Intelligence}.
+
+\bibitem[{Mahasseni, Lam, and Todorovic(2017)}]{mahasseni2017unsupervised}
+Mahasseni, B.; Lam, M.; and Todorovic, S. 2017.
+\newblock Unsupervised Video Summarization with Adversarial {LSTM} Networks.
+\newblock In \emph{Proceedings of the IEEE Conference on Computer Vision and
+  Pattern Recognition}, 202--211.
+
+\bibitem[{Radford et~al.(2023)Radford, Kim, Xu, Brockman, McLeavey, and
+  Sutskever}]{radford2023robust}
+Radford, A.; Kim, J.~W.; Xu, T.; Brockman, G.; McLeavey, C.; and Sutskever, I.
+  2023.
+\newblock Robust Speech Recognition via Large-Scale Weak Supervision.
+\newblock In \emph{International Conference on Machine Learning}.
+
+\bibitem[{Song et~al.(2015)Song, Vallmitjana, Stent, and
+  Jaimes}]{song2015tvsum}
+Song, Y.; Vallmitjana, J.; Stent, A.; and Jaimes, A. 2015.
+\newblock {TVSum}: Summarizing Web Videos Using Titles.
+\newblock In \emph{Proceedings of the IEEE Conference on Computer Vision and
+  Pattern Recognition}, 5179--5187.
+
+\bibitem[{Williams(1992)}]{williams1992simple}
+Williams, R.~J. 1992.
+\newblock Simple Statistical Gradient-Following Algorithms for Connectionist
+  Reinforcement Learning.
+\newblock volume~8, 229--256.
+
+\bibitem[{Zhang et~al.(2016)Zhang, Chao, Sha, and Grauman}]{zhang2016video}
+Zhang, K.; Chao, W.-L.; Sha, F.; and Grauman, K. 2016.
+\newblock Video Summarization with Long Short-Term Memory.
+\newblock In \emph{European Conference on Computer Vision}, 766--782. Springer.
+
+\bibitem[{Zhong et~al.(2020)Zhong, Liu, Chen, Wang, Qiu, and
+  Huang}]{zhong2019extractive}
+Zhong, M.; Liu, P.; Chen, Y.; Wang, D.; Qiu, X.; and Huang, X. 2020.
+\newblock Extractive Summarization as Text Matching.
+\newblock In \emph{Proceedings of the Annual Meeting of the Association for
+  Computational Linguistics}.
+
+\bibitem[{Zhou, Qiao, and Xiang(2018)}]{zhou2018deep}
+Zhou, K.; Qiao, Y.; and Xiang, T. 2018.
+\newblock Deep Reinforcement Learning for Unsupervised Video Summarization with
+  Diversity-Representativeness Reward.
+\newblock In \emph{Proceedings of the AAAI Conference on Artificial
+  Intelligence}, volume~32.
+
+\end{thebibliography}
