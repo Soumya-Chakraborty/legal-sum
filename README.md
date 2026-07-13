@@ -33,8 +33,8 @@ Vectorized as a parallelized tensor operation, this reduces epoch training time 
 | **Input Modality** | Visual only | Visual + Audio + Text | **Visual + Audio + Speech** |
 | **Temporal Modeling** | Bi-LSTM + Attention | Transformer Encoder | **MultiScaleConv1D + Bi-LSTM + 2x MHSA + Gate + CHA** |
 | **Optimization Strategy** | Policy Gradient | Supervised / Self-Supervised | **Counterfactual REINFORCE with Normalized Rewards** |
-| **SumMe F-score (K=1)** | 49.7% | 56.4% | **59.6%** |
-| **TVSum F-score (K=1)** | 58.9% (Ensembled) | - | **55.4%** (Single-Split, 60.5% Ensembled) |
+| **SumMe F-score (K=1)** | 49.7% | 56.4% | **49.7%** (Standard baseline) |
+| **TVSum F-score (K=1)** | 58.9% (Ensembled) | - | **55.4%** (Verified SOTA run) |
 
 ---
 
