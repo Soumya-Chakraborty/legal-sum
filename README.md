@@ -53,6 +53,8 @@ Unpack the H5 dataset files under the `datasets/` directory:
 
 ### 3. Training with Real-Time Analytics & Curves
 To train the model on TVSum (with running reward normalization and active plotting):
+
+**CPU execution**:
 ```bash
 python main.py \
     -d datasets/eccv16_dataset_tvsum_google_pool5.h5 \
@@ -68,6 +70,24 @@ python main.py \
     --eval-courtroom \
     --save-dir log/tvsum_optimized_run \
     --use-cpu
+```
+
+**GPU execution** (Recommended: 10x-50x faster training enabling parameter scaling):
+```bash
+python main.py \
+    -d datasets/eccv16_dataset_tvsum_google_pool5.h5 \
+    -s datasets/tvsum_splits.json \
+    -m tvsum \
+    --model-type enhanced \
+    --max-epoch 30 \
+    --phase2-epochs 8 \
+    --num-episode 2 \
+    --hidden-dim 128 \
+    --dropout 0.15 \
+    --ensemble-k 5 \
+    --eval-courtroom \
+    --save-dir log/tvsum_optimized_run_gpu \
+    --gpu 0
 ```
 This automatically produces performance charts inside `log/tvsum_optimized_run/plots/`:
 - `f_score_curve.png`: Tracking F-score over epochs.
