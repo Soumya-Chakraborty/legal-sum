@@ -36,12 +36,41 @@ CONFIGS = {
         '--model-type', 'original',
         '--no-counterfactual',
         '--contrastive-weight', '0.0',
+        '--pretrain-epochs', '0',
+        '--ppo-clip', '0.0',
+        '--ot-weight', '0.0',
+        '--tta-scales', '1.0',
+        '--action-lock-start', '0.95',
+        '--action-lock-end', '0.85',
+        '--lr-scheduler', 'cosine',
     ],
     'ours': [
         '--model-type', 'enhanced',
         '--use-counterfactual',
         '--contrastive-weight', '0.05',
-    ]
+        '--pretrain-epochs', '0',
+        '--ppo-clip', '0.0',
+        '--ot-weight', '0.0',
+        '--tta-scales', '1.0',
+        '--action-lock-start', '0.70',
+        '--action-lock-end', '0.50',
+        '--lr-scheduler', 'cosine',
+    ],
+    'sota': [
+        # Full SOTA: all 7 improvements enabled
+        '--model-type', 'enhanced',
+        '--use-counterfactual',
+        '--contrastive-weight', '0.05',
+        '--pretrain-epochs', '10',          # Phase-0 contrastive pretrain
+        '--ppo-clip', '0.2',                # PPO-clip policy gradient
+        '--ppo-inner-steps', '4',
+        '--reward-warmup-epochs', '15',     # Reward curriculum warm-start
+        '--ot-weight', '0.10',              # OT temporal diversity bonus
+        '--tta-scales', '1.0,0.8,1.2',     # TTA multi-scale ensemble
+        '--action-lock-start', '0.70',      # Relaxed action-lock (FIXED)
+        '--action-lock-end', '0.50',
+        '--lr-scheduler', 'cosine_warm',    # Cosine warm-restart LR
+    ],
 }
 
 def run_experiment(dataset_name, split_id, seed, config_name, config_flags, args):

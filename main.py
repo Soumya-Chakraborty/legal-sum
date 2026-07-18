@@ -104,7 +104,8 @@ from utils import Logger, read_json, write_json, save_checkpoint
 from models import (DSN, DSN_Transformer, DualPathwayDSN,
                     MultiScaleConv1D, MultiHeadSelfAttention, FeedForward)
 from rewards import (compute_reward, compute_per_frame_attribution,
-                     compute_contrastive_bonus, compute_legal_coherence_reward)
+                     compute_contrastive_bonus, compute_legal_coherence_reward,
+                     compute_ot_temporal_diversity)
 import vsum_tools
 
 parser = argparse.ArgumentParser(
@@ -131,8 +132,8 @@ parser.add_argument('--weight-decay', type=float, default=1e-5)
 parser.add_argument('--max-epoch', type=int, default=100)
 parser.add_argument('--stepsize', type=int, default=30)
 parser.add_argument('--gamma', type=float, default=0.1)
-parser.add_argument('--lr-scheduler', type=str, default='cosine',
-                    choices=['step', 'cosine'])
+parser.add_argument('--lr-scheduler', type=str, default='cosine_warm',
+                    choices=['step', 'cosine', 'cosine_warm'])
 parser.add_argument('--num-episode', type=int, default=5)
 parser.add_argument('--beta', type=float, default=0.01,
                     help="weight for summary length penalty (default: 0.01)")
@@ -151,6 +152,18 @@ parser.add_argument('--phase2-epochs', type=int, default=30,
                     help="number of Phase-2 (exploitation) epochs (default: 30)")
 parser.add_argument('--patience', type=int, default=10,
                     help="patience for early stopping validation plateau in Phase 1 (default: 10)")
+parser.add_argument('--pretrain-epochs', type=int, default=10,
+                    help="Phase-0 contrastive pre-training epochs before RL (default: 10)")
+parser.add_argument('--ppo-clip', type=float, default=0.2,
+                    help="PPO-clip epsilon for policy ratio clipping (default: 0.2, 0=REINFORCE)")
+parser.add_argument('--ppo-inner-steps', type=int, default=4,
+                    help="number of PPO inner update steps per episode (default: 4)")
+parser.add_argument('--reward-warmup-epochs', type=int, default=15,
+                    help="epochs over which auxiliary reward terms ramp to full weight (default: 15)")
+parser.add_argument('--ot-weight', type=float, default=0.10,
+                    help="weight of OT temporal diversity bonus in reward (default: 0.10)")
+parser.add_argument('--tta-scales', type=str, default='1.0,0.8,1.2',
+                    help="temporal scales for TTA ensemble inference (default: '1.0,0.8,1.2')")
 # Novel curriculum + contrastive options
 parser.add_argument('--use-curriculum', action='store_true', default=True,
                     help="self-paced curriculum: sort videos by reward difficulty (default: True)")
@@ -159,10 +172,10 @@ parser.add_argument('--contrastive-weight', type=float, default=0.05,
                     help="weight of InfoNCE contrastive bonus in loss (default: 0.05)")
 parser.add_argument('--use-legal-reward', action='store_true', default=False,
                     help="use composite legal-domain reward (adds acoustic variance + contrastive, default: False)")
-parser.add_argument('--action-lock-start', type=float, default=0.95,
-                    help="initial action-lock percentile threshold (default: 0.95 = 95th pct)")
-parser.add_argument('--action-lock-end', type=float, default=0.85,
-                    help="final action-lock percentile threshold (default: 0.85 = 85th pct)")
+parser.add_argument('--action-lock-start', type=float, default=0.70,
+                    help="initial action-lock percentile threshold (default: 0.70 = 70th pct)")
+parser.add_argument('--action-lock-end', type=float, default=0.50,
+                    help="final action-lock percentile threshold (default: 0.50 = 50th pct)")
 # Misc
 parser.add_argument('--seed', type=int, default=1)
 parser.add_argument('--gpu', type=str, default='0')
@@ -373,12 +386,49 @@ def evaluate_with_ensemble(model, dataset, test_keys, use_gpu,
                 if use_gpu:
                     event_mask = event_mask.cuda()
 
-            # Execute K stochastic passes to obtain diverse predictions
+            # Execute K stochastic MC-Dropout passes
             probs_list = []
             for _ in range(k):
                 p = model(seq, acoustic, semantic, speaker_mask, event_mask).data.cpu().squeeze().numpy()
                 probs_list.append(p)
-            probs = np.mean(probs_list, axis=0)   # Compute ensemble mean prediction
+            mc_probs = np.mean(probs_list, axis=0)   # MC-Dropout ensemble mean
+
+            # ── TTA: Test-Time Augmentation at multiple temporal scales ─────────
+            # Run inference at 3 temporal scales; re-interpolate to original length.
+            # Diverse temporal views reduce position bias in importance scoring.
+            tta_scales_str = getattr(args, 'tta_scales', '1.0,0.8,1.2')
+            tta_scales = [float(s.strip()) for s in tta_scales_str.split(',')]
+            tta_accum = [mc_probs]   # start with MC-Dropout mean
+            original_len = seq.shape[1]
+            for scale in tta_scales:
+                if abs(scale - 1.0) < 1e-6:
+                    continue   # already included as mc_probs
+                new_len = max(2, int(round(original_len * scale)))
+                seq_s = torch.nn.functional.interpolate(
+                    seq.permute(0, 2, 1),          # (1, dim, T)
+                    size=new_len, mode='linear', align_corners=False
+                ).permute(0, 2, 1)                 # (1, new_len, dim)
+                # Acoustic / semantic also need scaling when present
+                ac_s = None
+                if acoustic is not None:
+                    ac_s = torch.nn.functional.interpolate(
+                        acoustic.permute(0, 2, 1), size=new_len,
+                        mode='linear', align_corners=False).permute(0, 2, 1)
+                se_s = None
+                if semantic is not None:
+                    se_s = torch.nn.functional.interpolate(
+                        semantic.permute(0, 2, 1), size=new_len,
+                        mode='linear', align_corners=False).permute(0, 2, 1)
+                p_list = []
+                for _ in range(max(1, k // 2)):    # fewer passes for TTA scales
+                    p_s = model(seq_s, ac_s, se_s, None, None).data.cpu().squeeze().numpy()
+                    p_list.append(p_s)
+                p_mean = np.mean(p_list, axis=0)   # shape: (new_len,)
+                # Re-index back to original_len via linear interpolation
+                orig_idx = np.linspace(0, new_len - 1, original_len)
+                p_orig = np.interp(orig_idx, np.arange(new_len), p_mean)
+                tta_accum.append(p_orig)
+            probs = np.mean(tta_accum, axis=0)   # Final TTA-fused importance scores
 
 
             # Extract segment change points, frame counts, and ground truth human annotations
@@ -508,6 +558,110 @@ def _load_video_data(dataset, key, use_gpu):
     return seq, acoustic, semantic
 
 
+def pretrain_contrastive(model, dataset, train_keys, num_epochs, use_gpu):
+    """
+    [NOVEL-T0] Phase-0: Self-Supervised Contrastive Pre-Training.
+
+    Trains ONLY the encoder (all layers except the final FC classifier) using
+    the InfoNCE contrastive bonus on all training videos. No RL reward or
+    policy gradient — pure contrastive learning to initialise feature clusters
+    before exploration begins.
+
+    This primes CrossModalAttentionFusion and TemporalSegmentGraph with
+    meaningful visual cluster structure, reducing the cold-start exploration
+    cost in Phase 1.
+
+    The final FC layer is frozen during pre-training to prevent the policy head
+    from learning trivial solutions with random reward.
+    """
+    print("\n" + "="*60)
+    print("==> PHASE 0: Contrastive Pre-Training ({} epochs)".format(num_epochs))
+    print("="*60)
+
+    # Freeze policy head (final sigmoid FC)
+    policy_params = []
+    encoder_params = []
+    for name, param in model.named_parameters():
+        if 'fc' in name.split('.')[-2:] or name.endswith('.fc'):
+            param.requires_grad_(False)
+            policy_params.append(name)
+        else:
+            encoder_params.append(name)
+
+    opt0 = torch.optim.Adam(
+        [p for n, p in model.named_parameters() if p.requires_grad],
+        lr=args.lr, weight_decay=args.weight_decay
+    )
+    sched0 = lr_scheduler.CosineAnnealingLR(opt0, T_max=num_epochs, eta_min=args.lr * 0.05)
+
+    for epoch in range(num_epochs):
+        model.train()
+        epoch_loss = 0.0
+        for key in train_keys:
+            seq_data = dataset[key]['features'][...]
+            seq = torch.from_numpy(seq_data).unsqueeze(0).float()
+            if use_gpu:
+                seq = seq.cuda()
+
+            acoustic = None
+            if 'acoustic' in dataset[key]:
+                ac_data = dataset[key]['acoustic'][...]
+                acoustic = torch.from_numpy(ac_data).unsqueeze(0).float()
+                if use_gpu:
+                    acoustic = acoustic.cuda()
+
+            semantic = None
+            if 'semantic' in dataset[key]:
+                sem_data = dataset[key]['semantic'][...]
+                semantic = torch.from_numpy(sem_data).unsqueeze(0).float()
+                if use_gpu:
+                    semantic = semantic.cuda()
+
+            # Forward: get importance probabilities
+            with torch.enable_grad():
+                probs = model(seq, acoustic, semantic, None, None)   # (1, T, 1)
+                m = Bernoulli(probs)
+                # ── Differentiable pre-training objectives ────────────────────
+                # 1. Entropy maximisation: encourage uniform exploration early
+                entropy_loss = -m.entropy().mean()
+                # 2. Soft contrastive: use E[select] = probs as soft weights
+                #    Weighted diversity: mean pairwise cosine dissimilarity
+                #    under soft selection probabilities
+                feats = seq.squeeze(0)           # (T, dim)
+                p_soft = probs.squeeze()         # (T,)  gradient-attached
+                # Compute soft-weighted mean feature
+                p_norm = p_soft / (p_soft.sum() + 1e-8)
+                mean_feat = (feats * p_norm.unsqueeze(-1)).sum(0, keepdim=True)  # (1, dim)
+                # Cosine distance to mean: encourage diversity
+                cos_sim = torch.nn.functional.cosine_similarity(
+                    feats, mean_feat.expand_as(feats), dim=-1)  # (T,)
+                diversity_loss = -(p_norm * (1.0 - cos_sim)).sum()  # maximise spread
+                # 3. OT temporal coverage (differentiable via probs as soft weights)
+                t_pos = torch.linspace(0.0, 1.0, seq.shape[1],
+                                        device=probs.device)  # (T,)
+                soft_mean_pos = (p_norm * t_pos).sum()
+                # Push soft mean toward 0.5 (centre of timeline) + spread via variance
+                ot_loss = (soft_mean_pos - 0.5) ** 2 - (p_norm * (t_pos - soft_mean_pos) ** 2).sum()
+                # Combined pre-training loss
+                pretrain_loss = entropy_loss + 0.5 * diversity_loss + 0.3 * ot_loss
+
+                opt0.zero_grad()
+                pretrain_loss.backward()
+                torch.nn.utils.clip_grad_norm_(model.parameters(), 5.0)
+                opt0.step()
+                epoch_loss += pretrain_loss.item()
+
+        sched0.step()
+        print("pretrain epoch {}/{} contrastive_loss={:.4f} lr={:.2e}".format(
+            epoch + 1, num_epochs, epoch_loss / max(1, len(train_keys)),
+            opt0.param_groups[0]['lr']))
+
+    # Unfreeze all parameters for RL training
+    for param in model.parameters():
+        param.requires_grad_(True)
+    print("Phase 0 complete. All parameters unfrozen for RL.\n")
+
+
 def _build_curriculum_order(train_keys, reward_writers, epoch, warmup=10):
     """
     NOVEL: Self-Paced Curriculum Learning.
@@ -620,22 +774,22 @@ def train_one_phase(model, optimizer, scheduler, dataset, train_keys,
             length_pen = args.beta * (probs.mean() - target_ratio) ** 2
             m = Bernoulli(probs)
             entropy = m.entropy().mean()
-            cost = length_pen - entropy_coef * entropy
 
-            # ── NOVEL: Adaptive Action-Lock in reward ─────────────────────────
-            # Inject current lock_pct_int into the reward kwargs via semantic_boost
-            # (The reward function uses numpy percentile internally; we set it
-            # externally by temporarily overriding the acoustic anomaly threshold.)
-            # We encode this by tagging the acoustic tensor with a scalar attribute.
-            # Simpler: pass lock_pct_int as a keyword to reward functions that accept it.
-
-            # ── NOVEL: Counterfactual REINFORCE + Contrastive Bonus ───────────
+            # ── NOVEL: Counterfactual + PPO-Clip + OT Temporal Bonus ─────────
             epis_rewards = []
+            ppo_clip = getattr(args, 'ppo_clip', 0.2)
+            ppo_inner_steps = getattr(args, 'ppo_inner_steps', 4)
+            reward_warmup = getattr(args, 'reward_warmup_epochs', 15)
+            ot_w = getattr(args, 'ot_weight', 0.10)
+            n_frames = seq.shape[1]
+
             for _ in range(args.num_episode):
                 actions = m.sample()
+                log_probs_old = m.log_prob(actions).detach()   # reference for PPO ratio
 
+                # ── Reward with epoch-based warm-start ────────────────────────
+                local_epoch_cur = epoch - start_epoch
                 if args.use_legal_reward:
-                    # Full legal-domain composite reward (includes contrastive + acoustic var)
                     full_reward = compute_legal_coherence_reward(
                         seq, actions, use_gpu=use_gpu,
                         acoustic=acoustic, semantic_boost=semantic)
@@ -657,33 +811,58 @@ def train_one_phase(model, optimizer, scheduler, dataset, train_keys,
                         else:
                             full_reward = compute_reward(
                                 seq, actions, use_gpu=use_gpu,
-                                acoustic=acoustic, semantic_boost=semantic)
+                                acoustic=acoustic, semantic_boost=semantic,
+                                epoch=local_epoch_cur, warmup_epochs=reward_warmup)
 
-                # ── CONTRASTIVE BONUS ─────────────────────────────────────────
+                # ── InfoNCE Contrastive Bonus ─────────────────────────────────
                 if args.contrastive_weight > 0 and not args.use_legal_reward:
                     cb = compute_contrastive_bonus(seq, actions, speaker_mask=speaker_mask)
                     full_reward = full_reward + args.contrastive_weight * cb
 
+                # ── OT Temporal Diversity Bonus [NOVEL-R9] ────────────────────
+                ot_bonus = compute_ot_temporal_diversity(actions, n_frames)
+                full_reward = full_reward + ot_w * ot_bonus
+
                 baseline_val = baselines[key]
 
+                # ── PPO-Clip gradient (replaces vanilla REINFORCE) ────────────
+                optimizer.zero_grad()
                 if use_counterfactual and attributions is not None:
                     shaped_reward = attributions - baseline_val
-                    # Normalize shaped reward to stabilize policy updates
                     r_std = shaped_reward.std()
                     if r_std > 1e-5:
                         shaped_reward = shaped_reward / r_std
-                    log_probs = m.log_prob(actions).squeeze()
-                    expected_reward = (log_probs * shaped_reward).mean()
+                    for _inner in range(ppo_inner_steps if ppo_clip > 0 else 1):
+                        probs_cur = model(seq, acoustic, semantic, speaker_mask, event_mask)
+                        m_cur = Bernoulli(probs_cur)
+                        log_probs_new = m_cur.log_prob(actions).squeeze()
+                        lp_old_sq = log_probs_old.squeeze()
+                        if ppo_clip > 0:
+                            ratio = torch.exp(log_probs_new - lp_old_sq)
+                            ratio_c = torch.clamp(ratio, 1.0 - ppo_clip, 1.0 + ppo_clip)
+                            ppo_loss = -torch.min(ratio * shaped_reward,
+                                                   ratio_c * shaped_reward).mean()
+                        else:
+                            ppo_loss = -(log_probs_new * shaped_reward).mean()
+                        keep_graph = (_inner < ppo_inner_steps - 1)
+                        ppo_loss.backward(retain_graph=keep_graph)
                 else:
-                    log_probs = m.log_prob(actions)
-                    expected_reward = log_probs.mean() * (full_reward - baseline_val)
+                    log_probs_s = m.log_prob(actions)
+                    scalar_adv = full_reward - baseline_val
+                    if ppo_clip > 0:
+                        ratio = torch.exp(log_probs_s - log_probs_old.detach())
+                        ratio_c = torch.clamp(ratio, 1.0 - ppo_clip, 1.0 + ppo_clip)
+                        ppo_loss = -torch.min(
+                            ratio * scalar_adv, ratio_c * scalar_adv).mean()
+                    else:
+                        ppo_loss = -(log_probs_s * scalar_adv).mean()
+                    ppo_loss.backward()
 
-                cost -= expected_reward
                 epis_rewards.append(
                     full_reward.item() if hasattr(full_reward, 'item') else float(full_reward))
 
-            # ── Optimization step ─────────────────────────────────────────────
-            optimizer.zero_grad()
+            # Length penalty + entropy regularisation
+            cost = length_pen - entropy_coef * entropy
             cost.backward()
             torch.nn.utils.clip_grad_norm_(model.parameters(), 5.0)
             optimizer.step()
@@ -830,6 +1009,11 @@ def main():
                                save_dir=args.save_dir)
         return
 
+    # ── PHASE 0: CONTRASTIVE PRE-TRAINING (optional) ─────────────────────────
+    pretrain_epochs = getattr(args, 'pretrain_epochs', 10)
+    if pretrain_epochs > 0 and not args.evaluate:
+        pretrain_contrastive(model, dataset, train_keys, pretrain_epochs, use_gpu)
+
     # ── PHASE 1: EXPLORATION ──────────────────────────────────────────────────
     phase1_epochs = args.max_epoch - args.phase2_epochs
     print("\n" + "="*60)
@@ -839,8 +1023,18 @@ def main():
 
     optimizer1 = torch.optim.Adam(model.parameters(),
                                   lr=args.lr, weight_decay=args.weight_decay)
-    scheduler1 = lr_scheduler.CosineAnnealingLR(
-        optimizer1, T_max=phase1_epochs, eta_min=args.lr * 0.05)
+    lr_sched_type = getattr(args, 'lr_scheduler', 'cosine_warm')
+    if lr_sched_type == 'cosine_warm':
+        # CosineAnnealingWarmRestarts: T_0 = phase1_epochs // 3 for 3 warm restarts
+        t0 = max(1, phase1_epochs // 3)
+        scheduler1 = lr_scheduler.CosineAnnealingWarmRestarts(
+            optimizer1, T_0=t0, T_mult=1, eta_min=args.lr * 0.01)
+    elif lr_sched_type == 'cosine':
+        scheduler1 = lr_scheduler.CosineAnnealingLR(
+            optimizer1, T_max=phase1_epochs, eta_min=args.lr * 0.05)
+    else:  # step
+        scheduler1 = lr_scheduler.StepLR(
+            optimizer1, step_size=args.stepsize, gamma=args.gamma)
 
     start_time = time.time()
     baselines = {key: 0.0 for key in train_keys}

@@ -34,12 +34,21 @@ NOVELTY MAP — where to find each original contribution in this file
     Enables domain-specific frame bias without transcript labels.
 
 [NOVEL-R3] 6-Component Reward (compute_reward, line ~109)
-    Novel weighted combination:
+    Novel weighted combination with EPOCH-BASED WARM-START CURRICULUM:
       0.25·diversity + 0.30·coverage + 0.15·spread + 0.10·compactness
-      + 0.10·narrative_flow + 0.10·legal_density
-    The last two terms (R1, R2) are new vs. prior DSN / DR-DSN baselines.
+      + progress·0.10·narrative_flow + progress·0.10·legal_density
+    where progress = min(epoch/warmup_epochs, 1.0).
+    Auxiliary terms (R1, R2) ramp from 0 → full over warmup_epochs epochs.
+    This prevents early gradient noise from near-zero auxiliary signals.
     Also includes Adaptive Action-Lock: acoustic/semantic anomaly frames
     are force-selected before reward evaluation.
+
+[NOVEL-R9] Optimal-Transport Temporal Diversity (compute_ot_temporal_diversity, line ~330)
+    Approximates the 1D Wasserstein distance between the empirical
+    distribution of selected frame positions and a maximally spread
+    uniform distribution. Uses the closed-form 1D OT solution:
+    W1 = mean |sorted_picks - uniform_quantiles|.
+    Higher = more uniform spread across time = better summary.
 
 [NOVEL-R4] Self-supervised InfoNCE Contrastive Bonus (compute_contrastive_bonus, line ~236)
     Selected frames = positive pairs; unselected = negatives.
@@ -186,14 +195,21 @@ def _legal_density(semantic_boost, pick_idxs, n, device):
 # ─────────────────────────────────────────────────────────────────────────────
 
 def compute_reward(seq, actions, use_gpu=False, diss=None,
-                   acoustic=None, semantic_boost=None, normalizer=None):
+                   acoustic=None, semantic_boost=None, normalizer=None,
+                   epoch=0, warmup_epochs=15):
     """
-    Novel 6-component reward:
+    Novel 6-component reward with EPOCH-BASED WARM-START CURRICULUM:
       Diversity + Submodular Coverage + Temporal Spread
       + Compactness + Narrative Flow Coherence + Legal Keyword Density.
 
-    Weights: 0.25 * div  +  0.30 * cov  +  0.15 * spread
-           + 0.10 * compact  +  0.10 * narrative  +  0.10 * legal_density
+    Weights at epoch < warmup_epochs:
+      0.35·div + 0.40·cov + 0.15·spread + 0.10·compact + 0·narrative + 0·legal_density
+    Weights at epoch >= warmup_epochs (fully ramped):
+      0.25·div + 0.30·cov + 0.15·spread + 0.10·compact + 0.10·narrative + 0.10·legal_density
+
+    Auxiliary terms (narrative, legal_density) ramp smoothly from 0 to full
+    weight over warmup_epochs epochs. This prevents early gradient noise
+    from near-zero auxiliary signals causing reward collapse.
 
     Includes Action-Lock simulation alignment for legal domains:
     If acoustic (loudness) or semantic_boost metrics exist, pre-select
@@ -206,6 +222,8 @@ def compute_reward(seq, actions, use_gpu=False, diss=None,
         diss:           Pre-computed (n, n) cosine-dissimilarity matrix or None.
         acoustic:       Per-frame loudness tensor (n,) or None.
         semantic_boost: Per-frame legal keyword density tensor (n,) or None.
+        epoch:          Current training epoch (0-indexed) for reward warm-start.
+        warmup_epochs:  Number of epochs over which auxiliary terms ramp to full weight.
 
     Returns:
         Scalar reward tensor.
@@ -297,6 +315,17 @@ def compute_reward(seq, actions, use_gpu=False, diss=None,
     reward_legal_density = _legal_density(semantic_boost, pick_idxs, n,
                                           device=_seq.device)
 
+    # ── Epoch-based warm-start for auxiliary reward terms ─────────────────
+    # progress: 0.0 at epoch 0, 1.0 at epoch >= warmup_epochs
+    progress = float(min(epoch, warmup_epochs)) / max(1.0, float(warmup_epochs))
+    # Core weights scale up as auxiliary terms ramp in (total stays ≈ 1.0)
+    w_div       = 0.25 + 0.10 * (1.0 - progress)   # 0.35 → 0.25
+    w_cov       = 0.30 + 0.10 * (1.0 - progress)   # 0.40 → 0.30
+    w_spread    = 0.15
+    w_compact   = 0.10
+    w_narrative = 0.10 * progress                    # 0.0  → 0.10
+    w_legal     = 0.10 * progress                    # 0.0  → 0.10
+
     # ── Weighted combination ───────────────────────────────────────────────
     raw_components = torch.stack([
         reward_div,
@@ -309,21 +338,57 @@ def compute_reward(seq, actions, use_gpu=False, diss=None,
 
     if normalizer is not None:
         norm_components = normalizer(raw_components)
-        reward = (0.25 * norm_components[0]
-                + 0.30 * norm_components[1]
-                + 0.15 * norm_components[2]
-                + 0.10 * norm_components[3]
-                + 0.10 * norm_components[4]
-                + 0.10 * norm_components[5])
+        reward = (w_div     * norm_components[0]
+                + w_cov     * norm_components[1]
+                + w_spread  * norm_components[2]
+                + w_compact * norm_components[3]
+                + w_narrative * norm_components[4]
+                + w_legal   * norm_components[5])
     else:
-        reward = (0.25 * reward_div
-                + 0.30 * reward_cov
-                + 0.15 * reward_spread
-                + 0.10 * reward_compact
-                + 0.10 * reward_narrative
-                + 0.10 * reward_legal_density)
+        reward = (w_div     * reward_div
+                + w_cov     * reward_cov
+                + w_spread  * reward_spread
+                + w_compact * reward_compact
+                + w_narrative * reward_narrative
+                + w_legal   * reward_legal_density)
 
     return reward
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# [NOVEL-R9] Optimal-Transport Temporal Diversity
+# ─────────────────────────────────────────────────────────────────────────────
+
+def compute_ot_temporal_diversity(actions, n):
+    """
+    1D Wasserstein (OT) temporal diversity bonus.
+
+    Measures how uniformly the selected frames span the video timeline.
+    Uses the closed-form 1D OT solution between the empirical distribution
+    of selected frame positions and the uniform distribution on [0, 1].
+
+        W1 = mean |sorted_selected_positions - uniform_quantiles|
+
+    Returns 1 - W1 so that perfect uniform coverage = 1.0.
+
+    Args:
+        actions: Binary action tensor, shape (n,) or (1, n).
+        n:       Total number of frames.
+
+    Returns:
+        Scalar tensor in [0, 1]. 1.0 = perfectly uniform selection.
+    """
+    pick_idxs = actions.detach().squeeze().nonzero(as_tuple=False).squeeze(1)
+    k = len(pick_idxs)
+    if k < 2:
+        return torch.tensor(0.5, dtype=torch.float32)
+
+    # Normalised positions in [0, 1]
+    norm_picks, _ = (pick_idxs.float() / max(n - 1, 1)).sort()
+    # Uniform quantiles: 0/(k-1), 1/(k-1), ..., 1.0
+    uniform_q = torch.linspace(0.0, 1.0, k, device=norm_picks.device)
+    w1 = (norm_picks - uniform_q).abs().mean()
+    return 1.0 - w1
 
 
 # ─────────────────────────────────────────────────────────────────────────────
