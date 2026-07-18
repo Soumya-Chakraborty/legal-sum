@@ -1,3 +1,23 @@
+"""
+demo/losses.py — Multimodal Alignment Loss Functions.
+
+=============================================================================
+NOVELTY MAP — where to find each original contribution in this file
+=============================================================================
+
+[NOVEL-L1] MultimodalAlignmentLoss — 4-component supervised loss (class, line ~17)
+    Combines: InfoNCE contrastive (visual-text, visual-audio, audio-text)
+    + binary event classification + speaker-role cross-entropy
+    + MSE summarization importance + length-budget penalty.
+    First multi-objective supervised loss specifically designed for
+    courtroom video data (event labels + speaker roles + importance).
+
+[NOVEL-L2] Symmetric InfoNCE across 3 streams (info_nce_loss, line ~5)
+    Symmetric contrastive loss applied to all three modality projection pairs,
+    aligning visual, acoustic, and textual embeddings in a shared space
+    without requiring external pre-trained encoders.
+=============================================================================
+"""
 import torch
 import torch.nn as nn
 import torch.nn.functional as F

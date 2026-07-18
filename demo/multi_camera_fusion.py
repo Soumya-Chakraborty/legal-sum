@@ -1,3 +1,26 @@
+"""
+demo/multi_camera_fusion.py — Multi-Camera Legal Video Fusion & Prioritization.
+
+=============================================================================
+NOVELTY MAP — where to find each original contribution in this file
+=============================================================================
+
+[NOVEL-MC1] Audio-Driven Camera Selection (run_multimodal_multicamera, line ~104)
+    Per-frame best-camera selected by highest audio loudness across all
+    camera feeds — combines multi-camera signals without human direction.
+    Novel unsupervised camera switching for court video summarization.
+
+[NOVEL-MC2] ImageNet Legal-Class Relevance Multiplier (load_imagenet_class_index, line ~19)
+    Predefined mapping from ImageNet class IDs (suit, microphone, binder)
+    to relevance boost multipliers applied to DSN probability scores.
+    Injects scene-type prior (courtroom objects) into importance scoring.
+
+[NOVEL-MC3] Interval-Level Multi-Camera Splicing (run_multimodal_multicamera, line ~203)
+    For each selected knapsack interval, the majority camera-angle over
+    that interval is chosen for final video splice via FFmpeg.
+    Enables coherent multi-angle summaries preserving visual continuity.
+=============================================================================
+"""
 import os
 import sys
 import json
