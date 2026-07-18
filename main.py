@@ -656,7 +656,7 @@ def train_one_phase(model, optimizer, scheduler, dataset, train_keys,
 
                 # ── CONTRASTIVE BONUS ─────────────────────────────────────────
                 if args.contrastive_weight > 0 and not args.use_legal_reward:
-                    cb = compute_contrastive_bonus(seq, actions)
+                    cb = compute_contrastive_bonus(seq, actions, speaker_mask=speaker_mask)
                     full_reward = full_reward + args.contrastive_weight * cb
 
                 baseline_val = baselines[key]

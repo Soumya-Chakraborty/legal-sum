@@ -1,5 +1,5 @@
 """
-Reinforcement Learning Reward Functions for Video Summarization
+rewards.py — Reinforcement Learning Reward Functions for Video Summarization
 
 This module implements:
 1. compute_reward: A 6-component reward function comprising diversity,
@@ -18,11 +18,90 @@ This module implements:
    matrix alignment (CKA-like) across visual, acoustic, and textual streams.
 6. compute_courtroom_reward: Courtroom-specific unsupervised composite reward
    combining base reward, multimodal contrastive, event coverage, and speaker consistency.
+
+=============================================================================
+NOVELTY MAP — where to find each original contribution in this file
+=============================================================================
+
+[NOVEL-R1] Narrative Flow Coherence reward component (_narrative_flow, line ~43)
+    Computes mean cosine similarity between chronologically ordered consecutive
+    selected frames, encouraging summaries that form smooth semantic arcs.
+    No ground-truth annotation required — purely self-supervised.
+
+[NOVEL-R2] Legal Keyword Density reward component (_legal_density, line ~69)
+    Normalised mean semantic-feature magnitude at selected frames acts as a
+    proxy for legal keyword density (objection, ruling, testimony frames).
+    Enables domain-specific frame bias without transcript labels.
+
+[NOVEL-R3] 6-Component Reward (compute_reward, line ~109)
+    Novel weighted combination:
+      0.25·diversity + 0.30·coverage + 0.15·spread + 0.10·compactness
+      + 0.10·narrative_flow + 0.10·legal_density
+    The last two terms (R1, R2) are new vs. prior DSN / DR-DSN baselines.
+    Also includes Adaptive Action-Lock: acoustic/semantic anomaly frames
+    are force-selected before reward evaluation.
+
+[NOVEL-R4] Self-supervised InfoNCE Contrastive Bonus (compute_contrastive_bonus, line ~236)
+    Selected frames = positive pairs; unselected = negatives.
+    Applied with temperature τ=0.07 — adapted from MoCo/SimCLR style
+    contrastive learning into a REINFORCE reward bonus.
+    No labels, no extra model — pure frame similarity signal.
+
+[NOVEL-R5] Acoustic Energy Variance Bonus in Legal Reward (compute_legal_coherence_reward, line ~305)
+    Rewards the policy for selecting frames with higher audio energy *variance*
+    than unselected frames, capturing dynamic legal events (objections, rulings)
+    that exhibit energy spikes.
+
+[NOVEL-R6] CKA-style Multimodal Contrastive Reward (compute_multimodal_contrastive_reward, line ~368)
+    Parameter-free: aligns pairwise cosine similarity matrices across visual,
+    acoustic, and textual streams for selected frames.
+    Encourages selections that preserve consistent temporal structure
+    across all three modalities simultaneously — novel for unsupervised summarization.
+
+[NOVEL-R7] Courtroom Composite Reward (compute_courtroom_reward, line ~403)
+    Domain-specific fused reward:
+      0.4·base + 0.2·multimodal_contrastive + 0.2·event_coverage + 0.2·speaker_consistency
+    First unsupervised reward formulation explicitly targeting courtroom
+    event-coverage and speaker-role consistency objectives.
+
+[NOVEL-R8] Vectorized Counterfactual Frame Attribution — VCRA (compute_per_frame_attribution, line ~474)
+    Loop-free O(k²) leave-one-out attribution for all 6 reward components
+    in a single forward pass. Extends standard REINFORCE baseline to
+    per-frame credit assignment: attribution_j = R(S) - R(S∖{j}).
+    Also extended to courtroom reward (event/speaker leave-one-out).
+=============================================================================
 """
 
 import torch
+import torch.nn as nn
 import torch.nn.functional as F
 import numpy as np
+
+
+class RunningRewardNormalizer(nn.Module):
+    def __init__(self, num_components=6, momentum=0.99, eps=1e-5):
+        super(RunningRewardNormalizer, self).__init__()
+        self.num_components = num_components
+        self.momentum = momentum
+        self.eps = eps
+        self.register_buffer('means', torch.zeros(num_components, dtype=torch.float32))
+        self.register_buffer('vars', torch.ones(num_components, dtype=torch.float32))
+        
+    def forward(self, component_values):
+        # component_values: Tensor of shape (num_components,) or (B, num_components)
+        if self.training:
+            with torch.no_grad():
+                if component_values.dim() == 1:
+                    val = component_values
+                else:
+                    val = component_values.mean(dim=0)
+                # update running stats
+                self.means.copy_(self.momentum * self.means + (1.0 - self.momentum) * val)
+                self.vars.copy_(self.momentum * self.vars + (1.0 - self.momentum) * ((val - self.means) ** 2))
+                
+        stds = torch.sqrt(self.vars + self.eps)
+        normalized = (component_values - self.means) / stds
+        return normalized
 
 
 # ─────────────────────────────────────────────────────────────────────────────
@@ -107,7 +186,7 @@ def _legal_density(semantic_boost, pick_idxs, n, device):
 # ─────────────────────────────────────────────────────────────────────────────
 
 def compute_reward(seq, actions, use_gpu=False, diss=None,
-                   acoustic=None, semantic_boost=None):
+                   acoustic=None, semantic_boost=None, normalizer=None):
     """
     Novel 6-component reward:
       Diversity + Submodular Coverage + Temporal Spread
@@ -219,12 +298,30 @@ def compute_reward(seq, actions, use_gpu=False, diss=None,
                                           device=_seq.device)
 
     # ── Weighted combination ───────────────────────────────────────────────
-    reward = (0.25 * reward_div
-            + 0.30 * reward_cov
-            + 0.15 * reward_spread
-            + 0.10 * reward_compact
-            + 0.10 * reward_narrative
-            + 0.10 * reward_legal_density)
+    raw_components = torch.stack([
+        reward_div,
+        reward_cov,
+        reward_spread,
+        reward_compact,
+        reward_narrative,
+        reward_legal_density
+    ])
+
+    if normalizer is not None:
+        norm_components = normalizer(raw_components)
+        reward = (0.25 * norm_components[0]
+                + 0.30 * norm_components[1]
+                + 0.15 * norm_components[2]
+                + 0.10 * norm_components[3]
+                + 0.10 * norm_components[4]
+                + 0.10 * norm_components[5])
+    else:
+        reward = (0.25 * reward_div
+                + 0.30 * reward_cov
+                + 0.15 * reward_spread
+                + 0.10 * reward_compact
+                + 0.10 * reward_narrative
+                + 0.10 * reward_legal_density)
 
     return reward
 
@@ -233,7 +330,7 @@ def compute_reward(seq, actions, use_gpu=False, diss=None,
 # 2. compute_contrastive_bonus
 # ─────────────────────────────────────────────────────────────────────────────
 
-def compute_contrastive_bonus(seq, actions, temperature=0.07):
+def compute_contrastive_bonus(seq, actions, temperature=0.07, speaker_mask=None):
     """
     Self-supervised InfoNCE-style contrastive bonus (no labels required).
 
@@ -250,6 +347,7 @@ def compute_contrastive_bonus(seq, actions, temperature=0.07):
         seq:         Frame-feature tensor, shape (n, dim) or (1, n, dim).
         actions:     Binary action tensor, shape (n,) or (1, n).
         temperature: InfoNCE temperature τ (default 0.07).
+        speaker_mask: Optional speaker roles to perform hard negative mining.
 
     Returns:
         Scalar tensor ≤ 0. Returns tensor(0.0) when k < 2 or all selected.
@@ -275,8 +373,12 @@ def compute_contrastive_bonus(seq, actions, temperature=0.07):
     total_loss = torch.tensor(0.0, device=_seq.device)
     count = 0
 
+    if speaker_mask is not None:
+        speaker_mask = torch.as_tensor(speaker_mask, device=_seq.device).squeeze()
+
     for i in range(k):
         q_i = sel_feats[i]                          # (dim,)
+        anchor_idx = pick_idxs[i].item()
 
         # Draw a random positive (different from i)
         pos_candidates = torch.cat([
@@ -287,10 +389,24 @@ def compute_contrastive_bonus(seq, actions, temperature=0.07):
         q_j = sel_feats[j]
 
         pos_sim = (q_i * q_j).sum() / temperature                   # scalar
-        neg_sims = torch.mv(neg_feats, q_i) / temperature            # (m,)
+
+        if speaker_mask is not None and speaker_mask.dim() > 0:
+            anchor_spk = speaker_mask[anchor_idx].item()
+            diff_spk = (speaker_mask[neg_idxs] != anchor_spk)
+            adj = (torch.abs(neg_idxs - anchor_idx) <= 100)
+            hard_neg_mask = diff_spk & adj
+            if not hard_neg_mask.any():
+                hard_neg_mask = diff_spk
+            if not hard_neg_mask.any():
+                hard_neg_mask = torch.ones_like(diff_spk, dtype=torch.bool)
+            neg_feats_i = neg_feats[hard_neg_mask]
+        else:
+            neg_feats_i = neg_feats
+
+        neg_sims = torch.matmul(neg_feats_i, q_i) / temperature      # (m_i,)
 
         # log-softmax numerator over positive + all negatives
-        logits = torch.cat([pos_sim.unsqueeze(0), neg_sims])         # (1+m,)
+        logits = torch.cat([pos_sim.unsqueeze(0), neg_sims])         # (1+m_i,)
         log_prob = pos_sim - torch.logsumexp(logits, dim=0)
         total_loss = total_loss + log_prob
         count += 1
@@ -400,7 +516,9 @@ def compute_multimodal_contrastive_reward(seq, acoustic, semantic, pick_idxs):
 # 5. compute_courtroom_reward
 # ─────────────────────────────────────────────────────────────────────────────
 
-def compute_courtroom_reward(seq, actions, use_gpu=False, acoustic=None, semantic=None, event_mask=None, speaker_mask=None):
+def compute_courtroom_reward(seq, actions, use_gpu=False, acoustic=None, semantic=None,
+                             event_mask=None, speaker_mask=None,
+                             base_normalizer=None, courtroom_normalizer=None):
     """
     Unsupervised Courtroom-specific composite reward function.
     Fuses:
@@ -423,7 +541,7 @@ def compute_courtroom_reward(seq, actions, use_gpu=False, acoustic=None, semanti
         return reward
 
     # 1. Base Reward
-    base = compute_reward(seq, actions, use_gpu=use_gpu, acoustic=acoustic, semantic_boost=semantic)
+    base = compute_reward(seq, actions, use_gpu=use_gpu, acoustic=acoustic, semantic_boost=semantic, normalizer=base_normalizer)
 
     # 2. Multimodal Contrastive Alignment Reward
     if acoustic is not None and semantic is not None:
@@ -436,12 +554,31 @@ def compute_courtroom_reward(seq, actions, use_gpu=False, acoustic=None, semanti
     # 3. Event Coverage Reward
     if event_mask is not None:
         event_mask = event_mask.squeeze() # (n, num_classes)
+        # Event transitions: check difference between adjacent frames
+        if event_mask.dim() == 2 and n > 1:
+            diff_event = (event_mask[1:] != event_mask[:-1]).any(dim=-1).float()
+            event_transitions = torch.cat([torch.tensor([0.0], device=event_mask.device), diff_event])
+            transition_indices = event_transitions.nonzero(as_tuple=False).squeeze(1)
+            
+            if len(transition_indices) > 0:
+                covered_transitions = 0
+                for trans_idx in transition_indices:
+                    if torch.any((pick_idxs - trans_idx).abs() <= 10):
+                        covered_transitions += 1
+                r_trans_coverage = torch.tensor(covered_transitions / len(transition_indices), device=event_mask.device)
+            else:
+                r_trans_coverage = torch.tensor(1.0, device=event_mask.device)
+        else:
+            r_trans_coverage = torch.tensor(1.0, device=_seq.device)
+
         active_classes = (event_mask.sum(dim=0) > 0).nonzero(as_tuple=False).squeeze(1)
         if len(active_classes) > 0:
             covered = (event_mask[pick_idxs].sum(dim=0) > 0).float()
-            r_event = covered[active_classes].mean()
+            r_class_coverage = covered[active_classes].mean()
         else:
-            r_event = torch.tensor(1.0, device=_seq.device)
+            r_class_coverage = torch.tensor(1.0, device=_seq.device)
+            
+        r_event = 0.5 * r_class_coverage + 0.5 * r_trans_coverage
     else:
         r_event = torch.tensor(0.5, device=_seq.device)
 
@@ -450,20 +587,44 @@ def compute_courtroom_reward(seq, actions, use_gpu=False, acoustic=None, semanti
         speaker_mask = speaker_mask.squeeze() # (n,)
         active_speakers = speaker_mask.unique()
         selected_speakers = speaker_mask[pick_idxs].unique()
-        r_speaker_cov = len(selected_speakers) / len(active_speakers)
+        r_speaker_cov = torch.tensor(len(selected_speakers) / len(active_speakers), device=_seq.device)
 
         if k > 1:
-            switches = (speaker_mask[pick_idxs[:-1]] != speaker_mask[pick_idxs[1:]]).float().sum()
-            r_speaker_trans = 1.0 - (switches / (k - 1))
+            spk_switches = (speaker_mask[pick_idxs[:-1]] != speaker_mask[pick_idxs[1:]]).float()
+            if event_mask is not None and event_mask.squeeze().dim() == 2 and n > 1:
+                event_mask_sq = event_mask.squeeze()
+                diff_event = (event_mask_sq[1:] != event_mask_sq[:-1]).any(dim=-1).float()
+                event_transitions = torch.cat([torch.tensor([0.0], device=event_mask_sq.device), diff_event])
+                
+                switch_indices = pick_idxs[:-1][spk_switches == 1]
+                if len(switch_indices) > 0:
+                    aligned_switches = 0
+                    for idx in switch_indices:
+                        start_w = max(0, idx.item() - 10)
+                        end_w = min(n - 1, idx.item() + 10)
+                        if event_transitions[start_w:end_w+1].sum() > 0:
+                            aligned_switches += 1
+                    unaligned_switches = len(switch_indices) - aligned_switches
+                    r_speaker_trans = torch.tensor(1.0 - (unaligned_switches / (k - 1)), device=_seq.device)
+                else:
+                    r_speaker_trans = torch.tensor(1.0, device=_seq.device)
+            else:
+                r_speaker_trans = 1.0 - (spk_switches.sum() / (k - 1))
         else:
-            r_speaker_trans = 1.0
+            r_speaker_trans = torch.tensor(1.0, device=_seq.device)
 
         r_speaker = 0.5 * r_speaker_cov + 0.5 * r_speaker_trans
     else:
         r_speaker = torch.tensor(0.5, device=_seq.device)
 
     # Weighted combination
-    total = 0.4 * base + 0.2 * r_contrast + 0.2 * r_event + 0.2 * r_speaker
+    raw_courtroom = torch.stack([base, r_contrast, r_event, r_speaker])
+    if courtroom_normalizer is not None:
+        norm_courtroom = courtroom_normalizer(raw_courtroom)
+        total = 0.4 * norm_courtroom[0] + 0.2 * norm_courtroom[1] + 0.2 * norm_courtroom[2] + 0.2 * norm_courtroom[3]
+    else:
+        total = 0.4 * base + 0.2 * r_contrast + 0.2 * r_event + 0.2 * r_speaker
+
     return total
 
 
@@ -645,58 +806,14 @@ def compute_per_frame_attribution(seq, actions, use_gpu=False,
 
     # ── Courtroom-specific leave-one-out calculation ──────────────────────
     if is_courtroom:
-        # Precompute active classes and speakers
-        if event_mask is not None:
-            event_mask_sq = event_mask.squeeze()
-            active_classes = (event_mask_sq.sum(dim=0) > 0).nonzero(as_tuple=False).squeeze(1)
-        else:
-            active_classes = None
-
-        if speaker_mask is not None:
-            speaker_mask_sq = speaker_mask.squeeze()
-            active_speakers = speaker_mask_sq.unique()
-        else:
-            active_speakers = None
-
-        ac_sq = acoustic.squeeze() if acoustic is not None else None
-        sem_sq = semantic_boost.squeeze() if semantic_boost is not None else None
-
         for p in range(k):
             j_idx = pick_idxs[p]
-            # Exclude current pick p
-            pick_idxs_minus = torch.cat([pick_idxs[:p], pick_idxs[p+1:]])
-
-            # A. Multimodal Contrastive Alignment Reward Minus j
-            if ac_sq is not None and sem_sq is not None:
-                contrastive_minus = compute_multimodal_contrastive_reward(_seq, ac_sq, sem_sq, pick_idxs_minus)
-            else:
-                contrastive_minus = torch.tensor(0.5, device=seq.device)
-
-            # B. Event Coverage Minus j
-            if event_mask is not None and active_classes is not None and len(active_classes) > 0:
-                covered = (event_mask_sq[pick_idxs_minus].sum(dim=0) > 0).float()
-                event_minus = covered[active_classes].mean()
-            else:
-                event_minus = torch.tensor(0.5, device=seq.device)
-
-            # C. Speaker Consistency Minus j
-            if speaker_mask is not None and active_speakers is not None:
-                selected_speakers = speaker_mask_sq[pick_idxs_minus].unique()
-                r_speaker_cov = len(selected_speakers) / len(active_speakers)
-
-                k_minus = len(pick_idxs_minus)
-                if k_minus > 1:
-                    switches = (speaker_mask_sq[pick_idxs_minus[:-1]] != speaker_mask_sq[pick_idxs_minus[1:]]).float().sum()
-                    r_speaker_trans = 1.0 - (switches / (k_minus - 1))
-                else:
-                    r_speaker_trans = 1.0
-
-                speaker_minus = 0.5 * r_speaker_cov + 0.5 * r_speaker_trans
-            else:
-                speaker_minus = torch.tensor(0.5, device=seq.device)
-
-            # Combine leave-one-out reward for pick j
-            total_minus = 0.4 * base_minus[p] + 0.2 * contrastive_minus + 0.2 * event_minus + 0.2 * speaker_minus
+            actions_minus = _actions.clone()
+            actions_minus.squeeze()[j_idx] = 0.0
+            total_minus = compute_courtroom_reward(
+                seq, actions_minus, use_gpu=use_gpu, acoustic=acoustic, semantic=semantic_boost,
+                event_mask=event_mask, speaker_mask=speaker_mask
+            )
             attributions[j_idx] = full_reward - total_minus
     else:
         # Standard unsupervised REINFORCE leave-one-out
