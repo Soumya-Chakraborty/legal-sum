@@ -58,6 +58,14 @@ def generate_summary(ypred, cps, n_frames, nfps, positions, proportion=0.15, met
         seg_score.append(float(scores.mean()))
 
     # Calculate the maximum frame capacity limit for the summary
+    if proportion <= 0:
+        # Dynamic: set summary limit to cover only high-confidence frames (e.g. above mean + std)
+        # Handle zero std to avoid empty picks
+        std_val = float(ypred.std())
+        threshold = float(ypred.mean() + std_val) if std_val > 1e-6 else float(ypred.mean())
+        high_conf_ratio = float((ypred >= threshold).mean())
+        proportion = float(np.clip(high_conf_ratio, 0.10, 0.30))
+
     limits = int(math.floor(n_frames * proportion))
 
     # Select segments to include in the summary
@@ -103,11 +111,12 @@ def evaluate_summary(machine_summary, user_summary, eval_metric='avg'):
         eval_metric (str, optional): Evaluation metric to aggregate human summaries. 
                                     'avg' computes the mean Precision/Recall/F-score.
                                     'max' returns the metrics from the best-performing human summary. 
+                                    'all' returns both avg and max F-scores: (f_avg, f_max, prec, rec).
                                     Defaults to 'avg'.
 
     Returns:
         tuple: (final_f_score, final_prec, final_rec) representing F1-score, Precision, 
-               and Recall.
+               and Recall, OR if eval_metric is 'all', (final_f_avg, final_f_max, final_prec, final_rec).
     """
     machine_summary = machine_summary.astype(np.float32)
     user_summary = user_summary.astype(np.float32)
@@ -145,6 +154,14 @@ def evaluate_summary(machine_summary, user_summary, eval_metric='avg'):
         rec_arr.append(recall)
 
     # Aggregate scores over all users
+    if eval_metric == 'all':
+        final_f_avg = np.mean(f_scores)
+        final_f_max = np.max(f_scores)
+        # Precision/recall defaults to average metrics across all human summaries
+        final_prec = np.mean(prec_arr)
+        final_rec = np.mean(rec_arr)
+        return final_f_avg, final_f_max, final_prec, final_rec
+
     if eval_metric == 'avg':
         final_f_score = np.mean(f_scores)
         final_prec = np.mean(prec_arr)

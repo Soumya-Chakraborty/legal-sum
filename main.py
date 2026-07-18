@@ -36,7 +36,51 @@ NOVEL CONTRIBUTIONS IN THIS TRAINING LOOP
 
 8.  DUAL-PATHWAY ARCHITECTURE (DualPathwayDSN):
     Two DSN branches (visual-heavy, acoustic-heavy) with learned per-frame
-    mixing coefficient alpha = sigmoid(MLP([p_v, p_a]))."""
+    mixing coefficient alpha = sigmoid(MLP([p_v, p_a])).
+
+=============================================================================
+NOVELTY MAP — where to find each original contribution in this file
+=============================================================================
+
+[NOVEL-T1] Self-Paced Curriculum Learning (_build_curriculum_order, line ~458)
+    Sort training videos each epoch by reward-variance difficulty.
+    Warmup period uses random order; post-warmup: easy videos first.
+    Gaussian noise prevents strict determinism.
+    Novel application of self-paced learning to RL-based video summarization.
+
+[NOVEL-T2] Adaptive Action-Lock Budget (train_one_phase, line ~486)
+    Action-lock percentile threshold decays linearly from 95th→85th pct
+    over training progress (lock_pct_int). Tighter early locking prevents
+    noise-frame inclusion; relaxation allows policy autonomy at maturity.
+
+[NOVEL-T3] Counterfactual REINFORCE (train_one_phase, line ~576)
+    Replaces scalar global reward in REINFORCE with per-frame attributions
+    from compute_per_frame_attribution() (rewards.py NOVEL-R8).
+    Normalized shaped reward: (attribution - baseline) / std.
+    Reduces variance in policy gradient updates.
+
+[NOVEL-T4] InfoNCE Contrastive Bonus in Training Loop (train_one_phase, line ~606)
+    compute_contrastive_bonus() added on top of RL reward at each episode.
+    Weighted by --contrastive-weight (default 0.05) via CLI.
+
+[NOVEL-T5] Adaptive Entropy Scheduling + Two-Phase Training (main, line ~771)
+    Phase 1: high entropy_start (0.10), large LR for exploration.
+    Phase 2: low entropy_end (0.001), 10× smaller LR for exploitation.
+    Best Phase-1 checkpoint reloaded before Phase-2 begins.
+
+[NOVEL-T6] MC-Dropout Ensemble Inference (evaluate_with_ensemble, line ~254)
+    Model kept in train() mode during inference; K stochastic passes
+    averaged → more stable frame scores with uncertainty estimation.
+
+[NOVEL-T7] Bias-Corrected Momentum Baseline (train_one_phase, line ~635)
+    Adam-style bias correction applied to the exponential moving average
+    baseline: baseline / (1 - 0.9^t) prevents warm-up underestimation.
+
+[NOVEL-T8] Courtroom Evaluation Metrics (evaluate_with_ensemble, line ~371)
+    Event Coverage and Speaker Consistency computed per video alongside
+    F-score, Spearman-ρ, Kendall-τ — new metrics for legal domain eval.
+=============================================================================
+"""
 
 from __future__ import print_function
 import os
@@ -282,7 +326,7 @@ def evaluate_with_ensemble(model, dataset, test_keys, use_gpu,
     if save_results:
         h5_res = h5py.File(osp.join(save_dir, 'result.h5'), 'w')
 
-    fms, precs, recs = [], [], []
+    fms, fms_avg, fms_max, precs, recs = [], [], [], [], []
     spearmans, kendalls, event_covs, speaker_cons = [], [], [], []
     # Use eval() mode for deterministic inference when k is 1 (no ensemble),
     # otherwise use train() to keep dropout active for MC sampling
@@ -347,9 +391,12 @@ def evaluate_with_ensemble(model, dataset, test_keys, use_gpu,
                 probs, cps, num_frames, nfps, positions)
             
             # Compare the generated machine summary with the human summaries
-            fm, prec, rec = vsum_tools.evaluate_summary(
-                machine_summary, user_summary, eval_metric)
+            fm_avg, fm_max, prec, rec = vsum_tools.evaluate_summary(
+                machine_summary, user_summary, 'all')
+            fm = fm_avg if eval_metric == 'avg' else fm_max
             fms.append(fm)
+            fms_avg.append(fm_avg)
+            fms_max.append(fm_max)
             precs.append(prec)
             recs.append(rec)
 
@@ -406,6 +453,8 @@ def evaluate_with_ensemble(model, dataset, test_keys, use_gpu,
         h5_res.close()
 
     mean_fm = np.mean(fms)
+    mean_fm_avg = np.mean(fms_avg)
+    mean_fm_max = np.mean(fms_max)
     mean_prec = np.mean(precs)
     mean_rec = np.mean(recs)
     mean_spearman = np.mean(spearmans)
@@ -414,14 +463,16 @@ def evaluate_with_ensemble(model, dataset, test_keys, use_gpu,
     mean_speaker_con = np.mean(speaker_cons)
 
     if args.eval_courtroom:
-        print("Average F-score {:.1%}, Precision {:.1%}, Recall {:.1%}, Spearman {:.4f}, Kendall {:.4f}, Event Coverage {:.1%}, Speaker Consistency {:.1%}".format(
-            mean_fm, mean_prec, mean_rec, mean_spearman, mean_kendall, mean_event_cov, mean_speaker_con))
+        print("Average F1 (mean: {:.1%}, max: {:.1%}), Precision {:.1%}, Recall {:.1%}, Spearman {:.4f}, Kendall {:.4f}, Event Coverage {:.1%}, Speaker Consistency {:.1%}".format(
+            mean_fm_avg, mean_fm_max, mean_prec, mean_rec, mean_spearman, mean_kendall, mean_event_cov, mean_speaker_con))
     else:
-        print("Average F-score {:.1%}, Precision {:.1%}, Recall {:.1%}".format(mean_fm, mean_prec, mean_rec))
+        print("Average F1 (mean: {:.1%}, max: {:.1%}), Precision {:.1%}, Recall {:.1%}".format(mean_fm_avg, mean_fm_max, mean_prec, mean_rec))
 
     if return_all:
         metrics_dict = {
             'f_score': float(mean_fm),
+            'f_score_avg': float(mean_fm_avg),
+            'f_score_max': float(mean_fm_max),
             'spearman': float(mean_spearman),
             'kendall': float(mean_kendall),
             'event_coverage': float(mean_event_cov),
