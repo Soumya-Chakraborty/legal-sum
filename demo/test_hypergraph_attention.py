@@ -41,3 +41,24 @@ def test_dsn_with_hypergraph():
     p_fallback = model(x, acoustic=acoustic)
     assert p_fallback.shape == (B, T, 1)
     assert p_fallback.min() >= 0.0 and p_fallback.max() <= 1.0
+
+
+def test_temporal_segment_graph_gib():
+    from models import TemporalSegmentGraph
+    hid_dim = 64
+    tsg = TemporalSegmentGraph(hid_dim=hid_dim, k=5, dropout=0.1)
+    
+    B, T = 2, 10
+    h = torch.randn(B, T, hid_dim)
+    
+    # Test training mode (with KL loss computed)
+    tsg.train()
+    out_train = tsg(h)
+    assert out_train.shape == h.shape
+    assert tsg.kl_loss.item() > 0.0
+    
+    # Test evaluation mode (no KL loss)
+    tsg.eval()
+    out_eval = tsg(h)
+    assert out_eval.shape == h.shape
+    assert tsg.kl_loss.item() == 0.0
