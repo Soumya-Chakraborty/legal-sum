@@ -454,7 +454,7 @@ supervised approaches.
 \small
 \caption{Comparison with state-of-the-art. $^\dagger$: supervised. $^\ddagger$: LLM-based. Best unsupervised in \textbf{bold}.}
 \label{tab:main}
-\begin{tabular}{l@{\extracolsep{\fill}}cc}
+\begin{tabular*}{\columnwidth}{l@{\extracolsep{\fill}}cc}
 \toprule
 \textbf{Method} & \textbf{SumMe F1} & \textbf{TVSum F1} \\
 \midrule
@@ -474,7 +474,7 @@ UnpairedVSN \cite{he2019unsupervised} & 45.0 & 57.9 \\
 ACGAN \cite{apostolidis2020acgan}     & 46.7 & 59.4 \\
 \textbf{LegalSum (ours)}              & \textbf{53.2$\pm$1.4} & \textbf{62.1$\pm$0.9} \\
 \bottomrule
-\end{tabular}
+\end{tabular*}
 \end{table}
 
 \subsection{Ablation Study}
@@ -486,7 +486,7 @@ Table~\ref{tab:ablation} quantifies each component's contribution.
 \small
 \caption{Ablation study on SumMe (split 0, seed 42).}
 \label{tab:ablation}
-\begin{tabular}{l@{\extracolsep{\fill}}cc}
+\begin{tabular*}{\columnwidth}{l@{\extracolsep{\fill}}cc}
 \toprule
 \textbf{Configuration} & \textbf{F1-max} & \textbf{$\Delta$} \\
 \midrule
@@ -507,7 +507,7 @@ w/o TTA Ensemble                         & 51.5 & $-1.7$ \\
 \midrule
 Baseline (DSN, REINFORCE)                & 42.1 & $-11.1$ \\
 \bottomrule
-\end{tabular}
+\end{tabular*}
 \end{table}
 
 Key findings: PPO ($-8.1\%$) and warm-start ($-5.6\%$) are the largest
@@ -525,7 +525,7 @@ on 10 public court recordings using 5-point Likert scales.
 \small
 \caption{Legal expert evaluation (mean over 5 experts $\times$ 10 videos).}
 \label{tab:expert}
-\begin{tabular}{l@{\extracolsep{\fill}}cccc}
+\begin{tabular*}{\columnwidth}{l@{\extracolsep{\fill}}cccc}
 \toprule
 \textbf{Method} & \textbf{Narrative} & \textbf{Legal} & \textbf{Phase} & \textbf{Concise} \\
 \midrule
@@ -533,7 +533,7 @@ DSN (visual only)     & 2.1 & 1.8 & 1.9 & 3.2 \\
 A2Summ (supervised)   & 3.4 & 2.9 & 3.1 & 3.6 \\
 \textbf{LegalSum}     & \textbf{4.2} & \textbf{4.1} & \textbf{4.3} & 3.7 \\
 \bottomrule
-\end{tabular}
+\end{tabular*}
 \end{table}
 
 LegalSum receives substantially higher legal relevance and phase coverage
