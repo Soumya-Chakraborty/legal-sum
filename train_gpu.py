@@ -4,9 +4,9 @@ train_gpu.py — LegalSum Comprehensive GPU Training Script
 ==========================================================
 Runs the full two-phase Counterfactual REINFORCE training on GPU with:
 
-  ✅ Detailed per-epoch console logging (tabular, color-coded)
-  ✅ CSV metric log (every epoch + every eval checkpoint)
-  ✅ 12 diagnostic plots saved every eval cycle:
+  Detailed per-epoch console logging (tabular, color-coded)
+  CSV metric log (every epoch + every eval checkpoint)
+  12 diagnostic plots saved every eval cycle:
        1.  Reward convergence (Phase 1 vs Phase 2 + moving-avg trend)
        2.  F-Score progress (SOTA baseline + best marker + annotations)
        3.  Precision & Recall
@@ -19,9 +19,9 @@ Runs the full two-phase Counterfactual REINFORCE training on GPU with:
        10. Per-video F-score box-plot (distribution over epochs)
        11. Reward variance per epoch (curriculum difficulty proxy)
        12. Dashboard summary panel (2x3 grid of key metrics)
-  ✅ Per-video breakdown table printed at each eval step
-  ✅ Training speed: steps/sec, ETA per epoch
-  ✅ Best checkpoint tracking with full metadata JSON report
+  Per-video breakdown table printed at each eval step
+  Training speed: steps/sec, ETA per epoch
+  Best checkpoint tracking with full metadata JSON report
 
 Usage:
     python train_gpu.py \\

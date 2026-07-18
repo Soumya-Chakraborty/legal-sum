@@ -1,0 +1,122 @@
+\begin{thebibliography}{20}
+\providecommand{\natexlab}[1]{#1}
+
+\bibitem[{Apostolidis et~al.(2020)Apostolidis, Adamantidou, Metsai, Mezaris,
+  and Patras}]{apostolidis2020acgan}
+Apostolidis, E.; Adamantidou, E.; Metsai, A.~I.; Mezaris, V.; and Patras, I.
+  2020.
+\newblock Unsupervised Video Summarization via Attention-Driven Adversarial
+  Learning.
+\newblock In \emph{MMM}, 492--504.
+
+\bibitem[{de~Avila et~al.(2011)de~Avila, Lopes, da~Luz~Jr., and
+  de~Albuquerque~Ara{\'{u}}jo}]{de2011vsumm}
+de~Avila, S. E.~F.; Lopes, A. P.~B.; da~Luz~Jr., A.; and
+  de~Albuquerque~Ara{\'{u}}jo, A. 2011.
+\newblock {VSUMM}: {A} mechanism designed to produce static video summaries and
+  a novel evaluation method.
+\newblock In \emph{Pattern Recognition Letters}, volume~32, 56--68.
+
+\bibitem[{Fajtl et~al.(2018)Fajtl, Sokeh, Argyriou, Monekosso, and
+  Remagnino}]{fajtl2018summarizing}
+Fajtl, J.; Sokeh, H.~S.; Argyriou, V.; Monekosso, D.; and Remagnino, P. 2018.
+\newblock Summarizing Videos with Attention.
+\newblock In \emph{ACCV Workshops}.
+
+\bibitem[{Flamary and Courty(2021)}]{flamary2016optimal}
+Flamary, R.; and Courty, N. 2021.
+\newblock POT: Python Optimal Transport.
+\newblock In \emph{JMLR}.
+
+\bibitem[{Gygli et~al.(2014)Gygli, Grabner, Riemenschneider, and
+  Gool}]{gygli2014creating}
+Gygli, M.; Grabner, H.; Riemenschneider, H.; and Gool, L.~V. 2014.
+\newblock Creating Summaries from User Videos.
+\newblock In \emph{ECCV}, 505--520.
+
+\bibitem[{He et~al.(2022)He, Chen, Chai, and Wang}]{iptnet2022}
+He, G.; Chen, J.; Chai, W.; and Wang, G. 2022.
+\newblock Informative Proposals for Video Summarization via Transformer.
+\newblock In \emph{ECCV}.
+
+\bibitem[{He et~al.(2019)He, Zhao, Xue, and Gao}]{he2019unsupervised}
+He, J.; Zhao, F.; Xue, J.; and Gao, Y. 2019.
+\newblock Unsupervised Video Summarization with a Convolutional Attentive
+  Adversarial Network.
+\newblock In \emph{ACM MM}, 1098--1106.
+
+\bibitem[{He et~al.(2023)He, Liu, Pan, Zhang, Xu, Zheng, and
+  Shen}]{he2023a2summ}
+He, Z.; Liu, B.; Pan, J.; Zhang, S.; Xu, K.; Zheng, J.; and Shen, J. 2023.
+\newblock {A2Summ}: Aligned Audio-Visual Summarization of Egocentric Videos.
+\newblock In \emph{CVPR}.
+
+\bibitem[{Kolouri et~al.(2019)Kolouri, Pope, Martin, and
+  Rohde}]{kolouri2019generalized}
+Kolouri, S.; Pope, P.~E.; Martin, C.~E.; and Rohde, G.~K. 2019.
+\newblock Generalized Sliced Wasserstein Distances.
+\newblock In \emph{NeurIPS}.
+
+\bibitem[{Mahasseni, Lam, and Todorovic(2017)}]{mahasseni2017unsupervised}
+Mahasseni, B.; Lam, M.; and Todorovic, S. 2017.
+\newblock Unsupervised Video Summarization with Adversarial {LSTM} Networks.
+\newblock In \emph{CVPR}, 2982--2991.
+
+\bibitem[{Narasimhan, Rohrbach, and Darrell(2023)}]{narasimhan2023prompts}
+Narasimhan, M.; Rohrbach, A.; and Darrell, T. 2023.
+\newblock Prompts are not Queries: On Leveraging {LLMs} for Video
+  Summarization.
+\newblock In \emph{CVPR Workshops}.
+
+\bibitem[{Otani et~al.(2019)Otani, Nakashima, Rahtu, and
+  Heikkil{\"{a}}}]{otani2019rethinking}
+Otani, M.; Nakashima, Y.; Rahtu, E.; and Heikkil{\"{a}}, J. 2019.
+\newblock Rethinking the Evaluation of Video Summaries.
+\newblock In \emph{CVPR}, 7596--7604.
+
+\bibitem[{Park, Lee, and Sohn(2020)}]{park2020sumgraph}
+Park, J.; Lee, J.; and Sohn, K. 2020.
+\newblock {SumGraph}: Video Summarization via Recursive Graph Model.
+\newblock In \emph{ECCV}, 647--663.
+
+\bibitem[{Sarlin et~al.(2020)Sarlin, DeTone, Malisiewicz, and
+  Rabinovich}]{sarlin2020superglue}
+Sarlin, P.; DeTone, D.; Malisiewicz, T.; and Rabinovich, A. 2020.
+\newblock {SuperGlue}: Learning Feature Matching with Graph Neural Networks.
+\newblock In \emph{CVPR}, 4938--4947.
+
+\bibitem[{Schulman et~al.(2017)Schulman, Wolski, Dhariwal, Radford, and
+  Klimov}]{schulman2017proximal}
+Schulman, J.; Wolski, F.; Dhariwal, P.; Radford, A.; and Klimov, O. 2017.
+\newblock Proximal Policy Optimization Algorithms.
+\newblock In \emph{arXiv:1707.06347}.
+
+\bibitem[{Sharma, Sikka, and Divakaran(2021)}]{sharma2021multimodal}
+Sharma, R.; Sikka, K.; and Divakaran, A. 2021.
+\newblock Multimodal Legal Outcome Prediction.
+\newblock In \emph{ACL Findings}.
+
+\bibitem[{Song et~al.(2015)Song, Vallmitjana, Stent, and
+  Jaimes}]{song2015tvsum}
+Song, Y.; Vallmitjana, J.; Stent, A.; and Jaimes, A. 2015.
+\newblock {TVSum}: Summarizing Web Videos Using Titles.
+\newblock In \emph{CVPR}, 5179--5187.
+
+\bibitem[{Zhang et~al.(2016)Zhang, Chao, Sha, and Grauman}]{zhang2016video}
+Zhang, K.; Chao, W.; Sha, F.; and Grauman, K. 2016.
+\newblock Video Summarization with Long Short-Term Memory.
+\newblock In \emph{ECCV}, 766--782.
+
+\bibitem[{Zhong et~al.(2020)Zhong, Liu, Chen, Wang, Qiu, and
+  Huang}]{zhong2020iteratively}
+Zhong, M.; Liu, P.; Chen, Y.; Wang, D.; Qiu, X.; and Huang, X. 2020.
+\newblock Extractive Summarization as Text Matching.
+\newblock In \emph{ACL}.
+
+\bibitem[{Zhou, Qiao, and Xiang(2018)}]{zhou2018deep}
+Zhou, K.; Qiao, Y.; and Xiang, T. 2018.
+\newblock Deep Reinforcement Learning for Unsupervised Video Summarization with
+  Diversity-Representativeness Reward.
+\newblock In \emph{AAAI}.
+
+\end{thebibliography}

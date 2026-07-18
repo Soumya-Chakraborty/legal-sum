@@ -1,0 +1,51 @@
+This is BibTeX, Version 0.99e (TeX Live 2026/Arch Linux)
+Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
+The top-level auxiliary file: legalsum_aaai2027.aux
+The style file: aaai2027.bst
+Illegal, another \bibstyle command---line 61 of file legalsum_aaai2027.aux
+ : \bibstyle
+ :          {aaai2027}
+I'm skipping whatever remains of this command
+Database file #1: legalsum.bib
+You've used 20 entries,
+            2840 wiz_defined-function locations,
+            678 strings with 7682 characters,
+and the built_in function-call counts, 15235 in all, are:
+= -- 1208
+> -- 854
+< -- 1
++ -- 308
+- -- 289
+* -- 1049
+:= -- 2415
+add.period$ -- 80
+call.type$ -- 20
+change.case$ -- 201
+chr.to.int$ -- 21
+cite$ -- 20
+duplicate$ -- 1044
+empty$ -- 1035
+format.name$ -- 348
+if$ -- 3041
+int.to.chr$ -- 1
+int.to.str$ -- 1
+missing$ -- 213
+newline$ -- 104
+num.names$ -- 80
+pop$ -- 562
+preamble$ -- 1
+purify$ -- 161
+quote$ -- 0
+skip$ -- 541
+stack$ -- 0
+substring$ -- 572
+swap$ -- 520
+text.length$ -- 1
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 180
+warning$ -- 0
+while$ -- 110
+width$ -- 0
+write$ -- 254
+(There was 1 error message)
