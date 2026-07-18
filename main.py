@@ -149,6 +149,8 @@ parser.add_argument('--ensemble-k', type=int, default=10,
                     help="number of MC-Dropout passes at inference (default: 10)")
 parser.add_argument('--phase2-epochs', type=int, default=30,
                     help="number of Phase-2 (exploitation) epochs (default: 30)")
+parser.add_argument('--patience', type=int, default=10,
+                    help="patience for early stopping validation plateau in Phase 1 (default: 10)")
 # Novel curriculum + contrastive options
 parser.add_argument('--use-curriculum', action='store_true', default=True,
                     help="self-paced curriculum: sort videos by reward difficulty (default: True)")
@@ -538,7 +540,8 @@ def train_one_phase(model, optimizer, scheduler, dataset, train_keys,
                     test_keys, num_epochs, baselines, reward_writers,
                     entropy_start, entropy_end, start_epoch=0,
                     use_counterfactual=True, action_lock_start=0.95,
-                    action_lock_end=0.85):
+                    action_lock_end=0.85, enable_early_stopping=False,
+                    patience=10):
     """
     Runs the main RL loop for a single training phase.
 
@@ -553,6 +556,8 @@ def train_one_phase(model, optimizer, scheduler, dataset, train_keys,
     best_epoch = 0
     best_state = None
     baseline_step = {key: 0 for key in train_keys}
+    patience_counter = 0
+    epoch = start_epoch - 1
 
     for epoch in range(start_epoch, start_epoch + num_epochs):
         model.train()
@@ -712,13 +717,20 @@ def train_one_phase(model, optimizer, scheduler, dataset, train_keys,
                 'entropy': []
             }
 
-        if args.eval_courtroom:
-            if (epoch + 1) % 5 == 0 or epoch == start_epoch or epoch == start_epoch + num_epochs - 1:
+        # Check validation F-score at this epoch
+        is_eval_epoch = False
+        if enable_early_stopping:
+            is_eval_epoch = True
+        else:
+            is_eval_epoch = ((epoch + 1) % 5 == 0 or epoch == start_epoch or epoch == start_epoch + num_epochs - 1)
+
+        if is_eval_epoch:
+            if args.eval_courtroom:
                 fm, detailed_metrics = evaluate_with_ensemble(
                     model, dataset, test_keys, use_gpu, k=args.ensemble_k, return_all=True)
                 
                 model._history['epoch'].append(epoch + 1)
-                model._history['f_score'].append(detailed_metrics['f_score'])
+                model._history['f_score'].append(detailed_metrics['f_score_avg'])
                 model._history['spearman'].append(detailed_metrics['spearman'])
                 model._history['kendall'].append(detailed_metrics['kendall'])
                 model._history['event_coverage'].append(detailed_metrics['event_coverage'])
@@ -728,26 +740,25 @@ def train_one_phase(model, optimizer, scheduler, dataset, train_keys,
                 
                 from demo.plotting_utils import plot_training_curves
                 plot_training_curves(model._history, osp.join(args.save_dir, 'plots'))
-                
-                if fm > best_fm:
-                    best_fm = fm
-                    best_epoch = epoch + 1
-                    best_state = {k: v.clone() for k, v in (
-                        model.module.state_dict() if use_gpu else model.state_dict()).items()}
-                    save_checkpoint(best_state, osp.join(args.save_dir, 'model_best.pth.tar'))
-                    print("  ** New best F-score {:.1%} at epoch {}".format(best_fm, best_epoch))
-        else:
-            if (epoch + 1) % 5 == 0 or epoch == start_epoch + num_epochs - 1:
+            else:
                 fm = evaluate_with_ensemble(model, dataset, test_keys, use_gpu, k=args.ensemble_k)
-                if fm > best_fm:
-                    best_fm = fm
-                    best_epoch = epoch + 1
-                    best_state = {k: v.clone() for k, v in (
-                        model.module.state_dict() if use_gpu else model.state_dict()).items()}
-                    save_checkpoint(best_state, osp.join(args.save_dir, 'model_best.pth.tar'))
-                    print("  ** New best F-score {:.1%} at epoch {}".format(best_fm, best_epoch))
 
-    return best_fm, best_epoch, best_state, baselines, reward_writers
+            if fm > best_fm:
+                best_fm = fm
+                best_epoch = epoch + 1
+                best_state = {k: v.clone() for k, v in (
+                    model.module.state_dict() if use_gpu else model.state_dict()).items()}
+                save_checkpoint(best_state, osp.join(args.save_dir, 'model_best.pth.tar'))
+                print("  ** New best F-score {:.1%} at epoch {}".format(best_fm, best_epoch))
+                patience_counter = 0
+            else:
+                if enable_early_stopping:
+                    patience_counter += 1
+                    if patience_counter >= patience:
+                        print("  ** Early stopping triggered: validation F-score plateaued for {} epochs.".format(patience))
+                        break
+
+    return best_fm, best_epoch, best_state, baselines, reward_writers, epoch + 1
 
 
 def main():
@@ -835,12 +846,13 @@ def main():
     baselines = {key: 0.0 for key in train_keys}
     reward_writers = {key: [] for key in train_keys}
 
-    best_fm1, best_epoch1, best_state1, baselines, reward_writers = train_one_phase(
+    best_fm1, best_epoch1, best_state1, baselines, reward_writers, actual_phase1_epochs = train_one_phase(
         model, optimizer1, scheduler1, dataset, train_keys, test_keys,
         num_epochs=phase1_epochs, baselines=baselines, reward_writers=reward_writers,
         entropy_start=args.entropy_start, entropy_end=0.02,
         start_epoch=0, use_counterfactual=args.use_counterfactual,
         action_lock_start=args.action_lock_start, action_lock_end=args.action_lock_end,
+        enable_early_stopping=True, patience=args.patience
     )
 
     print("\nPhase 1 complete. Best F-score: {:.1%} at epoch {}".format(
@@ -868,12 +880,12 @@ def main():
         optimizer2, T_max=args.phase2_epochs, eta_min=args.lr * 0.001)
     reward_writers2 = {key: [] for key in train_keys}
 
-    best_fm2, best_epoch2, best_state2, _, reward_writers2 = train_one_phase(
+    best_fm2, best_epoch2, best_state2, _, reward_writers2, _ = train_one_phase(
         model, optimizer2, scheduler2, dataset, train_keys, test_keys,
         num_epochs=args.phase2_epochs, baselines=baselines,
         reward_writers=reward_writers2,
         entropy_start=0.02, entropy_end=args.entropy_end,
-        start_epoch=phase1_epochs, use_counterfactual=args.use_counterfactual,
+        start_epoch=actual_phase1_epochs, use_counterfactual=args.use_counterfactual,
         action_lock_start=args.action_lock_end,   # already lenient in Phase 2
         action_lock_end=args.action_lock_end,
     )
