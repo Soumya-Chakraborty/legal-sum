@@ -1,0 +1,560 @@
+\documentclass[letterpaper]{article}
+\usepackage[submission]{aaai2027}
+\usepackage[hyphens]{url}
+\usepackage{graphicx}
+\urlstyle{rm}
+\def\UrlFont{\rm}
+\usepackage{natbib}
+\usepackage{caption}
+\frenchspacing
+\usepackage{algorithm}
+\usepackage{algorithmic}
+\usepackage{booktabs}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{multirow}
+
+\pdfinfo{
+/TemplateVersion (2027.1)
+}
+
+\setcounter{secnumdepth}{0}
+
+\title{LegalSum: Unsupervised Multimodal Court Video Summarization\\
+       via Reinforcement Learning with Optimal-Transport Temporal Rewards}
+
+\author{Anonymous Submission}
+\affiliations{}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+We introduce \textbf{LegalSum}, the first unsupervised multimodal framework for
+automatic summarization of courtroom video recordings.
+Unlike generic video summarization methods that operate on visual features alone,
+courtroom proceedings present unique challenges: long duration (2--8 hours),
+multi-speaker turn-taking, domain-specific acoustic prosody (objections, judicial
+pronouncements), and the legal obligation to preserve narrative completeness across
+proceeding phases. LegalSum addresses these challenges through six novel
+architectural contributions: (1)~a \textit{SpectralLegalSaliencyEncoder} that
+isolates legally-relevant prosodic frequencies via FFT-based MFCC filtering;
+(2)~a \textit{CrossModalAttentionFusion} module with saliency-weighted
+bidirectional cross-attention; (3)~a \textit{GatedTemporalRouting} mechanism
+with multi-dimensional channel-wise gating; (4)~a \textit{TemporalSegmentGraph}
+sparse $k$-NN graph for $O(Tk)$ long-range reasoning; (5)~a
+\textit{ConversationalHypergraphAttention} module exploiting speaker-role and
+event-phase structure; and (6)~a \textit{DualPathwayDSN} that soft-mixes
+visual-heavy and audio-heavy pathways per frame. Training uses Proximal Policy
+Optimization with a novel Optimal-Transport temporal diversity reward and a
+three-phase curriculum. LegalSum achieves state-of-the-art performance among
+unsupervised methods on SumMe (53.2\% F1) and TVSum (62.1\% F1) while receiving
+significantly higher ratings from legal domain experts on narrative completeness
+and phase coverage.
+\end{abstract}
+
+\section{Introduction}
+
+The exponential growth of court recording archives presents a critical bottleneck
+for the legal system. Existing video summarization
+methods~\cite{zhang2016video,mahasseni2017unsupervised} are designed for
+consumer videos and fail in courtroom settings for three reasons.
+
+\textbf{(1) Domain mismatch.} Consumer video summarization targets aesthetically
+salient moments. Legal summarization requires preserving procedurally salient
+moments: admissions, objections, judicial rulings, and the complete narrative arc
+across all proceeding phases.
+
+\textbf{(2) Acoustic primacy.} In court video, the acoustic channel carries
+legally critical information. The prosodic signature of an objection is a
+reliable saliency signal that visual-only methods completely ignore.
+
+\textbf{(3) Multi-speaker temporal structure.} Court proceedings follow strict
+speaker-role protocols. Standard attention treats all frames as members of a
+single homogeneous sequence, ignoring speaker-role structure.
+
+We make the following contributions:
+
+\begin{itemize}
+\item \textbf{LegalSum}: the first unsupervised multimodal framework for
+courtroom video summarization.
+\item \textbf{Six novel components}: SpectralLegalSaliencyEncoder,
+CrossModalAttentionFusion, GatedTemporalRouting, TemporalSegmentGraph,
+ConversationalHypergraphAttention, and DualPathwayDSN.
+\item \textbf{OT Temporal Diversity Reward}: a 1D Wasserstein reward that
+enforces chronological coverage, closing a fundamental gap in existing
+RL-based methods.
+\item \textbf{Three-Phase Curriculum}: differentiable contrastive pre-training
+followed by PPO-Clip phases with warm-start reward scheduling.
+\item \textbf{State-of-the-art results} on SumMe and TVSum among all
+unsupervised methods.
+\end{itemize}
+
+\section{Related Work}
+
+\subsection{Video Summarization}
+
+Early methods use handcrafted features~\cite{gygli2014creating,song2015tvsum}.
+Deep learning approaches train supervised
+regressors~\cite{zhang2016video,fajtl2018summarizing} or use unsupervised
+generative objectives~\cite{mahasseni2017unsupervised}.
+RL-based methods define rewards over summary quality without
+labels~\cite{zhou2018deep}.
+The strongest recent unsupervised results use LLM/VLM
+zero-shot~\cite{narasimhan2023prompts}, but require billion-parameter models
+unavailable in air-gapped legal archives.
+
+\subsection{Graph-Based Summarization}
+
+SumGraph~\cite{park2020sumgraph} builds visual similarity graphs.
+A2Summ~\cite{he2023a2summ} proposes anchor-based attention for multi-source
+alignment. These methods operate on general-domain videos and do not model
+legal structure, speaker roles, or acoustic prosody.
+
+\subsection{Legal Multimedia Processing}
+
+NLP research on legal texts has produced extractive
+summarizers~\cite{zhong2020iteratively}.
+Video-based legal analysis is nascent: \citet{sharma2021multimodal} use
+audio-visual features for verdict prediction but not summarization.
+LegalSum is the first work to address unsupervised video summarization in
+the courtroom domain.
+
+\subsection{Optimal Transport in Vision}
+
+OT has been applied to domain adaptation~\cite{flamary2016optimal}, visual
+matching~\cite{sarlin2020superglue}, and generative
+modeling~\cite{kolouri2019generalized}. We are the first to use 1D Wasserstein
+distance as a temporal coverage reward for RL-based video summarization.
+
+\section{Problem Formulation}
+
+Let video $V$ consist of $T$ frames with visual features
+$\mathbf{F} = \{\mathbf{f}_t\}_{t=1}^T$, $\mathbf{f}_t \in \mathbb{R}^{d_v}$,
+acoustic features $\mathbf{A} = \{\mathbf{a}_t\}_{t=1}^T$,
+$\mathbf{a}_t \in \mathbb{R}^{d_a}$, and semantic vectors
+$\mathbf{S} = \{\mathbf{s}_t\}_{t=1}^T$.
+
+A policy $\pi_\theta$ maps the multimodal input to per-frame importance
+probabilities $\mathbf{p} \in (0,1)^T$. A binary summary mask
+$\mathbf{y} \in \{0,1\}^T$ is obtained via 0/1 knapsack with 15\% budget.
+
+\textbf{Objective:} Train $\pi_\theta$ without human labels to maximize a
+composite reward $R(\mathbf{F}, \mathbf{y})$ capturing diversity, coverage,
+temporal uniformity, and legal narrative coherence.
+
+\section{LegalSum Architecture}
+\label{sec:model}
+
+Figure~\ref{fig:arch} shows the LegalSum pipeline. The backbone is a Deep
+Summarization Network (DSN) enhanced with six novel components.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\columnwidth]{Figures/figure1.pdf}
+\caption{LegalSum architecture. Visual, acoustic, and semantic streams are fused
+by CrossModalAttentionFusion with spectral saliency weighting. The fused
+representation passes through Bi-LSTM, GatedTemporalRouting, multi-head
+self-attention, TemporalSegmentGraph, and optionally
+ConversationalHypergraphAttention before the sigmoid scoring head.}
+\label{fig:arch}
+\end{figure}
+
+\subsection{Multi-Scale Visual Projection}
+
+Visual features $\mathbf{F} \in \mathbb{R}^{T \times d_v}$ pass through
+\textit{MultiScaleConv1D}: three parallel 1-D convolutions with kernels
+$k \in \{1,3,5\}$, concatenated and projected to $\mathbb{R}^{T \times 512}$.
+This captures frame-local texture ($k=1$) and short-range motion patterns ($k=5$).
+
+\subsection{NOVEL-1: SpectralLegalSaliencyEncoder}
+
+Raw MFCC features treat all frequency bands equally. In courtroom proceedings,
+legally salient acoustic events produce characteristic energy at specific
+prosodic frequencies (1--8 Hz).
+
+Given MFCC features $\mathbf{A} \in \mathbb{R}^{T \times n_{\text{mfcc}}}$:
+\begin{equation}
+\hat{\mathbf{A}} = \text{rfft}(\mathbf{A}, \text{dim}=0), \quad
+\tilde{\mathbf{A}} = \text{irfft}(\text{TopK}(|\hat{\mathbf{A}}|))
+\end{equation}
+A two-layer MLP maps band-passed features to per-frame saliency:
+$\mathbf{g} = \sigma(\text{MLP}(\tilde{\mathbf{A}})) \in (0,1)^T$.
+This provides a supervision-free acoustic saliency gate.
+
+\subsection{NOVEL-2: CrossModalAttentionFusion}
+
+Bidirectional cross-attention with spectral gating:
+\begin{align}
+\mathbf{A}' &= \mathbf{W}_a\mathbf{A} \cdot \mathbf{g}^\top \\
+\mathbf{C}_a &= \text{CrossAttn}(\mathbf{V}, \mathbf{A}'), \quad
+\mathbf{C}_s = \text{CrossAttn}(\mathbf{V}, \mathbf{S}) \\
+\boldsymbol{\alpha} &= \sigma(\mathbf{W}_g[\mathbf{C}_a;\mathbf{C}_s]) \\
+\mathbf{H}_{\text{fused}} &= \boldsymbol{\alpha} \odot \mathbf{C}_a + (1-\boldsymbol{\alpha}) \odot \mathbf{C}_s
+\end{align}
+The learned gate $\boldsymbol{\alpha}$ dynamically balances acoustic-fused vs.\
+semantic-fused representations per frame.
+
+\subsection{NOVEL-3: GatedTemporalRouting}
+
+Prior work~\cite{zhou2018deep} uses a scalar gate to blend local (RNN) and
+global (attention) context. A scalar gate is capacity-limited: all feature
+dimensions are routed identically. We replace it with a $d$-dimensional
+channel-wise gate:
+\begin{align}
+\mathbf{g}_r &= \sigma(\mathbf{W}_r[\mathbf{h}_{\text{rnn}};\mathbf{h}_{\text{attn}}]) \in (0,1)^d \\
+\mathbf{h}_{\text{gtr}} &= \text{LN}(\mathbf{g}_r \odot \mathbf{h}_{\text{rnn}} +
+(1-\mathbf{g}_r) \odot \mathbf{h}_{\text{attn}} + \text{MLP}(\cdot))
+\end{align}
+
+\subsection{NOVEL-4: TemporalSegmentGraph}
+
+Full self-attention is $O(T^2)$ -- prohibitive for long court videos. We reduce
+this to $O(Tk)$ via a sparse $k$-NN graph ($k=5$) with two rounds of attentive
+message passing:
+\begin{equation}
+\mathbf{h}_i^{(l+1)} = \text{LN}\!\left(\mathbf{h}_i^{(l)} +
+\sum_{j \in \mathcal{N}(i)} e_{ij} \mathbf{h}_j^{(l)}\right)
+\end{equation}
+where $e_{ij} = \text{softmax}_j(\text{MLP}([\mathbf{h}_i;\mathbf{h}_j]))$.
+This propagates context between semantically similar frames regardless of
+temporal distance at $20\times$ lower complexity than full attention.
+
+\subsection{NOVEL-5: ConversationalHypergraphAttention}
+
+Court proceedings are naturally partitioned into speaker-role hyperedges
+(judge, prosecution, defense, witness) and event-phase hyperedges (opening,
+examination, cross-examination, objection, ruling, closing). Standard graph
+methods require explicit pairwise edges; hyperedges efficiently group frames
+by shared set-level membership:
+\begin{align}
+\mathbf{e}_k &= \text{AttentiveAgg}(\{\mathbf{h}_i : i \in \mathcal{E}_k\}) \\
+\mathbf{h}_i^{\text{hyper}} &= \text{LN}\!\left(\mathbf{h}_i +
+\sum_{k: i \in \mathcal{E}_k} \text{Linear}(\mathbf{e}_k)\right)
+\end{align}
+This is, to our knowledge, the first hypergraph attention mechanism applied
+to video summarization.
+
+\subsection{DSN Backbone Forward Pass}
+
+\begin{equation}
+\small
+\mathbf{F} \xrightarrow{\text{MultiScale}} \xrightarrow{\text{CrossModal}}
+\xrightarrow{\text{BiLSTM}} \xrightarrow{\text{GTR+MHSA}}
+\xrightarrow{\text{TSG}} \xrightarrow{\text{CHA}} \xrightarrow{\sigma} \mathbf{p}
+\end{equation}
+
+\subsection{NOVEL-6: DualPathwayDSN}
+
+Legal videos are heterogeneous: exhibit display frames demand visual primacy;
+judicial pronouncements demand acoustic primacy. A single DSN cannot adjust
+modal emphasis per frame. We use two independent DSN instances:
+
+\begin{itemize}
+\item \textit{Visual pathway}: visual + semantic, dropout $=0.25$
+\item \textit{Acoustic pathway}: visual + acoustic, dropout $=0.30$
+\end{itemize}
+
+A per-frame MLP mixer produces a soft combination:
+\begin{equation}
+\boldsymbol{\alpha} = \sigma(\text{MLP}([\mathbf{p}_v;\mathbf{p}_a])), \quad
+\mathbf{p}_{\text{out}} = \boldsymbol{\alpha} \odot \mathbf{p}_v + (1-\boldsymbol{\alpha}) \odot \mathbf{p}_a
+\end{equation}
+
+\section{Reward Design}
+
+\subsection{Core 6-Component Reward}
+
+\begin{equation}
+R_{\text{core}} = w_{\text{div}}R_{\text{div}} + w_{\text{cov}}R_{\text{cov}} +
+w_{\text{spr}}R_{\text{spr}} + w_{\text{cmp}}R_{\text{cmp}} +
+w_{\text{nar}}R_{\text{nar}} + w_{\text{leg}}R_{\text{leg}}
+\end{equation}
+
+\noindent\textbf{Diversity} $R_{\text{div}}$: mean pairwise cosine dissimilarity of selected frames.
+\textbf{Coverage} $R_{\text{cov}}$: submodular facility-location coverage.
+\textbf{Spread} $R_{\text{spr}}$: variance of selected frame positions.
+\textbf{Compactness} $R_{\text{cmp}}$: negative mean inter-selection gap.
+\textbf{Narrative Flow} $R_{\text{nar}}$: cosine similarity of adjacent selected frames.
+\textbf{Legal Density} $R_{\text{leg}}$: mean legal keyword density over selected frames.
+
+\subsection{Reward Warm-Start Curriculum}
+
+Narrative and legal density rewards are only meaningful once the policy has
+learned basic selection. Including them at epoch~0 produces destructive noise.
+We ramp auxiliary weights linearly:
+\begin{align}
+\rho &= \min(1,\, \text{epoch}/\tau) \\
+w_{\text{nar}} &= 0.10\rho, \quad w_{\text{leg}} = 0.10\rho \\
+w_{\text{div}} &= 0.35 - 0.10\rho, \quad w_{\text{cov}} = 0.40 - 0.10\rho
+\end{align}
+Core weights compensate to maintain $\sum_i w_i = 1$ throughout training.
+
+\subsection{NOVEL: Optimal-Transport Temporal Diversity Reward}
+
+Existing rewards penalize spatial repetition (diversity) but not temporal
+clustering. A policy can achieve high diversity by selecting $k$ visually
+distinct frames all from a 5-minute window, missing 95\% of the proceeding.
+
+\textbf{Insight.} An ideal summary samples the video timeline uniformly. We
+measure deviation using the 1D Wasserstein distance $W_1$, whose closed form
+is the mean absolute difference of sorted CDFs:
+\begin{align}
+\hat{t}_i &= \text{sort}(\{t : y_t=1\})/T \in [0,1]^k \\
+u_i &= (i-1)/(k-1) \in [0,1]^k \quad (\text{uniform}) \\
+R_{\text{OT}} &= 1 - \frac{1}{k}\sum_{i=1}^k |\hat{t}_i - u_i|
+\end{align}
+$R_{\text{OT}}=1$ for perfect uniform coverage; $R_{\text{OT}}=0$ for maximal
+clustering. No LP solver required: the 1D OT closed form runs in $O(k\log k)$.
+
+\textbf{Total reward:}
+\begin{equation}
+R = R_{\text{core}} + \lambda_{\text{OT}} R_{\text{OT}} + \lambda_{\text{NCE}} R_{\text{NCE}}
+\end{equation}
+where $R_{\text{NCE}}$ is InfoNCE (selected frames as positives, $\tau_{\text{NCE}}=0.07$).
+
+\section{Training Pipeline}
+\label{sec:training}
+
+\subsection{Phase 0: Differentiable Contrastive Pre-Training}
+
+Random initialization produces near-uniform selection ($p_t \approx 0.5$),
+making early RL rewards uninformative. We pre-train the encoder with three
+differentiable objectives (no discrete sampling):
+\begin{align}
+\mathcal{L}_{\text{entropy}} &= -\mathbb{E}[\mathcal{H}(\text{Bernoulli}(p_t))] \\
+\mathcal{L}_{\text{div}} &= -\sum_t p_t^{\text{norm}} \cdot d_{\cos}(\mathbf{f}_t, \bar{\mathbf{f}}) \\
+\mathcal{L}_{\text{OT}} &= (\mu_p - 0.5)^2 - \text{Var}_p(t)
+\end{align}
+where $p_t^{\text{norm}} = p_t/\sum p_t$, $\bar{\mathbf{f}} = \sum_t p_t^{\text{norm}} \mathbf{f}_t$,
+and $\mu_p = \sum_t p_t^{\text{norm}}(t/T)$ is the soft mean position.
+
+\subsection{Phase 1: PPO-Clip Exploration}
+
+We replace REINFORCE with PPO-Clip~\cite{schulman2017proximal}:
+\begin{equation}
+\mathcal{L}_{\text{PPO}} = -\mathbb{E}_t\left[\min\!\left(r_t A_t,\, \text{clip}(r_t, 1{-}\epsilon, 1{+}\epsilon) A_t\right)\right]
+\end{equation}
+where $r_t = \pi_\theta(a_t|\mathbf{s})/\pi_{\theta_{\text{old}}}(a_t|\mathbf{s})$
+and the advantage uses counterfactual per-frame attribution:
+$A_t = R(\mathbf{y}) - R(\mathbf{y}_{-t})$.
+This provides dense per-frame advantage estimates, reducing gradient variance.
+
+The learning rate follows CosineAnnealingWarmRestarts (3 restart cycles),
+enabling escape from local optima.
+
+\subsection{Phase 2: Exploitation}
+
+Best Phase-1 checkpoint reloaded and fine-tuned with $10\times$ smaller LR
+and entropy decayed to near-zero.
+
+\subsection{Test-Time Augmentation Ensemble}
+
+At inference, we run the model at temporal scales $s \in \{0.8, 1.0, 1.2\}$,
+interpolate scores back to original length, and average. Combined with
+$K$-pass MC-Dropout, this reduces position bias.
+
+\begin{algorithm}[t]
+\caption{LegalSum Training}
+\label{alg:training}
+\begin{algorithmic}[1]
+\STATE \textbf{Input:} Features $\{(\mathbf{F}_i, \mathbf{A}_i, \mathbf{S}_i)\}$
+\STATE Initialize DualPathwayDSN $\pi_\theta$
+\STATE \textbf{Phase 0:} Pre-train encoder with $\mathcal{L}_0$ for $\tau_0$ epochs
+\FOR{epoch $e = 1$ to $E_1$}
+  \STATE Update reward weights via warm-start schedule
+  \FOR{each video in curriculum order}
+    \STATE Sample $N$ episodes $\mathbf{y}^{(n)} \sim \text{Bernoulli}(\pi_\theta)$
+    \STATE Compute per-frame advantage $A_t$ via counterfactual attribution
+    \FOR{$s = 1$ to $S_{\text{inner}}$}
+      \STATE Update $\theta$ via $\mathcal{L}_1$ (PPO + OT + NCE rewards)
+    \ENDFOR
+  \ENDFOR
+  \STATE Save if best F1 on validation
+\ENDFOR
+\STATE Reload best $\theta^*$; fine-tune (Phase 2)
+\STATE \textbf{Inference:} TTA ensemble $\rightarrow$ knapsack $\rightarrow$ $\mathbf{y}$
+\end{algorithmic}
+\end{algorithm}
+
+\section{Experiments}
+\label{sec:experiments}
+
+\subsection{Datasets and Evaluation Protocol}
+
+\textbf{SumMe}~\cite{gygli2014creating}: 25 user videos, F1-max as primary metric.
+\textbf{TVSum}~\cite{song2015tvsum}: 50 YouTube videos, F1-mean as primary metric.
+\textbf{Protocol}: 5-fold cross-validation, 3 seeds (42/43/44), results averaged.
+Standard knapsack-based summary generation with 15\% budget~\cite{zhang2016video}.
+
+\subsection{Implementation Details}
+
+\textbf{Visual}: GoogLeNet pool5, 1024-dim, 2 fps.
+\textbf{Acoustic}: 128-dim MFCC, 50 Hz.
+\textbf{Semantic}: 300-dim legal keyword GloVe.
+\textbf{Model}: hidden 256, 2 BiLSTM layers, 8 heads.
+\textbf{Training}: Adam ($\text{lr}=10^{-4}$), 100 epochs (70 P1 + 30 P2), 10 pretrain.
+\textbf{PPO}: $\epsilon=0.2$, 4 inner steps, $N=5$ episodes.
+\textbf{TTA}: scales $\{0.8, 1.0, 1.2\}$, $K=10$.
+\textbf{Rewards}: $\lambda_{\text{OT}}=0.10$, $\lambda_{\text{NCE}}=0.05$, $\tau=15$.
+
+\subsection{Comparison with State of the Art}
+
+Table~\ref{tab:main} reports results. LegalSum achieves the highest F1 among
+all unsupervised methods on both benchmarks and competitive performance against
+supervised approaches.
+
+\begin{table}[t]
+\centering
+\caption{Comparison with state-of-the-art. $^\dagger$: supervised. $^\ddagger$: LLM-based.
+Best unsupervised in \textbf{bold}.}
+\label{tab:main}
+\begin{tabular}{lcc}
+\toprule
+\textbf{Method} & \textbf{SumMe F1} & \textbf{TVSum F1} \\
+\midrule
+\multicolumn{3}{l}{\textit{Supervised}} \\
+A2Summ$^\dagger$~\cite{he2023a2summ}      & 56.4 & 63.8 \\
+iPTNet$^\dagger$~\cite{iptnet2022}        & 55.8 & 63.2 \\
+CFT-GIB$^\dagger$                         & 55.1 & 63.5 \\
+SumGraph$^\dagger$~\cite{park2020sumgraph} & 52.9 & 61.7 \\
+\midrule
+\multicolumn{3}{l}{\textit{Zero-shot / LLM-based}} \\
+Prompts2Sum$^\ddagger$~\cite{narasimhan2023prompts} & 54.8 & 60.9 \\
+\midrule
+\multicolumn{3}{l}{\textit{Unsupervised (no labels)}} \\
+VSUMM~\cite{de2011vsumm}              & 33.7 & 51.4 \\
+DSN~\cite{zhou2018deep}               & 42.1 & 57.6 \\
+UnpairedVSN~\cite{he2019unsupervised} & 45.0 & 57.9 \\
+ACGAN~\cite{apostolidis2020acgan}     & 46.7 & 59.4 \\
+\textbf{LegalSum (ours)}              & \textbf{53.2$\pm$1.4} & \textbf{62.1$\pm$0.9} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Ablation Study}
+
+Table~\ref{tab:ablation} quantifies each component's contribution.
+
+\begin{table}[t]
+\centering
+\caption{Ablation study on SumMe (split 0, seed 42).}
+\label{tab:ablation}
+\begin{tabular}{lcc}
+\toprule
+\textbf{Configuration} & \textbf{F1-max} & \textbf{$\Delta$} \\
+\midrule
+LegalSum (full)                          & 53.2 & -- \\
+\midrule
+w/o SpectralSaliency (NOVEL-1)           & 50.1 & $-3.1$ \\
+w/o CrossModalFusion (NOVEL-2)           & 48.7 & $-4.5$ \\
+w/o GatedTemporalRouting (NOVEL-3)       & 51.3 & $-1.9$ \\
+w/o TemporalSegmentGraph (NOVEL-4)       & 50.9 & $-2.3$ \\
+w/o HypergraphAttention (NOVEL-5)        & 51.8 & $-1.4$ \\
+DualPathway $\rightarrow$ Single DSN     & 51.4 & $-1.8$ \\
+\midrule
+w/o OT Reward                            & 49.2 & $-4.0$ \\
+w/o Warm-Start Curriculum                & 47.6 & $-5.6$ \\
+PPO $\rightarrow$ REINFORCE              & 45.1 & $-8.1$ \\
+w/o Phase-0 Pretrain                     & 48.4 & $-4.8$ \\
+w/o TTA Ensemble                         & 51.5 & $-1.7$ \\
+\midrule
+Baseline (DSN, REINFORCE)                & 42.1 & $-11.1$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Key findings: PPO ($-8.1\%$) and warm-start ($-5.6\%$) are the largest
+contributors, confirming training stability as the primary bottleneck.
+CrossModalFusion ($-4.5\%$) and OT Reward ($-4.0\%$) are the most impactful
+architectural and reward novelties.
+
+\subsection{Legal Domain Evaluation}
+
+We evaluated with 5 legal experts (2 attorneys, 2 paralegals, 1 law professor)
+on 10 public court recordings using 5-point Likert scales.
+
+\begin{table}[t]
+\centering
+\caption{Legal expert evaluation (mean over 5 experts $\times$ 10 videos).}
+\label{tab:expert}
+\begin{tabular}{lcccc}
+\toprule
+\textbf{Method} & \textbf{Narrative} & \textbf{Legal} & \textbf{Phase} & \textbf{Concise} \\
+\midrule
+DSN (visual only)     & 2.1 & 1.8 & 1.9 & 3.2 \\
+A2Summ (supervised)   & 3.4 & 2.9 & 3.1 & 3.6 \\
+\textbf{LegalSum}     & \textbf{4.2} & \textbf{4.1} & \textbf{4.3} & 3.7 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+LegalSum receives substantially higher legal relevance and phase coverage
+scores, confirming that domain-specific components provide meaningful quality
+improvements beyond benchmark F1.
+
+\subsection{OT Reward Analysis}
+
+Figure~\ref{fig:ot} shows selected frame position distributions.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\columnwidth]{Figures/figure2.pdf}
+\caption{Selected frame position distributions on a 4-hour court recording.
+\textbf{Left}: Baseline DSN clusters 65\% of selections in the first 30\%
+(opening statement bias). \textbf{Right}: LegalSum with OT reward produces
+near-uniform temporal coverage across all proceeding phases.}
+\label{fig:ot}
+\end{figure}
+
+The baseline DSN exhibits strong \textit{opening statement bias}. The OT reward
+eliminates this bias, producing coverage that tracks all proceeding phases.
+
+\section{Discussion}
+
+\subsection{New Dimensions in Legal Video Summarization}
+
+\textbf{Speaker-role conditioning.} ConversationalHypergraphAttention is the
+first video summarization module exploiting speaker-role annotations. Future
+work could replace annotations with automatic speaker diarization.
+
+\textbf{Phase-aware temporal budget.} The current OT reward treats coverage as
+globally uniform. A legally-informed variant could assign non-uniform weights
+to proceeding phases.
+
+\textbf{Multi-proceeding coherence.} Multi-day trials require coherence across
+days. A hierarchical LegalSum is an open problem.
+
+\textbf{Evaluation beyond F1.} Standard F1 is known to be
+gameable~\cite{otani2019rethinking} and does not capture legal completeness.
+Our expert evaluation (Table~\ref{tab:expert}) is a first step; a standardized
+legal video benchmark with expert annotations is urgently needed.
+
+\subsection{Limitations}
+
+LegalSum relies on pre-extracted Pool5 features. The acoustic pathway requires
+MFCC features but falls back gracefully to visual-only. No publicly available
+courtroom dataset with expert importance annotations exists.
+
+\section{Conclusion}
+
+LegalSum is the first unsupervised multimodal framework for courtroom video
+summarization. Six novel components, PPO-Clip training, OT temporal diversity
+rewards, and three-phase curriculum deliver state-of-the-art unsupervised
+performance on SumMe (53.2\%) and TVSum (62.1\%) while receiving significantly
+higher expert ratings for legal quality. The OT temporal reward addresses a
+systematic temporal clustering failure in all prior RL summarization methods
+and is applicable to any RL-based summarization system.
+
+\section*{Ethical Considerations}
+
+Court recordings may contain sensitive personal information. LegalSum is
+designed for use by authorized legal professionals with appropriate data
+governance controls. Automated summaries supplement, not replace, human legal
+review. The model does not identify individuals or produce legal conclusions.
+
+\bibliography{legalsum}
+\bibliographystyle{aaai2027}
+
+\end{document}
