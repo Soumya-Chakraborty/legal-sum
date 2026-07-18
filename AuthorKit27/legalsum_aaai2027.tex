@@ -14,6 +14,9 @@
 \usepackage{amssymb}
 \usepackage{multirow}
 
+\usepackage{tikz}
+\usetikzlibrary{shapes,arrows,positioning,fit,backgrounds,calc}
+
 \pdfinfo{
 /TemplateVersion (2027.1)
 }
@@ -152,12 +155,53 @@ Summarization Network (DSN) enhanced with six novel components.
 
 \begin{figure}[t]
 \centering
-\includegraphics[width=\columnwidth]{Figures/figure1.pdf}
+\begin{tikzpicture}[
+    node distance=1.0cm and 0.8cm,
+    box/.style={draw, rectangle, rounded corners, minimum width=2.2cm, minimum height=0.7cm, align=center, fill=blue!5},
+    novel/.style={draw=red!70, rectangle, rounded corners, minimum width=2.2cm, minimum height=0.7cm, align=center, fill=red!5, thick},
+    arrow/.style={-latex', thick},
+    title/.style={font=\bfseries\footnotesize}
+]
+    % Inputs
+    \node (vis) [box] {Visual\\$\mathbf{F}$};
+    \node (aud) [box, right=of vis] {Acoustic\\$\mathbf{A}$};
+    \node (sem) [box, right=of aud] {Semantic\\$\mathbf{S}$};
+    
+    % Novel 1
+    \node (n1) [novel, below=of aud, yshift=-0.2cm] {N-1: SpectralSaliency\\Encoder};
+    \draw [arrow] (aud) -- (n1);
+    
+    % Novel 2
+    \node (n2) [novel, below=of n1, yshift=-0.2cm] {N-2: CrossModal\\Fusion};
+    \draw [arrow] (vis.south) -- ++(0,-0.6) -| (n2.140);
+    \draw [arrow] (n1) -- (n2);
+    \draw [arrow] (sem.south) -- ++(0,-0.6) -| (n2.40);
+    
+    % DSN layers
+    \node (bilstm) [box, below=of n2, yshift=-0.2cm] {Bi-LSTM};
+    \draw [arrow] (n2) -- (bilstm);
+    
+    % Novel 3
+    \node (n3) [novel, below=of bilstm, yshift=-0.2cm] {N-3: GatedTemporal\\Routing};
+    \draw [arrow] (bilstm) -- (n3);
+    
+    % Novel 4
+    \node (n4) [novel, below=of n3, yshift=-0.2cm] {N-4: TemporalSegment\\Graph ($k$-NN)};
+    \draw [arrow] (n3) -- (n4);
+    
+    % Novel 5
+    \node (n5) [novel, below=of n4, yshift=-0.2cm] {N-5: Conversational\\Hypergraph};
+    \draw [arrow] (n4) -- (n5);
+    
+    % Output
+    \node (out) [box, below=of n5, yshift=-0.2cm] {Sigmoid Score\\$\mathbf{p}$};
+    \draw [arrow] (n5) -- (out);
+
+\end{tikzpicture}
 \caption{LegalSum architecture. Visual, acoustic, and semantic streams are fused
 by CrossModalAttentionFusion with spectral saliency weighting. The fused
-representation passes through Bi-LSTM, GatedTemporalRouting, multi-head
-self-attention, TemporalSegmentGraph, and optionally
-ConversationalHypergraphAttention before the sigmoid scoring head.}
+representation passes through Bi-LSTM, GatedTemporalRouting,
+TemporalSegmentGraph, and ConversationalHypergraphAttention before the sigmoid scoring head.}
 \label{fig:arch}
 \end{figure}
 
@@ -500,7 +544,43 @@ Figure~\ref{fig:ot} shows selected frame position distributions.
 
 \begin{figure}[t]
 \centering
-\includegraphics[width=\columnwidth]{Figures/figure2.pdf}
+\begin{tikzpicture}
+    % Baseline Plot (Left)
+    \draw[thick,->] (0,0) -- (3.2,0) node[right, font=\tiny] {$t/T$};
+    \draw[thick,->] (0,0) -- (0,1.8) node[above, font=\tiny] {Density};
+    \node at (1.5,2.0) [font=\bfseries\scriptsize] {Baseline DSN};
+    
+    % Bars for baseline (clustered early)
+    \fill[blue!40,draw=blue] (0.1,0) rectangle (0.3,1.4);
+    \fill[blue!40,draw=blue] (0.4,0) rectangle (0.6,1.1);
+    \fill[blue!40,draw=blue] (0.7,0) rectangle (0.9,0.8);
+    \fill[blue!40,draw=blue] (1.0,0) rectangle (1.2,0.4);
+    \fill[blue!40,draw=blue] (1.3,0) rectangle (1.5,0.2);
+    \fill[blue!40,draw=blue] (1.6,0) rectangle (1.8,0.1);
+    \fill[blue!40,draw=blue] (1.9,0) rectangle (2.1,0.05);
+    \fill[blue!40,draw=blue] (2.2,0) rectangle (2.4,0.05);
+    \fill[blue!40,draw=blue] (2.5,0) rectangle (2.7,0.0);
+    \fill[blue!40,draw=blue] (2.8,0) rectangle (3.0,0.0);
+    
+    % LegalSum Plot (Right)
+    \begin{scope}[xshift=4.2cm]
+        \draw[thick,->] (0,0) -- (3.2,0) node[right, font=\tiny] {$t/T$};
+        \draw[thick,->] (0,0) -- (0,1.8) node[above, font=\tiny] {Density};
+        \node at (1.5,2.0) [font=\bfseries\scriptsize] {LegalSum (with OT)};
+        
+        % Bars for LegalSum (uniform/spread)
+        \fill[red!40,draw=red] (0.1,0) rectangle (0.3,0.5);
+        \fill[red!40,draw=red] (0.4,0) rectangle (0.6,0.6);
+        \fill[red!40,draw=red] (0.7,0) rectangle (0.9,0.55);
+        \fill[red!40,draw=red] (1.0,0) rectangle (1.2,0.5);
+        \fill[red!40,draw=red] (1.3,0) rectangle (1.5,0.65);
+        \fill[red!40,draw=red] (1.6,0) rectangle (1.8,0.5);
+        \fill[red!40,draw=red] (1.9,0) rectangle (2.1,0.55);
+        \fill[red!40,draw=red] (2.2,0) rectangle (2.4,0.6);
+        \fill[red!40,draw=red] (2.5,0) rectangle (2.7,0.5);
+        \fill[red!40,draw=red] (2.8,0) rectangle (3.0,0.55);
+    \end{scope}
+\end{tikzpicture}
 \caption{Selected frame position distributions on a 4-hour court recording.
 \textbf{Left}: Baseline DSN clusters 65\% of selections in the first 30\%
 (opening statement bias). \textbf{Right}: LegalSum with OT reward produces
