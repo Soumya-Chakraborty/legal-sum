@@ -156,11 +156,11 @@ Summarization Network (DSN) enhanced with six novel components.
 \begin{figure}[t]
 \centering
 \begin{tikzpicture}[
-    node distance=1.0cm and 0.8cm,
-    box/.style={draw, rectangle, rounded corners, minimum width=2.2cm, minimum height=0.7cm, align=center, fill=blue!5},
-    novel/.style={draw=red!70, rectangle, rounded corners, minimum width=2.2cm, minimum height=0.7cm, align=center, fill=red!5, thick},
-    arrow/.style={-latex', thick},
-    title/.style={font=\bfseries\footnotesize}
+    node distance=0.8cm and 0.5cm,
+    box/.style={draw, rectangle, rounded corners, minimum width=2.0cm, minimum height=0.6cm, align=center, fill=blue!5, font=\scriptsize},
+    novel/.style={draw=red!70, rectangle, rounded corners, minimum width=2.0cm, minimum height=0.6cm, align=center, fill=red!5, thick, font=\scriptsize},
+    arrow/.style={->, thick},
+    title/.style={font=\bfseries\scriptsize}
 ]
     % Inputs
     \node (vis) [box] {Visual\\$\mathbf{F}$};
@@ -168,33 +168,33 @@ Summarization Network (DSN) enhanced with six novel components.
     \node (sem) [box, right=of aud] {Semantic\\$\mathbf{S}$};
     
     % Novel 1
-    \node (n1) [novel, below=of aud, yshift=-0.2cm] {N-1: SpectralSaliency\\Encoder};
+    \node (n1) [novel, below=of aud, yshift=-0.1cm] {N-1: SpectralSaliency\\Encoder};
     \draw [arrow] (aud) -- (n1);
     
     % Novel 2
-    \node (n2) [novel, below=of n1, yshift=-0.2cm] {N-2: CrossModal\\Fusion};
-    \draw [arrow] (vis.south) -- ++(0,-0.6) -| (n2.140);
+    \node (n2) [novel, below=of n1, yshift=-0.1cm] {N-2: CrossModal\\Fusion};
+    \draw [arrow] (vis.south) -- ++(0,-0.4) -| (n2.140);
     \draw [arrow] (n1) -- (n2);
-    \draw [arrow] (sem.south) -- ++(0,-0.6) -| (n2.40);
+    \draw [arrow] (sem.south) -- ++(0,-0.4) -| (n2.40);
     
     % DSN layers
-    \node (bilstm) [box, below=of n2, yshift=-0.2cm] {Bi-LSTM};
+    \node (bilstm) [box, below=of n2, yshift=-0.1cm] {Bi-LSTM};
     \draw [arrow] (n2) -- (bilstm);
     
     % Novel 3
-    \node (n3) [novel, below=of bilstm, yshift=-0.2cm] {N-3: GatedTemporal\\Routing};
+    \node (n3) [novel, below=of bilstm, yshift=-0.1cm] {N-3: GatedTemporal\\Routing};
     \draw [arrow] (bilstm) -- (n3);
     
     % Novel 4
-    \node (n4) [novel, below=of n3, yshift=-0.2cm] {N-4: TemporalSegment\\Graph ($k$-NN)};
+    \node (n4) [novel, below=of n3, yshift=-0.1cm] {N-4: TemporalSegment\\Graph ($k$-NN)};
     \draw [arrow] (n3) -- (n4);
     
     % Novel 5
-    \node (n5) [novel, below=of n4, yshift=-0.2cm] {N-5: Conversational\\Hypergraph};
+    \node (n5) [novel, below=of n4, yshift=-0.1cm] {N-5: Conversational\\Hypergraph};
     \draw [arrow] (n4) -- (n5);
     
     % Output
-    \node (out) [box, below=of n5, yshift=-0.2cm] {Sigmoid Score\\$\mathbf{p}$};
+    \node (out) [box, below=of n5, yshift=-0.1cm] {Sigmoid Score\\$\mathbf{p}$};
     \draw [arrow] (n5) -- (out);
 
 \end{tikzpicture}
