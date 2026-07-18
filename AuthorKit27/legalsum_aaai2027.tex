@@ -451,27 +451,27 @@ supervised approaches.
 
 \begin{table}[t]
 \centering
-\caption{Comparison with state-of-the-art. $^\dagger$: supervised. $^\ddagger$: LLM-based.
-Best unsupervised in \textbf{bold}.}
+\small
+\caption{Comparison with state-of-the-art. $^\dagger$: supervised. $^\ddagger$: LLM-based. Best unsupervised in \textbf{bold}.}
 \label{tab:main}
-\begin{tabular}{lcc}
+\begin{tabular}{l@{\extracolsep{\fill}}cc}
 \toprule
 \textbf{Method} & \textbf{SumMe F1} & \textbf{TVSum F1} \\
 \midrule
 \multicolumn{3}{l}{\textit{Supervised}} \\
-A2Summ$^\dagger$~\cite{he2023a2summ}      & 56.4 & 63.8 \\
-iPTNet$^\dagger$~\cite{iptnet2022}        & 55.8 & 63.2 \\
+A2Summ$^\dagger$ \cite{he2023a2summ}      & 56.4 & 63.8 \\
+iPTNet$^\dagger$ \cite{iptnet2022}        & 55.8 & 63.2 \\
 CFT-GIB$^\dagger$                         & 55.1 & 63.5 \\
-SumGraph$^\dagger$~\cite{park2020sumgraph} & 52.9 & 61.7 \\
+SumGraph$^\dagger$ \cite{park2020sumgraph} & 52.9 & 61.7 \\
 \midrule
 \multicolumn{3}{l}{\textit{Zero-shot / LLM-based}} \\
-Prompts2Sum$^\ddagger$~\cite{narasimhan2023prompts} & 54.8 & 60.9 \\
+Prompts2Sum$^\ddagger$ \cite{narasimhan2023prompts} & 54.8 & 60.9 \\
 \midrule
 \multicolumn{3}{l}{\textit{Unsupervised (no labels)}} \\
-VSUMM~\cite{de2011vsumm}              & 33.7 & 51.4 \\
-DSN~\cite{zhou2018deep}               & 42.1 & 57.6 \\
-UnpairedVSN~\cite{he2019unsupervised} & 45.0 & 57.9 \\
-ACGAN~\cite{apostolidis2020acgan}     & 46.7 & 59.4 \\
+VSUMM \cite{de2011vsumm}              & 33.7 & 51.4 \\
+DSN \cite{zhou2018deep}               & 42.1 & 57.6 \\
+UnpairedVSN \cite{he2019unsupervised} & 45.0 & 57.9 \\
+ACGAN \cite{apostolidis2020acgan}     & 46.7 & 59.4 \\
 \textbf{LegalSum (ours)}              & \textbf{53.2$\pm$1.4} & \textbf{62.1$\pm$0.9} \\
 \bottomrule
 \end{tabular}
@@ -483,9 +483,10 @@ Table~\ref{tab:ablation} quantifies each component's contribution.
 
 \begin{table}[t]
 \centering
+\small
 \caption{Ablation study on SumMe (split 0, seed 42).}
 \label{tab:ablation}
-\begin{tabular}{lcc}
+\begin{tabular}{l@{\extracolsep{\fill}}cc}
 \toprule
 \textbf{Configuration} & \textbf{F1-max} & \textbf{$\Delta$} \\
 \midrule
@@ -521,9 +522,10 @@ on 10 public court recordings using 5-point Likert scales.
 
 \begin{table}[t]
 \centering
+\small
 \caption{Legal expert evaluation (mean over 5 experts $\times$ 10 videos).}
 \label{tab:expert}
-\begin{tabular}{lcccc}
+\begin{tabular}{l@{\extracolsep{\fill}}cccc}
 \toprule
 \textbf{Method} & \textbf{Narrative} & \textbf{Legal} & \textbf{Phase} & \textbf{Concise} \\
 \midrule
