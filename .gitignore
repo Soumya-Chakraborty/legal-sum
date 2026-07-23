@@ -7,3 +7,4 @@ log/
 # Ignore audio wavs and models
 demo/**/*.wav
 demo/**/*.pth.tar
+*.zip

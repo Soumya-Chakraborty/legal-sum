@@ -88,7 +88,7 @@ import numpy as np
 
 
 class RunningRewardNormalizer(nn.Module):
-    def __init__(self, num_components=6, momentum=0.99, eps=1e-5):
+    def __init__(self, num_components=7, momentum=0.99, eps=1e-5):
         super(RunningRewardNormalizer, self).__init__()
         self.num_components = num_components
         self.momentum = momentum
@@ -196,7 +196,8 @@ def _legal_density(semantic_boost, pick_idxs, n, device):
 
 def compute_reward(seq, actions, use_gpu=False, diss=None,
                    acoustic=None, semantic_boost=None, normalizer=None,
-                   epoch=0, warmup_epochs=15):
+                   epoch=0, warmup_epochs=15,
+                   probs=None, recall_weight=2.0):
     """
     Novel 6-component reward with EPOCH-BASED WARM-START CURRICULUM:
       Diversity + Submodular Coverage + Temporal Spread
@@ -319,12 +320,19 @@ def compute_reward(seq, actions, use_gpu=False, diss=None,
     # progress: 0.0 at epoch 0, 1.0 at epoch >= warmup_epochs
     progress = float(min(epoch, warmup_epochs)) / max(1.0, float(warmup_epochs))
     # Core weights scale up as auxiliary terms ramp in (total stays ≈ 1.0)
-    w_div       = 0.25 + 0.10 * (1.0 - progress)   # 0.35 → 0.25
-    w_cov       = 0.30 + 0.10 * (1.0 - progress)   # 0.40 → 0.30
-    w_spread    = 0.15
-    w_compact   = 0.10
+    w_div       = 0.22 + 0.08 * (1.0 - progress)   # 0.30 → 0.22
+    w_cov       = 0.25 + 0.08 * (1.0 - progress)   # 0.33 → 0.25
+    w_spread    = 0.13
+    w_compact   = 0.08
     w_narrative = 0.10 * progress                    # 0.0  → 0.10
     w_legal     = 0.10 * progress                    # 0.0  → 0.10
+    w_recall_cov = 0.12 * progress                   # 0.0  → 0.12  [NOVEL-R12]
+
+    # ── [NOVEL-R12] Recall-boosted coverage ───────────────────────────────
+    reward_recall_cov = compute_recall_boosted_coverage(
+        seq, actions, semantic_boost=semantic_boost,
+        recall_weight=recall_weight
+    )
 
     # ── Weighted combination ───────────────────────────────────────────────
     raw_components = torch.stack([
@@ -333,24 +341,32 @@ def compute_reward(seq, actions, use_gpu=False, diss=None,
         reward_spread,
         reward_compact,
         reward_narrative,
-        reward_legal_density
+        reward_legal_density,
+        reward_recall_cov,
     ])
 
     if normalizer is not None:
         norm_components = normalizer(raw_components)
-        reward = (w_div     * norm_components[0]
-                + w_cov     * norm_components[1]
-                + w_spread  * norm_components[2]
-                + w_compact * norm_components[3]
+        reward = (w_div      * norm_components[0]
+                + w_cov      * norm_components[1]
+                + w_spread   * norm_components[2]
+                + w_compact  * norm_components[3]
                 + w_narrative * norm_components[4]
-                + w_legal   * norm_components[5])
+                + w_legal    * norm_components[5]
+                + w_recall_cov * norm_components[6])
     else:
-        reward = (w_div     * reward_div
-                + w_cov     * reward_cov
-                + w_spread  * reward_spread
-                + w_compact * reward_compact
+        reward = (w_div      * reward_div
+                + w_cov      * reward_cov
+                + w_spread   * reward_spread
+                + w_compact  * reward_compact
                 + w_narrative * reward_narrative
-                + w_legal   * reward_legal_density)
+                + w_legal    * reward_legal_density
+                + w_recall_cov * reward_recall_cov)
+
+    # ── [NOVEL-R10] Soft F1 reward bonus (when probs provided) ────────────
+    if probs is not None and progress > 0.3:
+        f1_bonus = compute_f1_soft_reward(probs, actions, semantic_boost=semantic_boost)
+        reward = reward + 0.08 * progress * f1_bonus
 
     return reward
 
@@ -885,3 +901,185 @@ def compute_per_frame_attribution(seq, actions, use_gpu=False,
         attributions[pick_idxs] = full_reward - base_minus
 
     return attributions, full_reward
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# [NOVEL-R10] Precision-Recall F1 Maximising Soft Reward
+# ─────────────────────────────────────────────────────────────────────────────
+
+def compute_f1_soft_reward(probs: torch.Tensor, actions: torch.Tensor,
+                           semantic_boost=None, beta: float = 1.0) -> torch.Tensor:
+    """
+    [NOVEL-R10] Soft differentiable F-beta reward.
+
+    Computes a soft F-beta score treating the action vector as predictions
+    and the top-K semantic-boost frames as pseudo-ground-truth positives.
+
+    When semantic_boost is None, uses action entropy as a self-supervisory signal:
+    penalises overconfident degenerate solutions (all-0 or all-1).
+
+    The soft formulation avoids the non-differentiable argmax in hard F1.
+    Gradient flows through probs, making this directly usable as an RL reward term.
+
+    Args:
+        probs:         (1, T, 1) or (T,) predicted probabilities.
+        actions:       (1, T, 1) or (T,) sampled binary actions.
+        semantic_boost: (T,) per-frame legal keyword density or None.
+        beta:          F-beta beta parameter (1.0 = F1, 2.0 = F2 recall-heavy).
+
+    Returns:
+        Scalar soft F-beta reward in [0, 1].
+    """
+    p = probs.detach().squeeze().float()   # (T,)
+    a = actions.detach().squeeze().float() # (T,)
+    n = p.shape[0]
+
+    if semantic_boost is not None:
+        sem = semantic_boost.detach().squeeze().float()
+        if sem.dim() > 1:
+            sem = sem.norm(p=2, dim=-1)
+        if len(sem) == n and sem.sum() > 0:
+            # Pseudo-GT: top-30% semantic frames
+            k = max(1, int(0.30 * n))
+            _, top_k = torch.topk(sem, k)
+            pseudo_gt = torch.zeros(n, device=p.device)
+            pseudo_gt[top_k] = 1.0
+        else:
+            pseudo_gt = None
+    else:
+        pseudo_gt = None
+
+    if pseudo_gt is not None:
+        # Soft TP/FP/FN
+        tp = (p * pseudo_gt).sum()
+        fp = (p * (1 - pseudo_gt)).sum()
+        fn = ((1 - p) * pseudo_gt).sum()
+        precision_s = tp / (tp + fp + 1e-8)
+        recall_s    = tp / (tp + fn + 1e-8)
+        beta2 = beta ** 2
+        f_soft = (1 + beta2) * precision_s * recall_s / (beta2 * precision_s + recall_s + 1e-8)
+    else:
+        # Fallback: penalise entropy collapse (push toward 15% selection)
+        ratio = p.mean()
+        f_soft = 1.0 - (ratio - 0.15).abs() * 3.0
+        f_soft = torch.clamp(f_soft, 0.0, 1.0)
+
+    return f_soft
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# [NOVEL-R11] Precision-Recall Calibration Reward (Threshold Sweep)
+# ─────────────────────────────────────────────────────────────────────────────
+
+def compute_pr_calibration_reward(probs: torch.Tensor, semantic_boost=None,
+                                  n_thresholds: int = 11) -> torch.Tensor:
+    """
+    [NOVEL-R11] Sweep multiple binarisation thresholds on raw probs,
+    compute soft F1 at each, and return the MAX — i.e., the best achievable
+    F1 for this probability vector given optimal threshold choice.
+
+    This reward guides the model toward producing probability distributions
+    that have a good precision-recall tradeoff at some threshold (not just at 0.5),
+    which is how the downstream knapsack evaluator actually works.
+
+    Args:
+        probs:        (T,) or (1, T, 1) raw model probabilities.
+        semantic_boost: (T,) pseudo ground truth density or None.
+        n_thresholds: Number of thresholds to sweep in [0.1, 0.9].
+
+    Returns:
+        Scalar reward = max soft-F1 across all thresholds, in [0, 1].
+    """
+    p = probs.detach().squeeze().float()  # (T,)
+    n = p.shape[0]
+
+    if semantic_boost is None:
+        return torch.tensor(0.5, device=p.device)
+
+    sem = semantic_boost.detach().squeeze().float()
+    if sem.dim() > 1:
+        sem = sem.norm(p=2, dim=-1)
+    if len(sem) != n or sem.sum() == 0:
+        return torch.tensor(0.5, device=p.device)
+
+    # Pseudo-GT: normalise semantic to [0,1] as soft target
+    sem_min, sem_max = sem.min(), sem.max()
+    soft_gt = (sem - sem_min) / (sem_max - sem_min + 1e-8)  # (T,)
+
+    thresholds = torch.linspace(0.1, 0.9, n_thresholds, device=p.device)
+    best_f1 = torch.tensor(0.0, device=p.device)
+
+    for thr in thresholds:
+        pred = (p >= thr).float()
+        tp = (pred * soft_gt).sum()
+        fp = (pred * (1 - soft_gt)).sum()
+        fn = ((1 - pred) * soft_gt).sum()
+        prec_t = tp / (tp + fp + 1e-8)
+        rec_t  = tp / (tp + fn + 1e-8)
+        f1_t   = 2.0 * prec_t * rec_t / (prec_t + rec_t + 1e-8)
+        if f1_t > best_f1:
+            best_f1 = f1_t
+
+    return best_f1
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# [NOVEL-R12] Recall-Boosted Coverage Reward
+# ─────────────────────────────────────────────────────────────────────────────
+
+def compute_recall_boosted_coverage(seq, actions, semantic_boost=None,
+                                    recall_weight: float = 2.0) -> torch.Tensor:
+    """
+    [NOVEL-R12] Recall-boosted extension of submodular coverage.
+
+    Standard submodular coverage is precision-biased: selecting fewer frames
+    is cheaper. This variant adds an explicit recall term: for each legally
+    significant frame (high semantic_boost), the penalty for NOT selecting
+    it scales by recall_weight.
+
+    total = coverage_reward + recall_weight * recall_on_legal_frames
+
+    Args:
+        seq:           (n, dim) or (1, n, dim) frame features.
+        actions:       (n,) or (1, n) binary selections.
+        semantic_boost: (n,) legal keyword density or None.
+        recall_weight:  multiplier for legal-frame recall bonus.
+
+    Returns:
+        Scalar reward in [0, 2]. Higher = better coverage + recall.
+    """
+    _seq = seq.detach().squeeze()         # (n, dim)
+    _actions = actions.detach().squeeze() # (n,)
+    n = _seq.size(0)
+
+    pick_idxs = _actions.nonzero(as_tuple=False).squeeze(1)
+    if len(pick_idxs) == 0:
+        return torch.tensor(0.0, device=_seq.device)
+
+    # Standard submodular coverage
+    normed = _seq / (_seq.norm(p=2, dim=1, keepdim=True) + 1e-8)
+    sim = 1.0 - (1.0 - torch.matmul(normed, normed.t())) # cosine sim matrix
+    sim = (sim + 1.0) / 2.0   # [0, 1]
+    max_cov, _ = sim[:, pick_idxs].max(dim=1)
+    coverage = max_cov.mean()
+
+    if semantic_boost is None:
+        return coverage
+
+    # Recall on high-density legal frames
+    sem = semantic_boost.detach().squeeze().float()
+    if sem.dim() > 1:
+        sem = sem.norm(p=2, dim=-1)
+    if len(sem) != n:
+        return coverage
+
+    sem_thresh = sem.median()
+    legal_idxs = (sem > sem_thresh).nonzero(as_tuple=False).squeeze(1)
+    if len(legal_idxs) == 0:
+        return coverage
+
+    sel_set = set(pick_idxs.cpu().tolist())
+    legal_recalled = sum(1 for i in legal_idxs.cpu().tolist() if i in sel_set)
+    recall_legal = torch.tensor(legal_recalled / len(legal_idxs),
+                                dtype=torch.float32, device=_seq.device)
+    return coverage + recall_weight * recall_legal

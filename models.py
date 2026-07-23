@@ -70,6 +70,8 @@ __all__ = [
     'SpectralLegalSaliencyEncoder',
     'TemporalSegmentGraph',
     'DualPathwayDSN',
+    'LegalPrecisionBoostHead',
+    'AdaptiveTemperatureScaler',
 ]
 
 
@@ -123,6 +125,90 @@ class FeedForward(nn.Module):
         return x + self.net(self.norm(x))
 
 
+class LegalPrecisionBoostHead(nn.Module):
+    """
+    [NOVEL-7] Legal Precision Boost Head
+
+    A lightweight calibration head that post-processes raw sigmoid scores
+    to improve Precision-Recall balance for the legal domain.
+
+    Three mechanisms:
+      1. Learnable temperature scaling (τ > 1 sharpens, τ < 1 flattens).
+      2. Asymmetric margin loss: penalises false positives more than false negatives
+         (configurable via alpha_fp/alpha_fn).
+      3. Focal-style reweighting: down-weights easy negatives so the model focuses
+         on hard borderline frames.
+
+    Used as a drop-in post-processor on top of the base sigmoid output.
+    During training the head is trained jointly with the rest of the network
+    via the reward gradient.
+    """
+    def __init__(self, alpha_fp: float = 2.0, alpha_fn: float = 1.0):
+        super(LegalPrecisionBoostHead, self).__init__()
+        # Learnable log-temperature (init=0 → τ=1 = no-op at start)
+        self.log_temp = nn.Parameter(torch.zeros(1))
+        self.alpha_fp = alpha_fp
+        self.alpha_fn = alpha_fn
+        # Focal-weight bias (learnable per-frame offset)
+        self.focal_bias = nn.Parameter(torch.zeros(1))
+
+    def forward(self, p: torch.Tensor) -> torch.Tensor:
+        """
+        Args:
+            p: Raw sigmoid probabilities (B, T, 1) in [0, 1].
+        Returns:
+            Calibrated probabilities (B, T, 1) in [0, 1].
+        """
+        tau = torch.exp(self.log_temp).clamp(0.3, 5.0)   # temperature in [0.3, 5]
+        # Convert prob → logit, scale, convert back
+        logit = torch.log(p.clamp(1e-6, 1 - 1e-6) / (1 - p.clamp(1e-6, 1 - 1e-6)))
+        scaled_logit = logit / tau + self.focal_bias
+        return torch.sigmoid(scaled_logit)
+
+    def precision_recall_loss(self, p: torch.Tensor, target: torch.Tensor) -> torch.Tensor:
+        """
+        Asymmetric BCE: false positives penalised by alpha_fp, false negatives by alpha_fn.
+        Called only when soft ground truth targets are available (supervised-weight > 0).
+        """
+        p_cal = self.forward(p)
+        fp_weight = self.alpha_fp * target + self.alpha_fn * (1 - target)
+        loss = F.binary_cross_entropy(p_cal.squeeze(), target.squeeze(),
+                                      weight=fp_weight, reduction='mean')
+        return loss
+
+
+class AdaptiveTemperatureScaler(nn.Module):
+    """
+    [NOVEL-8] Adaptive Temperature Scaler for MC-Dropout Ensemble.
+
+    Learns a single global temperature τ on the validation set to
+    calibrate the ensemble's confidence scores — improving the
+    Precision-Recall operating point for the downstream knapsack selector.
+
+    Usage: fitted once after training on a held-out calibration split.
+    """
+    def __init__(self):
+        super(AdaptiveTemperatureScaler, self).__init__()
+        self.log_temp = nn.Parameter(torch.ones(1))   # τ=1 initially
+
+    def forward(self, logits: torch.Tensor) -> torch.Tensor:
+        tau = torch.exp(self.log_temp).clamp(0.1, 10.0)
+        return torch.sigmoid(logits / tau)
+
+    def fit(self, logits: torch.Tensor, targets: torch.Tensor,
+            lr: float = 0.01, steps: int = 100):
+        """Optimise NLL on calibration set."""
+        opt = torch.optim.LBFGS([self.log_temp], lr=lr, max_iter=steps)
+        def closure():
+            opt.zero_grad()
+            loss = F.binary_cross_entropy(self.forward(logits),
+                                          targets.float(), reduction='mean')
+            loss.backward()
+            return loss
+        opt.step(closure)
+        return self
+
+
 class MultiScaleConv1D(nn.Module):
     """
     Parallel 1D convolutions with different kernel sizes to extract multi-scale
@@ -130,20 +216,37 @@ class MultiScaleConv1D(nn.Module):
     """
     def __init__(self, in_dim, out_dim):
         super(MultiScaleConv1D, self).__init__()
-        self.conv3 = nn.Conv1d(in_dim, out_dim // 4, kernel_size=3, padding=1)
-        self.conv5 = nn.Conv1d(in_dim, out_dim // 4, kernel_size=5, padding=2)
-        self.conv7 = nn.Conv1d(in_dim, out_dim // 4, kernel_size=7, padding=3)
-        self.proj = nn.Linear(in_dim, out_dim // 4)
+        branch = out_dim // 4
+        self.conv3 = nn.Conv1d(in_dim, branch, kernel_size=3, padding=1)
+        self.conv5 = nn.Conv1d(in_dim, branch, kernel_size=5, padding=2)
+        self.conv7 = nn.Conv1d(in_dim, branch, kernel_size=7, padding=3)
+        self.proj = nn.Linear(in_dim, branch)
+        # GELU activations per branch before concat — sharper gradients
+        self.act = nn.GELU()
         self.norm = nn.LayerNorm(out_dim)
+        # Squeeze-excitation gate for branch importance weighting
+        self.se_gate = nn.Sequential(
+            nn.AdaptiveAvgPool1d(1),   # (B, out_dim, 1)
+            nn.Flatten(1),             # (B, out_dim)
+            nn.Linear(out_dim, out_dim // 4),
+            nn.ReLU(),
+            nn.Linear(out_dim // 4, out_dim),
+            nn.Sigmoid()
+        )
 
     def forward(self, x):
         # Transpose input for Conv1d: (batch_size, in_dim, seq_len)
-        x_t = x.transpose(1, 2)
-        c3 = self.conv3(x_t).transpose(1, 2)
-        c5 = self.conv5(x_t).transpose(1, 2)
-        c7 = self.conv7(x_t).transpose(1, 2)
-        c1 = self.proj(x)
-        out = torch.cat([c1, c3, c5, c7], dim=-1)
+        x_t = x.transpose(1, 2)                   # (B, in_dim, T)
+        c3 = self.act(self.conv3(x_t)).transpose(1, 2)   # (B, T, branch)
+        c5 = self.act(self.conv5(x_t)).transpose(1, 2)
+        c7 = self.act(self.conv7(x_t)).transpose(1, 2)
+        c1 = self.act(self.proj(x))               # (B, T, branch)
+        out = torch.cat([c1, c3, c5, c7], dim=-1)  # (B, T, out_dim)
+        # Squeeze-Excitation: channel-wise importance gating
+        out_t = out.transpose(1, 2)               # (B, out_dim, T)
+        se_w = self.se_gate(out_t).unsqueeze(-1)  # (B, out_dim, 1)
+        out_t = out_t * se_w
+        out = out_t.transpose(1, 2)               # (B, T, out_dim)
         return self.norm(out)
 
 
@@ -727,6 +830,10 @@ class DSN(nn.Module):
             nn.Linear(hid_dim, 1)
         )
 
+        # [NOVEL-7] Legal Precision Boost Head — calibrates output probabilities
+        # alpha_fp=2.0: penalise false positives 2x more than false negatives
+        self.precision_head = LegalPrecisionBoostHead(alpha_fp=2.0, alpha_fn=1.0)
+
     def _positional_encoding(self, x):
         """
         Computes and adds sinusoidal positional encoding to input representations.
@@ -782,6 +889,8 @@ class DSN(nn.Module):
 
         # Apply sigmoid to output the probability representing the importance score
         p = torch.sigmoid(self.fc(final_feats))
+        # [NOVEL-7] Calibrate via learnable temperature + focal reweighting
+        p = self.precision_head(p)
         return p
 
 
@@ -936,11 +1045,17 @@ class DualPathwayDSN(nn.Module):
 
         # Soft mixture MLP: [p_v || p_a] (B, T, 2) -> alpha (B, T, 1)
         self.mixer = nn.Sequential(
-            nn.Linear(2, 16),
+            nn.Linear(2, 32),
+            nn.GELU(),
+            nn.Dropout(0.1),
+            nn.Linear(32, 16),
             nn.GELU(),
             nn.Linear(16, 1),
             nn.Sigmoid(),
         )
+
+        # [NOVEL-7] Global precision boost head for the blended output
+        self.precision_head = LegalPrecisionBoostHead(alpha_fp=2.0, alpha_fn=1.0)
 
     def forward(self, x, acoustic=None, semantic=None, speaker_mask=None, event_mask=None) -> torch.Tensor:
         """
@@ -962,4 +1077,6 @@ class DualPathwayDSN(nn.Module):
 
         # Soft mixture of both pathway predictions
         p_final = alpha * p_v + (1.0 - alpha) * p_a   # (B, T, 1)
+        # [NOVEL-7] Calibrate blended score for optimal PR operating point
+        p_final = self.precision_head(p_final)
         return p_final

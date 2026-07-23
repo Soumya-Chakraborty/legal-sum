@@ -394,7 +394,7 @@ def save_all_plots(hist, save_dir, best_f=None, sota=41.4):
         fig, ax = plt.subplots(figsize=(max(9, len(eval_epochs)*0.8), 4))
         data = [[x*100 for x in row] for row in hist['per_video_fscores']]
         xlabels = [f"ep{e}" for e in eval_epochs]
-        ax.boxplot(data, labels=xlabels, patch_artist=True,
+        ax.boxplot(data, tick_labels=xlabels, patch_artist=True,
                    boxprops=dict(facecolor=COLORS['p1'], alpha=0.4),
                    medianprops=dict(color='darkblue', lw=2))
         ax.set(title='10. Per-Video F-Score Distribution (Box-Plot)',

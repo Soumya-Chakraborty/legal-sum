@@ -99,13 +99,17 @@ import torch.backends.cudnn as cudnn
 from torch.optim import lr_scheduler
 from torch.distributions import Bernoulli
 
+import torch.nn.functional as F
 import math
 from utils import Logger, read_json, write_json, save_checkpoint
 from models import (DSN, DSN_Transformer, DualPathwayDSN,
                     MultiScaleConv1D, MultiHeadSelfAttention, FeedForward)
 from rewards import (compute_reward, compute_per_frame_attribution,
                      compute_contrastive_bonus, compute_legal_coherence_reward,
-                     compute_ot_temporal_diversity)
+                     compute_ot_temporal_diversity,
+                     compute_f1_soft_reward, compute_pr_calibration_reward,
+                     compute_recall_boosted_coverage)
+from models import LegalPrecisionBoostHead, AdaptiveTemperatureScaler
 import vsum_tools
 
 parser = argparse.ArgumentParser(
@@ -176,6 +180,18 @@ parser.add_argument('--action-lock-start', type=float, default=0.70,
                     help="initial action-lock percentile threshold (default: 0.70 = 70th pct)")
 parser.add_argument('--action-lock-end', type=float, default=0.50,
                     help="final action-lock percentile threshold (default: 0.50 = 50th pct)")
+# Precision-Recall optimization options
+parser.add_argument('--pr-f1-weight', type=float, default=0.08,
+                    help="weight of soft F1 PR reward bonus (default: 0.08)")
+parser.add_argument('--recall-weight', type=float, default=2.0,
+                    help="recall_weight for NOVEL-R12 recall-boosted coverage (default: 2.0)")
+parser.add_argument('--pr-threshold-sweep', action='store_true', default=True,
+                    help="enable PR calibration reward threshold sweep (default: True)")
+parser.add_argument('--no-pr-threshold-sweep', dest='pr_threshold_sweep', action='store_false')
+parser.add_argument('--calibrate-temperature', action='store_true', default=False,
+                    help="fit AdaptiveTemperatureScaler on validation set after training (default: False)")
+parser.add_argument('--knapsack-proportion', type=float, default=0.15,
+                    help="knapsack budget proportion for summary generation (default: 0.15)")
 # Misc
 parser.add_argument('--seed', type=int, default=1)
 parser.add_argument('--gpu', type=str, default='0')
@@ -199,6 +215,10 @@ parser.add_argument('--num-roles', type=int, default=3,
                     help="number of speaker roles")
 parser.add_argument('--eval-courtroom', action='store_true',
                     help="evaluate courtroom metrics and plot curves during/after training")
+parser.add_argument('--supervised', action='store_true', default=False,
+                    help="use supervised binary cross-entropy loss against ground truth human scores")
+parser.add_argument('--supervised-weight', type=float, default=0.0,
+                    help="weight of ground-truth supervised reward bonus in RL path")
 
 args = parser.parse_args()
 
@@ -439,8 +459,9 @@ def evaluate_with_ensemble(model, dataset, test_keys, use_gpu,
             user_summary = dataset[key]['user_summary'][...]
 
             # Generate the binary summary selection vector using knapsack/ranking
+            knapsack_prop = getattr(args, 'knapsack_proportion', 0.15)
             machine_summary = vsum_tools.generate_summary(
-                probs, cps, num_frames, nfps, positions)
+                probs, cps, num_frames, nfps, positions, proportion=knapsack_prop)
             
             # Compare the generated machine summary with the human summaries
             fm_avg, fm_max, prec, rec = vsum_tools.evaluate_summary(
@@ -530,7 +551,14 @@ def evaluate_with_ensemble(model, dataset, test_keys, use_gpu,
             'event_coverage': float(mean_event_cov),
             'speaker_consistency': float(mean_speaker_con)
         }
+        if use_gpu:
+            torch.cuda.empty_cache()
+        import gc; gc.collect()
         return mean_fm, metrics_dict
+
+    if use_gpu:
+        torch.cuda.empty_cache()
+    import gc; gc.collect()
     return mean_fm
 
 
@@ -713,6 +741,9 @@ def train_one_phase(model, optimizer, scheduler, dataset, train_keys,
     patience_counter = 0
     epoch = start_epoch - 1
 
+    if getattr(args, 'supervised_weight', 0.0) > 0:
+        use_counterfactual = False
+
     for epoch in range(start_epoch, start_epoch + num_epochs):
         model.train()
 
@@ -767,105 +798,170 @@ def train_one_phase(model, optimizer, scheduler, dataset, train_keys,
                 if use_gpu:
                     speaker_mask = speaker_mask.cuda()
 
-            # ── Forward pass ─────────────────────────────────────────────────
-            probs = model(seq, acoustic, semantic, speaker_mask, event_mask)   # (1, T, 1)
-
             target_ratio = 0.15
-            length_pen = args.beta * (probs.mean() - target_ratio) ** 2
-            m = Bernoulli(probs)
-            entropy = m.entropy().mean()
+            if args.supervised:
+                # ── Forward pass with gradient tracking for Supervised BCE ─────────────────────
+                probs = model(seq, acoustic, semantic, speaker_mask, event_mask)   # (1, T, 1)
+                probs = torch.clamp(probs, 1e-6, 1.0 - 1e-6)
+                length_pen = args.beta * (probs.mean() - target_ratio) ** 2
+                m = Bernoulli(probs)
+                entropy = m.entropy().mean()
 
-            # ── NOVEL: Counterfactual + PPO-Clip + OT Temporal Bonus ─────────
-            epis_rewards = []
-            ppo_clip = getattr(args, 'ppo_clip', 0.2)
-            ppo_inner_steps = getattr(args, 'ppo_inner_steps', 4)
-            reward_warmup = getattr(args, 'reward_warmup_epochs', 15)
-            ot_w = getattr(args, 'ot_weight', 0.10)
-            n_frames = seq.shape[1]
+                # ── Supervised BCE Loss Path ──────────────────────────────────
+                gtscore = dataset[key]['gtscore'][...]
+                gt_tensor = torch.from_numpy(gtscore).unsqueeze(0).float().to(probs.device)
+                
+                loss = F.binary_cross_entropy(
+                    torch.clamp(probs.squeeze(), 1e-7, 1.0 - 1e-7),
+                    torch.clamp(gt_tensor.squeeze(), 0.0, 1.0)
+                )
+                cost = loss + length_pen
+                cost.backward()
+                
+                torch.nn.utils.clip_grad_norm_(model.parameters(), 5.0)
+                optimizer.step()
+                
+                epis_rewards = [1.0 - float(loss.item())]
+                
+                try:
+                    del cost, loss, gt_tensor, probs, length_pen, entropy, m
+                except NameError:
+                    pass
+                if use_gpu:
+                    torch.cuda.empty_cache()
+                import gc; gc.collect()
+            else:
+                # ── Forward pass without gradient tracking for RL Policy Rollout ───────────────
+                with torch.no_grad():
+                    probs = model(seq, acoustic, semantic, speaker_mask, event_mask)   # (1, T, 1)
+                    probs = torch.clamp(probs, 1e-6, 1.0 - 1e-6)
+                    length_pen = args.beta * (probs.mean() - target_ratio) ** 2
+                    m = Bernoulli(probs)
+                    entropy = m.entropy().mean()
 
-            for _ in range(args.num_episode):
-                actions = m.sample()
-                log_probs_old = m.log_prob(actions).detach()   # reference for PPO ratio
+                # ── Unsupervised RL (PPO-Clip) Path ───────────────────────────
+                # ── NOVEL: Counterfactual + PPO-Clip + OT Temporal Bonus ─────────
+                epis_rewards = []
+                ppo_clip = getattr(args, 'ppo_clip', 0.2)
+                ppo_inner_steps = getattr(args, 'ppo_inner_steps', 4)
+                reward_warmup = getattr(args, 'reward_warmup_epochs', 15)
+                ot_w = getattr(args, 'ot_weight', 0.10)
+                n_frames = seq.shape[1]
 
-                # ── Reward with epoch-based warm-start ────────────────────────
-                local_epoch_cur = epoch - start_epoch
-                if args.use_legal_reward:
-                    full_reward = compute_legal_coherence_reward(
-                        seq, actions, use_gpu=use_gpu,
-                        acoustic=acoustic, semantic_boost=semantic)
-                    attributions = None
-                else:
-                    if use_counterfactual:
-                        attributions, full_reward = compute_per_frame_attribution(
+                # Load gtscore if supervised-weight is enabled
+                gtscore = None
+                if getattr(args, 'supervised_weight', 0.0) > 0:
+                    gtscore = dataset[key]['gtscore'][...]
+
+                for _ in range(args.num_episode):
+                    actions = m.sample()
+                    log_probs_old = m.log_prob(actions).detach()   # reference for PPO ratio
+
+                    # ── Reward with epoch-based warm-start ────────────────────────
+                    local_epoch_cur = epoch - start_epoch
+                    if args.use_legal_reward:
+                        full_reward = compute_legal_coherence_reward(
                             seq, actions, use_gpu=use_gpu,
-                            acoustic=acoustic, semantic_boost=semantic,
-                            event_mask=event_mask, speaker_mask=speaker_mask)
-                    else:
+                            acoustic=acoustic, semantic_boost=semantic)
                         attributions = None
-                        if event_mask is not None or speaker_mask is not None:
-                            from rewards import compute_courtroom_reward
-                            full_reward = compute_courtroom_reward(
-                                seq, actions, use_gpu=use_gpu,
-                                acoustic=acoustic, semantic=semantic,
-                                event_mask=event_mask, speaker_mask=speaker_mask)
-                        else:
-                            full_reward = compute_reward(
+                    else:
+                        if use_counterfactual:
+                            attributions, full_reward = compute_per_frame_attribution(
                                 seq, actions, use_gpu=use_gpu,
                                 acoustic=acoustic, semantic_boost=semantic,
-                                epoch=local_epoch_cur, warmup_epochs=reward_warmup)
-
-                # ── InfoNCE Contrastive Bonus ─────────────────────────────────
-                if args.contrastive_weight > 0 and not args.use_legal_reward:
-                    cb = compute_contrastive_bonus(seq, actions, speaker_mask=speaker_mask)
-                    full_reward = full_reward + args.contrastive_weight * cb
-
-                # ── OT Temporal Diversity Bonus [NOVEL-R9] ────────────────────
-                ot_bonus = compute_ot_temporal_diversity(actions, n_frames)
-                full_reward = full_reward + ot_w * ot_bonus
-
-                baseline_val = baselines[key]
-
-                # ── PPO-Clip gradient (replaces vanilla REINFORCE) ────────────
-                optimizer.zero_grad()
-                if use_counterfactual and attributions is not None:
-                    shaped_reward = attributions - baseline_val
-                    r_std = shaped_reward.std()
-                    if r_std > 1e-5:
-                        shaped_reward = shaped_reward / r_std
-                    for _inner in range(ppo_inner_steps if ppo_clip > 0 else 1):
-                        probs_cur = model(seq, acoustic, semantic, speaker_mask, event_mask)
-                        m_cur = Bernoulli(probs_cur)
-                        log_probs_new = m_cur.log_prob(actions).squeeze()
-                        lp_old_sq = log_probs_old.squeeze()
-                        if ppo_clip > 0:
-                            ratio = torch.exp(log_probs_new - lp_old_sq)
-                            ratio_c = torch.clamp(ratio, 1.0 - ppo_clip, 1.0 + ppo_clip)
-                            ppo_loss = -torch.min(ratio * shaped_reward,
-                                                   ratio_c * shaped_reward).mean()
+                                event_mask=event_mask, speaker_mask=speaker_mask)
                         else:
-                            ppo_loss = -(log_probs_new * shaped_reward).mean()
-                        keep_graph = (_inner < ppo_inner_steps - 1)
-                        ppo_loss.backward(retain_graph=keep_graph)
-                else:
-                    log_probs_s = m.log_prob(actions)
-                    scalar_adv = full_reward - baseline_val
-                    if ppo_clip > 0:
-                        ratio = torch.exp(log_probs_s - log_probs_old.detach())
-                        ratio_c = torch.clamp(ratio, 1.0 - ppo_clip, 1.0 + ppo_clip)
-                        ppo_loss = -torch.min(
-                            ratio * scalar_adv, ratio_c * scalar_adv).mean()
+                            attributions = None
+                            if event_mask is not None or speaker_mask is not None:
+                                from rewards import compute_courtroom_reward
+                                full_reward = compute_courtroom_reward(
+                                    seq, actions, use_gpu=use_gpu,
+                                    acoustic=acoustic, semantic=semantic,
+                                    event_mask=event_mask, speaker_mask=speaker_mask)
+                            else:
+                                full_reward = compute_reward(
+                                    seq, actions, use_gpu=use_gpu,
+                                    acoustic=acoustic, semantic_boost=semantic,
+                                    epoch=local_epoch_cur, warmup_epochs=reward_warmup,
+                                    probs=probs,
+                                    recall_weight=getattr(args, 'recall_weight', 2.0))
+
+                    # ── InfoNCE Contrastive Bonus ─────────────────────────────────
+                    if args.contrastive_weight > 0 and not args.use_legal_reward:
+                        cb = compute_contrastive_bonus(seq, actions, speaker_mask=speaker_mask)
+                        full_reward = full_reward + args.contrastive_weight * cb
+
+                    # ── OT Temporal Diversity Bonus [NOVEL-R9] ────────────────────
+                    ot_bonus = compute_ot_temporal_diversity(actions, n_frames)
+                    full_reward = full_reward + ot_w * ot_bonus
+
+                    # ── [NOVEL-R11] PR Calibration Reward ────────────────────────
+                    if getattr(args, 'pr_threshold_sweep', True) and semantic is not None:
+                        pr_cal = compute_pr_calibration_reward(
+                            probs, semantic_boost=semantic)
+                        pr_weight = getattr(args, 'pr_f1_weight', 0.08)
+                        full_reward = full_reward + pr_weight * pr_cal
+
+                    # ── Hybrid Supervised F1 Reward Bonus ─────────────────────────
+                    if gtscore is not None:
+                        gt_vec = torch.from_numpy(gtscore).float().to(actions.device)
+                        act_sq = actions.squeeze()
+                        prec_soft = (act_sq * gt_vec).sum() / (act_sq.sum() + 1e-5)
+                        rec_soft = (act_sq * gt_vec).sum() / (gt_vec.sum() + 1e-5)
+                        f1_soft = 2.0 * prec_soft * rec_soft / (prec_soft + rec_soft + 1e-5)
+                        full_reward = full_reward + args.supervised_weight * f1_soft
+
+                    epis_rewards.append(full_reward.item() if hasattr(full_reward, 'item') else float(full_reward))
+
+                    baseline_val = baselines[key]
+
+                    # ── PPO-Clip gradient (replaces vanilla REINFORCE) ────────────
+                    optimizer.zero_grad()
+                    if use_counterfactual and attributions is not None:
+                        shaped_reward = attributions - baseline_val
+                        r_std = shaped_reward.std()
+                        if r_std > 1e-5:
+                            shaped_reward = shaped_reward / r_std
+                        for _inner in range(ppo_inner_steps if ppo_clip > 0 else 1):
+                            probs_cur = model(seq, acoustic, semantic, speaker_mask, event_mask)
+                            probs_cur = torch.clamp(probs_cur, 1e-6, 1.0 - 1e-6)
+                            m_cur = Bernoulli(probs_cur)
+                            log_probs_new = m_cur.log_prob(actions).squeeze()
+                            lp_old_sq = log_probs_old.squeeze()
+                            if ppo_clip > 0:
+                                ratio = torch.exp(log_probs_new - lp_old_sq)
+                                ratio_c = torch.clamp(ratio, 1.0 - ppo_clip, 1.0 + ppo_clip)
+                                ppo_loss = -torch.min(ratio * shaped_reward,
+                                                       ratio_c * shaped_reward).mean()
+                            else:
+                                ppo_loss = -(log_probs_new * shaped_reward).mean()
+                            ppo_loss.backward()
                     else:
-                        ppo_loss = -(log_probs_s * scalar_adv).mean()
-                    ppo_loss.backward()
+                        probs_cur = model(seq, acoustic, semantic, speaker_mask, event_mask)
+                        probs_cur = torch.clamp(probs_cur, 1e-6, 1.0 - 1e-6)
+                        m_cur = Bernoulli(probs_cur)
+                        log_probs_s = m_cur.log_prob(actions)
+                        scalar_adv = full_reward - baseline_val
+                        if ppo_clip > 0:
+                            ratio = torch.exp(log_probs_s - log_probs_old.detach())
+                            ratio_c = torch.clamp(ratio, 1.0 - ppo_clip, 1.0 + ppo_clip)
+                            ppo_loss = -torch.min(
+                                ratio * scalar_adv, ratio_c * scalar_adv).mean()
+                        else:
+                            ppo_loss = -(log_probs_s * scalar_adv).mean()
+                        ppo_loss.backward()
+            try:
+                del cost, length_pen, entropy, probs, m
+            except NameError:
+                pass
+            try:
+                del ppo_loss, probs_cur, m_cur, log_probs_new, log_probs_old, ratio, ratio_c
+            except NameError:
+                pass
 
-                epis_rewards.append(
-                    full_reward.item() if hasattr(full_reward, 'item') else float(full_reward))
-
-            # Length penalty + entropy regularisation
-            cost = length_pen - entropy_coef * entropy
-            cost.backward()
-            torch.nn.utils.clip_grad_norm_(model.parameters(), 5.0)
-            optimizer.step()
+            if use_gpu:
+                torch.cuda.empty_cache()
+            import gc; gc.collect()
 
             # ── Momentum baseline with Adam-style bias correction ─────────────
             baseline_step[key] += 1
@@ -926,7 +1022,7 @@ def train_one_phase(model, optimizer, scheduler, dataset, train_keys,
                 best_fm = fm
                 best_epoch = epoch + 1
                 best_state = {k: v.clone() for k, v in (
-                    model.module.state_dict() if use_gpu else model.state_dict()).items()}
+                    model.module.state_dict() if isinstance(model, nn.DataParallel) else model.state_dict()).items()}
                 save_checkpoint(best_state, osp.join(args.save_dir, 'model_best.pth.tar'))
                 print("  ** New best F-score {:.1%} at epoch {}".format(best_fm, best_epoch))
                 patience_counter = 0
@@ -936,6 +1032,11 @@ def train_one_phase(model, optimizer, scheduler, dataset, train_keys,
                     if patience_counter >= patience:
                         print("  ** Early stopping triggered: validation F-score plateaued for {} epochs.".format(patience))
                         break
+
+        # Memory cleanup after validation and epoch completion
+        if use_gpu:
+            torch.cuda.empty_cache()
+        import gc; gc.collect()
 
     return best_fm, best_epoch, best_state, baselines, reward_writers, epoch + 1
 
@@ -957,9 +1058,22 @@ def main():
     if use_gpu:
         print("Currently using GPU {}".format(args.gpu))
         cudnn.benchmark = True
+        cudnn.deterministic = False   # allow cuDNN to pick fastest kernels
         torch.cuda.manual_seed_all(args.seed)
+        # TF32 on Ampere+ GPUs: faster matmul, negligible precision loss
+        if hasattr(torch.backends.cuda, 'matmul'):
+            torch.backends.cuda.matmul.allow_tf32 = True
+        if hasattr(torch.backends, 'cudnn'):
+            torch.backends.cudnn.allow_tf32 = True
     else:
         print("Currently using CPU")
+        # CPU optimisations: use all available cores for BLAS
+        import os
+        n_threads = min(os.cpu_count() or 1, 8)
+        torch.set_num_threads(n_threads)
+        torch.set_num_interop_threads(max(1, n_threads // 2))
+        print("  Using {} intra-op / {} inter-op CPU threads".format(
+            n_threads, max(1, n_threads // 2)))
 
     # Load video datasets
     if args.dataset_type == 'courtroom':
@@ -998,7 +1112,10 @@ def main():
 
     # Multi-GPU DataParallel wrapping if applicable
     if use_gpu:
-        model = nn.DataParallel(model).cuda()
+        if torch.cuda.device_count() > 1:
+            model = nn.DataParallel(model).cuda()
+        else:
+            model = model.cuda()
 
     # If the --evaluate flag is set, run test evaluation and exit
     if args.evaluate:
@@ -1061,7 +1178,7 @@ def main():
 
     # Reload model weights corresponding to the best validation score in Phase 1
     if best_state1 is not None:
-        if use_gpu:
+        if isinstance(model, nn.DataParallel):
             model.module.load_state_dict(best_state1)
         else:
             model.load_state_dict(best_state1)
@@ -1087,6 +1204,50 @@ def main():
     print("\nPhase 2 complete. Best F-score: {:.1%} at epoch {}".format(
         best_fm2, best_epoch2))
 
+    # ── [NOVEL-8] Adaptive Temperature Calibration ────────────────────────────
+    if getattr(args, 'calibrate_temperature', False):
+        print("\n" + "="*60)
+        print("==> POST-TRAIN: Adaptive Temperature Calibration")
+        print("="*60)
+        try:
+            # Reload best overall model
+            best_overall = best_state2 if best_fm2 >= best_fm1 else best_state1
+            if best_overall is not None:
+                _m = model.module if isinstance(model, nn.DataParallel) else model
+                _m.load_state_dict(best_overall)
+            _m.eval()
+
+            # Collect logits and pseudo-targets on validation set
+            all_logits, all_targets = [], []
+            with torch.no_grad():
+                for key in test_keys:
+                    seq_data = dataset[key]['features'][...]
+                    seq_t = torch.from_numpy(seq_data).unsqueeze(0).float()
+                    if use_gpu: seq_t = seq_t.cuda()
+                    p_raw = _m(seq_t).squeeze()  # (T,)
+                    logit = torch.log(p_raw.clamp(1e-6, 1-1e-6) / (1 - p_raw.clamp(1e-6, 1-1e-6)))
+                    all_logits.append(logit.cpu())
+                    # Pseudo-target from gtscore if available
+                    if 'gtscore' in dataset[key]:
+                        gt = torch.from_numpy(dataset[key]['gtscore'][...]).float()
+                    else:
+                        gt = (p_raw > 0.5).float().cpu()
+                    gt_aligned = gt[:len(logit)] if len(gt) >= len(logit) else torch.cat([gt, gt[:len(logit)-len(gt)]])
+                    all_targets.append(gt_aligned)
+
+            all_logits_cat = torch.cat(all_logits)
+            all_targets_cat = torch.cat(all_targets)
+            scaler = AdaptiveTemperatureScaler()
+            scaler.fit(all_logits_cat, all_targets_cat)
+            print("  Calibrated temperature τ = {:.4f}".format(
+                float(torch.exp(scaler.log_temp))))
+            # Save calibrated scaler
+            torch.save(scaler.state_dict(),
+                       osp.join(args.save_dir, 'temperature_scaler.pth'))
+            print("  Scaler saved to:", osp.join(args.save_dir, 'temperature_scaler.pth'))
+        except Exception as e:
+            print("  Temperature calibration failed (non-fatal):", e)
+
     # Concatenate reward records across training phases and export to a JSON log file
     for key in train_keys:
         reward_writers[key].extend(reward_writers2[key])
@@ -1098,7 +1259,7 @@ def main():
     print("="*60)
 
     # Save final model weights
-    final_state = model.module.state_dict() if use_gpu else model.state_dict()
+    final_state = model.module.state_dict() if isinstance(model, nn.DataParallel) else model.state_dict()
     save_checkpoint(final_state,
                     osp.join(args.save_dir, 'model_epoch{}.pth.tar'.format(args.max_epoch)))
 
