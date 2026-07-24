@@ -1018,6 +1018,7 @@ class DualPathwayDSN(nn.Module):
         num_layers: int = 2,
         cell: str = 'lstm',
         num_heads: int = 8,
+        dropout: float = 0.25,
     ):
         super(DualPathwayDSN, self).__init__()
 
