@@ -2,6 +2,7 @@
 \usepackage[submission]{aaai2027}
 \usepackage[hyphens]{url}
 \usepackage{graphicx}
+\graphicspath{{../imgs/}{imgs/}}
 \urlstyle{rm}
 \def\UrlFont{\rm}
 \usepackage{natbib}
@@ -17,7 +18,7 @@
 \newtheorem{definition}{Definition}
 \newtheorem{theorem}{Theorem}
 \usepackage{tikz}
-\usetikzlibrary{shapes,arrows,positioning,fit,backgrounds,calc}
+\usetikzlibrary{shapes,arrows,arrows.meta,positioning,fit,backgrounds,calc,shadows}
 
 \pdfinfo{
 /TemplateVersion (2027.1)
@@ -78,11 +79,11 @@ Optimal Transport (OT) theory provides a mathematical framework for calculating 
 
 \section{Problem Formulation}
 
-Given an unedited courtrooProblem Formulationm video recording $V$ comprising $T$ sequential frame samples, we extract three synchronous feature streams:
+Given an unedited courtroom video recording $V$ comprising $T$ sequential frame samples, we extract three synchronous feature streams:
 \begin{enumerate}
 \item \textbf{Visual Stream} $\mathbf{F} = \{\mathbf{f}_t\}_{t=1}^T \in \mathbb{R}^{T \times d_v}$: Feature vectors extracted from a pre-trained ResNet/GoogleNet backbone capturing spatial courtroom imagery.
 \item \textbf{Acoustic Stream} $\mathbf{A} = \{\mathbf{a}_t\}_{t=1}^T \in \mathbb{R}^{T \times d_a}$: Mel-Frequency Cepstral Coefficient (MFCC) vectors representing short-term speech power spectra and acoustic properties.
-\item \textbf{Semantic Stream} $\mathbf{S} = \{\mathbf{s}_t\}_{t=1}^T \in \mathbb{R}^{T \times d_s}$: High-level language embeddings extracted from automatic speech recognition (ASR) transcripts using a pre-trained transformer model (e.g., Sentence-BERT).
+\item \textbf{Semantic Stream} $\mathbf{S} = \{\mathbf{s}_t\}_{t=1}^T \in \mathbb{R}^{T \times d_s}$: High-level language embeddings extracted from automatic speech recognition (ASR) transcripts using a pre-trained Whisper transformer model.
 \end{enumerate}
 
 A deep neural policy network $\pi_\theta$ processes the multimodal feature sequence $(\mathbf{F}, \mathbf{A}, \mathbf{S})$ and outputs a continuous frame importance score $p_t = \pi_\theta(\mathbf{f}_t, \mathbf{a}_t, \mathbf{s}_t) \in (0,1)$ for each frame $t \in \{1, \dots, T\}$.
@@ -118,16 +119,62 @@ Given visual features $\mathbf{F} \in \mathbb{R}^{T \times d_v}$ from a pre-trai
 
 Standard speech features like Mel-Frequency Cepstral Coefficients (MFCCs) capture raw acoustic power but treat all sound frequencies equally. In courtroom trials, legally crucial moments -- such as an attorney raising an objection or a judge delivering an evidentiary ruling -- produce distinct prosodic patterns characterized by specific low-frequency pitch and energy modulation (1--8~Hz).
 
-To isolate these legally salient speech signals without requiring manual annotations, we pass the MFCC matrix $\mathbf{A} \in \mathbb{R}^{T \times n_{\text{mfcc}}}$ through a Real Fast Fourier Transform ($\text{rfft}$) along the frame time dimension:
+To isolate these legally salient speech signals without requiring manual annotations, we transpose the MFCC matrix $\mathbf{A} \in \mathbb{R}^{T \times n_{\text{mfcc}}}$ to $(n_{\text{mfcc}} \times T)$ and pass it through a Real Fast Fourier Transform ($\text{rfft}$) along the frame time dimension:
 \begin{equation}
-\hat{\mathbf{A}} = \text{rfft}(\mathbf{A}, \text{dim}=-1), \quad
-\tilde{\mathbf{A}} = \text{irfft}(\text{TopK}(|\hat{\mathbf{A}}|))
+\hat{\mathbf{A}} = \text{rfft}(\mathbf{A}^\top, \text{dim}=-1), \quad
+\tilde{\mathbf{A}} = \text{irfft}(\text{TopK}(|\hat{\mathbf{A}}|), n=T, \text{dim}=-1)^\top
 \end{equation}
 The $\text{TopK}$ operator retains only the top frequency bands corresponding to prosodic speech rhythms while zeroing out high-frequency noise and background courtroom hums. An Inverse Real FFT ($\text{irfft}$) reconstructs the filtered temporal signal $\tilde{\mathbf{A}}$. A two-layer Multi-Layer Perceptron (MLP) with a sigmoid activation function maps $\tilde{\mathbf{A}}$ to a per-frame acoustic saliency weight:
 \begin{equation}
 \mathbf{g} = \sigma(\text{MLP}(\tilde{\mathbf{A}})) \in (0,1)^{T \times 1}
 \end{equation}
 The vector $\mathbf{g}$ acts as a self-supervised acoustic gate that amplifies frames containing significant vocal prosody.
+
+\begin{figure}[t]
+\centering
+\begin{tikzpicture}[
+    scale=0.72,
+    every node/.style={transform shape},
+    box/.style={draw=black!80, rectangle, rounded corners=6pt, fill=blue!5, line width=1.0pt, align=center, inner sep=5pt},
+    proc/.style={draw=purple!80!black, rectangle, rounded corners=6pt, fill=purple!10, line width=1.0pt, align=center, inner sep=5pt}
+]
+    \node[box, minimum width=2.2cm, minimum height=1.6cm] (mfcc) at (0,0) {
+        \textbf{MFCCs}\\[2pt]
+        $\mathbf{A} \in \mathbb{R}^{T \times 40}$
+    };
+    \node[proc, minimum width=2.3cm, minimum height=1.6cm, right=0.6cm of mfcc] (rfft) {
+        \textbf{1D RFFT}\\[2pt]
+        $\hat{\mathbf{A}} = \text{rfft}(\mathbf{A})$
+    };
+    \node[proc, minimum width=2.4cm, minimum height=1.6cm, right=0.6cm of rfft] (topk) {
+        \textbf{Top-K Filter}\\[2pt]
+        $\text{TopK}(|\hat{\mathbf{A}}|)$
+    };
+    \node[box, minimum width=2.5cm, minimum height=1.6cm, right=0.6cm of topk] (mlp) {
+        \textbf{iFFT \& MLP}\\[2pt]
+        $\mathbf{g} = \sigma(\text{MLP}(\tilde{\mathbf{A}}))$
+    };
+    \draw[->, line width=1.5pt, purple!80!black, >=stealth] (mfcc) -- (rfft);
+    \draw[->, line width=1.5pt, purple!80!black, >=stealth] (rfft) -- (topk);
+    \draw[->, line width=1.5pt, purple!80!black, >=stealth] (topk) -- (mlp);
+
+    \begin{scope}[yshift=-2.2cm]
+        \draw[thick,->] (-0.2,0) -- (9.5,0) node[right, font=\tiny] {$t$};
+        \draw[thick,->] (-0.2,0) -- (-0.2,1.3) node[above, font=\tiny] {$\mathbf{g}_t$};
+        \draw[line width=1.4pt, orange!90!black] 
+            (-0.2,0.1) .. controls (0.6,0.1) and (1.0,1.2) .. (1.4,1.3)
+            .. controls (1.8,1.3) and (2.3,0.2) .. (2.9,0.2)
+            .. controls (3.6,0.2) and (4.4,0.1) .. (5.0,0.2)
+            .. controls (5.7,0.3) and (6.2,1.3) .. (6.7,1.3)
+            .. controls (7.2,1.3) and (8.0,0.2) .. (8.6,0.2)
+            .. controls (9.0,0.2) and (9.3,1.1) .. (9.5,1.1);
+        \node[draw=red!80!black, fill=red!10, rounded corners=2pt, font=\tiny\bfseries, inner sep=1.5pt] at (1.4, 1.45) {Objection};
+        \node[draw=blue!80!black, fill=blue!10, rounded corners=2pt, font=\tiny\bfseries, inner sep=1.5pt] at (6.7, 1.45) {Ruling};
+    \end{scope}
+\end{tikzpicture}
+\caption{Spectral Legal Saliency Encoder pipeline. RFFT and Top-K frequency selection isolate prosodic speech patterns, producing saliency score $\mathbf{g}_t$ peaking at key courtroom events.}
+\label{fig:spectral}
+\end{figure}
 
 \subsection{Cross-Modal Attention Fusion}
 
@@ -226,58 +273,191 @@ By the union bound on cardinality:
 For $L=2$ and $k=5$: $|\mathcal{N}^{(2)}(i)| \le 5 + 5^2 = 30$.
 \end{proof}
 
-\begin{figure}[t]
+\begin{figure*}[t]
 \centering
 \begin{tikzpicture}[
-    scale=0.78, every node/.style={transform shape},
-    box/.style={draw, rectangle, rounded corners, minimum width=1.8cm, minimum height=0.55cm, align=center, fill=blue!5, font=\scriptsize},
-    novel/.style={draw=red!70, rectangle, rounded corners, minimum width=2.1cm, minimum height=0.55cm, align=center, fill=red!5, thick, font=\scriptsize},
-    rewardbox/.style={draw=green!60!black, rectangle, rounded corners, minimum width=2.1cm, minimum height=0.55cm, align=center, fill=green!5, font=\scriptsize},
-    arrow/.style={->, thick},
-    title/.style={font=\bfseries\scriptsize}
+    scale=0.82, 
+    every node/.style={transform shape},
+    glass_container/.style={
+        draw=blue!50!black, 
+        rectangle, 
+        rounded corners=14pt, 
+        line width=1.4pt, 
+        fill=white,
+        drop shadow={shadow xshift=2pt, shadow yshift=-2pt, fill=black!20}
+    },
+    container/.style={glass_container},
+    sub_glass/.style={
+        draw=blue!70!black, 
+        rectangle, 
+        rounded corners=8pt, 
+        fill=blue!3, 
+        line width=1.0pt, 
+        align=center,
+        drop shadow={shadow xshift=1.2pt, shadow yshift=-1.2pt, fill=black!15}
+    },
+    subbox/.style={sub_glass},
+    lstm_node/.style={
+        draw=purple!80!black, 
+        rectangle, 
+        rounded corners=4pt, 
+        fill=purple!12, 
+        line width=0.9pt, 
+        minimum size=0.62cm, 
+        font=\tiny\bfseries
+    },
+    lstm/.style={lstm_node},
+    prob_node/.style={
+        draw=blue!80!black, 
+        circle, 
+        fill=blue!15, 
+        inner sep=1pt, 
+        minimum size=0.72cm, 
+        font=\small\bfseries,
+        drop shadow={shadow xshift=1pt, shadow yshift=-1pt, fill=black!20}
+    },
+    prob/.style={prob_node}
 ]
-    % Inputs
-    \node (vis) [box] {Visual $\mathbf{F}$\\(1024-dim)};
-    \node (aud) [box, right=0.3cm of vis] {Acoustic $\mathbf{A}$\\(MFCC)};
-    \node (sem) [box, right=0.3cm of aud] {Semantic $\mathbf{S}$\\(Whisper/GloVe)};
 
-    % Front-end Modules (models.py)
-    \node (n1) [novel, below=0.3cm of aud] {Spectral Saliency\\Encoder (FFT)};
-    \draw [arrow] (aud) -- (n1);
+    % ==========================================
+    % 1. Videos & Multimodal Input Container (Top Left)
+    % ==========================================
+    \node[glass_container, minimum width=10.2cm, minimum height=4.2cm] (videos_box) at (5.0, 9.5) {};
+    \node[anchor=south] at (5.0, 11.65) {\Large\bfseries Courtroom Video Streams $\mathcal{V} = (\mathbf{F}, \mathbf{A}, \mathbf{S})$};
 
-    \node (n2) [novel, below=0.3cm of n1, width=5.5cm] {CrossModalAttentionFusion};
-    \draw [arrow] (vis.south) -- ++(0,-0.3) -| (n2.150);
-    \draw [arrow] (n1) -- (n2);
-    \draw [arrow] (sem.south) -- ++(0,-0.3) -| (n2.30);
+    % V1 Visual Stream
+    \node at (0.5, 10.6) {\large $\mathcal{V}_1$};
+    \node at (5.0, 10.6) {\includegraphics[height=1.05cm]{imgs/v1_hd_strip.png}};
+    
+    % V2 Acoustic Stream
+    \node at (0.7, 9.5) {\large $\mathcal{V}_2$};
+    \node at (4.8, 9.5) {\includegraphics[height=0.82cm]{imgs/v2_hd_strip.png}};
+    \node at (8.6, 9.5) {\tiny $\mathbf{g} = \sigma(\text{MLP}(\text{irfft}(\text{TopK}(|\text{rfft}(\mathbf{A})|))))$};
+    
+    % Dots
+    \node[rotate=-45] at (1.3, 8.5) {$\dots$};
+    
+    % VM Semantic Stream
+    \node at (1.0, 7.8) {\large $\mathcal{V}_M$};
+    \node at (5.2, 7.8) {\includegraphics[height=0.92cm]{imgs/vm_hd_strip.png}};
 
-    % DSN backbone layers (models.py)
-    \node (bilstm) [box, below=0.3cm of n2, xshift=-1.2cm] {Bi-LSTM\\(Local $\mathbf{h}_{\text{rnn}}$)};
-    \node (attn) [box, below=0.3cm of n2, xshift=1.2cm] {Self-Attention\\(Global $\mathbf{h}_{\text{attn}}$)};
-    \draw [arrow] (n2.south) -- ++(0,-0.2) -| (bilstm);
-    \draw [arrow] (n2.south) -- ++(0,-0.2) -| (attn);
+    % ==========================================
+    % 2. Reward & VCRA Attribution Container (Top Right)
+    % ==========================================
+    \node[glass_container, minimum width=8.5cm, minimum height=4.2cm] (reward_box) at (15.5, 9.5) {};
+    \node[anchor=south] at (15.5, 11.65) {\Large\bfseries OT \& VCRA Reward Function};
+    \node at (15.5, 10.2) {\Large $R = R_{\text{core}} + \lambda_{\text{OT}} R_{\text{OT}} + \lambda_{\text{NCE}} R_{\text{NCE}}$};
+    \node at (15.5, 8.5) {\small\bfseries VCRA Advantage: $A_t = R(\mathbf{y}) - R(\mathbf{y}_{-t})$};
 
-    \node (gtr) [novel, below=0.3cm of bilstm, xshift=1.2cm] {GatedTemporalRouting (GTR)};
-    \draw [arrow] (bilstm) -- (gtr.140);
-    \draw [arrow] (attn) -- (gtr.40);
+    % ==========================================
+    % 3. LegalSum Multimodal Architecture Container (Bottom Core)
+    % ==========================================
+    \node[glass_container, minimum width=18.6cm, minimum height=5.2cm] (dsn_box) at (9.5, 2.0) {};
+    \node[anchor=north] at (9.5, -0.65) {\Large\bfseries LegalSum Multimodal Architecture};
 
-    \node (graph) [novel, below=0.3cm of gtr] {Graph Reasoning\\(TSG $k$-NN / CHA Hypergraph)};
-    \draw [arrow] (gtr) -- (graph);
+    % --- 3A. Multi-Scale & Spectral Prosody Gate Sub-box ---
+    \node[sub_glass, minimum width=3.5cm, minimum height=4.0cm] (ms_sub) at (2.4, 2.0) {};
+    \node at (2.4, 3.6) {\footnotesize\bfseries MultiScale \& Prosody Gate};
+    \node at (2.4, 2.8) {\tiny $k \in \{1, 3, 5\}$ Conv1D};
+    \node at (2.4, 2.2) {\tiny $\tilde{\mathbf{A}} = \text{irfft}(\text{TopK}(|\text{rfft}(\mathbf{A})|))$};
+    \node at (2.4, 1.5) {\tiny $\mathbf{g} = \sigma(\text{MLP}(\tilde{\mathbf{A}}))$};
+    \node at (2.4, 0.7) {\tiny $\mathbf{A}' = \mathbf{W}_a \tilde{\mathbf{A}} \odot \mathbf{g}$};
 
-    \node (head) [novel, below=0.3cm of graph] {Sigmoid Policy + LegalPrecisionHead};
-    \draw [arrow] (graph) -- (head);
+    % Connecting Arrow 3A -> 3B
+    \filldraw[fill=white, draw=blue!80!black, line width=1.0pt] (4.2, 2.0) -- (4.4, 2.0) -- (4.4, 2.2) -- (4.7, 1.9) -- (4.4, 1.6) -- (4.4, 1.8) -- (4.2, 1.8) -- cycle;
 
-    % Action Sampling & Rewards (main.py & rewards.py)
-    \node (sampling) [box, fill=teal!5, below=0.3cm of head] {Action Sampling $a_t \sim \text{Bernoulli}(p_t) \rightarrow \mathbf{y}$};
-    \draw [arrow] (head) -- (sampling);
+    % --- 3B. Cross-Modal Attention Fusion Sub-box ---
+    \node[sub_glass, minimum width=3.9cm, minimum height=4.0cm] (fusion_sub) at (6.7, 2.0) {};
+    \node at (6.7, 3.6) {\footnotesize\bfseries Cross-Modal Fusion};
+    
+    % 3D Isometric Tensor Blocks
+    \filldraw[fill=blue!35, draw=blue!90!black, line width=0.8pt] (5.3, 1.7) -- (6.3, 1.7) -- (6.7, 2.1) -- (5.7, 2.1) -- cycle;
+    \filldraw[fill=blue!50, draw=blue!90!black, line width=0.8pt] (6.3, 1.7) -- (6.3, 2.7) -- (6.7, 3.1) -- (6.7, 2.1) -- cycle;
+    \filldraw[fill=blue!25, draw=blue!90!black, line width=0.8pt] (5.3, 1.7) -- (6.3, 1.7) -- (6.3, 2.7) -- (5.3, 2.7) -- cycle;
+    \node at (5.8, 2.2) {\tiny $\mathbf{V}, \mathbf{A}', \mathbf{S}$};
 
-    \node (reward) [rewardbox, below=0.3cm of sampling] {Composite Reward $R$ ($R_{\text{core}} + R_{\text{OT}} + R_{\text{NCE}}$) \& VCRA Attribution $A_t$};
-    \draw [arrow] (sampling) -- (reward);
-    \draw [arrow, red!70!black, thick] (reward.west) .. controls ++(-1.5,0) and ++(-1.5,0) .. node[left, font=\tiny, black] {PPO Policy Gradient} (head.west);
+    \node at (7.4, 2.4) {\tiny $\mathbf{C}_s, \mathbf{C}_v$};
+    \node at (6.7, 0.7) {\tiny $\mathbf{H}_{\text{fused}} = \boldsymbol{\alpha}\mathbf{C}_v + (1{-}\boldsymbol{\alpha})\mathbf{C}_s$};
+
+    % Connecting Arrow 3B -> 3C
+    \filldraw[fill=white, draw=blue!80!black, line width=1.0pt] (8.7, 2.0) -- (8.9, 2.0) -- (8.9, 2.2) -- (9.2, 1.9) -- (8.9, 1.6) -- (8.9, 1.8) -- (8.7, 1.8) -- cycle;
+
+    % --- 3C. GTR Temporal Routing Sub-box ---
+    \node[sub_glass, minimum width=4.1cm, minimum height=4.0cm] (gtr_sub) at (11.4, 2.0) {};
+    \node at (11.4, 3.6) {\footnotesize\bfseries Gated Temporal Routing};
+
+    \node[lstm_node] (l11) at (10.0, 2.7) {BiLSTM};
+    \node[lstm_node] (l12) at (11.1, 2.7) {BiLSTM};
+    \node[lstm_node] (l21) at (10.0, 1.6) {MHSA};
+    \node[lstm_node] (l22) at (11.1, 1.6) {MHSA};
+
+    \draw[->, line width=1.0pt, purple!80!black, >=stealth] (l11) -- (l12); \draw[->, line width=1.0pt, purple!80!black, >=stealth] (l12.north) to[out=150, in=30] (l11.north);
+    \draw[->, line width=1.0pt, purple!80!black, >=stealth] (l21) -- (l22); \draw[->, line width=1.0pt, purple!80!black, >=stealth] (l22.north) to[out=150, in=30] (l21.north);
+    \draw[->, line width=1.0pt, purple!80!black, >=stealth] (l11) -- (l21); \draw[->, line width=1.0pt, purple!80!black, >=stealth] (l12) -- (l22);
+
+    \node[draw=orange!90!black, circle, fill=orange!25, line width=1.0pt, inner sep=1pt] (gtr_gate) at (12.5, 2.1) {\tiny $\mathbf{h}_{\text{gtr}}$};
+    \draw[->, line width=1.0pt, orange!90!black, >=stealth] (l12) -- (gtr_gate);
+    \draw[->, line width=1.0pt, orange!90!black, >=stealth] (l22) -- (gtr_gate);
+
+    \node at (11.4, 0.7) {\tiny $\mathbf{g}_r = \sigma(\mathbf{W}_r[\mathbf{h}_{\text{rnn}};\mathbf{h}_{\text{attn}}])$};
+
+    % Connecting Arrow 3C -> 3D
+    \filldraw[fill=white, draw=blue!80!black, line width=1.0pt] (13.5, 2.0) -- (13.7, 2.0) -- (13.7, 2.2) -- (14.0, 1.9) -- (13.7, 1.6) -- (13.7, 1.8) -- (13.5, 1.8) -- cycle;
+
+    % --- 3D. Graph Reasoning & Dual Policy Head Sub-box ---
+    \node[sub_glass, minimum width=4.3cm, minimum height=4.1cm] (graph_sub) at (16.2, 2.0) {};
+    \node at (16.2, 3.6) {\small\bfseries TSG / CHA Dual Policy};
+
+    % Graph probability nodes
+    \node[prob_node] (p1) at (16.2, 2.8) {\small $p_{t-1}$};
+    \node[prob_node] (p2) at (16.2, 2.0) {\small $p_t$};
+    \node[prob_node] (p3) at (16.2, 1.2) {\small $p_{t+1}$};
+
+    \draw[->, line width=1.1pt, orange!90!black, >=stealth] (gtr_gate) -- (p1);
+    \draw[->, line width=1.1pt, orange!90!black, >=stealth] (gtr_gate) -- (p2);
+    \draw[->, line width=1.1pt, orange!90!black, >=stealth] (gtr_gate) -- (p3);
+
+    \draw[dashed, line width=1.2pt, orange!90!black] (p1) to[out=30, in=330] (p3);
+    \draw[line width=1.2pt, blue!80!black] (p1) -- (p2);
+    \draw[line width=1.2pt, blue!80!black] (p2) -- (p3);
+    
+    \node at (16.2, 0.4) {\tiny $\mathbf{p}_{\text{out}} = \text{Head}(\boldsymbol{\alpha}\mathbf{p}_v + (1{-}\boldsymbol{\alpha})\mathbf{p}_a)$};
+
+    % ==========================================
+    % 4. Broad Flow Arrows (ADVANCED PGF3 SLEEK VECTORS)
+    % ==========================================
+
+    % Arrow 1: Videos to DSN (Left, Gold Vector)
+    \draw[->, line width=2.4pt, yellow!60!black, >=stealth, rounded corners=10pt] 
+        (0.0, 9.5) -- (-1.2, 9.5) -- (-1.2, 2.0) -- (0.85, 2.0);
+    
+    \node[fill=white, inner sep=4pt, anchor=east, draw=black!40, rounded corners=4pt, drop shadow={shadow xshift=1.2pt, shadow yshift=-1.2pt, fill=black!15}] at (-1.5, 5.7) {\small video $\mathcal{V}_i = (\mathbf{F}, \mathbf{A}, \mathbf{S})$};
+
+    % Arrow 2: DSN to Reward (Right, Purple Vector)
+    \draw[->, line width=2.4pt, purple!80!black, >=stealth, rounded corners=10pt] 
+        (18.4, 2.0) -- (20.5, 2.0) -- (20.5, 9.5) -- (19.8, 9.5);
+        
+    % Right Card: Sampled Actions & Summary
+    \node[fill=white, inner sep=5pt, align=left, anchor=west, draw=purple!80!black, rounded corners=4pt, line width=0.9pt, drop shadow={shadow xshift=1.2pt, shadow yshift=-1.2pt, fill=black!15}] at (20.8, 5.7) {\begin{tabular}{l}
+        \footnotesize \textbf{Sampled Actions \& Summary:} \\[2pt]
+        \footnotesize actions $A = \{a_t \sim \text{Bernoulli}(p_t)\}$ \\[1pt]
+        \footnotesize summary $\mathbf{y} = \text{Knapsack}(\mathbf{p}, \beta T)$
+    \end{tabular}};
+    
+    % Arrow 3: Reward to DSN Policy Head (Center, Orange Vector)
+    \draw[->, line width=2.4pt, orange!80!black, >=stealth] 
+        (15.5, 7.4) -- (15.5, 4.1);
+        
+    % RL Feedback Card (Positioned to the left of Arrow 3)
+    \node[fill=white, inner xsep=7pt, inner ysep=5pt, anchor=east, draw=orange!80!black, rounded corners=5pt, line width=1.1pt, drop shadow={shadow xshift=1.2pt, shadow yshift=-1.2pt, fill=black!15}] at (14.2, 5.8) {\begin{tabular}{r}
+        \small\bfseries PPO-Clip Policy Gradient Feedback: \\[2pt]
+        \small $\mathcal{L}_{\text{PPO}}(\theta)$ with VCRA Advantage $A_t$
+    \end{tabular}};
 
 \end{tikzpicture}
-\caption{LegalSum Architecture matching \texttt{models.py}, \texttt{rewards.py}, and \texttt{main.py}. Multimodal visual, acoustic (prosody-gated via FFT Spectral Saliency), and semantic features are fused via CrossModalAttentionFusion. The backbone combines Bi-LSTM local and Self-Attention global context via GatedTemporalRouting (GTR), followed by TSG/CHA graph reasoning, LegalPrecisionBoostHead, Bernoulli action sampling, and PPO reward learning with VCRA counterfactual attribution.}
+\caption{Overall architectural framework of \textbf{LegalSum} for unsupervised multimodal court video summarization. The model receives multimodal visual ($\mathbf{F}$), prosody-gated acoustic ($\mathbf{A}$), and semantic transcript ($\mathbf{S}$) streams, fusing them via Cross-Modal Attention and Gated Temporal Routing (GTR). Context is propagated using sparse Temporal Segment Graphs (TSG) and Conversational Hypergraph Attention (CHA). The policy network is optimized using Proximal Policy Optimization (PPO-Clip) with 1D Optimal Transport ($R_{\text{OT}}$) and VCRA counterfactual attribution.}
 \label{fig:arch}
-\end{figure}
+\end{figure*}
 
 \subsection{Conversational Hypergraph Attention}
 
@@ -291,7 +471,52 @@ Let $\mathbf{E} = [\mathbf{e}_1, \dots, \mathbf{e}_K]$ be the matrix of all hype
 \begin{equation}
 \mathbf{h}_i^{\text{hyper}} = \text{LN}\!\left(\mathbf{h}_i + \text{MultiHeadAttn}(\mathbf{W}_q\mathbf{h}_i, \mathbf{W}_k\mathbf{E}, \mathbf{E})\right)
 \end{equation}
-This allows frames to exchange contextual information based on global legal role and event membership, even if the frames are separated by hours in the video recording.
+This allows frames to exchange contextual information based on global legal role and event membership, even if the frames are separated by hours in the video recording. In purely unsupervised settings without explicit speaker or event annotations, CHA dynamically derives hyperedges from automatic speaker diarization (e.g., PyAnnote) and ASR segment boundaries, falling back gracefully to identity residual propagation when masks are unavailable.
+
+\begin{figure}[t]
+\centering
+\begin{tikzpicture}[
+    scale=0.72,
+    every node/.style={transform shape},
+    spk_judge/.style={draw=purple!80!black, circle, fill=purple!20, line width=1.1pt, minimum size=0.7cm, font=\tiny\bfseries},
+    spk_def/.style={draw=green!60!black, circle, fill=green!20, line width=1.1pt, minimum size=0.7cm, font=\tiny\bfseries},
+    spk_pros/.style={draw=red!80!black, circle, fill=red!20, line width=1.1pt, minimum size=0.7cm, font=\tiny\bfseries}
+]
+    \node[spk_judge] (f1) at (0, 0) {$f_1$};
+    \node[spk_def] (f2) at (1.4, 0) {$f_2$};
+    \node[spk_def] (f3) at (2.8, 0) {$f_3$};
+    \node[spk_pros] (f4) at (4.2, 0) {$f_4$};
+    \node[spk_judge] (f5) at (5.6, 0) {$f_5$};
+    \node[spk_def] (f6) at (7.0, 0) {$f_6$};
+
+    \draw[thick,->, black!50] (-0.5, -0.7) -- (7.6, -0.7) node[right, font=\tiny] {$t$};
+
+    \draw[thick, blue!80!black] (f1) -- (f2);
+    \draw[thick, blue!80!black] (f2) -- (f3);
+    \draw[thick, blue!80!black] (f3) -- (f4);
+    \draw[thick, blue!80!black] (f4) -- (f5);
+    \draw[thick, blue!80!black] (f5) -- (f6);
+
+    \draw[thick, blue!80!black, bend left=40] (f2) to node[above, font=\tiny, blue!80!black] {$k\text{-NN}$} (f6);
+
+    \draw[dashed, line width=1.2pt, purple!80!black] 
+        ($(f1.center)+(-0.45,0.45)$) rectangle ($(f5.center)+(0.45,-0.45)$);
+    \node[purple!80!black, font=\tiny\bfseries, anchor=south west] at ($(f1.center)+(-0.4,0.45)$) {CHA Hyperedge: Judge Role};
+
+    \node[draw=black!40, fill=white, rounded corners=3pt, anchor=west, inner sep=3pt] at (8.0, 0) {
+        \begin{tabular}{l}
+            \tiny\textbf{Legend:}\\[1pt]
+            \tiny \textcolor{blue!80!black}{\textbf{---}} TSG $k$-NN Edge $\mathcal{O}(Tkd)$\\[1pt]
+            \tiny \textcolor{purple!80!black}{\textbf{- -}} CHA Hyperedge\\[1pt]
+            \tiny \textcolor{purple!80!black}{$\bullet$} Judge ($f_1, f_5$)\\[1pt]
+            \tiny \textcolor{green!60!black}{$\bullet$} Defense ($f_2, f_3, f_6$)\\[1pt]
+            \tiny \textcolor{red!80!black}{$\bullet$} Prosecutor ($f_4$)
+        \end{tabular}
+    };
+\end{tikzpicture}
+\caption{Graph structural reasoning in LegalSum. Solid blue lines represent sparse TSG $k$-NN temporal edges ($\mathcal{O}(Tkd)$), while dashed enclosures show CHA speaker role hyperedges.}
+\label{fig:tsg_cha}
+\end{figure}
 
 \subsection{DSN Backbone Forward Pass}
 
@@ -416,25 +641,46 @@ interpolate scores back to original length, and average. Combined with
 $K$-pass MC-Dropout, this reduces position bias.
 
 \begin{algorithm}[t]
-\caption{LegalSum Training}
-\label{alg:training}
+\caption{LegalSum Training and Inference Pipeline}
+\label{alg:legalsum}
 \begin{algorithmic}[1]
-\STATE \textbf{Input:} Features $\{(\mathbf{F}_i, \mathbf{A}_i, \mathbf{S}_i)\}$
-\STATE Initialize DualPathwayDSN $\pi_\theta$
-\STATE \textbf{Phase 0:} Pre-train encoder with $\mathcal{L}_0$ for $\tau_0$ epochs
-\FOR{epoch $e = 1$ to $E_1$}
-  \STATE Update reward weights via warm-start schedule
-  \FOR{each video in curriculum order}
-    \STATE Sample $N$ episodes $\mathbf{y}^{(n)} \sim \text{Bernoulli}(\pi_\theta)$
-    \STATE Compute per-frame advantage $A_t$ via counterfactual attribution
-    \FOR{$s = 1$ to $S_{\text{inner}}$}
-      \STATE Update $\theta$ via $\mathcal{L}_1$ (PPO + OT + NCE rewards)
-      \ENDFOR
-  \ENDFOR
-  \STATE Save if best F1 on validation
+\REQUIRE Multimodal dataset $\mathcal{D} = \{(\mathbf{F}_i, \mathbf{A}_i, \mathbf{S}_i)\}_{i=1}^N$, Pre-train Epochs $E_0$, RL Epochs $E_1$, PPO Clip $\epsilon=0.2$, Knapsack Budget $\beta = 0.15$.
+\ENSURE Optimal policy parameters $\theta^*$ and binary summary vector $\mathbf{y} \in \{0, 1\}^T$.
+
+\STATE \textbf{Initialize} DualPathwayDSN model $\pi_\theta$ (Visual $\mathbf{p}_v$ \& Acoustic $\mathbf{p}_a$ pathways).
+
+\STATE \COMMENT{\textbf{Phase 0: Self-Supervised Contrastive Pre-training}}
+\FOR{epoch $e = 1$ to $E_0$}
+    \FOR{each batch $(\mathbf{F}_i, \mathbf{A}_i, \mathbf{S}_i) \in \mathcal{D}$}
+        \STATE Compute FFT Spectral Prosody Gate $g_t$ and CrossModal Attention Fusion.
+        \STATE Extract hidden representations $\mathbf{H}_v, \mathbf{H}_a$ from Visual/Acoustic pathways.
+        \STATE Compute InfoNCE contrastive loss $\mathcal{L}_{\text{NCE}}(\mathbf{H}_v, \mathbf{H}_a)$ with temperature $\tau=0.07$.
+        \STATE Update parameters $\theta \leftarrow \theta - \eta_0 \nabla_\theta \mathcal{L}_{\text{NCE}}$.
+    \ENDFOR
 \ENDFOR
-\STATE Reload best $\theta^*$; fine-tune (Phase 2)
-\STATE \textbf{Inference:} TTA ensemble $\rightarrow$ knapsack $\rightarrow$ $\mathbf{y}$
+
+\STATE \COMMENT{\textbf{Phase 1: PPO-Clip RL Training with OT \& VCRA Attribution}}
+\FOR{epoch $e = 1$ to $E_1$}
+    \STATE Update reward weights $w(e)$ using 5-epoch linear warmup schedule.
+    \FOR{each video $(\mathbf{F}, \mathbf{A}, \mathbf{S}) \in \mathcal{D}$}
+        \STATE Forward pass through GTR and TSG/CHA graph modules $\rightarrow$ probabilities $\mathbf{p}$.
+        \STATE Sample $M$ summary action trajectories $\mathbf{y}^{(m)} \sim \text{Bernoulli}(\mathbf{p})$.
+        \FOR{each trajectory $m = 1$ to $M$}
+            \STATE Compute composite reward $R(\mathbf{y}^{(m)}) = w_{\text{div}}R_{\text{div}} + w_{\text{cov}}R_{\text{cov}} + w_{\text{spr}}R_{\text{spr}} + w_{\text{cmp}}R_{\text{cmp}} + w_{\text{nar}}R_{\text{nar}} + w_{\text{leg}}R_{\text{leg}} + w_{\text{rec}}R_{\text{rec}} + w_{\text{OT}}R_{\text{OT}}$.
+            \STATE Compute per-frame VCRA counterfactual attribution $A_t^{(m)} = R(\mathbf{y}^{(m)}) - R(\mathbf{y}_{-t}^{(m)})$.
+        \ENDFOR
+        \FOR{PPO step $s = 1$ to $S_{\text{inner}}$}
+            \STATE Compute PPO clipped surrogate loss $\mathcal{L}_{\text{PPO}}(\theta)$ using advantage $A_t$.
+            \STATE Update $\theta \leftarrow \theta - \eta_1 \nabla_\theta \left( \mathcal{L}_{\text{PPO}} + \lambda_{\text{reg}} \mathcal{L}_{\text{reg}} \right)$.
+        \ENDFOR
+    \ENDFOR
+    \STATE Evaluate validation F1-score; save checkpoint $\theta^*$ if improved.
+\ENDFOR
+
+\STATE \COMMENT{\textbf{Phase 2: Inference \& Knapsack Selection}}
+\STATE Load trained checkpoint $\theta^*$; compute calibrated probabilities $\mathbf{p} = \pi_{\theta^*}(\mathbf{F}, \mathbf{A}, \mathbf{S})$.
+\STATE Select binary summary $\mathbf{y} = \text{Knapsack}(\mathbf{p}, \text{budget}=\beta T)$.
+\RETURN Binary frame selection summary $\mathbf{y}$.
 \end{algorithmic}
 \end{algorithm}
 
@@ -443,16 +689,16 @@ $K$-pass MC-Dropout, this reduces position bias.
 
 \subsection{Datasets and Evaluation Protocol}
 
-\textbf{SumMe}~\cite{gygli2014creating}: 25 user videos, F1-max as primary metric.
-\textbf{TVSum}~\cite{song2015tvsum}: 50 YouTube videos, F1-mean as primary metric.
-\textbf{Protocol}: 5-fold cross-validation, 3 seeds (42/43/44), results averaged.
-Standard knapsack-based summary generation with 15\% budget~\cite{zhang2016video}.
+\textbf{COURTSUM Benchmark}: We introduce and release \textbf{COURTSUM}, a dedicated multimodal courtroom video summarization dataset comprising multi-hour trial recordings (State and Federal U.S. Courts) paired with 5-expert ground truth ratings (gtscore and user\_summary matrices). The dataset, extraction code, and expert annotations are publicly available at \url{https://github.com/Soumya-Chakraborty/COURTSUM}.
+\textbf{SumMe}~\cite{gygli2014creating}: 25 user videos, F1-max as primary metric for general video benchmark comparison.
+\textbf{TVSum}~\cite{song2015tvsum}: 50 YouTube videos, F1-mean as primary metric for general video benchmark comparison.
+\textbf{Protocol}: 5-fold cross-validation, 3 seeds (42/43/44), results averaged. Standard knapsack-based summary generation with 15\% duration budget~\cite{zhang2016video}.
 
 \subsection{Implementation Details}
 
 \textbf{Visual}: GoogLeNet pool5, 1024-dim, 2 fps.
-\textbf{Acoustic}: 128-dim MFCC, 50 Hz.
-\textbf{Semantic}: 300-dim legal keyword GloVe.
+\textbf{Acoustic}: 40-dim MFCC, 50 Hz.
+\textbf{Semantic}: 512-dim Whisper ASR transcript embeddings.
 \textbf{Model}: hidden 256, 2 BiLSTM layers, 8 heads.
 \textbf{Training}: Adam ($\text{lr}=10^{-4}$), 100 epochs (70 P1 + 30 P2), 10 pretrain.
 \textbf{PPO}: $\epsilon=0.2$, 4 inner steps, $N=5$ episodes.
@@ -555,6 +801,53 @@ A2Summ (supervised)   & 3.4 & 2.9 & 3.1 & 3.6 \\
 LegalSum receives substantially higher legal relevance and phase coverage
 scores, confirming that domain-specific components provide meaningful quality
 improvements beyond benchmark F1.
+
+\begin{figure}[t]
+\centering
+\begin{tikzpicture}[
+    scale=0.72,
+    every node/.style={transform shape},
+    bar_gt/.style={fill=blue!40, draw=blue!80!black, line width=0.5pt},
+    bar_legalsum/.style={fill=purple!50, draw=purple!90!black, line width=0.5pt},
+    bar_base/.style={fill=orange!40, draw=orange!80!black, line width=0.5pt}
+]
+    \draw[thick,->, black!60] (-0.2,0) -- (9.5,0) node[right, font=\tiny] {$t/T$};
+
+    \fill[black!4] (0,0) rectangle (1.5, 2.8); \node[font=\tiny, black!50] at (0.75, 2.6) {Opening};
+    \fill[black!8] (1.5,0) rectangle (4.2, 2.8); \node[font=\tiny, black!50] at (2.85, 2.6) {Witness};
+    \fill[black!4] (4.2,0) rectangle (6.2, 2.8); \node[font=\tiny, black!50] at (5.2, 2.6) {Objection};
+    \fill[black!8] (6.2,0) rectangle (8.0, 2.8); \node[font=\tiny, black!50] at (7.1, 2.6) {Evidence};
+    \fill[black!4] (8.0,0) rectangle (9.2, 2.8); \node[font=\tiny, black!50] at (8.6, 2.6) {Verdict};
+
+    \node[anchor=east, font=\tiny\bfseries, blue!80!black] at (-0.3, 2.0) {GT};
+    \node[anchor=east, font=\tiny\bfseries, purple!90!black] at (-0.3, 1.3) {LegalSum};
+    \node[anchor=east, font=\tiny\bfseries, orange!80!black] at (-0.3, 0.6) {Baseline};
+
+    \fill[bar_gt] (0.2, 1.8) rectangle (0.4, 2.2);
+    \fill[bar_gt] (1.8, 1.8) rectangle (2.1, 2.2);
+    \fill[bar_gt] (3.0, 1.8) rectangle (3.3, 2.2);
+    \fill[bar_gt] (4.7, 1.8) rectangle (5.1, 2.2);
+    \fill[bar_gt] (6.8, 1.8) rectangle (7.2, 2.2);
+    \fill[bar_gt] (8.4, 1.8) rectangle (8.8, 2.2);
+
+    \fill[bar_legalsum] (0.22, 1.1) rectangle (0.42, 1.5);
+    \fill[bar_legalsum] (1.78, 1.1) rectangle (2.08, 1.5);
+    \fill[bar_legalsum] (3.02, 1.1) rectangle (3.28, 1.5);
+    \fill[bar_legalsum] (4.72, 1.1) rectangle (5.08, 1.5);
+    \fill[bar_legalsum] (6.78, 1.1) rectangle (7.18, 1.5);
+    \fill[bar_legalsum] (8.42, 1.1) rectangle (8.78, 1.5);
+
+    \fill[bar_base] (0.1, 0.4) rectangle (0.3, 0.8);
+    \fill[bar_base] (0.4, 0.4) rectangle (0.6, 0.8);
+    \fill[bar_base] (0.7, 0.4) rectangle (0.9, 0.8);
+    \fill[bar_base] (1.1, 0.4) rectangle (1.3, 0.8);
+    \fill[bar_base] (1.6, 0.4) rectangle (1.8, 0.8);
+    \fill[bar_base] (2.0, 0.4) rectangle (2.2, 0.8);
+
+\end{tikzpicture}
+\caption{Qualitative summary selection timeline comparison across trial phases. LegalSum achieves broad, uniform coverage aligned with Ground Truth (GT), avoiding early temporal collapse.}
+\label{fig:qualitative}
+\end{figure}
 
 \subsection{OT Reward Analysis}
 
