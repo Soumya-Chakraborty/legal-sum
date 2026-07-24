@@ -453,6 +453,7 @@ def evaluate_with_ensemble(model, dataset, test_keys, use_gpu,
                 p_mean = np.mean(p_list, axis=0)   # shape: (new_len,)
                 # Re-index back to original_len via linear interpolation
                 orig_idx = np.linspace(0, new_len - 1, original_len)
+                p_orig = np.interp(orig_idx, np.arange(new_len), p_mean)
                 tta_accum.append(p_orig)
             probs = np.mean(tta_accum, axis=0)   # Final TTA-fused importance scores
 
