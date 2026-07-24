@@ -1,10 +1,17 @@
 __pycache__/
+*.pyc
 log/
 *.aux
 *.log
 *.pdf
-
-# Ignore audio wavs and models
-demo/**/*.wav
-demo/**/*.pth.tar
 *.zip
+*.tar
+*.gz
+*.mp4
+*.wav
+*.pth.tar
+
+# Heavy data folders
+Demo/
+demo/
+datasets/*.h5
