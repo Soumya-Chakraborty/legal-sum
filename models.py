@@ -97,7 +97,7 @@ class MultiHeadSelfAttention(nn.Module):
         Forward pass for Multi-Head Self-Attention using Pre-LN.
         """
         x_norm = self.norm(x)
-        attn_out, _ = self.attn(x_norm, x_norm, x_norm)  # Self-attention: query=x, key=x, value=x
+        attn_out, _ = self.attn(x_norm, x_norm, x_norm, need_weights=False)  # Self-attention: query=x, key=x, value=x (need_weights=False saves GBs of RAM)
         return x + self.dropout(attn_out)
 
 
@@ -455,12 +455,12 @@ class CrossModalAttentionFusion(nn.Module):
 
         # --- Pass 1: semantic queries, visual+acoustic keys/values ---
         kv_va = torch.cat([proj_v, proj_a], dim=1)          # (B, 2T, D)
-        attn_s, _ = self.attn_s2va(proj_s, kv_va, kv_va)
+        attn_s, _ = self.attn_s2va(proj_s, kv_va, kv_va, need_weights=False)
         fused_s = self.norm_s(proj_s + self.dropout(attn_s))  # (B, T, D)
 
         # --- Pass 2: visual queries, semantic+acoustic keys/values ---
         kv_sa = torch.cat([proj_s, proj_a], dim=1)          # (B, 2T, D)
-        attn_v, _ = self.attn_v2sa(proj_v, kv_sa, kv_sa)
+        attn_v, _ = self.attn_v2sa(proj_v, kv_sa, kv_sa, need_weights=False)
         fused_v = self.norm_v(proj_v + self.dropout(attn_v))  # (B, T, D)
 
         # --- Gated output fusion ---
@@ -757,7 +757,7 @@ class ConversationalHypergraphAttention(nn.Module):
             v = edge_feats.unsqueeze(0) # (1, num_edges, D)
             
             # Attention routing
-            attn_out, _ = self.attn(q, k, v) # (1, T, D)
+            attn_out, _ = self.attn(q, k, v, need_weights=False) # (1, T, D)
             out[b] = self.dropout(attn_out.squeeze(0))
             
         return self.norm(h + out)
