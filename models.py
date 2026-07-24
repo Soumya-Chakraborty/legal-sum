@@ -617,13 +617,11 @@ class TemporalSegmentGraph(nn.Module):
         """
         B, T, D = h.shape
 
-        # Gather neighbour features: (B, T, k, D)
-        idx_exp = topk_idx.unsqueeze(-1).expand(-1, -1, -1, D)  # (B, T, k, D)
-        neigh = torch.gather(
-            h.unsqueeze(1).expand(-1, T, -1, -1),               # (B, T, T, D)
-            2,
-            idx_exp                                              # (B, T, k, D)
-        )                                                         # (B, T, k, D)
+        # Efficient O(T*k*D) gathering (prevents O(T^2*D) 50GB+ RAM explosion on long videos)
+        flat_h = h.reshape(B * T, D)
+        batch_offset = (torch.arange(B, device=h.device) * T).unsqueeze(-1).unsqueeze(-1)
+        flat_idx = (topk_idx + batch_offset).reshape(-1)
+        neigh = flat_h[flat_idx].reshape(B, T, k, D)                            # (B, T, k, D)
 
         # Compute learned edge attention logits
         node_rep = h.unsqueeze(2).expand(-1, -1, k, -1)         # (B, T, k, D)
