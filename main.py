@@ -219,6 +219,8 @@ parser.add_argument('--supervised', action='store_true', default=False,
                     help="use supervised binary cross-entropy loss against ground truth human scores")
 parser.add_argument('--supervised-weight', type=float, default=0.0,
                     help="weight of ground-truth supervised reward bonus in RL path")
+parser.add_argument('--max-seq-len', type=int, default=2000,
+                    help="maximum frame sequence length per video to prevent RAM OOM (default: 2000, set 0 for full)")
 
 args = parser.parse_args()
 
@@ -227,6 +229,43 @@ os.environ['CUDA_VISIBLE_DEVICES'] = args.gpu
 use_gpu = torch.cuda.is_available()
 if args.use_cpu:
     use_gpu = False
+
+
+def _load_features(dataset, key, use_gpu, max_seq_len=None):
+    if max_seq_len is None:
+        max_seq_len = getattr(args, 'max_seq_len', 2000)
+
+    seq_data = dataset[key]['features'][...]
+    ac_data = dataset[key]['acoustic'][...] if 'acoustic' in dataset[key] else None
+    sem_data = dataset[key]['semantic'][...] if 'semantic' in dataset[key] else None
+    sp_data = dataset[key]['speaker_mask'][...] if 'speaker_mask' in dataset[key] else None
+    ev_data = dataset[key]['event_mask'][...] if 'event_mask' in dataset[key] else None
+
+    n_frames = seq_data.shape[0]
+    if max_seq_len is not None and max_seq_len > 0 and n_frames > max_seq_len:
+        step = int(np.ceil(n_frames / max_seq_len))
+        seq_data = seq_data[::step]
+        if ac_data is not None: ac_data = ac_data[::step]
+        if sem_data is not None: sem_data = sem_data[::step]
+        if sp_data is not None: sp_data = sp_data[::step]
+        if ev_data is not None: ev_data = ev_data[::step]
+
+    seq = torch.from_numpy(seq_data).unsqueeze(0).float()
+    if use_gpu: seq = seq.cuda()
+
+    acoustic = torch.from_numpy(ac_data).unsqueeze(0).float() if ac_data is not None else None
+    if use_gpu and acoustic is not None: acoustic = acoustic.cuda()
+
+    semantic = torch.from_numpy(sem_data).unsqueeze(0).float() if sem_data is not None else None
+    if use_gpu and semantic is not None: semantic = semantic.cuda()
+
+    speaker_mask = torch.from_numpy(sp_data).unsqueeze(0).long() if sp_data is not None else None
+    if use_gpu and speaker_mask is not None: speaker_mask = speaker_mask.cuda()
+
+    event_mask = torch.from_numpy(ev_data).unsqueeze(0).float() if ev_data is not None else None
+    if use_gpu and event_mask is not None: event_mask = event_mask.cuda()
+
+    return seq, acoustic, semantic, speaker_mask, event_mask
 
 
 def build_model():
@@ -371,40 +410,8 @@ def evaluate_with_ensemble(model, dataset, test_keys, use_gpu,
         model.train()
     with torch.no_grad():
         for key_idx, key in enumerate(test_keys):
-            # Load video features
-            seq_data = dataset[key]['features'][...]
-            seq = torch.from_numpy(seq_data).unsqueeze(0).float()
-            if use_gpu:
-                seq = seq.cuda()
-
-            # Load optional acoustic and semantic features if present
-            acoustic = None
-            if 'acoustic' in dataset[key]:
-                ac_data = dataset[key]['acoustic'][...]
-                acoustic = torch.from_numpy(ac_data).unsqueeze(0).float()
-                if use_gpu:
-                    acoustic = acoustic.cuda()
-
-            semantic = None
-            if 'semantic' in dataset[key]:
-                sem_data = dataset[key]['semantic'][...]
-                semantic = torch.from_numpy(sem_data).unsqueeze(0).float()
-                if use_gpu:
-                    semantic = semantic.cuda()
-
-            speaker_mask = None
-            if 'speaker_mask' in dataset[key]:
-                sp_data = dataset[key]['speaker_mask'][...]
-                speaker_mask = torch.from_numpy(sp_data).unsqueeze(0).long()
-                if use_gpu:
-                    speaker_mask = speaker_mask.cuda()
-
-            event_mask = None
-            if 'event_mask' in dataset[key]:
-                ev_data = dataset[key]['event_mask'][...]
-                event_mask = torch.from_numpy(ev_data).unsqueeze(0).float()
-                if use_gpu:
-                    event_mask = event_mask.cuda()
+            # Load video features with max_seq_len RAM safety
+            seq, acoustic, semantic, speaker_mask, event_mask = _load_features(dataset, key, use_gpu)
 
             # Execute K stochastic MC-Dropout passes
             probs_list = []
@@ -446,10 +453,8 @@ def evaluate_with_ensemble(model, dataset, test_keys, use_gpu,
                 p_mean = np.mean(p_list, axis=0)   # shape: (new_len,)
                 # Re-index back to original_len via linear interpolation
                 orig_idx = np.linspace(0, new_len - 1, original_len)
-                p_orig = np.interp(orig_idx, np.arange(new_len), p_mean)
                 tta_accum.append(p_orig)
             probs = np.mean(tta_accum, axis=0)   # Final TTA-fused importance scores
-
 
             # Extract segment change points, frame counts, and ground truth human annotations
             cps = dataset[key]['change_points'][...]
@@ -457,6 +462,10 @@ def evaluate_with_ensemble(model, dataset, test_keys, use_gpu,
             nfps = dataset[key]['n_frame_per_seg'][...].tolist()
             positions = dataset[key]['picks'][...]
             user_summary = dataset[key]['user_summary'][...]
+
+            # Interpolate probs to match picked positions length if sub-sampled
+            if len(probs) != len(positions):
+                probs = np.interp(np.linspace(0, 1, len(positions)), np.linspace(0, 1, len(probs)), probs)
 
             # Generate the binary summary selection vector using knapsack/ranking
             knapsack_prop = getattr(args, 'knapsack_proportion', 0.15)
@@ -626,24 +635,7 @@ def pretrain_contrastive(model, dataset, train_keys, num_epochs, use_gpu):
         model.train()
         epoch_loss = 0.0
         for key in train_keys:
-            seq_data = dataset[key]['features'][...]
-            seq = torch.from_numpy(seq_data).unsqueeze(0).float()
-            if use_gpu:
-                seq = seq.cuda()
-
-            acoustic = None
-            if 'acoustic' in dataset[key]:
-                ac_data = dataset[key]['acoustic'][...]
-                acoustic = torch.from_numpy(ac_data).unsqueeze(0).float()
-                if use_gpu:
-                    acoustic = acoustic.cuda()
-
-            semantic = None
-            if 'semantic' in dataset[key]:
-                sem_data = dataset[key]['semantic'][...]
-                semantic = torch.from_numpy(sem_data).unsqueeze(0).float()
-                if use_gpu:
-                    semantic = semantic.cuda()
+            seq, acoustic, semantic, speaker_mask, event_mask = _load_features(dataset, key, use_gpu)
 
             # Forward: get importance probabilities
             with torch.enable_grad():
@@ -764,39 +756,8 @@ def train_one_phase(model, optimizer, scheduler, dataset, train_keys,
         for idx in idxs:
             key = train_keys[idx]
 
-            # ── Load features ─────────────────────────────────────────────────
-            seq_data = dataset[key]['features'][...]
-            seq = torch.from_numpy(seq_data).unsqueeze(0).float()
-            if use_gpu:
-                seq = seq.cuda()
-
-            acoustic = None
-            if 'acoustic' in dataset[key]:
-                ac_data = dataset[key]['acoustic'][...]
-                acoustic = torch.from_numpy(ac_data).unsqueeze(0).float()
-                if use_gpu:
-                    acoustic = acoustic.cuda()
-
-            semantic = None
-            if 'semantic' in dataset[key]:
-                sem_data = dataset[key]['semantic'][...]
-                semantic = torch.from_numpy(sem_data).unsqueeze(0).float()
-                if use_gpu:
-                    semantic = semantic.cuda()
-
-            event_mask = None
-            if 'event_mask' in dataset[key]:
-                event_data = dataset[key]['event_mask'][...]
-                event_mask = torch.from_numpy(event_data).unsqueeze(0).float()
-                if use_gpu:
-                    event_mask = event_mask.cuda()
-
-            speaker_mask = None
-            if 'speaker_mask' in dataset[key]:
-                speaker_data = dataset[key]['speaker_mask'][...]
-                speaker_mask = torch.from_numpy(speaker_data).unsqueeze(0).long()
-                if use_gpu:
-                    speaker_mask = speaker_mask.cuda()
+            # ── Load features with max_seq_len RAM safety ───────────────────────
+            seq, acoustic, semantic, speaker_mask, event_mask = _load_features(dataset, key, use_gpu)
 
             target_ratio = 0.15
             if args.supervised:
