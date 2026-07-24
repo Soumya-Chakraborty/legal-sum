@@ -219,8 +219,8 @@ parser.add_argument('--supervised', action='store_true', default=False,
                     help="use supervised binary cross-entropy loss against ground truth human scores")
 parser.add_argument('--supervised-weight', type=float, default=0.0,
                     help="weight of ground-truth supervised reward bonus in RL path")
-parser.add_argument('--max-seq-len', type=int, default=2000,
-                    help="maximum frame sequence length per video to prevent RAM OOM (default: 2000, set 0 for full)")
+parser.add_argument('--max-seq-len', type=int, default=600,
+                    help="maximum frame sequence length per video to prevent RAM OOM (default: 600, set 0 for full)")
 
 args = parser.parse_args()
 

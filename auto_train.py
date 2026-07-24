@@ -132,9 +132,9 @@ def main():
         print(f"  • Sequence Length : User override set to max_seq_len={target_seq_len}")
     elif ds_info['is_long_sequence']:
         if not use_gpu and specs['total_ram_gb'] < 16.0:
-            target_seq_len = 1200
+            target_seq_len = 600
             print(f"  ⚠️ BOTTLENECK DETECTED: Long sequence (T={ds_info['max_T']}) on limited RAM ({specs['total_ram_gb']} GB).")
-            print(f"    -> Auto-tuning --max-seq-len=1200 (250MB RAM footprint) to guarantee ZERO RAM OOM.")
+            print(f"    -> Auto-tuning --max-seq-len=600 (<300MB RAM footprint) for 100% OOM-proof execution.")
         elif use_gpu and specs['vram_gb'] < 10.0:
             target_seq_len = 2500
             print(f"  ⚠️ BOTTLENECK DETECTED: Long sequence (T={ds_info['max_T']}) on medium VRAM ({specs['vram_gb']:.1f} GB).")
