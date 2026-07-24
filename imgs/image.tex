@@ -1,0 +1,166 @@
+\documentclass[tikz,border=20pt]{standalone}
+\usetikzlibrary{shapes,arrows.meta,positioning,calc,fit,backgrounds,decorations.pathreplacing}
+\usepackage{amsmath,amssymb}
+\usepackage{graphicx}
+
+\begin{document}
+\begin{tikzpicture}[
+    scale=1.0, 
+    every node/.style={transform shape},
+    container/.style={draw=black, rectangle, rounded corners=15pt, line width=1.6pt, fill=white},
+    subbox/.style={draw=black!80, rectangle, rounded corners=8pt, fill=blue!3, line width=1.1pt, align=center},
+    lstm/.style={draw=black, rectangle, fill=green!15, minimum width=1.1cm, minimum height=0.55cm, font=\scriptsize\bfseries},
+    prob/.style={draw=black, circle, fill=pink!40, inner sep=1pt, minimum size=0.52cm, font=\scriptsize\bfseries}
+]
+
+    % ==========================================
+    % 1. Videos & Multimodal Input Container (Top Left)
+    % ==========================================
+    \node[container, minimum width=10.0cm, minimum height=4.0cm] (videos_box) at (5.0, 9.5) {};
+    \node[anchor=south] at (5.0, 11.6) {\Large\bfseries Courtroom Video Streams $\mathcal{V} = (\mathbf{F}, \mathbf{A}, \mathbf{S})$};
+
+    % V1 Visual Stream
+    \node at (0.6, 10.6) {\large $\mathcal{V}_1$};
+    \node at (5.0, 10.6) {\includegraphics[height=1.0cm]{imgs/v1_hd_strip.png}};
+    
+    % V2 Acoustic Stream
+    \node at (0.8, 9.5) {\large $\mathcal{V}_2$};
+    \node at (4.8, 9.5) {\includegraphics[height=0.8cm]{imgs/v2_hd_strip.png}};
+    \node at (8.6, 9.5) {\tiny $\mathbf{g} = \sigma(\text{MLP}(\text{irfft}(\text{TopK}(|\text{rfft}(\mathbf{A})|))))$};
+    
+    % Dots
+    \node[rotate=-45] at (1.4, 8.5) {$\dots$};
+    
+    % VM Semantic Stream
+    \node at (1.1, 7.8) {\large $\mathcal{V}_M$};
+    \node at (5.2, 7.8) {\includegraphics[height=0.9cm]{imgs/vm_hd_strip.png}};
+
+    % ==========================================
+    % 2. Reward & VCRA Attribution Container (Top Right)
+    % ==========================================
+    \node[container, minimum width=8.5cm, minimum height=4.0cm] (reward_box) at (15.5, 9.5) {};
+    \node[anchor=south] at (15.5, 11.6) {\Large\bfseries OT \& VCRA Reward Function};
+    \node at (15.5, 10.2) {\Large $R = R_{\text{core}} + \lambda_{\text{OT}} R_{\text{OT}} + \lambda_{\text{NCE}} R_{\text{NCE}}$};
+    \node at (15.5, 8.5) {\small\bfseries VCRA Advantage: $A_t = R(\mathbf{y}) - R(\mathbf{y}_{-t})$};
+
+    % ==========================================
+    % 3. LegalSum Multimodal Architecture Container (Bottom Core)
+    % ==========================================
+    \node[container, minimum width=17.8cm, minimum height=5.0cm] (dsn_box) at (9.5, 2.0) {};
+    \node[anchor=north] at (9.5, -0.6) {\Large\bfseries LegalSum Multimodal Architecture};
+
+    % --- 3A. CrossModal Attention Fusion Sub-box ---
+    \node[subbox, minimum width=4.2cm, minimum height=3.8cm] (fusion_sub) at (3.1, 2.0) {};
+    \node at (3.1, 3.5) {\small\bfseries Cross-Modal Attention Fusion};
+    
+    % 3D Feature Map Stack
+    \filldraw[fill=blue!30, draw=black, thick] (1.7, 1.8) rectangle (2.9, 2.9);
+    \filldraw[fill=blue!25, draw=black, thick] (1.5, 1.5) rectangle (2.7, 2.6);
+    \filldraw[fill=blue!20, draw=black, thick] (1.3, 1.2) rectangle (2.5, 2.3);
+    \node at (2.0, 2.0) {\tiny $\mathbf{F}, \mathbf{A}, \mathbf{S}$};
+
+    % 1D Fused Vector Bar
+    \filldraw[fill=red!25, draw=black, thick] (4.7, 0.7) rectangle (4.9, 3.1);
+
+    % Dotted Connections
+    \draw[densely dotted, thick] (2.7, 2.0) -- (4.7, 3.1);
+    \draw[densely dotted, thick] (2.7, 1.5) -- (4.7, 0.7);
+
+    % White Arrow from Fusion to GTR Backbone
+    \filldraw[fill=white, draw=black, thick] (5.3, 2.0) -- (5.7, 2.0) -- (5.7, 2.2) -- (6.1, 1.9) -- (5.7, 1.6) -- (5.7, 1.8) -- (5.3, 1.8) -- cycle;
+
+    % --- 3B. GTR Temporal Backbone Sub-box ---
+    \node[subbox, minimum width=4.8cm, minimum height=3.8cm] (gtr_sub) at (8.8, 2.0) {};
+    \node at (8.8, 3.5) {\small\bfseries Gated Temporal Routing (GTR)};
+
+    \node[lstm] (l11) at (7.2, 2.7) {BiLSTM};
+    \node[lstm] (l12) at (8.5, 2.7) {BiLSTM};
+    \node[lstm] (l21) at (7.2, 1.6) {MHSA};
+    \node[lstm] (l22) at (8.5, 1.6) {MHSA};
+
+    \draw[->, thick] (l11) -- (l12); \draw[->, thick] (l12.north) to[out=150, in=30] (l11.north);
+    \draw[->, thick] (l21) -- (l22); \draw[->, thick] (l22.north) to[out=150, in=30] (l21.north);
+    \draw[->, thick] (l11) -- (l21); \draw[->, thick] (l12) -- (l22);
+
+    \node[draw=orange!80!black, circle, fill=orange!20, inner sep=1pt] (gtr_gate) at (10.1, 2.1) {\tiny $\mathbf{h}_{\text{gtr}}$};
+    \draw[->, thick] (l12) -- (gtr_gate);
+    \draw[->, thick] (l22) -- (gtr_gate);
+
+    % --- 3C. Graph Reasoning & Policy Head Sub-box ---
+    \node[subbox, minimum width=6.2cm, minimum height=4.0cm] (graph_sub) at (15.2, 2.0) {};
+    \node at (15.2, 3.6) {\normalsize\bfseries TSG / CHA Graph \& Policy Head};
+
+    \node[prob, minimum size=0.75cm] (p1) at (15.2, 2.9) {\small $p_{t-1}$};
+    \node[prob, minimum size=0.75cm] (p2) at (15.2, 2.0) {\small $p_t$};
+    \node[prob, minimum size=0.75cm] (p3) at (15.2, 1.1) {\small $p_{t+1}$};
+
+    \draw[->, line width=1.2pt] (gtr_gate) -- (p1);
+    \draw[->, line width=1.2pt] (gtr_gate) -- (p2);
+    \draw[->, line width=1.2pt] (gtr_gate) -- (p3);
+
+    \draw[dashed, thick, orange!80!black] (p1) to[out=30, in=330] (p3);
+    \draw[thick, blue!80!black] (p1) -- (p2);
+    \draw[thick, blue!80!black] (p2) -- (p3);
+    
+    \node at (15.2, 0.3) {\small $p_t = \pi_\theta(\mathbf{f}_t, \mathbf{a}_t, \mathbf{s}_t) \in (0,1)$};
+
+    % ==========================================
+    % 4. Broad Flow Arrows (UNIFORM MATCHING DESIGN)
+    % ==========================================
+
+    % Arrow 1: Videos to DSN (Left, Gold/Beige Block Arrow)
+    \filldraw[fill=yellow!35!brown!20, draw=yellow!60!black, thick] 
+        (0.6, 1.6) -- (0.6, 1.9) 
+        [rounded corners=10pt] -- (-1.4, 1.9) 
+        -- (-1.4, 9.5) 
+        [sharp corners] -- (-0.2, 9.5) 
+        -- (-0.2, 9.1) 
+        [rounded corners=6pt] -- (-1.0, 9.1) 
+        -- (-1.0, 2.3) 
+        [sharp corners] -- (0.6, 2.3) 
+        -- (0.6, 2.6) 
+        -- (1.3, 2.1) 
+        -- cycle;
+    
+    \node[fill=white, inner sep=4pt, anchor=east, draw=black!40, rounded corners=3pt] at (-1.7, 5.7) {\small video $\mathcal{V}_i = (\mathbf{F}, \mathbf{A}, \mathbf{S})$};
+
+    % Arrow 2: DSN to Reward (Right, Purple Block Arrow: rises on right & points LEFT into Reward Box)
+    \filldraw[fill=purple!20, draw=purple!80!black, thick] 
+        (18.1, 2.2) 
+        [rounded corners=8pt] -- (20.6, 2.2) 
+        -- (20.6, 9.7) 
+        [sharp corners] -- (19.9, 9.7) 
+        -- (19.9, 10.0) % Arrowhead flare
+        -- (19.2, 9.5) % Arrow tip pointing LEFT into Reward Box right edge
+        -- (19.9, 9.0) 
+        -- (19.9, 9.3) 
+        [rounded corners=6pt] -- (20.2, 9.3) 
+        -- (20.2, 1.8) 
+        [sharp corners] -- (18.1, 1.8) 
+        -- cycle;
+        
+    % Right Card: Sampled Actions & Summary (Aligned at Y=5.7 on right of Arrow 2 shaft)
+    \node[fill=white, inner sep=5pt, align=left, anchor=west, draw=purple!80!black, rounded corners=4pt, line width=0.8pt] at (20.9, 5.7) {\begin{tabular}{l}
+        \footnotesize \textbf{Sampled Actions \& Summary:} \\[2pt]
+        \footnotesize actions $A = \{a_t \sim \text{Bernoulli}(p_t)\}$ \\[1pt]
+        \footnotesize summary $\mathbf{y} = \text{Knapsack}(\mathbf{p}, \beta T)$
+    \end{tabular}};
+    
+    % Arrow 3: Reward to DSN Policy Head (Center, Orange Block Arrow)
+    \filldraw[fill=orange!30, draw=orange!80!black, thick] 
+        (15.2, 7.5) -- (15.8, 7.5) 
+        -- (15.8, 4.7) 
+        -- (16.3, 4.7) 
+        -- (15.5, 4.0) % Tip pointing down into Policy Head
+        -- (14.7, 4.7) 
+        -- (15.2, 4.7) 
+        -- cycle;
+        
+    % RL Feedback Card (Positioned to the left of Arrow 3)
+    \node[fill=white, inner xsep=7pt, inner ysep=5pt, anchor=east, draw=orange!80!black, rounded corners=5pt, line width=1.2pt] at (14.2, 5.8) {\begin{tabular}{r}
+        \small\bfseries PPO-Clip Policy Gradient Feedback: \\[2pt]
+        \small $\mathcal{L}_{\text{PPO}}(\theta)$ with VCRA Advantage $A_t$
+    \end{tabular}};
+
+\end{tikzpicture}
+\end{document}

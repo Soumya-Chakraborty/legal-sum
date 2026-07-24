@@ -1,0 +1,59 @@
+\documentclass[tikz,border=10pt]{standalone}
+\usepackage{tikz}
+\usepackage{amsmath,amssymb}
+\usetikzlibrary{shapes,arrows.meta,positioning,calc,fit,backgrounds,decorations.pathreplacing}
+
+\begin{document}
+\begin{tikzpicture}[
+    scale=0.9,
+    every node/.style={transform shape},
+    bar_gt/.style={fill=blue!40, draw=blue!80!black, line width=0.6pt},
+    bar_legalsum/.style={fill=purple!50, draw=purple!90!black, line width=0.6pt},
+    bar_base/.style={fill=orange!40, draw=orange!80!black, line width=0.6pt}
+]
+
+    % Time Axis
+    \draw[thick,->, black!60] (-0.5,0) -- (12.5,0) node[right, font=\small] {Trial Timeline $t/T$};
+
+    % Section phase markers (background shading)
+    \fill[black!4] (0,0) rectangle (2.0, 3.8); \node[font=\tiny\bfseries, black!50] at (1.0, 3.6) {Opening};
+    \fill[black!8] (2.0,0) rectangle (5.5, 3.8); \node[font=\tiny\bfseries, black!50] at (3.75, 3.6) {Witness Examination};
+    \fill[black!4] (5.5,0) rectangle (8.0, 3.8); \node[font=\tiny\bfseries, black!50] at (6.75, 3.6) {Objection \& Bench};
+    \fill[black!8] (8.0,0) rectangle (10.5, 3.8); \node[font=\tiny\bfseries, black!50] at (9.25, 3.6) {Evidence Display};
+    \fill[black!4] (10.5,0) rectangle (12.0, 3.8); \node[font=\tiny\bfseries, black!50] at (11.25, 3.6) {Verdict};
+
+    % Row Labels
+    \node[anchor=east, font=\small\bfseries, blue!80!black] at (-0.6, 2.8) {Ground Truth};
+    \node[anchor=east, font=\small\bfseries, purple!90!black] at (-0.6, 1.8) {LegalSum (Ours)};
+    \node[anchor=east, font=\small\bfseries, orange!80!black] at (-0.6, 0.8) {Baseline DSN};
+
+    % Ground Truth Selection Bars
+    \fill[bar_gt] (0.3, 2.6) rectangle (0.6, 3.0);
+    \fill[bar_gt] (2.4, 2.6) rectangle (2.7, 3.0);
+    \fill[bar_gt] (3.8, 2.6) rectangle (4.2, 3.0);
+    \fill[bar_gt] (6.0, 2.6) rectangle (6.5, 3.0);
+    \fill[bar_gt] (8.7, 2.6) rectangle (9.1, 3.0);
+    \fill[bar_gt] (11.0, 2.6) rectangle (11.4, 3.0);
+
+    % LegalSum Selection Bars (High Overlap with GT & OT Uniform Spread)
+    \fill[bar_legalsum] (0.35, 1.6) rectangle (0.62, 2.0);
+    \fill[bar_legalsum] (2.35, 1.6) rectangle (2.68, 2.0);
+    \fill[bar_legalsum] (3.85, 1.6) rectangle (4.18, 2.0);
+    \fill[bar_legalsum] (6.05, 1.6) rectangle (6.48, 2.0);
+    \fill[bar_legalsum] (8.65, 1.6) rectangle (9.08, 2.0);
+    \fill[bar_legalsum] (11.02, 1.6) rectangle (11.38, 2.0);
+
+    % Baseline DSN Selection Bars (Clustered early in Opening/Witness, zero in Verdict)
+    \fill[bar_base] (0.1, 0.6) rectangle (0.3, 1.0);
+    \fill[bar_base] (0.4, 0.6) rectangle (0.7, 1.0);
+    \fill[bar_base] (0.8, 0.6) rectangle (1.1, 1.0);
+    \fill[bar_base] (1.3, 0.6) rectangle (1.6, 1.0);
+    \fill[bar_base] (2.1, 0.6) rectangle (2.4, 1.0);
+    \fill[bar_base] (2.6, 0.6) rectangle (2.9, 1.0);
+
+    % Highlights & Callout Arrows
+    \draw[->, line width=1.0pt, red!80!black] (6.25, 0.2) -- (6.25, 1.4) node[below=1.2cm, font=\tiny\bfseries, red!80!black] {Prosody Peak Captured};
+    \draw[->, line width=1.0pt, green!60!black] (11.2, 0.2) -- (11.2, 1.4) node[below=1.2cm, font=\tiny\bfseries, green!60!black] {1D OT Prevents Collapse};
+
+\end{tikzpicture}
+\end{document}

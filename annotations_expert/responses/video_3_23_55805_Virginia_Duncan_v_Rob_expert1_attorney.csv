@@ -1,0 +1,1682 @@
+segment_id,timestamp_start,timestamp_end,frame_start,frame_end,rating_1_to_5,trial_phase,expert_notes
+1,00:00,00:02,0,4,4,Opening Statement,Annotated by expert1_attorney
+2,00:02,00:05,5,9,5,Opening Statement,Annotated by expert1_attorney
+3,00:05,00:07,10,14,5,Opening Statement,Annotated by expert1_attorney
+4,00:07,00:10,15,19,4,Opening Statement,Annotated by expert1_attorney
+5,00:10,00:12,20,24,4,Opening Statement,Annotated by expert1_attorney
+6,00:12,00:15,25,29,3,Opening Statement,Annotated by expert1_attorney
+7,00:15,00:17,30,34,4,Opening Statement,Annotated by expert1_attorney
+8,00:17,00:20,35,39,3,Opening Statement,Annotated by expert1_attorney
+9,00:20,00:22,40,44,4,Opening Statement,Annotated by expert1_attorney
+10,00:22,00:25,45,49,4,Opening Statement,Annotated by expert1_attorney
+11,00:25,00:27,50,54,4,Opening Statement,Annotated by expert1_attorney
+12,00:27,00:30,55,59,4,Opening Statement,Annotated by expert1_attorney
+13,00:30,00:32,60,64,5,Opening Statement,Annotated by expert1_attorney
+14,00:32,00:35,65,69,5,Opening Statement,Annotated by expert1_attorney
+15,00:35,00:37,70,74,5,Opening Statement,Annotated by expert1_attorney
+16,00:37,00:40,75,79,3,Opening Statement,Annotated by expert1_attorney
+17,00:40,00:42,80,84,5,Opening Statement,Annotated by expert1_attorney
+18,00:42,00:45,85,89,4,Opening Statement,Annotated by expert1_attorney
+19,00:45,00:47,90,94,3,Opening Statement,Annotated by expert1_attorney
+20,00:47,00:50,95,99,4,Opening Statement,Annotated by expert1_attorney
+21,00:50,00:52,100,104,5,Opening Statement,Annotated by expert1_attorney
+22,00:52,00:55,105,109,4,Opening Statement,Annotated by expert1_attorney
+23,00:55,00:57,110,114,4,Opening Statement,Annotated by expert1_attorney
+24,00:57,01:00,115,119,5,Opening Statement,Annotated by expert1_attorney
+25,01:00,01:02,120,124,4,Opening Statement,Annotated by expert1_attorney
+26,01:02,01:05,125,129,4,Opening Statement,Annotated by expert1_attorney
+27,01:05,01:07,130,134,4,Opening Statement,Annotated by expert1_attorney
+28,01:07,01:10,135,139,5,Opening Statement,Annotated by expert1_attorney
+29,01:10,01:12,140,144,4,Opening Statement,Annotated by expert1_attorney
+30,01:12,01:15,145,149,4,Opening Statement,Annotated by expert1_attorney
+31,01:15,01:17,150,154,4,Opening Statement,Annotated by expert1_attorney
+32,01:17,01:20,155,159,5,Opening Statement,Annotated by expert1_attorney
+33,01:20,01:22,160,164,4,Opening Statement,Annotated by expert1_attorney
+34,01:22,01:25,165,169,5,Opening Statement,Annotated by expert1_attorney
+35,01:25,01:27,170,174,4,Opening Statement,Annotated by expert1_attorney
+36,01:27,01:30,175,179,4,Opening Statement,Annotated by expert1_attorney
+37,01:30,01:32,180,184,4,Opening Statement,Annotated by expert1_attorney
+38,01:32,01:35,185,189,4,Opening Statement,Annotated by expert1_attorney
+39,01:35,01:37,190,194,4,Opening Statement,Annotated by expert1_attorney
+40,01:37,01:40,195,199,4,Opening Statement,Annotated by expert1_attorney
+41,01:40,01:42,200,204,4,Opening Statement,Annotated by expert1_attorney
+42,01:42,01:45,205,209,4,Opening Statement,Annotated by expert1_attorney
+43,01:45,01:47,210,214,5,Opening Statement,Annotated by expert1_attorney
+44,01:47,01:50,215,219,5,Opening Statement,Annotated by expert1_attorney
+45,01:50,01:52,220,224,5,Opening Statement,Annotated by expert1_attorney
+46,01:52,01:55,225,229,4,Opening Statement,Annotated by expert1_attorney
+47,01:55,01:57,230,234,4,Opening Statement,Annotated by expert1_attorney
+48,01:57,02:00,235,239,5,Opening Statement,Annotated by expert1_attorney
+49,02:00,02:02,240,244,4,Opening Statement,Annotated by expert1_attorney
+50,02:02,02:05,245,249,4,Opening Statement,Annotated by expert1_attorney
+51,02:05,02:07,250,254,4,Opening Statement,Annotated by expert1_attorney
+52,02:07,02:10,255,259,4,Opening Statement,Annotated by expert1_attorney
+53,02:10,02:12,260,264,4,Opening Statement,Annotated by expert1_attorney
+54,02:12,02:15,265,269,5,Opening Statement,Annotated by expert1_attorney
+55,02:15,02:17,270,274,4,Opening Statement,Annotated by expert1_attorney
+56,02:17,02:20,275,279,5,Opening Statement,Annotated by expert1_attorney
+57,02:20,02:22,280,284,4,Opening Statement,Annotated by expert1_attorney
+58,02:22,02:25,285,289,4,Opening Statement,Annotated by expert1_attorney
+59,02:25,02:27,290,294,4,Opening Statement,Annotated by expert1_attorney
+60,02:27,02:30,295,299,4,Opening Statement,Annotated by expert1_attorney
+61,02:30,02:32,300,304,3,Opening Statement,Annotated by expert1_attorney
+62,02:32,02:35,305,309,5,Opening Statement,Annotated by expert1_attorney
+63,02:35,02:37,310,314,5,Opening Statement,Annotated by expert1_attorney
+64,02:37,02:40,315,319,5,Opening Statement,Annotated by expert1_attorney
+65,02:40,02:42,320,324,4,Opening Statement,Annotated by expert1_attorney
+66,02:42,02:45,325,329,4,Opening Statement,Annotated by expert1_attorney
+67,02:45,02:47,330,334,4,Opening Statement,Annotated by expert1_attorney
+68,02:47,02:50,335,339,4,Opening Statement,Annotated by expert1_attorney
+69,02:50,02:52,340,344,4,Opening Statement,Annotated by expert1_attorney
+70,02:52,02:55,345,349,5,Opening Statement,Annotated by expert1_attorney
+71,02:55,02:57,350,354,5,Opening Statement,Annotated by expert1_attorney
+72,02:57,03:00,355,359,5,Opening Statement,Annotated by expert1_attorney
+73,03:00,03:02,360,364,4,Opening Statement,Annotated by expert1_attorney
+74,03:02,03:05,365,369,5,Opening Statement,Annotated by expert1_attorney
+75,03:05,03:07,370,374,4,Opening Statement,Annotated by expert1_attorney
+76,03:07,03:10,375,379,4,Opening Statement,Annotated by expert1_attorney
+77,03:10,03:12,380,384,4,Opening Statement,Annotated by expert1_attorney
+78,03:12,03:15,385,389,4,Opening Statement,Annotated by expert1_attorney
+79,03:15,03:17,390,394,4,Opening Statement,Annotated by expert1_attorney
+80,03:17,03:20,395,399,4,Opening Statement,Annotated by expert1_attorney
+81,03:20,03:22,400,404,5,Opening Statement,Annotated by expert1_attorney
+82,03:22,03:25,405,409,3,Opening Statement,Annotated by expert1_attorney
+83,03:25,03:27,410,414,5,Opening Statement,Annotated by expert1_attorney
+84,03:27,03:30,415,419,4,Opening Statement,Annotated by expert1_attorney
+85,03:30,03:32,420,424,4,Opening Statement,Annotated by expert1_attorney
+86,03:32,03:35,425,429,4,Opening Statement,Annotated by expert1_attorney
+87,03:35,03:37,430,434,4,Opening Statement,Annotated by expert1_attorney
+88,03:37,03:40,435,439,5,Opening Statement,Annotated by expert1_attorney
+89,03:40,03:42,440,444,4,Opening Statement,Annotated by expert1_attorney
+90,03:42,03:45,445,449,4,Opening Statement,Annotated by expert1_attorney
+91,03:45,03:47,450,454,5,Opening Statement,Annotated by expert1_attorney
+92,03:47,03:50,455,459,4,Opening Statement,Annotated by expert1_attorney
+93,03:50,03:52,460,464,5,Opening Statement,Annotated by expert1_attorney
+94,03:52,03:55,465,469,4,Opening Statement,Annotated by expert1_attorney
+95,03:55,03:57,470,474,4,Opening Statement,Annotated by expert1_attorney
+96,03:57,04:00,475,479,5,Opening Statement,Annotated by expert1_attorney
+97,04:00,04:02,480,484,3,Opening Statement,Annotated by expert1_attorney
+98,04:02,04:05,485,489,4,Opening Statement,Annotated by expert1_attorney
+99,04:05,04:07,490,494,4,Opening Statement,Annotated by expert1_attorney
+100,04:07,04:10,495,499,4,Opening Statement,Annotated by expert1_attorney
+101,04:10,04:12,500,504,4,Opening Statement,Annotated by expert1_attorney
+102,04:12,04:15,505,509,5,Opening Statement,Annotated by expert1_attorney
+103,04:15,04:17,510,514,4,Opening Statement,Annotated by expert1_attorney
+104,04:17,04:20,515,519,5,Opening Statement,Annotated by expert1_attorney
+105,04:20,04:22,520,524,4,Opening Statement,Annotated by expert1_attorney
+106,04:22,04:25,525,529,4,Opening Statement,Annotated by expert1_attorney
+107,04:25,04:27,530,534,4,Opening Statement,Annotated by expert1_attorney
+108,04:27,04:30,535,539,5,Opening Statement,Annotated by expert1_attorney
+109,04:30,04:32,540,544,5,Opening Statement,Annotated by expert1_attorney
+110,04:32,04:35,545,549,4,Opening Statement,Annotated by expert1_attorney
+111,04:35,04:37,550,554,3,Opening Statement,Annotated by expert1_attorney
+112,04:37,04:40,555,559,3,Opening Statement,Annotated by expert1_attorney
+113,04:40,04:42,560,564,5,Opening Statement,Annotated by expert1_attorney
+114,04:42,04:45,565,569,4,Opening Statement,Annotated by expert1_attorney
+115,04:45,04:47,570,574,5,Opening Statement,Annotated by expert1_attorney
+116,04:47,04:50,575,579,5,Opening Statement,Annotated by expert1_attorney
+117,04:50,04:52,580,584,4,Opening Statement,Annotated by expert1_attorney
+118,04:52,04:55,585,589,5,Opening Statement,Annotated by expert1_attorney
+119,04:55,04:57,590,594,4,Opening Statement,Annotated by expert1_attorney
+120,04:57,05:00,595,599,5,Opening Statement,Annotated by expert1_attorney
+121,05:00,05:02,600,604,4,Opening Statement,Annotated by expert1_attorney
+122,05:02,05:05,605,609,4,Opening Statement,Annotated by expert1_attorney
+123,05:05,05:07,610,614,4,Opening Statement,Annotated by expert1_attorney
+124,05:07,05:10,615,619,4,Opening Statement,Annotated by expert1_attorney
+125,05:10,05:12,620,624,5,Opening Statement,Annotated by expert1_attorney
+126,05:12,05:15,625,629,5,Opening Statement,Annotated by expert1_attorney
+127,05:15,05:17,630,634,4,Opening Statement,Annotated by expert1_attorney
+128,05:17,05:20,635,639,5,Opening Statement,Annotated by expert1_attorney
+129,05:20,05:22,640,644,5,Opening Statement,Annotated by expert1_attorney
+130,05:22,05:25,645,649,5,Opening Statement,Annotated by expert1_attorney
+131,05:25,05:27,650,654,5,Opening Statement,Annotated by expert1_attorney
+132,05:27,05:30,655,659,5,Opening Statement,Annotated by expert1_attorney
+133,05:30,05:32,660,664,5,Opening Statement,Annotated by expert1_attorney
+134,05:32,05:35,665,669,5,Opening Statement,Annotated by expert1_attorney
+135,05:35,05:37,670,674,5,Opening Statement,Annotated by expert1_attorney
+136,05:37,05:40,675,679,5,Opening Statement,Annotated by expert1_attorney
+137,05:40,05:42,680,684,4,Opening Statement,Annotated by expert1_attorney
+138,05:42,05:45,685,689,4,Opening Statement,Annotated by expert1_attorney
+139,05:45,05:47,690,694,3,Opening Statement,Annotated by expert1_attorney
+140,05:47,05:50,695,699,5,Opening Statement,Annotated by expert1_attorney
+141,05:50,05:52,700,704,5,Opening Statement,Annotated by expert1_attorney
+142,05:52,05:55,705,709,4,Opening Statement,Annotated by expert1_attorney
+143,05:55,05:57,710,714,4,Opening Statement,Annotated by expert1_attorney
+144,05:57,06:00,715,719,5,Opening Statement,Annotated by expert1_attorney
+145,06:00,06:02,720,724,5,Opening Statement,Annotated by expert1_attorney
+146,06:02,06:05,725,729,5,Opening Statement,Annotated by expert1_attorney
+147,06:05,06:07,730,734,4,Opening Statement,Annotated by expert1_attorney
+148,06:07,06:10,735,739,5,Opening Statement,Annotated by expert1_attorney
+149,06:10,06:12,740,744,3,Opening Statement,Annotated by expert1_attorney
+150,06:12,06:15,745,749,5,Opening Statement,Annotated by expert1_attorney
+151,06:15,06:17,750,754,5,Opening Statement,Annotated by expert1_attorney
+152,06:17,06:20,755,759,4,Opening Statement,Annotated by expert1_attorney
+153,06:20,06:22,760,764,4,Opening Statement,Annotated by expert1_attorney
+154,06:22,06:25,765,769,4,Opening Statement,Annotated by expert1_attorney
+155,06:25,06:27,770,774,5,Opening Statement,Annotated by expert1_attorney
+156,06:27,06:30,775,779,5,Opening Statement,Annotated by expert1_attorney
+157,06:30,06:32,780,784,5,Opening Statement,Annotated by expert1_attorney
+158,06:32,06:35,785,789,5,Opening Statement,Annotated by expert1_attorney
+159,06:35,06:37,790,794,3,Opening Statement,Annotated by expert1_attorney
+160,06:37,06:40,795,799,4,Opening Statement,Annotated by expert1_attorney
+161,06:40,06:42,800,804,3,Opening Statement,Annotated by expert1_attorney
+162,06:42,06:45,805,809,5,Opening Statement,Annotated by expert1_attorney
+163,06:45,06:47,810,814,5,Opening Statement,Annotated by expert1_attorney
+164,06:47,06:50,815,819,4,Opening Statement,Annotated by expert1_attorney
+165,06:50,06:52,820,824,4,Opening Statement,Annotated by expert1_attorney
+166,06:52,06:55,825,829,4,Opening Statement,Annotated by expert1_attorney
+167,06:55,06:57,830,834,5,Opening Statement,Annotated by expert1_attorney
+168,06:57,07:00,835,839,4,Opening Statement,Annotated by expert1_attorney
+169,07:00,07:02,840,844,4,Opening Statement,Annotated by expert1_attorney
+170,07:02,07:05,845,849,5,Opening Statement,Annotated by expert1_attorney
+171,07:05,07:07,850,854,5,Opening Statement,Annotated by expert1_attorney
+172,07:07,07:10,855,859,5,Opening Statement,Annotated by expert1_attorney
+173,07:10,07:12,860,864,3,Opening Statement,Annotated by expert1_attorney
+174,07:12,07:15,865,869,4,Opening Statement,Annotated by expert1_attorney
+175,07:15,07:17,870,874,5,Opening Statement,Annotated by expert1_attorney
+176,07:17,07:20,875,879,3,Opening Statement,Annotated by expert1_attorney
+177,07:20,07:22,880,884,3,Opening Statement,Annotated by expert1_attorney
+178,07:22,07:25,885,889,4,Opening Statement,Annotated by expert1_attorney
+179,07:25,07:27,890,894,5,Opening Statement,Annotated by expert1_attorney
+180,07:27,07:30,895,899,4,Opening Statement,Annotated by expert1_attorney
+181,07:30,07:32,900,904,5,Opening Statement,Annotated by expert1_attorney
+182,07:32,07:35,905,909,4,Opening Statement,Annotated by expert1_attorney
+183,07:35,07:37,910,914,4,Opening Statement,Annotated by expert1_attorney
+184,07:37,07:40,915,919,5,Opening Statement,Annotated by expert1_attorney
+185,07:40,07:42,920,924,4,Opening Statement,Annotated by expert1_attorney
+186,07:42,07:45,925,929,4,Opening Statement,Annotated by expert1_attorney
+187,07:45,07:47,930,934,3,Opening Statement,Annotated by expert1_attorney
+188,07:47,07:50,935,939,3,Opening Statement,Annotated by expert1_attorney
+189,07:50,07:52,940,944,4,Opening Statement,Annotated by expert1_attorney
+190,07:52,07:55,945,949,3,Opening Statement,Annotated by expert1_attorney
+191,07:55,07:57,950,954,4,Opening Statement,Annotated by expert1_attorney
+192,07:57,08:00,955,959,5,Opening Statement,Annotated by expert1_attorney
+193,08:00,08:02,960,964,4,Opening Statement,Annotated by expert1_attorney
+194,08:02,08:05,965,969,4,Opening Statement,Annotated by expert1_attorney
+195,08:05,08:07,970,974,5,Opening Statement,Annotated by expert1_attorney
+196,08:07,08:10,975,979,4,Opening Statement,Annotated by expert1_attorney
+197,08:10,08:12,980,984,3,Opening Statement,Annotated by expert1_attorney
+198,08:12,08:15,985,989,4,Opening Statement,Annotated by expert1_attorney
+199,08:15,08:17,990,994,4,Opening Statement,Annotated by expert1_attorney
+200,08:17,08:20,995,999,5,Opening Statement,Annotated by expert1_attorney
+201,08:20,08:22,1000,1004,5,Opening Statement,Annotated by expert1_attorney
+202,08:22,08:25,1005,1009,4,Opening Statement,Annotated by expert1_attorney
+203,08:25,08:27,1010,1014,4,Opening Statement,Annotated by expert1_attorney
+204,08:27,08:30,1015,1019,4,Opening Statement,Annotated by expert1_attorney
+205,08:30,08:32,1020,1024,4,Opening Statement,Annotated by expert1_attorney
+206,08:32,08:35,1025,1029,5,Opening Statement,Annotated by expert1_attorney
+207,08:35,08:37,1030,1034,5,Opening Statement,Annotated by expert1_attorney
+208,08:37,08:40,1035,1039,4,Opening Statement,Annotated by expert1_attorney
+209,08:40,08:42,1040,1044,5,Opening Statement,Annotated by expert1_attorney
+210,08:42,08:45,1045,1049,5,Opening Statement,Annotated by expert1_attorney
+211,08:45,08:47,1050,1054,5,Opening Statement,Annotated by expert1_attorney
+212,08:47,08:50,1055,1059,3,Opening Statement,Annotated by expert1_attorney
+213,08:50,08:52,1060,1064,4,Opening Statement,Annotated by expert1_attorney
+214,08:52,08:55,1065,1069,4,Opening Statement,Annotated by expert1_attorney
+215,08:55,08:57,1070,1074,4,Opening Statement,Annotated by expert1_attorney
+216,08:57,09:00,1075,1079,4,Opening Statement,Annotated by expert1_attorney
+217,09:00,09:02,1080,1084,5,Opening Statement,Annotated by expert1_attorney
+218,09:02,09:05,1085,1089,4,Opening Statement,Annotated by expert1_attorney
+219,09:05,09:07,1090,1094,5,Opening Statement,Annotated by expert1_attorney
+220,09:07,09:10,1095,1099,4,Opening Statement,Annotated by expert1_attorney
+221,09:10,09:12,1100,1104,4,Opening Statement,Annotated by expert1_attorney
+222,09:12,09:15,1105,1109,5,Opening Statement,Annotated by expert1_attorney
+223,09:15,09:17,1110,1114,3,Opening Statement,Annotated by expert1_attorney
+224,09:17,09:20,1115,1119,5,Opening Statement,Annotated by expert1_attorney
+225,09:20,09:22,1120,1124,4,Opening Statement,Annotated by expert1_attorney
+226,09:22,09:25,1125,1129,4,Opening Statement,Annotated by expert1_attorney
+227,09:25,09:27,1130,1134,5,Opening Statement,Annotated by expert1_attorney
+228,09:27,09:30,1135,1139,5,Opening Statement,Annotated by expert1_attorney
+229,09:30,09:32,1140,1144,5,Opening Statement,Annotated by expert1_attorney
+230,09:32,09:35,1145,1149,3,Opening Statement,Annotated by expert1_attorney
+231,09:35,09:37,1150,1154,4,Opening Statement,Annotated by expert1_attorney
+232,09:37,09:40,1155,1159,5,Opening Statement,Annotated by expert1_attorney
+233,09:40,09:42,1160,1164,5,Opening Statement,Annotated by expert1_attorney
+234,09:42,09:45,1165,1169,3,Opening Statement,Annotated by expert1_attorney
+235,09:45,09:47,1170,1174,5,Opening Statement,Annotated by expert1_attorney
+236,09:47,09:50,1175,1179,4,Opening Statement,Annotated by expert1_attorney
+237,09:50,09:52,1180,1184,5,Opening Statement,Annotated by expert1_attorney
+238,09:52,09:55,1185,1189,4,Opening Statement,Annotated by expert1_attorney
+239,09:55,09:57,1190,1194,3,Opening Statement,Annotated by expert1_attorney
+240,09:57,10:00,1195,1199,4,Opening Statement,Annotated by expert1_attorney
+241,10:00,10:02,1200,1204,4,Opening Statement,Annotated by expert1_attorney
+242,10:02,10:05,1205,1209,4,Opening Statement,Annotated by expert1_attorney
+243,10:05,10:07,1210,1214,5,Opening Statement,Annotated by expert1_attorney
+244,10:07,10:10,1215,1219,4,Opening Statement,Annotated by expert1_attorney
+245,10:10,10:12,1220,1224,4,Opening Statement,Annotated by expert1_attorney
+246,10:12,10:15,1225,1229,5,Opening Statement,Annotated by expert1_attorney
+247,10:15,10:17,1230,1234,3,Opening Statement,Annotated by expert1_attorney
+248,10:17,10:20,1235,1239,5,Opening Statement,Annotated by expert1_attorney
+249,10:20,10:22,1240,1244,5,Opening Statement,Annotated by expert1_attorney
+250,10:22,10:25,1245,1249,3,Opening Statement,Annotated by expert1_attorney
+251,10:25,10:27,1250,1254,5,Opening Statement,Annotated by expert1_attorney
+252,10:27,10:30,1255,1259,5,Opening Statement,Annotated by expert1_attorney
+253,10:30,10:32,1260,1264,2,Witness Examination,Annotated by expert1_attorney
+254,10:32,10:35,1265,1269,2,Witness Examination,Annotated by expert1_attorney
+255,10:35,10:37,1270,1274,4,Witness Examination,Annotated by expert1_attorney
+256,10:37,10:40,1275,1279,3,Witness Examination,Annotated by expert1_attorney
+257,10:40,10:42,1280,1284,3,Witness Examination,Annotated by expert1_attorney
+258,10:42,10:45,1285,1289,3,Witness Examination,Annotated by expert1_attorney
+259,10:45,10:47,1290,1294,3,Witness Examination,Annotated by expert1_attorney
+260,10:47,10:50,1295,1299,2,Witness Examination,Annotated by expert1_attorney
+261,10:50,10:52,1300,1304,2,Witness Examination,Annotated by expert1_attorney
+262,10:52,10:55,1305,1309,3,Witness Examination,Annotated by expert1_attorney
+263,10:55,10:57,1310,1314,2,Witness Examination,Annotated by expert1_attorney
+264,10:57,11:00,1315,1319,3,Witness Examination,Annotated by expert1_attorney
+265,11:00,11:02,1320,1324,5,Witness Examination,Annotated by expert1_attorney
+266,11:02,11:05,1325,1329,3,Witness Examination,Annotated by expert1_attorney
+267,11:05,11:07,1330,1334,3,Witness Examination,Annotated by expert1_attorney
+268,11:07,11:10,1335,1339,5,Witness Examination,Annotated by expert1_attorney
+269,11:10,11:12,1340,1344,3,Witness Examination,Annotated by expert1_attorney
+270,11:12,11:15,1345,1349,3,Witness Examination,Annotated by expert1_attorney
+271,11:15,11:17,1350,1354,3,Witness Examination,Annotated by expert1_attorney
+272,11:17,11:20,1355,1359,4,Witness Examination,Annotated by expert1_attorney
+273,11:20,11:22,1360,1364,3,Witness Examination,Annotated by expert1_attorney
+274,11:22,11:25,1365,1369,3,Witness Examination,Annotated by expert1_attorney
+275,11:25,11:27,1370,1374,2,Witness Examination,Annotated by expert1_attorney
+276,11:27,11:30,1375,1379,3,Witness Examination,Annotated by expert1_attorney
+277,11:30,11:32,1380,1384,3,Witness Examination,Annotated by expert1_attorney
+278,11:32,11:35,1385,1389,3,Witness Examination,Annotated by expert1_attorney
+279,11:35,11:37,1390,1394,3,Witness Examination,Annotated by expert1_attorney
+280,11:37,11:40,1395,1399,3,Witness Examination,Annotated by expert1_attorney
+281,11:40,11:42,1400,1404,3,Witness Examination,Annotated by expert1_attorney
+282,11:42,11:45,1405,1409,4,Witness Examination,Annotated by expert1_attorney
+283,11:45,11:47,1410,1414,3,Witness Examination,Annotated by expert1_attorney
+284,11:47,11:50,1415,1419,4,Witness Examination,Annotated by expert1_attorney
+285,11:50,11:52,1420,1424,2,Witness Examination,Annotated by expert1_attorney
+286,11:52,11:55,1425,1429,4,Witness Examination,Annotated by expert1_attorney
+287,11:55,11:57,1430,1434,2,Witness Examination,Annotated by expert1_attorney
+288,11:57,12:00,1435,1439,3,Witness Examination,Annotated by expert1_attorney
+289,12:00,12:02,1440,1444,3,Witness Examination,Annotated by expert1_attorney
+290,12:02,12:05,1445,1449,3,Witness Examination,Annotated by expert1_attorney
+291,12:05,12:07,1450,1454,4,Witness Examination,Annotated by expert1_attorney
+292,12:07,12:10,1455,1459,4,Witness Examination,Annotated by expert1_attorney
+293,12:10,12:12,1460,1464,3,Witness Examination,Annotated by expert1_attorney
+294,12:12,12:15,1465,1469,3,Witness Examination,Annotated by expert1_attorney
+295,12:15,12:17,1470,1474,4,Witness Examination,Annotated by expert1_attorney
+296,12:17,12:20,1475,1479,3,Witness Examination,Annotated by expert1_attorney
+297,12:20,12:22,1480,1484,3,Witness Examination,Annotated by expert1_attorney
+298,12:22,12:25,1485,1489,3,Witness Examination,Annotated by expert1_attorney
+299,12:25,12:27,1490,1494,3,Witness Examination,Annotated by expert1_attorney
+300,12:27,12:30,1495,1499,2,Witness Examination,Annotated by expert1_attorney
+301,12:30,12:32,1500,1504,4,Witness Examination,Annotated by expert1_attorney
+302,12:32,12:35,1505,1509,3,Witness Examination,Annotated by expert1_attorney
+303,12:35,12:37,1510,1514,2,Witness Examination,Annotated by expert1_attorney
+304,12:37,12:40,1515,1519,4,Witness Examination,Annotated by expert1_attorney
+305,12:40,12:42,1520,1524,3,Witness Examination,Annotated by expert1_attorney
+306,12:42,12:45,1525,1529,3,Witness Examination,Annotated by expert1_attorney
+307,12:45,12:47,1530,1534,4,Witness Examination,Annotated by expert1_attorney
+308,12:47,12:50,1535,1539,3,Witness Examination,Annotated by expert1_attorney
+309,12:50,12:52,1540,1544,2,Witness Examination,Annotated by expert1_attorney
+310,12:52,12:55,1545,1549,3,Witness Examination,Annotated by expert1_attorney
+311,12:55,12:57,1550,1554,3,Witness Examination,Annotated by expert1_attorney
+312,12:57,13:00,1555,1559,3,Witness Examination,Annotated by expert1_attorney
+313,13:00,13:02,1560,1564,4,Witness Examination,Annotated by expert1_attorney
+314,13:02,13:05,1565,1569,4,Witness Examination,Annotated by expert1_attorney
+315,13:05,13:07,1570,1574,3,Witness Examination,Annotated by expert1_attorney
+316,13:07,13:10,1575,1579,2,Witness Examination,Annotated by expert1_attorney
+317,13:10,13:12,1580,1584,3,Witness Examination,Annotated by expert1_attorney
+318,13:12,13:15,1585,1589,3,Witness Examination,Annotated by expert1_attorney
+319,13:15,13:17,1590,1594,3,Witness Examination,Annotated by expert1_attorney
+320,13:17,13:20,1595,1599,3,Witness Examination,Annotated by expert1_attorney
+321,13:20,13:22,1600,1604,3,Witness Examination,Annotated by expert1_attorney
+322,13:22,13:25,1605,1609,2,Witness Examination,Annotated by expert1_attorney
+323,13:25,13:27,1610,1614,3,Witness Examination,Annotated by expert1_attorney
+324,13:27,13:30,1615,1619,3,Witness Examination,Annotated by expert1_attorney
+325,13:30,13:32,1620,1624,4,Witness Examination,Annotated by expert1_attorney
+326,13:32,13:35,1625,1629,5,Witness Examination,Annotated by expert1_attorney
+327,13:35,13:37,1630,1634,3,Witness Examination,Annotated by expert1_attorney
+328,13:37,13:40,1635,1639,3,Witness Examination,Annotated by expert1_attorney
+329,13:40,13:42,1640,1644,3,Witness Examination,Annotated by expert1_attorney
+330,13:42,13:45,1645,1649,3,Witness Examination,Annotated by expert1_attorney
+331,13:45,13:47,1650,1654,4,Witness Examination,Annotated by expert1_attorney
+332,13:47,13:50,1655,1659,4,Witness Examination,Annotated by expert1_attorney
+333,13:50,13:52,1660,1664,3,Witness Examination,Annotated by expert1_attorney
+334,13:52,13:55,1665,1669,3,Witness Examination,Annotated by expert1_attorney
+335,13:55,13:57,1670,1674,3,Witness Examination,Annotated by expert1_attorney
+336,13:57,14:00,1675,1679,3,Witness Examination,Annotated by expert1_attorney
+337,14:00,14:02,1680,1684,3,Witness Examination,Annotated by expert1_attorney
+338,14:02,14:05,1685,1689,3,Witness Examination,Annotated by expert1_attorney
+339,14:05,14:07,1690,1694,3,Witness Examination,Annotated by expert1_attorney
+340,14:07,14:10,1695,1699,3,Witness Examination,Annotated by expert1_attorney
+341,14:10,14:12,1700,1704,4,Witness Examination,Annotated by expert1_attorney
+342,14:12,14:15,1705,1709,3,Witness Examination,Annotated by expert1_attorney
+343,14:15,14:17,1710,1714,3,Witness Examination,Annotated by expert1_attorney
+344,14:17,14:20,1715,1719,3,Witness Examination,Annotated by expert1_attorney
+345,14:20,14:22,1720,1724,3,Witness Examination,Annotated by expert1_attorney
+346,14:22,14:25,1725,1729,3,Witness Examination,Annotated by expert1_attorney
+347,14:25,14:27,1730,1734,4,Witness Examination,Annotated by expert1_attorney
+348,14:27,14:30,1735,1739,5,Witness Examination,Annotated by expert1_attorney
+349,14:30,14:32,1740,1744,4,Witness Examination,Annotated by expert1_attorney
+350,14:32,14:35,1745,1749,3,Witness Examination,Annotated by expert1_attorney
+351,14:35,14:37,1750,1754,2,Witness Examination,Annotated by expert1_attorney
+352,14:37,14:40,1755,1759,3,Witness Examination,Annotated by expert1_attorney
+353,14:40,14:42,1760,1764,2,Witness Examination,Annotated by expert1_attorney
+354,14:42,14:45,1765,1769,3,Witness Examination,Annotated by expert1_attorney
+355,14:45,14:47,1770,1774,4,Witness Examination,Annotated by expert1_attorney
+356,14:47,14:50,1775,1779,2,Witness Examination,Annotated by expert1_attorney
+357,14:50,14:52,1780,1784,4,Witness Examination,Annotated by expert1_attorney
+358,14:52,14:55,1785,1789,4,Witness Examination,Annotated by expert1_attorney
+359,14:55,14:57,1790,1794,4,Witness Examination,Annotated by expert1_attorney
+360,14:57,15:00,1795,1799,3,Witness Examination,Annotated by expert1_attorney
+361,15:00,15:02,1800,1804,3,Witness Examination,Annotated by expert1_attorney
+362,15:02,15:05,1805,1809,3,Witness Examination,Annotated by expert1_attorney
+363,15:05,15:07,1810,1814,3,Witness Examination,Annotated by expert1_attorney
+364,15:07,15:10,1815,1819,4,Witness Examination,Annotated by expert1_attorney
+365,15:10,15:12,1820,1824,3,Witness Examination,Annotated by expert1_attorney
+366,15:12,15:15,1825,1829,3,Witness Examination,Annotated by expert1_attorney
+367,15:15,15:17,1830,1834,3,Witness Examination,Annotated by expert1_attorney
+368,15:17,15:20,1835,1839,4,Witness Examination,Annotated by expert1_attorney
+369,15:20,15:22,1840,1844,2,Witness Examination,Annotated by expert1_attorney
+370,15:22,15:25,1845,1849,3,Witness Examination,Annotated by expert1_attorney
+371,15:25,15:27,1850,1854,4,Witness Examination,Annotated by expert1_attorney
+372,15:27,15:30,1855,1859,4,Witness Examination,Annotated by expert1_attorney
+373,15:30,15:32,1860,1864,4,Witness Examination,Annotated by expert1_attorney
+374,15:32,15:35,1865,1869,3,Witness Examination,Annotated by expert1_attorney
+375,15:35,15:37,1870,1874,3,Witness Examination,Annotated by expert1_attorney
+376,15:37,15:40,1875,1879,3,Witness Examination,Annotated by expert1_attorney
+377,15:40,15:42,1880,1884,3,Witness Examination,Annotated by expert1_attorney
+378,15:42,15:45,1885,1889,2,Witness Examination,Annotated by expert1_attorney
+379,15:45,15:47,1890,1894,4,Witness Examination,Annotated by expert1_attorney
+380,15:47,15:50,1895,1899,5,Witness Examination,Annotated by expert1_attorney
+381,15:50,15:52,1900,1904,2,Witness Examination,Annotated by expert1_attorney
+382,15:52,15:55,1905,1909,2,Witness Examination,Annotated by expert1_attorney
+383,15:55,15:57,1910,1914,4,Witness Examination,Annotated by expert1_attorney
+384,15:57,16:00,1915,1919,3,Witness Examination,Annotated by expert1_attorney
+385,16:00,16:02,1920,1924,4,Witness Examination,Annotated by expert1_attorney
+386,16:02,16:05,1925,1929,4,Witness Examination,Annotated by expert1_attorney
+387,16:05,16:07,1930,1934,3,Witness Examination,Annotated by expert1_attorney
+388,16:07,16:10,1935,1939,4,Witness Examination,Annotated by expert1_attorney
+389,16:10,16:12,1940,1944,5,Witness Examination,Annotated by expert1_attorney
+390,16:12,16:15,1945,1949,3,Witness Examination,Annotated by expert1_attorney
+391,16:15,16:17,1950,1954,4,Witness Examination,Annotated by expert1_attorney
+392,16:17,16:20,1955,1959,4,Witness Examination,Annotated by expert1_attorney
+393,16:20,16:22,1960,1964,4,Witness Examination,Annotated by expert1_attorney
+394,16:22,16:25,1965,1969,5,Witness Examination,Annotated by expert1_attorney
+395,16:25,16:27,1970,1974,3,Witness Examination,Annotated by expert1_attorney
+396,16:27,16:30,1975,1979,4,Witness Examination,Annotated by expert1_attorney
+397,16:30,16:32,1980,1984,4,Witness Examination,Annotated by expert1_attorney
+398,16:32,16:35,1985,1989,4,Witness Examination,Annotated by expert1_attorney
+399,16:35,16:37,1990,1994,3,Witness Examination,Annotated by expert1_attorney
+400,16:37,16:40,1995,1999,4,Witness Examination,Annotated by expert1_attorney
+401,16:40,16:42,2000,2004,3,Witness Examination,Annotated by expert1_attorney
+402,16:42,16:45,2005,2009,2,Witness Examination,Annotated by expert1_attorney
+403,16:45,16:47,2010,2014,4,Witness Examination,Annotated by expert1_attorney
+404,16:47,16:50,2015,2019,2,Witness Examination,Annotated by expert1_attorney
+405,16:50,16:52,2020,2024,4,Witness Examination,Annotated by expert1_attorney
+406,16:52,16:55,2025,2029,3,Witness Examination,Annotated by expert1_attorney
+407,16:55,16:57,2030,2034,3,Witness Examination,Annotated by expert1_attorney
+408,16:57,17:00,2035,2039,2,Witness Examination,Annotated by expert1_attorney
+409,17:00,17:02,2040,2044,3,Witness Examination,Annotated by expert1_attorney
+410,17:02,17:05,2045,2049,3,Witness Examination,Annotated by expert1_attorney
+411,17:05,17:07,2050,2054,3,Witness Examination,Annotated by expert1_attorney
+412,17:07,17:10,2055,2059,3,Witness Examination,Annotated by expert1_attorney
+413,17:10,17:12,2060,2064,3,Witness Examination,Annotated by expert1_attorney
+414,17:12,17:15,2065,2069,3,Witness Examination,Annotated by expert1_attorney
+415,17:15,17:17,2070,2074,3,Witness Examination,Annotated by expert1_attorney
+416,17:17,17:20,2075,2079,3,Witness Examination,Annotated by expert1_attorney
+417,17:20,17:22,2080,2084,4,Witness Examination,Annotated by expert1_attorney
+418,17:22,17:25,2085,2089,2,Witness Examination,Annotated by expert1_attorney
+419,17:25,17:27,2090,2094,3,Witness Examination,Annotated by expert1_attorney
+420,17:27,17:30,2095,2099,5,Witness Examination,Annotated by expert1_attorney
+421,17:30,17:32,2100,2104,2,Witness Examination,Annotated by expert1_attorney
+422,17:32,17:35,2105,2109,3,Witness Examination,Annotated by expert1_attorney
+423,17:35,17:37,2110,2114,5,Witness Examination,Annotated by expert1_attorney
+424,17:37,17:40,2115,2119,3,Witness Examination,Annotated by expert1_attorney
+425,17:40,17:42,2120,2124,3,Witness Examination,Annotated by expert1_attorney
+426,17:42,17:45,2125,2129,4,Witness Examination,Annotated by expert1_attorney
+427,17:45,17:47,2130,2134,4,Witness Examination,Annotated by expert1_attorney
+428,17:47,17:50,2135,2139,4,Witness Examination,Annotated by expert1_attorney
+429,17:50,17:52,2140,2144,3,Witness Examination,Annotated by expert1_attorney
+430,17:52,17:55,2145,2149,4,Witness Examination,Annotated by expert1_attorney
+431,17:55,17:57,2150,2154,2,Witness Examination,Annotated by expert1_attorney
+432,17:57,18:00,2155,2159,4,Witness Examination,Annotated by expert1_attorney
+433,18:00,18:02,2160,2164,4,Witness Examination,Annotated by expert1_attorney
+434,18:02,18:05,2165,2169,3,Witness Examination,Annotated by expert1_attorney
+435,18:05,18:07,2170,2174,3,Witness Examination,Annotated by expert1_attorney
+436,18:07,18:10,2175,2179,4,Witness Examination,Annotated by expert1_attorney
+437,18:10,18:12,2180,2184,3,Witness Examination,Annotated by expert1_attorney
+438,18:12,18:15,2185,2189,3,Witness Examination,Annotated by expert1_attorney
+439,18:15,18:17,2190,2194,3,Witness Examination,Annotated by expert1_attorney
+440,18:17,18:20,2195,2199,2,Witness Examination,Annotated by expert1_attorney
+441,18:20,18:22,2200,2204,3,Witness Examination,Annotated by expert1_attorney
+442,18:22,18:25,2205,2209,3,Witness Examination,Annotated by expert1_attorney
+443,18:25,18:27,2210,2214,4,Witness Examination,Annotated by expert1_attorney
+444,18:27,18:30,2215,2219,5,Witness Examination,Annotated by expert1_attorney
+445,18:30,18:32,2220,2224,3,Witness Examination,Annotated by expert1_attorney
+446,18:32,18:35,2225,2229,3,Witness Examination,Annotated by expert1_attorney
+447,18:35,18:37,2230,2234,3,Witness Examination,Annotated by expert1_attorney
+448,18:37,18:40,2235,2239,2,Witness Examination,Annotated by expert1_attorney
+449,18:40,18:42,2240,2244,4,Witness Examination,Annotated by expert1_attorney
+450,18:42,18:45,2245,2249,3,Witness Examination,Annotated by expert1_attorney
+451,18:45,18:47,2250,2254,3,Witness Examination,Annotated by expert1_attorney
+452,18:47,18:50,2255,2259,4,Witness Examination,Annotated by expert1_attorney
+453,18:50,18:52,2260,2264,3,Witness Examination,Annotated by expert1_attorney
+454,18:52,18:55,2265,2269,3,Witness Examination,Annotated by expert1_attorney
+455,18:55,18:57,2270,2274,4,Witness Examination,Annotated by expert1_attorney
+456,18:57,19:00,2275,2279,3,Witness Examination,Annotated by expert1_attorney
+457,19:00,19:02,2280,2284,3,Witness Examination,Annotated by expert1_attorney
+458,19:02,19:05,2285,2289,4,Witness Examination,Annotated by expert1_attorney
+459,19:05,19:07,2290,2294,3,Witness Examination,Annotated by expert1_attorney
+460,19:07,19:10,2295,2299,3,Witness Examination,Annotated by expert1_attorney
+461,19:10,19:12,2300,2304,3,Witness Examination,Annotated by expert1_attorney
+462,19:12,19:15,2305,2309,2,Witness Examination,Annotated by expert1_attorney
+463,19:15,19:17,2310,2314,3,Witness Examination,Annotated by expert1_attorney
+464,19:17,19:20,2315,2319,5,Witness Examination,Annotated by expert1_attorney
+465,19:20,19:22,2320,2324,4,Witness Examination,Annotated by expert1_attorney
+466,19:22,19:25,2325,2329,4,Witness Examination,Annotated by expert1_attorney
+467,19:25,19:27,2330,2334,4,Witness Examination,Annotated by expert1_attorney
+468,19:27,19:30,2335,2339,3,Witness Examination,Annotated by expert1_attorney
+469,19:30,19:32,2340,2344,4,Witness Examination,Annotated by expert1_attorney
+470,19:32,19:35,2345,2349,3,Witness Examination,Annotated by expert1_attorney
+471,19:35,19:37,2350,2354,4,Witness Examination,Annotated by expert1_attorney
+472,19:37,19:40,2355,2359,3,Witness Examination,Annotated by expert1_attorney
+473,19:40,19:42,2360,2364,4,Witness Examination,Annotated by expert1_attorney
+474,19:42,19:45,2365,2369,3,Witness Examination,Annotated by expert1_attorney
+475,19:45,19:47,2370,2374,3,Witness Examination,Annotated by expert1_attorney
+476,19:47,19:50,2375,2379,3,Witness Examination,Annotated by expert1_attorney
+477,19:50,19:52,2380,2384,3,Witness Examination,Annotated by expert1_attorney
+478,19:52,19:55,2385,2389,4,Witness Examination,Annotated by expert1_attorney
+479,19:55,19:57,2390,2394,2,Witness Examination,Annotated by expert1_attorney
+480,19:57,20:00,2395,2399,2,Witness Examination,Annotated by expert1_attorney
+481,20:00,20:02,2400,2404,3,Witness Examination,Annotated by expert1_attorney
+482,20:02,20:05,2405,2409,3,Witness Examination,Annotated by expert1_attorney
+483,20:05,20:07,2410,2414,3,Witness Examination,Annotated by expert1_attorney
+484,20:07,20:10,2415,2419,3,Witness Examination,Annotated by expert1_attorney
+485,20:10,20:12,2420,2424,3,Witness Examination,Annotated by expert1_attorney
+486,20:12,20:15,2425,2429,4,Witness Examination,Annotated by expert1_attorney
+487,20:15,20:17,2430,2434,2,Witness Examination,Annotated by expert1_attorney
+488,20:17,20:20,2435,2439,3,Witness Examination,Annotated by expert1_attorney
+489,20:20,20:22,2440,2444,4,Witness Examination,Annotated by expert1_attorney
+490,20:22,20:25,2445,2449,4,Witness Examination,Annotated by expert1_attorney
+491,20:25,20:27,2450,2454,3,Witness Examination,Annotated by expert1_attorney
+492,20:27,20:30,2455,2459,3,Witness Examination,Annotated by expert1_attorney
+493,20:30,20:32,2460,2464,3,Witness Examination,Annotated by expert1_attorney
+494,20:32,20:35,2465,2469,3,Witness Examination,Annotated by expert1_attorney
+495,20:35,20:37,2470,2474,3,Witness Examination,Annotated by expert1_attorney
+496,20:37,20:40,2475,2479,3,Witness Examination,Annotated by expert1_attorney
+497,20:40,20:42,2480,2484,3,Witness Examination,Annotated by expert1_attorney
+498,20:42,20:45,2485,2489,4,Witness Examination,Annotated by expert1_attorney
+499,20:45,20:47,2490,2494,3,Witness Examination,Annotated by expert1_attorney
+500,20:47,20:50,2495,2499,3,Witness Examination,Annotated by expert1_attorney
+501,20:50,20:52,2500,2504,4,Witness Examination,Annotated by expert1_attorney
+502,20:52,20:55,2505,2509,3,Witness Examination,Annotated by expert1_attorney
+503,20:55,20:57,2510,2514,4,Witness Examination,Annotated by expert1_attorney
+504,20:57,21:00,2515,2519,2,Witness Examination,Annotated by expert1_attorney
+505,21:00,21:02,2520,2524,3,Witness Examination,Annotated by expert1_attorney
+506,21:02,21:05,2525,2529,4,Witness Examination,Annotated by expert1_attorney
+507,21:05,21:07,2530,2534,3,Witness Examination,Annotated by expert1_attorney
+508,21:07,21:10,2535,2539,4,Witness Examination,Annotated by expert1_attorney
+509,21:10,21:12,2540,2544,4,Witness Examination,Annotated by expert1_attorney
+510,21:12,21:15,2545,2549,4,Witness Examination,Annotated by expert1_attorney
+511,21:15,21:17,2550,2554,4,Witness Examination,Annotated by expert1_attorney
+512,21:17,21:20,2555,2559,3,Witness Examination,Annotated by expert1_attorney
+513,21:20,21:22,2560,2564,2,Witness Examination,Annotated by expert1_attorney
+514,21:22,21:25,2565,2569,3,Witness Examination,Annotated by expert1_attorney
+515,21:25,21:27,2570,2574,3,Witness Examination,Annotated by expert1_attorney
+516,21:27,21:30,2575,2579,2,Witness Examination,Annotated by expert1_attorney
+517,21:30,21:32,2580,2584,3,Witness Examination,Annotated by expert1_attorney
+518,21:32,21:35,2585,2589,3,Witness Examination,Annotated by expert1_attorney
+519,21:35,21:37,2590,2594,4,Witness Examination,Annotated by expert1_attorney
+520,21:37,21:40,2595,2599,4,Witness Examination,Annotated by expert1_attorney
+521,21:40,21:42,2600,2604,3,Witness Examination,Annotated by expert1_attorney
+522,21:42,21:45,2605,2609,4,Witness Examination,Annotated by expert1_attorney
+523,21:45,21:47,2610,2614,3,Witness Examination,Annotated by expert1_attorney
+524,21:47,21:50,2615,2619,2,Witness Examination,Annotated by expert1_attorney
+525,21:50,21:52,2620,2624,3,Witness Examination,Annotated by expert1_attorney
+526,21:52,21:55,2625,2629,3,Witness Examination,Annotated by expert1_attorney
+527,21:55,21:57,2630,2634,3,Witness Examination,Annotated by expert1_attorney
+528,21:57,22:00,2635,2639,4,Witness Examination,Annotated by expert1_attorney
+529,22:00,22:02,2640,2644,3,Witness Examination,Annotated by expert1_attorney
+530,22:02,22:05,2645,2649,4,Witness Examination,Annotated by expert1_attorney
+531,22:05,22:07,2650,2654,2,Witness Examination,Annotated by expert1_attorney
+532,22:07,22:10,2655,2659,4,Witness Examination,Annotated by expert1_attorney
+533,22:10,22:12,2660,2664,2,Witness Examination,Annotated by expert1_attorney
+534,22:12,22:15,2665,2669,3,Witness Examination,Annotated by expert1_attorney
+535,22:15,22:17,2670,2674,3,Witness Examination,Annotated by expert1_attorney
+536,22:17,22:20,2675,2679,2,Witness Examination,Annotated by expert1_attorney
+537,22:20,22:22,2680,2684,3,Witness Examination,Annotated by expert1_attorney
+538,22:22,22:25,2685,2689,4,Witness Examination,Annotated by expert1_attorney
+539,22:25,22:27,2690,2694,2,Witness Examination,Annotated by expert1_attorney
+540,22:27,22:30,2695,2699,2,Witness Examination,Annotated by expert1_attorney
+541,22:30,22:32,2700,2704,3,Witness Examination,Annotated by expert1_attorney
+542,22:32,22:35,2705,2709,3,Witness Examination,Annotated by expert1_attorney
+543,22:35,22:37,2710,2714,4,Witness Examination,Annotated by expert1_attorney
+544,22:37,22:40,2715,2719,3,Witness Examination,Annotated by expert1_attorney
+545,22:40,22:42,2720,2724,2,Witness Examination,Annotated by expert1_attorney
+546,22:42,22:45,2725,2729,4,Witness Examination,Annotated by expert1_attorney
+547,22:45,22:47,2730,2734,3,Witness Examination,Annotated by expert1_attorney
+548,22:47,22:50,2735,2739,4,Witness Examination,Annotated by expert1_attorney
+549,22:50,22:52,2740,2744,3,Witness Examination,Annotated by expert1_attorney
+550,22:52,22:55,2745,2749,3,Witness Examination,Annotated by expert1_attorney
+551,22:55,22:57,2750,2754,3,Witness Examination,Annotated by expert1_attorney
+552,22:57,23:00,2755,2759,3,Witness Examination,Annotated by expert1_attorney
+553,23:00,23:02,2760,2764,3,Witness Examination,Annotated by expert1_attorney
+554,23:02,23:05,2765,2769,3,Witness Examination,Annotated by expert1_attorney
+555,23:05,23:07,2770,2774,3,Witness Examination,Annotated by expert1_attorney
+556,23:07,23:10,2775,2779,4,Witness Examination,Annotated by expert1_attorney
+557,23:10,23:12,2780,2784,3,Witness Examination,Annotated by expert1_attorney
+558,23:12,23:15,2785,2789,3,Witness Examination,Annotated by expert1_attorney
+559,23:15,23:17,2790,2794,4,Witness Examination,Annotated by expert1_attorney
+560,23:17,23:20,2795,2799,4,Witness Examination,Annotated by expert1_attorney
+561,23:20,23:22,2800,2804,3,Witness Examination,Annotated by expert1_attorney
+562,23:22,23:25,2805,2809,4,Witness Examination,Annotated by expert1_attorney
+563,23:25,23:27,2810,2814,3,Witness Examination,Annotated by expert1_attorney
+564,23:27,23:30,2815,2819,3,Witness Examination,Annotated by expert1_attorney
+565,23:30,23:32,2820,2824,3,Witness Examination,Annotated by expert1_attorney
+566,23:32,23:35,2825,2829,3,Witness Examination,Annotated by expert1_attorney
+567,23:35,23:37,2830,2834,3,Witness Examination,Annotated by expert1_attorney
+568,23:37,23:40,2835,2839,2,Witness Examination,Annotated by expert1_attorney
+569,23:40,23:42,2840,2844,4,Witness Examination,Annotated by expert1_attorney
+570,23:42,23:45,2845,2849,5,Witness Examination,Annotated by expert1_attorney
+571,23:45,23:47,2850,2854,4,Witness Examination,Annotated by expert1_attorney
+572,23:47,23:50,2855,2859,4,Witness Examination,Annotated by expert1_attorney
+573,23:50,23:52,2860,2864,3,Witness Examination,Annotated by expert1_attorney
+574,23:52,23:55,2865,2869,3,Witness Examination,Annotated by expert1_attorney
+575,23:55,23:57,2870,2874,3,Witness Examination,Annotated by expert1_attorney
+576,23:57,24:00,2875,2879,3,Witness Examination,Annotated by expert1_attorney
+577,24:00,24:02,2880,2884,3,Witness Examination,Annotated by expert1_attorney
+578,24:02,24:05,2885,2889,2,Witness Examination,Annotated by expert1_attorney
+579,24:05,24:07,2890,2894,3,Witness Examination,Annotated by expert1_attorney
+580,24:07,24:10,2895,2899,3,Witness Examination,Annotated by expert1_attorney
+581,24:10,24:12,2900,2904,4,Witness Examination,Annotated by expert1_attorney
+582,24:12,24:15,2905,2909,4,Witness Examination,Annotated by expert1_attorney
+583,24:15,24:17,2910,2914,2,Witness Examination,Annotated by expert1_attorney
+584,24:17,24:20,2915,2919,4,Witness Examination,Annotated by expert1_attorney
+585,24:20,24:22,2920,2924,3,Witness Examination,Annotated by expert1_attorney
+586,24:22,24:25,2925,2929,3,Witness Examination,Annotated by expert1_attorney
+587,24:25,24:27,2930,2934,2,Witness Examination,Annotated by expert1_attorney
+588,24:27,24:30,2935,2939,3,Witness Examination,Annotated by expert1_attorney
+589,24:30,24:32,2940,2944,3,Witness Examination,Annotated by expert1_attorney
+590,24:32,24:35,2945,2949,4,Witness Examination,Annotated by expert1_attorney
+591,24:35,24:37,2950,2954,4,Witness Examination,Annotated by expert1_attorney
+592,24:37,24:40,2955,2959,3,Witness Examination,Annotated by expert1_attorney
+593,24:40,24:42,2960,2964,2,Witness Examination,Annotated by expert1_attorney
+594,24:42,24:45,2965,2969,3,Witness Examination,Annotated by expert1_attorney
+595,24:45,24:47,2970,2974,4,Witness Examination,Annotated by expert1_attorney
+596,24:47,24:50,2975,2979,5,Witness Examination,Annotated by expert1_attorney
+597,24:50,24:52,2980,2984,3,Witness Examination,Annotated by expert1_attorney
+598,24:52,24:55,2985,2989,3,Witness Examination,Annotated by expert1_attorney
+599,24:55,24:57,2990,2994,3,Witness Examination,Annotated by expert1_attorney
+600,24:57,25:00,2995,2999,3,Witness Examination,Annotated by expert1_attorney
+601,25:00,25:02,3000,3004,3,Witness Examination,Annotated by expert1_attorney
+602,25:02,25:05,3005,3009,3,Witness Examination,Annotated by expert1_attorney
+603,25:05,25:07,3010,3014,5,Witness Examination,Annotated by expert1_attorney
+604,25:07,25:10,3015,3019,4,Witness Examination,Annotated by expert1_attorney
+605,25:10,25:12,3020,3024,2,Witness Examination,Annotated by expert1_attorney
+606,25:12,25:15,3025,3029,4,Witness Examination,Annotated by expert1_attorney
+607,25:15,25:17,3030,3034,4,Witness Examination,Annotated by expert1_attorney
+608,25:17,25:20,3035,3039,3,Witness Examination,Annotated by expert1_attorney
+609,25:20,25:22,3040,3044,3,Witness Examination,Annotated by expert1_attorney
+610,25:22,25:25,3045,3049,4,Witness Examination,Annotated by expert1_attorney
+611,25:25,25:27,3050,3054,3,Witness Examination,Annotated by expert1_attorney
+612,25:27,25:30,3055,3059,3,Witness Examination,Annotated by expert1_attorney
+613,25:30,25:32,3060,3064,4,Witness Examination,Annotated by expert1_attorney
+614,25:32,25:35,3065,3069,3,Witness Examination,Annotated by expert1_attorney
+615,25:35,25:37,3070,3074,3,Witness Examination,Annotated by expert1_attorney
+616,25:37,25:40,3075,3079,3,Witness Examination,Annotated by expert1_attorney
+617,25:40,25:42,3080,3084,4,Witness Examination,Annotated by expert1_attorney
+618,25:42,25:45,3085,3089,3,Witness Examination,Annotated by expert1_attorney
+619,25:45,25:47,3090,3094,3,Witness Examination,Annotated by expert1_attorney
+620,25:47,25:50,3095,3099,3,Witness Examination,Annotated by expert1_attorney
+621,25:50,25:52,3100,3104,3,Witness Examination,Annotated by expert1_attorney
+622,25:52,25:55,3105,3109,4,Witness Examination,Annotated by expert1_attorney
+623,25:55,25:57,3110,3114,3,Witness Examination,Annotated by expert1_attorney
+624,25:57,26:00,3115,3119,3,Witness Examination,Annotated by expert1_attorney
+625,26:00,26:02,3120,3124,2,Witness Examination,Annotated by expert1_attorney
+626,26:02,26:05,3125,3129,2,Witness Examination,Annotated by expert1_attorney
+627,26:05,26:07,3130,3134,4,Witness Examination,Annotated by expert1_attorney
+628,26:07,26:10,3135,3139,4,Witness Examination,Annotated by expert1_attorney
+629,26:10,26:12,3140,3144,3,Witness Examination,Annotated by expert1_attorney
+630,26:12,26:15,3145,3149,5,Witness Examination,Annotated by expert1_attorney
+631,26:15,26:17,3150,3154,3,Witness Examination,Annotated by expert1_attorney
+632,26:17,26:20,3155,3159,4,Witness Examination,Annotated by expert1_attorney
+633,26:20,26:22,3160,3164,3,Witness Examination,Annotated by expert1_attorney
+634,26:22,26:25,3165,3169,4,Witness Examination,Annotated by expert1_attorney
+635,26:25,26:27,3170,3174,3,Witness Examination,Annotated by expert1_attorney
+636,26:27,26:30,3175,3179,3,Witness Examination,Annotated by expert1_attorney
+637,26:30,26:32,3180,3184,3,Witness Examination,Annotated by expert1_attorney
+638,26:32,26:35,3185,3189,2,Witness Examination,Annotated by expert1_attorney
+639,26:35,26:37,3190,3194,4,Witness Examination,Annotated by expert1_attorney
+640,26:37,26:40,3195,3199,3,Witness Examination,Annotated by expert1_attorney
+641,26:40,26:42,3200,3204,3,Witness Examination,Annotated by expert1_attorney
+642,26:42,26:45,3205,3209,4,Witness Examination,Annotated by expert1_attorney
+643,26:45,26:47,3210,3214,5,Witness Examination,Annotated by expert1_attorney
+644,26:47,26:50,3215,3219,3,Witness Examination,Annotated by expert1_attorney
+645,26:50,26:52,3220,3224,4,Witness Examination,Annotated by expert1_attorney
+646,26:52,26:55,3225,3229,3,Witness Examination,Annotated by expert1_attorney
+647,26:55,26:57,3230,3234,4,Witness Examination,Annotated by expert1_attorney
+648,26:57,27:00,3235,3239,4,Witness Examination,Annotated by expert1_attorney
+649,27:00,27:02,3240,3244,3,Witness Examination,Annotated by expert1_attorney
+650,27:02,27:05,3245,3249,3,Witness Examination,Annotated by expert1_attorney
+651,27:05,27:07,3250,3254,4,Witness Examination,Annotated by expert1_attorney
+652,27:07,27:10,3255,3259,3,Witness Examination,Annotated by expert1_attorney
+653,27:10,27:12,3260,3264,4,Witness Examination,Annotated by expert1_attorney
+654,27:12,27:15,3265,3269,3,Witness Examination,Annotated by expert1_attorney
+655,27:15,27:17,3270,3274,3,Witness Examination,Annotated by expert1_attorney
+656,27:17,27:20,3275,3279,4,Witness Examination,Annotated by expert1_attorney
+657,27:20,27:22,3280,3284,4,Witness Examination,Annotated by expert1_attorney
+658,27:22,27:25,3285,3289,4,Witness Examination,Annotated by expert1_attorney
+659,27:25,27:27,3290,3294,5,Witness Examination,Annotated by expert1_attorney
+660,27:27,27:30,3295,3299,4,Witness Examination,Annotated by expert1_attorney
+661,27:30,27:32,3300,3304,4,Witness Examination,Annotated by expert1_attorney
+662,27:32,27:35,3305,3309,4,Witness Examination,Annotated by expert1_attorney
+663,27:35,27:37,3310,3314,3,Witness Examination,Annotated by expert1_attorney
+664,27:37,27:40,3315,3319,4,Witness Examination,Annotated by expert1_attorney
+665,27:40,27:42,3320,3324,2,Witness Examination,Annotated by expert1_attorney
+666,27:42,27:45,3325,3329,3,Witness Examination,Annotated by expert1_attorney
+667,27:45,27:47,3330,3334,3,Witness Examination,Annotated by expert1_attorney
+668,27:47,27:50,3335,3339,3,Witness Examination,Annotated by expert1_attorney
+669,27:50,27:52,3340,3344,3,Witness Examination,Annotated by expert1_attorney
+670,27:52,27:55,3345,3349,5,Witness Examination,Annotated by expert1_attorney
+671,27:55,27:57,3350,3354,3,Witness Examination,Annotated by expert1_attorney
+672,27:57,28:00,3355,3359,4,Witness Examination,Annotated by expert1_attorney
+673,28:00,28:02,3360,3364,2,Witness Examination,Annotated by expert1_attorney
+674,28:02,28:05,3365,3369,5,Witness Examination,Annotated by expert1_attorney
+675,28:05,28:07,3370,3374,2,Witness Examination,Annotated by expert1_attorney
+676,28:07,28:10,3375,3379,3,Witness Examination,Annotated by expert1_attorney
+677,28:10,28:12,3380,3384,4,Witness Examination,Annotated by expert1_attorney
+678,28:12,28:15,3385,3389,3,Witness Examination,Annotated by expert1_attorney
+679,28:15,28:17,3390,3394,2,Witness Examination,Annotated by expert1_attorney
+680,28:17,28:20,3395,3399,3,Witness Examination,Annotated by expert1_attorney
+681,28:20,28:22,3400,3404,3,Witness Examination,Annotated by expert1_attorney
+682,28:22,28:25,3405,3409,3,Witness Examination,Annotated by expert1_attorney
+683,28:25,28:27,3410,3414,3,Witness Examination,Annotated by expert1_attorney
+684,28:27,28:30,3415,3419,3,Witness Examination,Annotated by expert1_attorney
+685,28:30,28:32,3420,3424,4,Witness Examination,Annotated by expert1_attorney
+686,28:32,28:35,3425,3429,3,Witness Examination,Annotated by expert1_attorney
+687,28:35,28:37,3430,3434,3,Witness Examination,Annotated by expert1_attorney
+688,28:37,28:40,3435,3439,3,Witness Examination,Annotated by expert1_attorney
+689,28:40,28:42,3440,3444,4,Witness Examination,Annotated by expert1_attorney
+690,28:42,28:45,3445,3449,3,Witness Examination,Annotated by expert1_attorney
+691,28:45,28:47,3450,3454,4,Witness Examination,Annotated by expert1_attorney
+692,28:47,28:50,3455,3459,4,Witness Examination,Annotated by expert1_attorney
+693,28:50,28:52,3460,3464,2,Witness Examination,Annotated by expert1_attorney
+694,28:52,28:55,3465,3469,4,Witness Examination,Annotated by expert1_attorney
+695,28:55,28:57,3470,3474,3,Witness Examination,Annotated by expert1_attorney
+696,28:57,29:00,3475,3479,3,Witness Examination,Annotated by expert1_attorney
+697,29:00,29:02,3480,3484,4,Witness Examination,Annotated by expert1_attorney
+698,29:02,29:05,3485,3489,4,Witness Examination,Annotated by expert1_attorney
+699,29:05,29:07,3490,3494,3,Witness Examination,Annotated by expert1_attorney
+700,29:07,29:10,3495,3499,2,Witness Examination,Annotated by expert1_attorney
+701,29:10,29:12,3500,3504,3,Witness Examination,Annotated by expert1_attorney
+702,29:12,29:15,3505,3509,3,Witness Examination,Annotated by expert1_attorney
+703,29:15,29:17,3510,3514,2,Witness Examination,Annotated by expert1_attorney
+704,29:17,29:20,3515,3519,4,Witness Examination,Annotated by expert1_attorney
+705,29:20,29:22,3520,3524,4,Witness Examination,Annotated by expert1_attorney
+706,29:22,29:25,3525,3529,3,Witness Examination,Annotated by expert1_attorney
+707,29:25,29:27,3530,3534,3,Witness Examination,Annotated by expert1_attorney
+708,29:27,29:30,3535,3539,4,Witness Examination,Annotated by expert1_attorney
+709,29:30,29:32,3540,3544,3,Witness Examination,Annotated by expert1_attorney
+710,29:32,29:35,3545,3549,3,Witness Examination,Annotated by expert1_attorney
+711,29:35,29:37,3550,3554,2,Witness Examination,Annotated by expert1_attorney
+712,29:37,29:40,3555,3559,4,Witness Examination,Annotated by expert1_attorney
+713,29:40,29:42,3560,3564,3,Witness Examination,Annotated by expert1_attorney
+714,29:42,29:45,3565,3569,4,Witness Examination,Annotated by expert1_attorney
+715,29:45,29:47,3570,3574,2,Witness Examination,Annotated by expert1_attorney
+716,29:47,29:50,3575,3579,4,Witness Examination,Annotated by expert1_attorney
+717,29:50,29:52,3580,3584,3,Witness Examination,Annotated by expert1_attorney
+718,29:52,29:55,3585,3589,4,Witness Examination,Annotated by expert1_attorney
+719,29:55,29:57,3590,3594,2,Witness Examination,Annotated by expert1_attorney
+720,29:57,30:00,3595,3599,3,Witness Examination,Annotated by expert1_attorney
+721,30:00,30:02,3600,3604,3,Witness Examination,Annotated by expert1_attorney
+722,30:02,30:05,3605,3609,3,Witness Examination,Annotated by expert1_attorney
+723,30:05,30:07,3610,3614,3,Witness Examination,Annotated by expert1_attorney
+724,30:07,30:10,3615,3619,4,Witness Examination,Annotated by expert1_attorney
+725,30:10,30:12,3620,3624,3,Witness Examination,Annotated by expert1_attorney
+726,30:12,30:15,3625,3629,4,Witness Examination,Annotated by expert1_attorney
+727,30:15,30:17,3630,3634,4,Witness Examination,Annotated by expert1_attorney
+728,30:17,30:20,3635,3639,2,Witness Examination,Annotated by expert1_attorney
+729,30:20,30:22,3640,3644,3,Witness Examination,Annotated by expert1_attorney
+730,30:22,30:25,3645,3649,3,Witness Examination,Annotated by expert1_attorney
+731,30:25,30:27,3650,3654,3,Witness Examination,Annotated by expert1_attorney
+732,30:27,30:30,3655,3659,4,Witness Examination,Annotated by expert1_attorney
+733,30:30,30:32,3660,3664,4,Witness Examination,Annotated by expert1_attorney
+734,30:32,30:35,3665,3669,4,Witness Examination,Annotated by expert1_attorney
+735,30:35,30:37,3670,3674,5,Witness Examination,Annotated by expert1_attorney
+736,30:37,30:40,3675,3679,3,Witness Examination,Annotated by expert1_attorney
+737,30:40,30:42,3680,3684,3,Witness Examination,Annotated by expert1_attorney
+738,30:42,30:45,3685,3689,3,Witness Examination,Annotated by expert1_attorney
+739,30:45,30:47,3690,3694,4,Witness Examination,Annotated by expert1_attorney
+740,30:47,30:50,3695,3699,5,Witness Examination,Annotated by expert1_attorney
+741,30:50,30:52,3700,3704,4,Witness Examination,Annotated by expert1_attorney
+742,30:52,30:55,3705,3709,4,Witness Examination,Annotated by expert1_attorney
+743,30:55,30:57,3710,3714,3,Witness Examination,Annotated by expert1_attorney
+744,30:57,31:00,3715,3719,4,Witness Examination,Annotated by expert1_attorney
+745,31:00,31:02,3720,3724,4,Witness Examination,Annotated by expert1_attorney
+746,31:02,31:05,3725,3729,3,Witness Examination,Annotated by expert1_attorney
+747,31:05,31:07,3730,3734,3,Witness Examination,Annotated by expert1_attorney
+748,31:07,31:10,3735,3739,3,Witness Examination,Annotated by expert1_attorney
+749,31:10,31:12,3740,3744,3,Witness Examination,Annotated by expert1_attorney
+750,31:12,31:15,3745,3749,4,Witness Examination,Annotated by expert1_attorney
+751,31:15,31:17,3750,3754,3,Witness Examination,Annotated by expert1_attorney
+752,31:17,31:20,3755,3759,3,Witness Examination,Annotated by expert1_attorney
+753,31:20,31:22,3760,3764,3,Witness Examination,Annotated by expert1_attorney
+754,31:22,31:25,3765,3769,3,Witness Examination,Annotated by expert1_attorney
+755,31:25,31:27,3770,3774,2,Witness Examination,Annotated by expert1_attorney
+756,31:27,31:30,3775,3779,3,Witness Examination,Annotated by expert1_attorney
+757,31:30,31:32,3780,3784,4,Witness Examination,Annotated by expert1_attorney
+758,31:32,31:35,3785,3789,3,Witness Examination,Annotated by expert1_attorney
+759,31:35,31:37,3790,3794,2,Witness Examination,Annotated by expert1_attorney
+760,31:37,31:40,3795,3799,4,Witness Examination,Annotated by expert1_attorney
+761,31:40,31:42,3800,3804,3,Witness Examination,Annotated by expert1_attorney
+762,31:42,31:45,3805,3809,4,Witness Examination,Annotated by expert1_attorney
+763,31:45,31:47,3810,3814,4,Witness Examination,Annotated by expert1_attorney
+764,31:47,31:50,3815,3819,3,Witness Examination,Annotated by expert1_attorney
+765,31:50,31:52,3820,3824,4,Witness Examination,Annotated by expert1_attorney
+766,31:52,31:55,3825,3829,4,Witness Examination,Annotated by expert1_attorney
+767,31:55,31:57,3830,3834,3,Witness Examination,Annotated by expert1_attorney
+768,31:57,32:00,3835,3839,3,Witness Examination,Annotated by expert1_attorney
+769,32:00,32:02,3840,3844,3,Witness Examination,Annotated by expert1_attorney
+770,32:02,32:05,3845,3849,3,Witness Examination,Annotated by expert1_attorney
+771,32:05,32:07,3850,3854,3,Witness Examination,Annotated by expert1_attorney
+772,32:07,32:10,3855,3859,3,Witness Examination,Annotated by expert1_attorney
+773,32:10,32:12,3860,3864,4,Witness Examination,Annotated by expert1_attorney
+774,32:12,32:15,3865,3869,3,Witness Examination,Annotated by expert1_attorney
+775,32:15,32:17,3870,3874,4,Witness Examination,Annotated by expert1_attorney
+776,32:17,32:20,3875,3879,2,Witness Examination,Annotated by expert1_attorney
+777,32:20,32:22,3880,3884,2,Witness Examination,Annotated by expert1_attorney
+778,32:22,32:25,3885,3889,4,Witness Examination,Annotated by expert1_attorney
+779,32:25,32:27,3890,3894,3,Witness Examination,Annotated by expert1_attorney
+780,32:27,32:30,3895,3899,3,Witness Examination,Annotated by expert1_attorney
+781,32:30,32:32,3900,3904,4,Witness Examination,Annotated by expert1_attorney
+782,32:32,32:35,3905,3909,3,Witness Examination,Annotated by expert1_attorney
+783,32:35,32:37,3910,3914,3,Witness Examination,Annotated by expert1_attorney
+784,32:37,32:40,3915,3919,3,Witness Examination,Annotated by expert1_attorney
+785,32:40,32:42,3920,3924,4,Witness Examination,Annotated by expert1_attorney
+786,32:42,32:45,3925,3929,3,Witness Examination,Annotated by expert1_attorney
+787,32:45,32:47,3930,3934,4,Witness Examination,Annotated by expert1_attorney
+788,32:47,32:50,3935,3939,2,Witness Examination,Annotated by expert1_attorney
+789,32:50,32:52,3940,3944,3,Witness Examination,Annotated by expert1_attorney
+790,32:52,32:55,3945,3949,3,Witness Examination,Annotated by expert1_attorney
+791,32:55,32:57,3950,3954,3,Witness Examination,Annotated by expert1_attorney
+792,32:57,33:00,3955,3959,3,Witness Examination,Annotated by expert1_attorney
+793,33:00,33:02,3960,3964,3,Witness Examination,Annotated by expert1_attorney
+794,33:02,33:05,3965,3969,3,Witness Examination,Annotated by expert1_attorney
+795,33:05,33:07,3970,3974,4,Witness Examination,Annotated by expert1_attorney
+796,33:07,33:10,3975,3979,4,Witness Examination,Annotated by expert1_attorney
+797,33:10,33:12,3980,3984,3,Witness Examination,Annotated by expert1_attorney
+798,33:12,33:15,3985,3989,3,Witness Examination,Annotated by expert1_attorney
+799,33:15,33:17,3990,3994,4,Witness Examination,Annotated by expert1_attorney
+800,33:17,33:20,3995,3999,4,Witness Examination,Annotated by expert1_attorney
+801,33:20,33:22,4000,4004,4,Witness Examination,Annotated by expert1_attorney
+802,33:22,33:25,4005,4009,3,Witness Examination,Annotated by expert1_attorney
+803,33:25,33:27,4010,4014,3,Witness Examination,Annotated by expert1_attorney
+804,33:27,33:30,4015,4019,2,Witness Examination,Annotated by expert1_attorney
+805,33:30,33:32,4020,4024,3,Witness Examination,Annotated by expert1_attorney
+806,33:32,33:35,4025,4029,4,Witness Examination,Annotated by expert1_attorney
+807,33:35,33:37,4030,4034,3,Witness Examination,Annotated by expert1_attorney
+808,33:37,33:40,4035,4039,2,Witness Examination,Annotated by expert1_attorney
+809,33:40,33:42,4040,4044,4,Witness Examination,Annotated by expert1_attorney
+810,33:42,33:45,4045,4049,3,Witness Examination,Annotated by expert1_attorney
+811,33:45,33:47,4050,4054,3,Witness Examination,Annotated by expert1_attorney
+812,33:47,33:50,4055,4059,2,Witness Examination,Annotated by expert1_attorney
+813,33:50,33:52,4060,4064,2,Witness Examination,Annotated by expert1_attorney
+814,33:52,33:55,4065,4069,3,Witness Examination,Annotated by expert1_attorney
+815,33:55,33:57,4070,4074,3,Witness Examination,Annotated by expert1_attorney
+816,33:57,34:00,4075,4079,4,Witness Examination,Annotated by expert1_attorney
+817,34:00,34:02,4080,4084,3,Witness Examination,Annotated by expert1_attorney
+818,34:02,34:05,4085,4089,3,Witness Examination,Annotated by expert1_attorney
+819,34:05,34:07,4090,4094,3,Witness Examination,Annotated by expert1_attorney
+820,34:07,34:10,4095,4099,2,Witness Examination,Annotated by expert1_attorney
+821,34:10,34:12,4100,4104,3,Witness Examination,Annotated by expert1_attorney
+822,34:12,34:15,4105,4109,4,Witness Examination,Annotated by expert1_attorney
+823,34:15,34:17,4110,4114,3,Witness Examination,Annotated by expert1_attorney
+824,34:17,34:20,4115,4119,4,Witness Examination,Annotated by expert1_attorney
+825,34:20,34:22,4120,4124,4,Witness Examination,Annotated by expert1_attorney
+826,34:22,34:25,4125,4129,2,Witness Examination,Annotated by expert1_attorney
+827,34:25,34:27,4130,4134,3,Witness Examination,Annotated by expert1_attorney
+828,34:27,34:30,4135,4139,4,Witness Examination,Annotated by expert1_attorney
+829,34:30,34:32,4140,4144,3,Witness Examination,Annotated by expert1_attorney
+830,34:32,34:35,4145,4149,3,Witness Examination,Annotated by expert1_attorney
+831,34:35,34:37,4150,4154,4,Witness Examination,Annotated by expert1_attorney
+832,34:37,34:40,4155,4159,3,Witness Examination,Annotated by expert1_attorney
+833,34:40,34:42,4160,4164,3,Witness Examination,Annotated by expert1_attorney
+834,34:42,34:45,4165,4169,3,Witness Examination,Annotated by expert1_attorney
+835,34:45,34:47,4170,4174,2,Witness Examination,Annotated by expert1_attorney
+836,34:47,34:50,4175,4179,3,Witness Examination,Annotated by expert1_attorney
+837,34:50,34:52,4180,4184,3,Witness Examination,Annotated by expert1_attorney
+838,34:52,34:55,4185,4189,3,Witness Examination,Annotated by expert1_attorney
+839,34:55,34:57,4190,4194,3,Witness Examination,Annotated by expert1_attorney
+840,34:57,35:00,4195,4199,3,Witness Examination,Annotated by expert1_attorney
+841,35:00,35:02,4200,4204,3,Witness Examination,Annotated by expert1_attorney
+842,35:02,35:05,4205,4209,4,Witness Examination,Annotated by expert1_attorney
+843,35:05,35:07,4210,4214,3,Witness Examination,Annotated by expert1_attorney
+844,35:07,35:10,4215,4219,3,Witness Examination,Annotated by expert1_attorney
+845,35:10,35:12,4220,4224,4,Witness Examination,Annotated by expert1_attorney
+846,35:12,35:15,4225,4229,3,Witness Examination,Annotated by expert1_attorney
+847,35:15,35:17,4230,4234,4,Witness Examination,Annotated by expert1_attorney
+848,35:17,35:20,4235,4239,3,Witness Examination,Annotated by expert1_attorney
+849,35:20,35:22,4240,4244,4,Witness Examination,Annotated by expert1_attorney
+850,35:22,35:25,4245,4249,3,Witness Examination,Annotated by expert1_attorney
+851,35:25,35:27,4250,4254,3,Witness Examination,Annotated by expert1_attorney
+852,35:27,35:30,4255,4259,3,Witness Examination,Annotated by expert1_attorney
+853,35:30,35:32,4260,4264,3,Witness Examination,Annotated by expert1_attorney
+854,35:32,35:35,4265,4269,2,Witness Examination,Annotated by expert1_attorney
+855,35:35,35:37,4270,4274,3,Witness Examination,Annotated by expert1_attorney
+856,35:37,35:40,4275,4279,3,Witness Examination,Annotated by expert1_attorney
+857,35:40,35:42,4280,4284,3,Witness Examination,Annotated by expert1_attorney
+858,35:42,35:45,4285,4289,3,Witness Examination,Annotated by expert1_attorney
+859,35:45,35:47,4290,4294,2,Witness Examination,Annotated by expert1_attorney
+860,35:47,35:50,4295,4299,3,Witness Examination,Annotated by expert1_attorney
+861,35:50,35:52,4300,4304,2,Witness Examination,Annotated by expert1_attorney
+862,35:52,35:55,4305,4309,3,Witness Examination,Annotated by expert1_attorney
+863,35:55,35:57,4310,4314,4,Witness Examination,Annotated by expert1_attorney
+864,35:57,36:00,4315,4319,3,Witness Examination,Annotated by expert1_attorney
+865,36:00,36:02,4320,4324,3,Witness Examination,Annotated by expert1_attorney
+866,36:02,36:05,4325,4329,5,Witness Examination,Annotated by expert1_attorney
+867,36:05,36:07,4330,4334,4,Witness Examination,Annotated by expert1_attorney
+868,36:07,36:10,4335,4339,3,Witness Examination,Annotated by expert1_attorney
+869,36:10,36:12,4340,4344,2,Witness Examination,Annotated by expert1_attorney
+870,36:12,36:15,4345,4349,2,Witness Examination,Annotated by expert1_attorney
+871,36:15,36:17,4350,4354,3,Witness Examination,Annotated by expert1_attorney
+872,36:17,36:20,4355,4359,4,Witness Examination,Annotated by expert1_attorney
+873,36:20,36:22,4360,4364,3,Witness Examination,Annotated by expert1_attorney
+874,36:22,36:25,4365,4369,4,Witness Examination,Annotated by expert1_attorney
+875,36:25,36:27,4370,4374,4,Witness Examination,Annotated by expert1_attorney
+876,36:27,36:30,4375,4379,3,Witness Examination,Annotated by expert1_attorney
+877,36:30,36:32,4380,4384,2,Witness Examination,Annotated by expert1_attorney
+878,36:32,36:35,4385,4389,4,Witness Examination,Annotated by expert1_attorney
+879,36:35,36:37,4390,4394,2,Witness Examination,Annotated by expert1_attorney
+880,36:37,36:40,4395,4399,5,Witness Examination,Annotated by expert1_attorney
+881,36:40,36:42,4400,4404,3,Witness Examination,Annotated by expert1_attorney
+882,36:42,36:45,4405,4409,3,Witness Examination,Annotated by expert1_attorney
+883,36:45,36:47,4410,4414,3,Witness Examination,Annotated by expert1_attorney
+884,36:47,36:50,4415,4419,3,Witness Examination,Annotated by expert1_attorney
+885,36:50,36:52,4420,4424,2,Witness Examination,Annotated by expert1_attorney
+886,36:52,36:55,4425,4429,3,Witness Examination,Annotated by expert1_attorney
+887,36:55,36:57,4430,4434,4,Witness Examination,Annotated by expert1_attorney
+888,36:57,37:00,4435,4439,4,Witness Examination,Annotated by expert1_attorney
+889,37:00,37:02,4440,4444,3,Witness Examination,Annotated by expert1_attorney
+890,37:02,37:05,4445,4449,3,Witness Examination,Annotated by expert1_attorney
+891,37:05,37:07,4450,4454,3,Witness Examination,Annotated by expert1_attorney
+892,37:07,37:10,4455,4459,4,Witness Examination,Annotated by expert1_attorney
+893,37:10,37:12,4460,4464,3,Witness Examination,Annotated by expert1_attorney
+894,37:12,37:15,4465,4469,4,Witness Examination,Annotated by expert1_attorney
+895,37:15,37:17,4470,4474,3,Witness Examination,Annotated by expert1_attorney
+896,37:17,37:20,4475,4479,3,Witness Examination,Annotated by expert1_attorney
+897,37:20,37:22,4480,4484,5,Witness Examination,Annotated by expert1_attorney
+898,37:22,37:25,4485,4489,4,Witness Examination,Annotated by expert1_attorney
+899,37:25,37:27,4490,4494,3,Witness Examination,Annotated by expert1_attorney
+900,37:27,37:30,4495,4499,3,Witness Examination,Annotated by expert1_attorney
+901,37:30,37:32,4500,4504,3,Witness Examination,Annotated by expert1_attorney
+902,37:32,37:35,4505,4509,3,Witness Examination,Annotated by expert1_attorney
+903,37:35,37:37,4510,4514,4,Witness Examination,Annotated by expert1_attorney
+904,37:37,37:40,4515,4519,4,Witness Examination,Annotated by expert1_attorney
+905,37:40,37:42,4520,4524,2,Witness Examination,Annotated by expert1_attorney
+906,37:42,37:45,4525,4529,5,Witness Examination,Annotated by expert1_attorney
+907,37:45,37:47,4530,4534,4,Witness Examination,Annotated by expert1_attorney
+908,37:47,37:50,4535,4539,3,Witness Examination,Annotated by expert1_attorney
+909,37:50,37:52,4540,4544,4,Witness Examination,Annotated by expert1_attorney
+910,37:52,37:55,4545,4549,2,Witness Examination,Annotated by expert1_attorney
+911,37:55,37:57,4550,4554,3,Witness Examination,Annotated by expert1_attorney
+912,37:57,38:00,4555,4559,5,Witness Examination,Annotated by expert1_attorney
+913,38:00,38:02,4560,4564,4,Witness Examination,Annotated by expert1_attorney
+914,38:02,38:05,4565,4569,3,Witness Examination,Annotated by expert1_attorney
+915,38:05,38:07,4570,4574,4,Witness Examination,Annotated by expert1_attorney
+916,38:07,38:10,4575,4579,3,Witness Examination,Annotated by expert1_attorney
+917,38:10,38:12,4580,4584,4,Witness Examination,Annotated by expert1_attorney
+918,38:12,38:15,4585,4589,3,Witness Examination,Annotated by expert1_attorney
+919,38:15,38:17,4590,4594,3,Witness Examination,Annotated by expert1_attorney
+920,38:17,38:20,4595,4599,2,Witness Examination,Annotated by expert1_attorney
+921,38:20,38:22,4600,4604,3,Witness Examination,Annotated by expert1_attorney
+922,38:22,38:25,4605,4609,4,Witness Examination,Annotated by expert1_attorney
+923,38:25,38:27,4610,4614,3,Witness Examination,Annotated by expert1_attorney
+924,38:27,38:30,4615,4619,3,Witness Examination,Annotated by expert1_attorney
+925,38:30,38:32,4620,4624,3,Witness Examination,Annotated by expert1_attorney
+926,38:32,38:35,4625,4629,3,Witness Examination,Annotated by expert1_attorney
+927,38:35,38:37,4630,4634,4,Witness Examination,Annotated by expert1_attorney
+928,38:37,38:40,4635,4639,3,Witness Examination,Annotated by expert1_attorney
+929,38:40,38:42,4640,4644,3,Witness Examination,Annotated by expert1_attorney
+930,38:42,38:45,4645,4649,3,Witness Examination,Annotated by expert1_attorney
+931,38:45,38:47,4650,4654,3,Witness Examination,Annotated by expert1_attorney
+932,38:47,38:50,4655,4659,2,Witness Examination,Annotated by expert1_attorney
+933,38:50,38:52,4660,4664,3,Witness Examination,Annotated by expert1_attorney
+934,38:52,38:55,4665,4669,3,Witness Examination,Annotated by expert1_attorney
+935,38:55,38:57,4670,4674,2,Witness Examination,Annotated by expert1_attorney
+936,38:57,39:00,4675,4679,4,Witness Examination,Annotated by expert1_attorney
+937,39:00,39:02,4680,4684,3,Witness Examination,Annotated by expert1_attorney
+938,39:02,39:05,4685,4689,3,Witness Examination,Annotated by expert1_attorney
+939,39:05,39:07,4690,4694,3,Witness Examination,Annotated by expert1_attorney
+940,39:07,39:10,4695,4699,3,Witness Examination,Annotated by expert1_attorney
+941,39:10,39:12,4700,4704,3,Witness Examination,Annotated by expert1_attorney
+942,39:12,39:15,4705,4709,4,Witness Examination,Annotated by expert1_attorney
+943,39:15,39:17,4710,4714,3,Witness Examination,Annotated by expert1_attorney
+944,39:17,39:20,4715,4719,4,Witness Examination,Annotated by expert1_attorney
+945,39:20,39:22,4720,4724,4,Witness Examination,Annotated by expert1_attorney
+946,39:22,39:25,4725,4729,3,Witness Examination,Annotated by expert1_attorney
+947,39:25,39:27,4730,4734,3,Witness Examination,Annotated by expert1_attorney
+948,39:27,39:30,4735,4739,4,Witness Examination,Annotated by expert1_attorney
+949,39:30,39:32,4740,4744,2,Witness Examination,Annotated by expert1_attorney
+950,39:32,39:35,4745,4749,3,Witness Examination,Annotated by expert1_attorney
+951,39:35,39:37,4750,4754,3,Witness Examination,Annotated by expert1_attorney
+952,39:37,39:40,4755,4759,5,Witness Examination,Annotated by expert1_attorney
+953,39:40,39:42,4760,4764,3,Witness Examination,Annotated by expert1_attorney
+954,39:42,39:45,4765,4769,4,Witness Examination,Annotated by expert1_attorney
+955,39:45,39:47,4770,4774,4,Witness Examination,Annotated by expert1_attorney
+956,39:47,39:50,4775,4779,2,Witness Examination,Annotated by expert1_attorney
+957,39:50,39:52,4780,4784,2,Witness Examination,Annotated by expert1_attorney
+958,39:52,39:55,4785,4789,3,Witness Examination,Annotated by expert1_attorney
+959,39:55,39:57,4790,4794,2,Witness Examination,Annotated by expert1_attorney
+960,39:57,40:00,4795,4799,2,Witness Examination,Annotated by expert1_attorney
+961,40:00,40:02,4800,4804,3,Witness Examination,Annotated by expert1_attorney
+962,40:02,40:05,4805,4809,2,Witness Examination,Annotated by expert1_attorney
+963,40:05,40:07,4810,4814,3,Witness Examination,Annotated by expert1_attorney
+964,40:07,40:10,4815,4819,4,Witness Examination,Annotated by expert1_attorney
+965,40:10,40:12,4820,4824,3,Witness Examination,Annotated by expert1_attorney
+966,40:12,40:15,4825,4829,4,Witness Examination,Annotated by expert1_attorney
+967,40:15,40:17,4830,4834,3,Witness Examination,Annotated by expert1_attorney
+968,40:17,40:20,4835,4839,5,Witness Examination,Annotated by expert1_attorney
+969,40:20,40:22,4840,4844,5,Witness Examination,Annotated by expert1_attorney
+970,40:22,40:25,4845,4849,3,Witness Examination,Annotated by expert1_attorney
+971,40:25,40:27,4850,4854,3,Witness Examination,Annotated by expert1_attorney
+972,40:27,40:30,4855,4859,4,Witness Examination,Annotated by expert1_attorney
+973,40:30,40:32,4860,4864,4,Witness Examination,Annotated by expert1_attorney
+974,40:32,40:35,4865,4869,4,Witness Examination,Annotated by expert1_attorney
+975,40:35,40:37,4870,4874,3,Witness Examination,Annotated by expert1_attorney
+976,40:37,40:40,4875,4879,4,Witness Examination,Annotated by expert1_attorney
+977,40:40,40:42,4880,4884,3,Witness Examination,Annotated by expert1_attorney
+978,40:42,40:45,4885,4889,4,Witness Examination,Annotated by expert1_attorney
+979,40:45,40:47,4890,4894,3,Witness Examination,Annotated by expert1_attorney
+980,40:47,40:50,4895,4899,2,Witness Examination,Annotated by expert1_attorney
+981,40:50,40:52,4900,4904,3,Witness Examination,Annotated by expert1_attorney
+982,40:52,40:55,4905,4909,2,Witness Examination,Annotated by expert1_attorney
+983,40:55,40:57,4910,4914,3,Witness Examination,Annotated by expert1_attorney
+984,40:57,41:00,4915,4919,3,Witness Examination,Annotated by expert1_attorney
+985,41:00,41:02,4920,4924,3,Witness Examination,Annotated by expert1_attorney
+986,41:02,41:05,4925,4929,4,Witness Examination,Annotated by expert1_attorney
+987,41:05,41:07,4930,4934,2,Witness Examination,Annotated by expert1_attorney
+988,41:07,41:10,4935,4939,4,Witness Examination,Annotated by expert1_attorney
+989,41:10,41:12,4940,4944,3,Witness Examination,Annotated by expert1_attorney
+990,41:12,41:15,4945,4949,2,Witness Examination,Annotated by expert1_attorney
+991,41:15,41:17,4950,4954,3,Witness Examination,Annotated by expert1_attorney
+992,41:17,41:20,4955,4959,5,Witness Examination,Annotated by expert1_attorney
+993,41:20,41:22,4960,4964,4,Witness Examination,Annotated by expert1_attorney
+994,41:22,41:25,4965,4969,4,Witness Examination,Annotated by expert1_attorney
+995,41:25,41:27,4970,4974,3,Witness Examination,Annotated by expert1_attorney
+996,41:27,41:30,4975,4979,4,Witness Examination,Annotated by expert1_attorney
+997,41:30,41:32,4980,4984,4,Witness Examination,Annotated by expert1_attorney
+998,41:32,41:35,4985,4989,3,Witness Examination,Annotated by expert1_attorney
+999,41:35,41:37,4990,4994,4,Witness Examination,Annotated by expert1_attorney
+1000,41:37,41:40,4995,4999,4,Witness Examination,Annotated by expert1_attorney
+1001,41:40,41:42,5000,5004,3,Witness Examination,Annotated by expert1_attorney
+1002,41:42,41:45,5005,5009,3,Witness Examination,Annotated by expert1_attorney
+1003,41:45,41:47,5010,5014,4,Witness Examination,Annotated by expert1_attorney
+1004,41:47,41:50,5015,5019,3,Witness Examination,Annotated by expert1_attorney
+1005,41:50,41:52,5020,5024,4,Witness Examination,Annotated by expert1_attorney
+1006,41:52,41:55,5025,5029,3,Witness Examination,Annotated by expert1_attorney
+1007,41:55,41:57,5030,5034,3,Witness Examination,Annotated by expert1_attorney
+1008,41:57,42:00,5035,5039,2,Witness Examination,Annotated by expert1_attorney
+1009,42:00,42:02,5040,5044,3,Witness Examination,Annotated by expert1_attorney
+1010,42:02,42:05,5045,5049,3,Witness Examination,Annotated by expert1_attorney
+1011,42:05,42:07,5050,5054,2,Witness Examination,Annotated by expert1_attorney
+1012,42:07,42:10,5055,5059,4,Witness Examination,Annotated by expert1_attorney
+1013,42:10,42:12,5060,5064,4,Witness Examination,Annotated by expert1_attorney
+1014,42:12,42:15,5065,5069,5,Witness Examination,Annotated by expert1_attorney
+1015,42:15,42:17,5070,5074,4,Witness Examination,Annotated by expert1_attorney
+1016,42:17,42:20,5075,5079,3,Witness Examination,Annotated by expert1_attorney
+1017,42:20,42:22,5080,5084,2,Witness Examination,Annotated by expert1_attorney
+1018,42:22,42:25,5085,5089,3,Witness Examination,Annotated by expert1_attorney
+1019,42:25,42:27,5090,5094,4,Witness Examination,Annotated by expert1_attorney
+1020,42:27,42:30,5095,5099,5,Witness Examination,Annotated by expert1_attorney
+1021,42:30,42:32,5100,5104,3,Witness Examination,Annotated by expert1_attorney
+1022,42:32,42:35,5105,5109,3,Witness Examination,Annotated by expert1_attorney
+1023,42:35,42:37,5110,5114,3,Witness Examination,Annotated by expert1_attorney
+1024,42:37,42:40,5115,5119,4,Witness Examination,Annotated by expert1_attorney
+1025,42:40,42:42,5120,5124,5,Witness Examination,Annotated by expert1_attorney
+1026,42:42,42:45,5125,5129,3,Witness Examination,Annotated by expert1_attorney
+1027,42:45,42:47,5130,5134,5,Witness Examination,Annotated by expert1_attorney
+1028,42:47,42:50,5135,5139,3,Witness Examination,Annotated by expert1_attorney
+1029,42:50,42:52,5140,5144,3,Witness Examination,Annotated by expert1_attorney
+1030,42:52,42:55,5145,5149,4,Witness Examination,Annotated by expert1_attorney
+1031,42:55,42:57,5150,5154,3,Witness Examination,Annotated by expert1_attorney
+1032,42:57,43:00,5155,5159,3,Witness Examination,Annotated by expert1_attorney
+1033,43:00,43:02,5160,5164,3,Witness Examination,Annotated by expert1_attorney
+1034,43:02,43:05,5165,5169,4,Witness Examination,Annotated by expert1_attorney
+1035,43:05,43:07,5170,5174,5,Witness Examination,Annotated by expert1_attorney
+1036,43:07,43:10,5175,5179,2,Witness Examination,Annotated by expert1_attorney
+1037,43:10,43:12,5180,5184,4,Witness Examination,Annotated by expert1_attorney
+1038,43:12,43:15,5185,5189,3,Witness Examination,Annotated by expert1_attorney
+1039,43:15,43:17,5190,5194,3,Witness Examination,Annotated by expert1_attorney
+1040,43:17,43:20,5195,5199,3,Witness Examination,Annotated by expert1_attorney
+1041,43:20,43:22,5200,5204,4,Witness Examination,Annotated by expert1_attorney
+1042,43:22,43:25,5205,5209,4,Witness Examination,Annotated by expert1_attorney
+1043,43:25,43:27,5210,5214,2,Witness Examination,Annotated by expert1_attorney
+1044,43:27,43:30,5215,5219,3,Witness Examination,Annotated by expert1_attorney
+1045,43:30,43:32,5220,5224,4,Witness Examination,Annotated by expert1_attorney
+1046,43:32,43:35,5225,5229,3,Witness Examination,Annotated by expert1_attorney
+1047,43:35,43:37,5230,5234,3,Witness Examination,Annotated by expert1_attorney
+1048,43:37,43:40,5235,5239,3,Witness Examination,Annotated by expert1_attorney
+1049,43:40,43:42,5240,5244,4,Witness Examination,Annotated by expert1_attorney
+1050,43:42,43:45,5245,5249,3,Witness Examination,Annotated by expert1_attorney
+1051,43:45,43:47,5250,5254,3,Witness Examination,Annotated by expert1_attorney
+1052,43:47,43:50,5255,5259,4,Witness Examination,Annotated by expert1_attorney
+1053,43:50,43:52,5260,5264,4,Witness Examination,Annotated by expert1_attorney
+1054,43:52,43:55,5265,5269,3,Witness Examination,Annotated by expert1_attorney
+1055,43:55,43:57,5270,5274,2,Witness Examination,Annotated by expert1_attorney
+1056,43:57,44:00,5275,5279,3,Witness Examination,Annotated by expert1_attorney
+1057,44:00,44:02,5280,5284,4,Witness Examination,Annotated by expert1_attorney
+1058,44:02,44:05,5285,5289,3,Witness Examination,Annotated by expert1_attorney
+1059,44:05,44:07,5290,5294,2,Witness Examination,Annotated by expert1_attorney
+1060,44:07,44:10,5295,5299,3,Witness Examination,Annotated by expert1_attorney
+1061,44:10,44:12,5300,5304,4,Witness Examination,Annotated by expert1_attorney
+1062,44:12,44:15,5305,5309,3,Witness Examination,Annotated by expert1_attorney
+1063,44:15,44:17,5310,5314,2,Witness Examination,Annotated by expert1_attorney
+1064,44:17,44:20,5315,5319,3,Witness Examination,Annotated by expert1_attorney
+1065,44:20,44:22,5320,5324,4,Witness Examination,Annotated by expert1_attorney
+1066,44:22,44:25,5325,5329,3,Witness Examination,Annotated by expert1_attorney
+1067,44:25,44:27,5330,5334,4,Witness Examination,Annotated by expert1_attorney
+1068,44:27,44:30,5335,5339,4,Witness Examination,Annotated by expert1_attorney
+1069,44:30,44:32,5340,5344,4,Witness Examination,Annotated by expert1_attorney
+1070,44:32,44:35,5345,5349,3,Witness Examination,Annotated by expert1_attorney
+1071,44:35,44:37,5350,5354,4,Witness Examination,Annotated by expert1_attorney
+1072,44:37,44:40,5355,5359,3,Witness Examination,Annotated by expert1_attorney
+1073,44:40,44:42,5360,5364,3,Witness Examination,Annotated by expert1_attorney
+1074,44:42,44:45,5365,5369,2,Witness Examination,Annotated by expert1_attorney
+1075,44:45,44:47,5370,5374,3,Witness Examination,Annotated by expert1_attorney
+1076,44:47,44:50,5375,5379,2,Witness Examination,Annotated by expert1_attorney
+1077,44:50,44:52,5380,5384,3,Witness Examination,Annotated by expert1_attorney
+1078,44:52,44:55,5385,5389,2,Witness Examination,Annotated by expert1_attorney
+1079,44:55,44:57,5390,5394,3,Witness Examination,Annotated by expert1_attorney
+1080,44:57,45:00,5395,5399,2,Witness Examination,Annotated by expert1_attorney
+1081,45:00,45:02,5400,5404,3,Witness Examination,Annotated by expert1_attorney
+1082,45:02,45:05,5405,5409,3,Witness Examination,Annotated by expert1_attorney
+1083,45:05,45:07,5410,5414,3,Witness Examination,Annotated by expert1_attorney
+1084,45:07,45:10,5415,5419,4,Witness Examination,Annotated by expert1_attorney
+1085,45:10,45:12,5420,5424,3,Witness Examination,Annotated by expert1_attorney
+1086,45:12,45:15,5425,5429,4,Witness Examination,Annotated by expert1_attorney
+1087,45:15,45:17,5430,5434,4,Witness Examination,Annotated by expert1_attorney
+1088,45:17,45:20,5435,5439,4,Witness Examination,Annotated by expert1_attorney
+1089,45:20,45:22,5440,5444,3,Witness Examination,Annotated by expert1_attorney
+1090,45:22,45:25,5445,5449,2,Witness Examination,Annotated by expert1_attorney
+1091,45:25,45:27,5450,5454,3,Witness Examination,Annotated by expert1_attorney
+1092,45:27,45:30,5455,5459,3,Witness Examination,Annotated by expert1_attorney
+1093,45:30,45:32,5460,5464,5,Objections & Rulings,Annotated by expert1_attorney
+1094,45:32,45:35,5465,5469,5,Objections & Rulings,Annotated by expert1_attorney
+1095,45:35,45:37,5470,5474,4,Objections & Rulings,Annotated by expert1_attorney
+1096,45:37,45:40,5475,5479,5,Objections & Rulings,Annotated by expert1_attorney
+1097,45:40,45:42,5480,5484,5,Objections & Rulings,Annotated by expert1_attorney
+1098,45:42,45:45,5485,5489,5,Objections & Rulings,Annotated by expert1_attorney
+1099,45:45,45:47,5490,5494,5,Objections & Rulings,Annotated by expert1_attorney
+1100,45:47,45:50,5495,5499,5,Objections & Rulings,Annotated by expert1_attorney
+1101,45:50,45:52,5500,5504,5,Objections & Rulings,Annotated by expert1_attorney
+1102,45:52,45:55,5505,5509,5,Objections & Rulings,Annotated by expert1_attorney
+1103,45:55,45:57,5510,5514,5,Objections & Rulings,Annotated by expert1_attorney
+1104,45:57,46:00,5515,5519,3,Objections & Rulings,Annotated by expert1_attorney
+1105,46:00,46:02,5520,5524,5,Objections & Rulings,Annotated by expert1_attorney
+1106,46:02,46:05,5525,5529,5,Objections & Rulings,Annotated by expert1_attorney
+1107,46:05,46:07,5530,5534,5,Objections & Rulings,Annotated by expert1_attorney
+1108,46:07,46:10,5535,5539,5,Objections & Rulings,Annotated by expert1_attorney
+1109,46:10,46:12,5540,5544,5,Objections & Rulings,Annotated by expert1_attorney
+1110,46:12,46:15,5545,5549,5,Objections & Rulings,Annotated by expert1_attorney
+1111,46:15,46:17,5550,5554,5,Objections & Rulings,Annotated by expert1_attorney
+1112,46:17,46:20,5555,5559,5,Objections & Rulings,Annotated by expert1_attorney
+1113,46:20,46:22,5560,5564,5,Objections & Rulings,Annotated by expert1_attorney
+1114,46:22,46:25,5565,5569,5,Objections & Rulings,Annotated by expert1_attorney
+1115,46:25,46:27,5570,5574,5,Objections & Rulings,Annotated by expert1_attorney
+1116,46:27,46:30,5575,5579,5,Objections & Rulings,Annotated by expert1_attorney
+1117,46:30,46:32,5580,5584,4,Objections & Rulings,Annotated by expert1_attorney
+1118,46:32,46:35,5585,5589,5,Objections & Rulings,Annotated by expert1_attorney
+1119,46:35,46:37,5590,5594,5,Objections & Rulings,Annotated by expert1_attorney
+1120,46:37,46:40,5595,5599,5,Objections & Rulings,Annotated by expert1_attorney
+1121,46:40,46:42,5600,5604,5,Objections & Rulings,Annotated by expert1_attorney
+1122,46:42,46:45,5605,5609,5,Objections & Rulings,Annotated by expert1_attorney
+1123,46:45,46:47,5610,5614,5,Objections & Rulings,Annotated by expert1_attorney
+1124,46:47,46:50,5615,5619,5,Objections & Rulings,Annotated by expert1_attorney
+1125,46:50,46:52,5620,5624,5,Objections & Rulings,Annotated by expert1_attorney
+1126,46:52,46:55,5625,5629,5,Objections & Rulings,Annotated by expert1_attorney
+1127,46:55,46:57,5630,5634,5,Objections & Rulings,Annotated by expert1_attorney
+1128,46:57,47:00,5635,5639,5,Objections & Rulings,Annotated by expert1_attorney
+1129,47:00,47:02,5640,5644,5,Objections & Rulings,Annotated by expert1_attorney
+1130,47:02,47:05,5645,5649,5,Objections & Rulings,Annotated by expert1_attorney
+1131,47:05,47:07,5650,5654,5,Objections & Rulings,Annotated by expert1_attorney
+1132,47:07,47:10,5655,5659,5,Objections & Rulings,Annotated by expert1_attorney
+1133,47:10,47:12,5660,5664,5,Objections & Rulings,Annotated by expert1_attorney
+1134,47:12,47:15,5665,5669,5,Objections & Rulings,Annotated by expert1_attorney
+1135,47:15,47:17,5670,5674,4,Objections & Rulings,Annotated by expert1_attorney
+1136,47:17,47:20,5675,5679,5,Objections & Rulings,Annotated by expert1_attorney
+1137,47:20,47:22,5680,5684,4,Objections & Rulings,Annotated by expert1_attorney
+1138,47:22,47:25,5685,5689,5,Objections & Rulings,Annotated by expert1_attorney
+1139,47:25,47:27,5690,5694,5,Objections & Rulings,Annotated by expert1_attorney
+1140,47:27,47:30,5695,5699,5,Objections & Rulings,Annotated by expert1_attorney
+1141,47:30,47:32,5700,5704,5,Objections & Rulings,Annotated by expert1_attorney
+1142,47:32,47:35,5705,5709,5,Objections & Rulings,Annotated by expert1_attorney
+1143,47:35,47:37,5710,5714,4,Objections & Rulings,Annotated by expert1_attorney
+1144,47:37,47:40,5715,5719,5,Objections & Rulings,Annotated by expert1_attorney
+1145,47:40,47:42,5720,5724,5,Objections & Rulings,Annotated by expert1_attorney
+1146,47:42,47:45,5725,5729,5,Objections & Rulings,Annotated by expert1_attorney
+1147,47:45,47:47,5730,5734,5,Objections & Rulings,Annotated by expert1_attorney
+1148,47:47,47:50,5735,5739,5,Objections & Rulings,Annotated by expert1_attorney
+1149,47:50,47:52,5740,5744,4,Objections & Rulings,Annotated by expert1_attorney
+1150,47:52,47:55,5745,5749,5,Objections & Rulings,Annotated by expert1_attorney
+1151,47:55,47:57,5750,5754,5,Objections & Rulings,Annotated by expert1_attorney
+1152,47:57,48:00,5755,5759,5,Objections & Rulings,Annotated by expert1_attorney
+1153,48:00,48:02,5760,5764,4,Objections & Rulings,Annotated by expert1_attorney
+1154,48:02,48:05,5765,5769,5,Objections & Rulings,Annotated by expert1_attorney
+1155,48:05,48:07,5770,5774,5,Objections & Rulings,Annotated by expert1_attorney
+1156,48:07,48:10,5775,5779,5,Objections & Rulings,Annotated by expert1_attorney
+1157,48:10,48:12,5780,5784,5,Objections & Rulings,Annotated by expert1_attorney
+1158,48:12,48:15,5785,5789,5,Objections & Rulings,Annotated by expert1_attorney
+1159,48:15,48:17,5790,5794,5,Objections & Rulings,Annotated by expert1_attorney
+1160,48:17,48:20,5795,5799,5,Objections & Rulings,Annotated by expert1_attorney
+1161,48:20,48:22,5800,5804,5,Objections & Rulings,Annotated by expert1_attorney
+1162,48:22,48:25,5805,5809,5,Objections & Rulings,Annotated by expert1_attorney
+1163,48:25,48:27,5810,5814,5,Objections & Rulings,Annotated by expert1_attorney
+1164,48:27,48:30,5815,5819,5,Objections & Rulings,Annotated by expert1_attorney
+1165,48:30,48:32,5820,5824,5,Objections & Rulings,Annotated by expert1_attorney
+1166,48:32,48:35,5825,5829,5,Objections & Rulings,Annotated by expert1_attorney
+1167,48:35,48:37,5830,5834,4,Objections & Rulings,Annotated by expert1_attorney
+1168,48:37,48:40,5835,5839,4,Objections & Rulings,Annotated by expert1_attorney
+1169,48:40,48:42,5840,5844,5,Objections & Rulings,Annotated by expert1_attorney
+1170,48:42,48:45,5845,5849,5,Objections & Rulings,Annotated by expert1_attorney
+1171,48:45,48:47,5850,5854,5,Objections & Rulings,Annotated by expert1_attorney
+1172,48:47,48:50,5855,5859,5,Objections & Rulings,Annotated by expert1_attorney
+1173,48:50,48:52,5860,5864,5,Objections & Rulings,Annotated by expert1_attorney
+1174,48:52,48:55,5865,5869,5,Objections & Rulings,Annotated by expert1_attorney
+1175,48:55,48:57,5870,5874,5,Objections & Rulings,Annotated by expert1_attorney
+1176,48:57,49:00,5875,5879,5,Objections & Rulings,Annotated by expert1_attorney
+1177,49:00,49:02,5880,5884,5,Objections & Rulings,Annotated by expert1_attorney
+1178,49:02,49:05,5885,5889,5,Objections & Rulings,Annotated by expert1_attorney
+1179,49:05,49:07,5890,5894,5,Objections & Rulings,Annotated by expert1_attorney
+1180,49:07,49:10,5895,5899,5,Objections & Rulings,Annotated by expert1_attorney
+1181,49:10,49:12,5900,5904,5,Objections & Rulings,Annotated by expert1_attorney
+1182,49:12,49:15,5905,5909,5,Objections & Rulings,Annotated by expert1_attorney
+1183,49:15,49:17,5910,5914,5,Objections & Rulings,Annotated by expert1_attorney
+1184,49:17,49:20,5915,5919,4,Objections & Rulings,Annotated by expert1_attorney
+1185,49:20,49:22,5920,5924,5,Objections & Rulings,Annotated by expert1_attorney
+1186,49:22,49:25,5925,5929,5,Objections & Rulings,Annotated by expert1_attorney
+1187,49:25,49:27,5930,5934,5,Objections & Rulings,Annotated by expert1_attorney
+1188,49:27,49:30,5935,5939,5,Objections & Rulings,Annotated by expert1_attorney
+1189,49:30,49:32,5940,5944,5,Objections & Rulings,Annotated by expert1_attorney
+1190,49:32,49:35,5945,5949,4,Objections & Rulings,Annotated by expert1_attorney
+1191,49:35,49:37,5950,5954,5,Objections & Rulings,Annotated by expert1_attorney
+1192,49:37,49:40,5955,5959,5,Objections & Rulings,Annotated by expert1_attorney
+1193,49:40,49:42,5960,5964,5,Objections & Rulings,Annotated by expert1_attorney
+1194,49:42,49:45,5965,5969,5,Objections & Rulings,Annotated by expert1_attorney
+1195,49:45,49:47,5970,5974,5,Objections & Rulings,Annotated by expert1_attorney
+1196,49:47,49:50,5975,5979,5,Objections & Rulings,Annotated by expert1_attorney
+1197,49:50,49:52,5980,5984,5,Objections & Rulings,Annotated by expert1_attorney
+1198,49:52,49:55,5985,5989,5,Objections & Rulings,Annotated by expert1_attorney
+1199,49:55,49:57,5990,5994,5,Objections & Rulings,Annotated by expert1_attorney
+1200,49:57,50:00,5995,5999,5,Objections & Rulings,Annotated by expert1_attorney
+1201,50:00,50:02,6000,6004,4,Objections & Rulings,Annotated by expert1_attorney
+1202,50:02,50:05,6005,6009,5,Objections & Rulings,Annotated by expert1_attorney
+1203,50:05,50:07,6010,6014,5,Objections & Rulings,Annotated by expert1_attorney
+1204,50:07,50:10,6015,6019,5,Objections & Rulings,Annotated by expert1_attorney
+1205,50:10,50:12,6020,6024,5,Objections & Rulings,Annotated by expert1_attorney
+1206,50:12,50:15,6025,6029,5,Objections & Rulings,Annotated by expert1_attorney
+1207,50:15,50:17,6030,6034,4,Objections & Rulings,Annotated by expert1_attorney
+1208,50:17,50:20,6035,6039,5,Objections & Rulings,Annotated by expert1_attorney
+1209,50:20,50:22,6040,6044,5,Objections & Rulings,Annotated by expert1_attorney
+1210,50:22,50:25,6045,6049,5,Objections & Rulings,Annotated by expert1_attorney
+1211,50:25,50:27,6050,6054,5,Objections & Rulings,Annotated by expert1_attorney
+1212,50:27,50:30,6055,6059,5,Objections & Rulings,Annotated by expert1_attorney
+1213,50:30,50:32,6060,6064,5,Objections & Rulings,Annotated by expert1_attorney
+1214,50:32,50:35,6065,6069,5,Objections & Rulings,Annotated by expert1_attorney
+1215,50:35,50:37,6070,6074,5,Objections & Rulings,Annotated by expert1_attorney
+1216,50:37,50:40,6075,6079,5,Objections & Rulings,Annotated by expert1_attorney
+1217,50:40,50:42,6080,6084,5,Objections & Rulings,Annotated by expert1_attorney
+1218,50:42,50:45,6085,6089,5,Objections & Rulings,Annotated by expert1_attorney
+1219,50:45,50:47,6090,6094,5,Objections & Rulings,Annotated by expert1_attorney
+1220,50:47,50:50,6095,6099,5,Objections & Rulings,Annotated by expert1_attorney
+1221,50:50,50:52,6100,6104,5,Objections & Rulings,Annotated by expert1_attorney
+1222,50:52,50:55,6105,6109,5,Objections & Rulings,Annotated by expert1_attorney
+1223,50:55,50:57,6110,6114,5,Objections & Rulings,Annotated by expert1_attorney
+1224,50:57,51:00,6115,6119,5,Objections & Rulings,Annotated by expert1_attorney
+1225,51:00,51:02,6120,6124,5,Objections & Rulings,Annotated by expert1_attorney
+1226,51:02,51:05,6125,6129,5,Objections & Rulings,Annotated by expert1_attorney
+1227,51:05,51:07,6130,6134,5,Objections & Rulings,Annotated by expert1_attorney
+1228,51:07,51:10,6135,6139,5,Objections & Rulings,Annotated by expert1_attorney
+1229,51:10,51:12,6140,6144,5,Objections & Rulings,Annotated by expert1_attorney
+1230,51:12,51:15,6145,6149,5,Objections & Rulings,Annotated by expert1_attorney
+1231,51:15,51:17,6150,6154,4,Objections & Rulings,Annotated by expert1_attorney
+1232,51:17,51:20,6155,6159,5,Objections & Rulings,Annotated by expert1_attorney
+1233,51:20,51:22,6160,6164,5,Objections & Rulings,Annotated by expert1_attorney
+1234,51:22,51:25,6165,6169,5,Objections & Rulings,Annotated by expert1_attorney
+1235,51:25,51:27,6170,6174,5,Objections & Rulings,Annotated by expert1_attorney
+1236,51:27,51:30,6175,6179,5,Objections & Rulings,Annotated by expert1_attorney
+1237,51:30,51:32,6180,6184,5,Objections & Rulings,Annotated by expert1_attorney
+1238,51:32,51:35,6185,6189,5,Objections & Rulings,Annotated by expert1_attorney
+1239,51:35,51:37,6190,6194,4,Objections & Rulings,Annotated by expert1_attorney
+1240,51:37,51:40,6195,6199,5,Objections & Rulings,Annotated by expert1_attorney
+1241,51:40,51:42,6200,6204,5,Objections & Rulings,Annotated by expert1_attorney
+1242,51:42,51:45,6205,6209,5,Objections & Rulings,Annotated by expert1_attorney
+1243,51:45,51:47,6210,6214,5,Objections & Rulings,Annotated by expert1_attorney
+1244,51:47,51:50,6215,6219,4,Objections & Rulings,Annotated by expert1_attorney
+1245,51:50,51:52,6220,6224,5,Objections & Rulings,Annotated by expert1_attorney
+1246,51:52,51:55,6225,6229,5,Objections & Rulings,Annotated by expert1_attorney
+1247,51:55,51:57,6230,6234,4,Objections & Rulings,Annotated by expert1_attorney
+1248,51:57,52:00,6235,6239,5,Objections & Rulings,Annotated by expert1_attorney
+1249,52:00,52:02,6240,6244,5,Objections & Rulings,Annotated by expert1_attorney
+1250,52:02,52:05,6245,6249,5,Objections & Rulings,Annotated by expert1_attorney
+1251,52:05,52:07,6250,6254,5,Objections & Rulings,Annotated by expert1_attorney
+1252,52:07,52:10,6255,6259,3,Objections & Rulings,Annotated by expert1_attorney
+1253,52:10,52:12,6260,6264,5,Objections & Rulings,Annotated by expert1_attorney
+1254,52:12,52:15,6265,6269,5,Objections & Rulings,Annotated by expert1_attorney
+1255,52:15,52:17,6270,6274,5,Objections & Rulings,Annotated by expert1_attorney
+1256,52:17,52:20,6275,6279,5,Objections & Rulings,Annotated by expert1_attorney
+1257,52:20,52:22,6280,6284,5,Objections & Rulings,Annotated by expert1_attorney
+1258,52:22,52:25,6285,6289,5,Objections & Rulings,Annotated by expert1_attorney
+1259,52:25,52:27,6290,6294,5,Objections & Rulings,Annotated by expert1_attorney
+1260,52:27,52:30,6295,6299,5,Objections & Rulings,Annotated by expert1_attorney
+1261,52:30,52:32,6300,6304,5,Objections & Rulings,Annotated by expert1_attorney
+1262,52:32,52:35,6305,6309,5,Objections & Rulings,Annotated by expert1_attorney
+1263,52:35,52:37,6310,6314,5,Objections & Rulings,Annotated by expert1_attorney
+1264,52:37,52:40,6315,6319,5,Objections & Rulings,Annotated by expert1_attorney
+1265,52:40,52:42,6320,6324,5,Objections & Rulings,Annotated by expert1_attorney
+1266,52:42,52:45,6325,6329,5,Objections & Rulings,Annotated by expert1_attorney
+1267,52:45,52:47,6330,6334,5,Objections & Rulings,Annotated by expert1_attorney
+1268,52:47,52:50,6335,6339,5,Objections & Rulings,Annotated by expert1_attorney
+1269,52:50,52:52,6340,6344,5,Objections & Rulings,Annotated by expert1_attorney
+1270,52:52,52:55,6345,6349,5,Objections & Rulings,Annotated by expert1_attorney
+1271,52:55,52:57,6350,6354,5,Objections & Rulings,Annotated by expert1_attorney
+1272,52:57,53:00,6355,6359,5,Objections & Rulings,Annotated by expert1_attorney
+1273,53:00,53:02,6360,6364,5,Objections & Rulings,Annotated by expert1_attorney
+1274,53:02,53:05,6365,6369,5,Objections & Rulings,Annotated by expert1_attorney
+1275,53:05,53:07,6370,6374,5,Objections & Rulings,Annotated by expert1_attorney
+1276,53:07,53:10,6375,6379,5,Objections & Rulings,Annotated by expert1_attorney
+1277,53:10,53:12,6380,6384,5,Objections & Rulings,Annotated by expert1_attorney
+1278,53:12,53:15,6385,6389,5,Objections & Rulings,Annotated by expert1_attorney
+1279,53:15,53:17,6390,6394,4,Objections & Rulings,Annotated by expert1_attorney
+1280,53:17,53:20,6395,6399,5,Objections & Rulings,Annotated by expert1_attorney
+1281,53:20,53:22,6400,6404,5,Objections & Rulings,Annotated by expert1_attorney
+1282,53:22,53:25,6405,6409,5,Objections & Rulings,Annotated by expert1_attorney
+1283,53:25,53:27,6410,6414,5,Objections & Rulings,Annotated by expert1_attorney
+1284,53:27,53:30,6415,6419,5,Objections & Rulings,Annotated by expert1_attorney
+1285,53:30,53:32,6420,6424,5,Objections & Rulings,Annotated by expert1_attorney
+1286,53:32,53:35,6425,6429,4,Objections & Rulings,Annotated by expert1_attorney
+1287,53:35,53:37,6430,6434,5,Objections & Rulings,Annotated by expert1_attorney
+1288,53:37,53:40,6435,6439,5,Objections & Rulings,Annotated by expert1_attorney
+1289,53:40,53:42,6440,6444,5,Objections & Rulings,Annotated by expert1_attorney
+1290,53:42,53:45,6445,6449,5,Objections & Rulings,Annotated by expert1_attorney
+1291,53:45,53:47,6450,6454,5,Objections & Rulings,Annotated by expert1_attorney
+1292,53:47,53:50,6455,6459,5,Objections & Rulings,Annotated by expert1_attorney
+1293,53:50,53:52,6460,6464,5,Objections & Rulings,Annotated by expert1_attorney
+1294,53:52,53:55,6465,6469,5,Objections & Rulings,Annotated by expert1_attorney
+1295,53:55,53:57,6470,6474,5,Objections & Rulings,Annotated by expert1_attorney
+1296,53:57,54:00,6475,6479,5,Objections & Rulings,Annotated by expert1_attorney
+1297,54:00,54:02,6480,6484,5,Objections & Rulings,Annotated by expert1_attorney
+1298,54:02,54:05,6485,6489,5,Objections & Rulings,Annotated by expert1_attorney
+1299,54:05,54:07,6490,6494,4,Objections & Rulings,Annotated by expert1_attorney
+1300,54:07,54:10,6495,6499,5,Objections & Rulings,Annotated by expert1_attorney
+1301,54:10,54:12,6500,6504,5,Objections & Rulings,Annotated by expert1_attorney
+1302,54:12,54:15,6505,6509,5,Objections & Rulings,Annotated by expert1_attorney
+1303,54:15,54:17,6510,6514,5,Objections & Rulings,Annotated by expert1_attorney
+1304,54:17,54:20,6515,6519,5,Objections & Rulings,Annotated by expert1_attorney
+1305,54:20,54:22,6520,6524,5,Objections & Rulings,Annotated by expert1_attorney
+1306,54:22,54:25,6525,6529,5,Objections & Rulings,Annotated by expert1_attorney
+1307,54:25,54:27,6530,6534,5,Objections & Rulings,Annotated by expert1_attorney
+1308,54:27,54:30,6535,6539,5,Objections & Rulings,Annotated by expert1_attorney
+1309,54:30,54:32,6540,6544,5,Objections & Rulings,Annotated by expert1_attorney
+1310,54:32,54:35,6545,6549,5,Objections & Rulings,Annotated by expert1_attorney
+1311,54:35,54:37,6550,6554,5,Objections & Rulings,Annotated by expert1_attorney
+1312,54:37,54:40,6555,6559,5,Objections & Rulings,Annotated by expert1_attorney
+1313,54:40,54:42,6560,6564,4,Objections & Rulings,Annotated by expert1_attorney
+1314,54:42,54:45,6565,6569,5,Objections & Rulings,Annotated by expert1_attorney
+1315,54:45,54:47,6570,6574,4,Objections & Rulings,Annotated by expert1_attorney
+1316,54:47,54:50,6575,6579,5,Objections & Rulings,Annotated by expert1_attorney
+1317,54:50,54:52,6580,6584,5,Objections & Rulings,Annotated by expert1_attorney
+1318,54:52,54:55,6585,6589,5,Objections & Rulings,Annotated by expert1_attorney
+1319,54:55,54:57,6590,6594,5,Objections & Rulings,Annotated by expert1_attorney
+1320,54:57,55:00,6595,6599,5,Objections & Rulings,Annotated by expert1_attorney
+1321,55:00,55:02,6600,6604,5,Objections & Rulings,Annotated by expert1_attorney
+1322,55:02,55:05,6605,6609,5,Objections & Rulings,Annotated by expert1_attorney
+1323,55:05,55:07,6610,6614,5,Objections & Rulings,Annotated by expert1_attorney
+1324,55:07,55:10,6615,6619,5,Objections & Rulings,Annotated by expert1_attorney
+1325,55:10,55:12,6620,6624,5,Objections & Rulings,Annotated by expert1_attorney
+1326,55:12,55:15,6625,6629,5,Objections & Rulings,Annotated by expert1_attorney
+1327,55:15,55:17,6630,6634,5,Objections & Rulings,Annotated by expert1_attorney
+1328,55:17,55:20,6635,6639,3,Objections & Rulings,Annotated by expert1_attorney
+1329,55:20,55:22,6640,6644,5,Objections & Rulings,Annotated by expert1_attorney
+1330,55:22,55:25,6645,6649,5,Objections & Rulings,Annotated by expert1_attorney
+1331,55:25,55:27,6650,6654,5,Objections & Rulings,Annotated by expert1_attorney
+1332,55:27,55:30,6655,6659,4,Objections & Rulings,Annotated by expert1_attorney
+1333,55:30,55:32,6660,6664,5,Objections & Rulings,Annotated by expert1_attorney
+1334,55:32,55:35,6665,6669,5,Objections & Rulings,Annotated by expert1_attorney
+1335,55:35,55:37,6670,6674,5,Objections & Rulings,Annotated by expert1_attorney
+1336,55:37,55:40,6675,6679,5,Objections & Rulings,Annotated by expert1_attorney
+1337,55:40,55:42,6680,6684,4,Objections & Rulings,Annotated by expert1_attorney
+1338,55:42,55:45,6685,6689,5,Objections & Rulings,Annotated by expert1_attorney
+1339,55:45,55:47,6690,6694,5,Objections & Rulings,Annotated by expert1_attorney
+1340,55:47,55:50,6695,6699,5,Objections & Rulings,Annotated by expert1_attorney
+1341,55:50,55:52,6700,6704,5,Objections & Rulings,Annotated by expert1_attorney
+1342,55:52,55:55,6705,6709,5,Objections & Rulings,Annotated by expert1_attorney
+1343,55:55,55:57,6710,6714,5,Objections & Rulings,Annotated by expert1_attorney
+1344,55:57,56:00,6715,6719,5,Objections & Rulings,Annotated by expert1_attorney
+1345,56:00,56:02,6720,6724,5,Closing Argument,Annotated by expert1_attorney
+1346,56:02,56:05,6725,6729,4,Closing Argument,Annotated by expert1_attorney
+1347,56:05,56:07,6730,6734,4,Closing Argument,Annotated by expert1_attorney
+1348,56:07,56:10,6735,6739,4,Closing Argument,Annotated by expert1_attorney
+1349,56:10,56:12,6740,6744,4,Closing Argument,Annotated by expert1_attorney
+1350,56:12,56:15,6745,6749,5,Closing Argument,Annotated by expert1_attorney
+1351,56:15,56:17,6750,6754,5,Closing Argument,Annotated by expert1_attorney
+1352,56:17,56:20,6755,6759,5,Closing Argument,Annotated by expert1_attorney
+1353,56:20,56:22,6760,6764,4,Closing Argument,Annotated by expert1_attorney
+1354,56:22,56:25,6765,6769,4,Closing Argument,Annotated by expert1_attorney
+1355,56:25,56:27,6770,6774,3,Closing Argument,Annotated by expert1_attorney
+1356,56:27,56:30,6775,6779,4,Closing Argument,Annotated by expert1_attorney
+1357,56:30,56:32,6780,6784,4,Closing Argument,Annotated by expert1_attorney
+1358,56:32,56:35,6785,6789,5,Closing Argument,Annotated by expert1_attorney
+1359,56:35,56:37,6790,6794,5,Closing Argument,Annotated by expert1_attorney
+1360,56:37,56:40,6795,6799,3,Closing Argument,Annotated by expert1_attorney
+1361,56:40,56:42,6800,6804,4,Closing Argument,Annotated by expert1_attorney
+1362,56:42,56:45,6805,6809,3,Closing Argument,Annotated by expert1_attorney
+1363,56:45,56:47,6810,6814,3,Closing Argument,Annotated by expert1_attorney
+1364,56:47,56:50,6815,6819,5,Closing Argument,Annotated by expert1_attorney
+1365,56:50,56:52,6820,6824,4,Closing Argument,Annotated by expert1_attorney
+1366,56:52,56:55,6825,6829,4,Closing Argument,Annotated by expert1_attorney
+1367,56:55,56:57,6830,6834,4,Closing Argument,Annotated by expert1_attorney
+1368,56:57,57:00,6835,6839,4,Closing Argument,Annotated by expert1_attorney
+1369,57:00,57:02,6840,6844,4,Closing Argument,Annotated by expert1_attorney
+1370,57:02,57:05,6845,6849,4,Closing Argument,Annotated by expert1_attorney
+1371,57:05,57:07,6850,6854,4,Closing Argument,Annotated by expert1_attorney
+1372,57:07,57:10,6855,6859,4,Closing Argument,Annotated by expert1_attorney
+1373,57:10,57:12,6860,6864,4,Closing Argument,Annotated by expert1_attorney
+1374,57:12,57:15,6865,6869,4,Closing Argument,Annotated by expert1_attorney
+1375,57:15,57:17,6870,6874,4,Closing Argument,Annotated by expert1_attorney
+1376,57:17,57:20,6875,6879,5,Closing Argument,Annotated by expert1_attorney
+1377,57:20,57:22,6880,6884,5,Closing Argument,Annotated by expert1_attorney
+1378,57:22,57:25,6885,6889,4,Closing Argument,Annotated by expert1_attorney
+1379,57:25,57:27,6890,6894,5,Closing Argument,Annotated by expert1_attorney
+1380,57:27,57:30,6895,6899,4,Closing Argument,Annotated by expert1_attorney
+1381,57:30,57:32,6900,6904,5,Closing Argument,Annotated by expert1_attorney
+1382,57:32,57:35,6905,6909,4,Closing Argument,Annotated by expert1_attorney
+1383,57:35,57:37,6910,6914,4,Closing Argument,Annotated by expert1_attorney
+1384,57:37,57:40,6915,6919,4,Closing Argument,Annotated by expert1_attorney
+1385,57:40,57:42,6920,6924,3,Closing Argument,Annotated by expert1_attorney
+1386,57:42,57:45,6925,6929,4,Closing Argument,Annotated by expert1_attorney
+1387,57:45,57:47,6930,6934,4,Closing Argument,Annotated by expert1_attorney
+1388,57:47,57:50,6935,6939,5,Closing Argument,Annotated by expert1_attorney
+1389,57:50,57:52,6940,6944,4,Closing Argument,Annotated by expert1_attorney
+1390,57:52,57:55,6945,6949,4,Closing Argument,Annotated by expert1_attorney
+1391,57:55,57:57,6950,6954,4,Closing Argument,Annotated by expert1_attorney
+1392,57:57,58:00,6955,6959,4,Closing Argument,Annotated by expert1_attorney
+1393,58:00,58:02,6960,6964,5,Closing Argument,Annotated by expert1_attorney
+1394,58:02,58:05,6965,6969,4,Closing Argument,Annotated by expert1_attorney
+1395,58:05,58:07,6970,6974,4,Closing Argument,Annotated by expert1_attorney
+1396,58:07,58:10,6975,6979,3,Closing Argument,Annotated by expert1_attorney
+1397,58:10,58:12,6980,6984,3,Closing Argument,Annotated by expert1_attorney
+1398,58:12,58:15,6985,6989,4,Closing Argument,Annotated by expert1_attorney
+1399,58:15,58:17,6990,6994,4,Closing Argument,Annotated by expert1_attorney
+1400,58:17,58:20,6995,6999,5,Closing Argument,Annotated by expert1_attorney
+1401,58:20,58:22,7000,7004,5,Closing Argument,Annotated by expert1_attorney
+1402,58:22,58:25,7005,7009,3,Closing Argument,Annotated by expert1_attorney
+1403,58:25,58:27,7010,7014,4,Closing Argument,Annotated by expert1_attorney
+1404,58:27,58:30,7015,7019,4,Closing Argument,Annotated by expert1_attorney
+1405,58:30,58:32,7020,7024,5,Closing Argument,Annotated by expert1_attorney
+1406,58:32,58:35,7025,7029,5,Closing Argument,Annotated by expert1_attorney
+1407,58:35,58:37,7030,7034,3,Closing Argument,Annotated by expert1_attorney
+1408,58:37,58:40,7035,7039,5,Closing Argument,Annotated by expert1_attorney
+1409,58:40,58:42,7040,7044,5,Closing Argument,Annotated by expert1_attorney
+1410,58:42,58:45,7045,7049,4,Closing Argument,Annotated by expert1_attorney
+1411,58:45,58:47,7050,7054,4,Closing Argument,Annotated by expert1_attorney
+1412,58:47,58:50,7055,7059,3,Closing Argument,Annotated by expert1_attorney
+1413,58:50,58:52,7060,7064,5,Closing Argument,Annotated by expert1_attorney
+1414,58:52,58:55,7065,7069,4,Closing Argument,Annotated by expert1_attorney
+1415,58:55,58:57,7070,7074,5,Closing Argument,Annotated by expert1_attorney
+1416,58:57,59:00,7075,7079,4,Closing Argument,Annotated by expert1_attorney
+1417,59:00,59:02,7080,7084,4,Closing Argument,Annotated by expert1_attorney
+1418,59:02,59:05,7085,7089,4,Closing Argument,Annotated by expert1_attorney
+1419,59:05,59:07,7090,7094,4,Closing Argument,Annotated by expert1_attorney
+1420,59:07,59:10,7095,7099,4,Closing Argument,Annotated by expert1_attorney
+1421,59:10,59:12,7100,7104,5,Closing Argument,Annotated by expert1_attorney
+1422,59:12,59:15,7105,7109,5,Closing Argument,Annotated by expert1_attorney
+1423,59:15,59:17,7110,7114,4,Closing Argument,Annotated by expert1_attorney
+1424,59:17,59:20,7115,7119,4,Closing Argument,Annotated by expert1_attorney
+1425,59:20,59:22,7120,7124,5,Closing Argument,Annotated by expert1_attorney
+1426,59:22,59:25,7125,7129,5,Closing Argument,Annotated by expert1_attorney
+1427,59:25,59:27,7130,7134,4,Closing Argument,Annotated by expert1_attorney
+1428,59:27,59:30,7135,7139,4,Closing Argument,Annotated by expert1_attorney
+1429,59:30,59:32,7140,7144,4,Closing Argument,Annotated by expert1_attorney
+1430,59:32,59:35,7145,7149,4,Closing Argument,Annotated by expert1_attorney
+1431,59:35,59:37,7150,7154,4,Closing Argument,Annotated by expert1_attorney
+1432,59:37,59:40,7155,7159,5,Closing Argument,Annotated by expert1_attorney
+1433,59:40,59:42,7160,7164,5,Closing Argument,Annotated by expert1_attorney
+1434,59:42,59:45,7165,7169,4,Closing Argument,Annotated by expert1_attorney
+1435,59:45,59:47,7170,7174,4,Closing Argument,Annotated by expert1_attorney
+1436,59:47,59:50,7175,7179,4,Closing Argument,Annotated by expert1_attorney
+1437,59:50,59:52,7180,7184,4,Closing Argument,Annotated by expert1_attorney
+1438,59:52,59:55,7185,7189,4,Closing Argument,Annotated by expert1_attorney
+1439,59:55,59:57,7190,7194,5,Closing Argument,Annotated by expert1_attorney
+1440,59:57,01:00:00,7195,7199,4,Closing Argument,Annotated by expert1_attorney
+1441,01:00:00,01:00:02,7200,7204,3,Closing Argument,Annotated by expert1_attorney
+1442,01:00:02,01:00:05,7205,7209,5,Closing Argument,Annotated by expert1_attorney
+1443,01:00:05,01:00:07,7210,7214,5,Closing Argument,Annotated by expert1_attorney
+1444,01:00:07,01:00:10,7215,7219,4,Closing Argument,Annotated by expert1_attorney
+1445,01:00:10,01:00:12,7220,7224,3,Closing Argument,Annotated by expert1_attorney
+1446,01:00:12,01:00:15,7225,7229,4,Closing Argument,Annotated by expert1_attorney
+1447,01:00:15,01:00:17,7230,7234,4,Closing Argument,Annotated by expert1_attorney
+1448,01:00:17,01:00:20,7235,7239,5,Closing Argument,Annotated by expert1_attorney
+1449,01:00:20,01:00:22,7240,7244,4,Closing Argument,Annotated by expert1_attorney
+1450,01:00:22,01:00:25,7245,7249,4,Closing Argument,Annotated by expert1_attorney
+1451,01:00:25,01:00:27,7250,7254,5,Closing Argument,Annotated by expert1_attorney
+1452,01:00:27,01:00:30,7255,7259,4,Closing Argument,Annotated by expert1_attorney
+1453,01:00:30,01:00:32,7260,7264,4,Closing Argument,Annotated by expert1_attorney
+1454,01:00:32,01:00:35,7265,7269,4,Closing Argument,Annotated by expert1_attorney
+1455,01:00:35,01:00:37,7270,7274,2,Closing Argument,Annotated by expert1_attorney
+1456,01:00:37,01:00:40,7275,7279,5,Closing Argument,Annotated by expert1_attorney
+1457,01:00:40,01:00:42,7280,7284,4,Closing Argument,Annotated by expert1_attorney
+1458,01:00:42,01:00:45,7285,7289,4,Closing Argument,Annotated by expert1_attorney
+1459,01:00:45,01:00:47,7290,7294,3,Closing Argument,Annotated by expert1_attorney
+1460,01:00:47,01:00:50,7295,7299,5,Closing Argument,Annotated by expert1_attorney
+1461,01:00:50,01:00:52,7300,7304,4,Closing Argument,Annotated by expert1_attorney
+1462,01:00:52,01:00:55,7305,7309,4,Closing Argument,Annotated by expert1_attorney
+1463,01:00:55,01:00:57,7310,7314,5,Closing Argument,Annotated by expert1_attorney
+1464,01:00:57,01:01:00,7315,7319,5,Closing Argument,Annotated by expert1_attorney
+1465,01:01:00,01:01:02,7320,7324,4,Closing Argument,Annotated by expert1_attorney
+1466,01:01:02,01:01:05,7325,7329,4,Closing Argument,Annotated by expert1_attorney
+1467,01:01:05,01:01:07,7330,7334,5,Closing Argument,Annotated by expert1_attorney
+1468,01:01:07,01:01:10,7335,7339,4,Closing Argument,Annotated by expert1_attorney
+1469,01:01:10,01:01:12,7340,7344,5,Closing Argument,Annotated by expert1_attorney
+1470,01:01:12,01:01:15,7345,7349,4,Closing Argument,Annotated by expert1_attorney
+1471,01:01:15,01:01:17,7350,7354,4,Closing Argument,Annotated by expert1_attorney
+1472,01:01:17,01:01:20,7355,7359,5,Closing Argument,Annotated by expert1_attorney
+1473,01:01:20,01:01:22,7360,7364,4,Closing Argument,Annotated by expert1_attorney
+1474,01:01:22,01:01:25,7365,7369,5,Closing Argument,Annotated by expert1_attorney
+1475,01:01:25,01:01:27,7370,7374,4,Closing Argument,Annotated by expert1_attorney
+1476,01:01:27,01:01:30,7375,7379,5,Closing Argument,Annotated by expert1_attorney
+1477,01:01:30,01:01:32,7380,7384,4,Closing Argument,Annotated by expert1_attorney
+1478,01:01:32,01:01:35,7385,7389,4,Closing Argument,Annotated by expert1_attorney
+1479,01:01:35,01:01:37,7390,7394,3,Closing Argument,Annotated by expert1_attorney
+1480,01:01:37,01:01:40,7395,7399,4,Closing Argument,Annotated by expert1_attorney
+1481,01:01:40,01:01:42,7400,7404,5,Closing Argument,Annotated by expert1_attorney
+1482,01:01:42,01:01:45,7405,7409,4,Closing Argument,Annotated by expert1_attorney
+1483,01:01:45,01:01:47,7410,7414,3,Closing Argument,Annotated by expert1_attorney
+1484,01:01:47,01:01:50,7415,7419,5,Closing Argument,Annotated by expert1_attorney
+1485,01:01:50,01:01:52,7420,7424,4,Closing Argument,Annotated by expert1_attorney
+1486,01:01:52,01:01:55,7425,7429,5,Closing Argument,Annotated by expert1_attorney
+1487,01:01:55,01:01:57,7430,7434,4,Closing Argument,Annotated by expert1_attorney
+1488,01:01:57,01:02:00,7435,7439,3,Closing Argument,Annotated by expert1_attorney
+1489,01:02:00,01:02:02,7440,7444,5,Closing Argument,Annotated by expert1_attorney
+1490,01:02:02,01:02:05,7445,7449,4,Closing Argument,Annotated by expert1_attorney
+1491,01:02:05,01:02:07,7450,7454,4,Closing Argument,Annotated by expert1_attorney
+1492,01:02:07,01:02:10,7455,7459,5,Closing Argument,Annotated by expert1_attorney
+1493,01:02:10,01:02:12,7460,7464,5,Closing Argument,Annotated by expert1_attorney
+1494,01:02:12,01:02:15,7465,7469,4,Closing Argument,Annotated by expert1_attorney
+1495,01:02:15,01:02:17,7470,7474,5,Closing Argument,Annotated by expert1_attorney
+1496,01:02:17,01:02:20,7475,7479,4,Closing Argument,Annotated by expert1_attorney
+1497,01:02:20,01:02:22,7480,7484,5,Closing Argument,Annotated by expert1_attorney
+1498,01:02:22,01:02:25,7485,7489,3,Closing Argument,Annotated by expert1_attorney
+1499,01:02:25,01:02:27,7490,7494,5,Closing Argument,Annotated by expert1_attorney
+1500,01:02:27,01:02:30,7495,7499,5,Closing Argument,Annotated by expert1_attorney
+1501,01:02:30,01:02:32,7500,7504,5,Closing Argument,Annotated by expert1_attorney
+1502,01:02:32,01:02:35,7505,7509,5,Closing Argument,Annotated by expert1_attorney
+1503,01:02:35,01:02:37,7510,7514,5,Closing Argument,Annotated by expert1_attorney
+1504,01:02:37,01:02:40,7515,7519,4,Closing Argument,Annotated by expert1_attorney
+1505,01:02:40,01:02:42,7520,7524,3,Closing Argument,Annotated by expert1_attorney
+1506,01:02:42,01:02:45,7525,7529,5,Closing Argument,Annotated by expert1_attorney
+1507,01:02:45,01:02:47,7530,7534,4,Closing Argument,Annotated by expert1_attorney
+1508,01:02:47,01:02:50,7535,7539,5,Closing Argument,Annotated by expert1_attorney
+1509,01:02:50,01:02:52,7540,7544,5,Closing Argument,Annotated by expert1_attorney
+1510,01:02:52,01:02:55,7545,7549,4,Closing Argument,Annotated by expert1_attorney
+1511,01:02:55,01:02:57,7550,7554,5,Closing Argument,Annotated by expert1_attorney
+1512,01:02:57,01:03:00,7555,7559,3,Closing Argument,Annotated by expert1_attorney
+1513,01:03:00,01:03:02,7560,7564,4,Closing Argument,Annotated by expert1_attorney
+1514,01:03:02,01:03:05,7565,7569,5,Closing Argument,Annotated by expert1_attorney
+1515,01:03:05,01:03:07,7570,7574,3,Closing Argument,Annotated by expert1_attorney
+1516,01:03:07,01:03:10,7575,7579,5,Closing Argument,Annotated by expert1_attorney
+1517,01:03:10,01:03:12,7580,7584,4,Closing Argument,Annotated by expert1_attorney
+1518,01:03:12,01:03:15,7585,7589,4,Closing Argument,Annotated by expert1_attorney
+1519,01:03:15,01:03:17,7590,7594,5,Closing Argument,Annotated by expert1_attorney
+1520,01:03:17,01:03:20,7595,7599,4,Closing Argument,Annotated by expert1_attorney
+1521,01:03:20,01:03:22,7600,7604,4,Closing Argument,Annotated by expert1_attorney
+1522,01:03:22,01:03:25,7605,7609,4,Closing Argument,Annotated by expert1_attorney
+1523,01:03:25,01:03:27,7610,7614,5,Closing Argument,Annotated by expert1_attorney
+1524,01:03:27,01:03:30,7615,7619,4,Closing Argument,Annotated by expert1_attorney
+1525,01:03:30,01:03:32,7620,7624,5,Closing Argument,Annotated by expert1_attorney
+1526,01:03:32,01:03:35,7625,7629,4,Closing Argument,Annotated by expert1_attorney
+1527,01:03:35,01:03:37,7630,7634,5,Closing Argument,Annotated by expert1_attorney
+1528,01:03:37,01:03:40,7635,7639,5,Closing Argument,Annotated by expert1_attorney
+1529,01:03:40,01:03:42,7640,7644,5,Closing Argument,Annotated by expert1_attorney
+1530,01:03:42,01:03:45,7645,7649,4,Closing Argument,Annotated by expert1_attorney
+1531,01:03:45,01:03:47,7650,7654,5,Closing Argument,Annotated by expert1_attorney
+1532,01:03:47,01:03:50,7655,7659,4,Closing Argument,Annotated by expert1_attorney
+1533,01:03:50,01:03:52,7660,7664,5,Closing Argument,Annotated by expert1_attorney
+1534,01:03:52,01:03:55,7665,7669,4,Closing Argument,Annotated by expert1_attorney
+1535,01:03:55,01:03:57,7670,7674,4,Closing Argument,Annotated by expert1_attorney
+1536,01:03:57,01:04:00,7675,7679,4,Closing Argument,Annotated by expert1_attorney
+1537,01:04:00,01:04:02,7680,7684,4,Closing Argument,Annotated by expert1_attorney
+1538,01:04:02,01:04:05,7685,7689,5,Closing Argument,Annotated by expert1_attorney
+1539,01:04:05,01:04:07,7690,7694,5,Closing Argument,Annotated by expert1_attorney
+1540,01:04:07,01:04:10,7695,7699,4,Closing Argument,Annotated by expert1_attorney
+1541,01:04:10,01:04:12,7700,7704,5,Closing Argument,Annotated by expert1_attorney
+1542,01:04:12,01:04:15,7705,7709,4,Closing Argument,Annotated by expert1_attorney
+1543,01:04:15,01:04:17,7710,7714,4,Closing Argument,Annotated by expert1_attorney
+1544,01:04:17,01:04:20,7715,7719,4,Closing Argument,Annotated by expert1_attorney
+1545,01:04:20,01:04:22,7720,7724,5,Closing Argument,Annotated by expert1_attorney
+1546,01:04:22,01:04:25,7725,7729,5,Closing Argument,Annotated by expert1_attorney
+1547,01:04:25,01:04:27,7730,7734,4,Closing Argument,Annotated by expert1_attorney
+1548,01:04:27,01:04:30,7735,7739,4,Closing Argument,Annotated by expert1_attorney
+1549,01:04:30,01:04:32,7740,7744,4,Closing Argument,Annotated by expert1_attorney
+1550,01:04:32,01:04:35,7745,7749,4,Closing Argument,Annotated by expert1_attorney
+1551,01:04:35,01:04:37,7750,7754,4,Closing Argument,Annotated by expert1_attorney
+1552,01:04:37,01:04:40,7755,7759,5,Closing Argument,Annotated by expert1_attorney
+1553,01:04:40,01:04:42,7760,7764,5,Closing Argument,Annotated by expert1_attorney
+1554,01:04:42,01:04:45,7765,7769,5,Closing Argument,Annotated by expert1_attorney
+1555,01:04:45,01:04:47,7770,7774,3,Closing Argument,Annotated by expert1_attorney
+1556,01:04:47,01:04:50,7775,7779,4,Closing Argument,Annotated by expert1_attorney
+1557,01:04:50,01:04:52,7780,7784,3,Closing Argument,Annotated by expert1_attorney
+1558,01:04:52,01:04:55,7785,7789,4,Closing Argument,Annotated by expert1_attorney
+1559,01:04:55,01:04:57,7790,7794,5,Closing Argument,Annotated by expert1_attorney
+1560,01:04:57,01:05:00,7795,7799,5,Closing Argument,Annotated by expert1_attorney
+1561,01:05:00,01:05:02,7800,7804,4,Closing Argument,Annotated by expert1_attorney
+1562,01:05:02,01:05:05,7805,7809,4,Closing Argument,Annotated by expert1_attorney
+1563,01:05:05,01:05:07,7810,7814,4,Closing Argument,Annotated by expert1_attorney
+1564,01:05:07,01:05:10,7815,7819,3,Closing Argument,Annotated by expert1_attorney
+1565,01:05:10,01:05:12,7820,7824,4,Closing Argument,Annotated by expert1_attorney
+1566,01:05:12,01:05:15,7825,7829,3,Closing Argument,Annotated by expert1_attorney
+1567,01:05:15,01:05:17,7830,7834,3,Closing Argument,Annotated by expert1_attorney
+1568,01:05:17,01:05:20,7835,7839,4,Closing Argument,Annotated by expert1_attorney
+1569,01:05:20,01:05:22,7840,7844,5,Closing Argument,Annotated by expert1_attorney
+1570,01:05:22,01:05:25,7845,7849,5,Closing Argument,Annotated by expert1_attorney
+1571,01:05:25,01:05:27,7850,7854,5,Closing Argument,Annotated by expert1_attorney
+1572,01:05:27,01:05:30,7855,7859,4,Closing Argument,Annotated by expert1_attorney
+1573,01:05:30,01:05:32,7860,7864,5,Closing Argument,Annotated by expert1_attorney
+1574,01:05:32,01:05:35,7865,7869,4,Closing Argument,Annotated by expert1_attorney
+1575,01:05:35,01:05:37,7870,7874,3,Closing Argument,Annotated by expert1_attorney
+1576,01:05:37,01:05:40,7875,7879,4,Closing Argument,Annotated by expert1_attorney
+1577,01:05:40,01:05:42,7880,7884,3,Closing Argument,Annotated by expert1_attorney
+1578,01:05:42,01:05:45,7885,7889,5,Closing Argument,Annotated by expert1_attorney
+1579,01:05:45,01:05:47,7890,7894,5,Closing Argument,Annotated by expert1_attorney
+1580,01:05:47,01:05:50,7895,7899,4,Closing Argument,Annotated by expert1_attorney
+1581,01:05:50,01:05:52,7900,7904,4,Closing Argument,Annotated by expert1_attorney
+1582,01:05:52,01:05:55,7905,7909,4,Closing Argument,Annotated by expert1_attorney
+1583,01:05:55,01:05:57,7910,7914,5,Closing Argument,Annotated by expert1_attorney
+1584,01:05:57,01:06:00,7915,7919,5,Closing Argument,Annotated by expert1_attorney
+1585,01:06:00,01:06:02,7920,7924,5,Closing Argument,Annotated by expert1_attorney
+1586,01:06:02,01:06:05,7925,7929,5,Closing Argument,Annotated by expert1_attorney
+1587,01:06:05,01:06:07,7930,7934,4,Closing Argument,Annotated by expert1_attorney
+1588,01:06:07,01:06:10,7935,7939,4,Closing Argument,Annotated by expert1_attorney
+1589,01:06:10,01:06:12,7940,7944,4,Closing Argument,Annotated by expert1_attorney
+1590,01:06:12,01:06:15,7945,7949,4,Closing Argument,Annotated by expert1_attorney
+1591,01:06:15,01:06:17,7950,7954,4,Closing Argument,Annotated by expert1_attorney
+1592,01:06:17,01:06:20,7955,7959,4,Closing Argument,Annotated by expert1_attorney
+1593,01:06:20,01:06:22,7960,7964,4,Closing Argument,Annotated by expert1_attorney
+1594,01:06:22,01:06:25,7965,7969,4,Closing Argument,Annotated by expert1_attorney
+1595,01:06:25,01:06:27,7970,7974,3,Closing Argument,Annotated by expert1_attorney
+1596,01:06:27,01:06:30,7975,7979,4,Closing Argument,Annotated by expert1_attorney
+1597,01:06:30,01:06:32,7980,7984,5,Judicial Pronouncement,Annotated by expert1_attorney
+1598,01:06:32,01:06:35,7985,7989,5,Judicial Pronouncement,Annotated by expert1_attorney
+1599,01:06:35,01:06:37,7990,7994,5,Judicial Pronouncement,Annotated by expert1_attorney
+1600,01:06:37,01:06:40,7995,7999,5,Judicial Pronouncement,Annotated by expert1_attorney
+1601,01:06:40,01:06:42,8000,8004,5,Judicial Pronouncement,Annotated by expert1_attorney
+1602,01:06:42,01:06:45,8005,8009,5,Judicial Pronouncement,Annotated by expert1_attorney
+1603,01:06:45,01:06:47,8010,8014,5,Judicial Pronouncement,Annotated by expert1_attorney
+1604,01:06:47,01:06:50,8015,8019,5,Judicial Pronouncement,Annotated by expert1_attorney
+1605,01:06:50,01:06:52,8020,8024,5,Judicial Pronouncement,Annotated by expert1_attorney
+1606,01:06:52,01:06:55,8025,8029,5,Judicial Pronouncement,Annotated by expert1_attorney
+1607,01:06:55,01:06:57,8030,8034,4,Judicial Pronouncement,Annotated by expert1_attorney
+1608,01:06:57,01:07:00,8035,8039,5,Judicial Pronouncement,Annotated by expert1_attorney
+1609,01:07:00,01:07:02,8040,8044,5,Judicial Pronouncement,Annotated by expert1_attorney
+1610,01:07:02,01:07:05,8045,8049,5,Judicial Pronouncement,Annotated by expert1_attorney
+1611,01:07:05,01:07:07,8050,8054,5,Judicial Pronouncement,Annotated by expert1_attorney
+1612,01:07:07,01:07:10,8055,8059,5,Judicial Pronouncement,Annotated by expert1_attorney
+1613,01:07:10,01:07:12,8060,8064,5,Judicial Pronouncement,Annotated by expert1_attorney
+1614,01:07:12,01:07:15,8065,8069,4,Judicial Pronouncement,Annotated by expert1_attorney
+1615,01:07:15,01:07:17,8070,8074,5,Judicial Pronouncement,Annotated by expert1_attorney
+1616,01:07:17,01:07:20,8075,8079,4,Judicial Pronouncement,Annotated by expert1_attorney
+1617,01:07:20,01:07:22,8080,8084,5,Judicial Pronouncement,Annotated by expert1_attorney
+1618,01:07:22,01:07:25,8085,8089,4,Judicial Pronouncement,Annotated by expert1_attorney
+1619,01:07:25,01:07:27,8090,8094,5,Judicial Pronouncement,Annotated by expert1_attorney
+1620,01:07:27,01:07:30,8095,8099,4,Judicial Pronouncement,Annotated by expert1_attorney
+1621,01:07:30,01:07:32,8100,8104,5,Judicial Pronouncement,Annotated by expert1_attorney
+1622,01:07:32,01:07:35,8105,8109,4,Judicial Pronouncement,Annotated by expert1_attorney
+1623,01:07:35,01:07:37,8110,8114,5,Judicial Pronouncement,Annotated by expert1_attorney
+1624,01:07:37,01:07:40,8115,8119,5,Judicial Pronouncement,Annotated by expert1_attorney
+1625,01:07:40,01:07:42,8120,8124,5,Judicial Pronouncement,Annotated by expert1_attorney
+1626,01:07:42,01:07:45,8125,8129,5,Judicial Pronouncement,Annotated by expert1_attorney
+1627,01:07:45,01:07:47,8130,8134,5,Judicial Pronouncement,Annotated by expert1_attorney
+1628,01:07:47,01:07:50,8135,8139,5,Judicial Pronouncement,Annotated by expert1_attorney
+1629,01:07:50,01:07:52,8140,8144,5,Judicial Pronouncement,Annotated by expert1_attorney
+1630,01:07:52,01:07:55,8145,8149,5,Judicial Pronouncement,Annotated by expert1_attorney
+1631,01:07:55,01:07:57,8150,8154,5,Judicial Pronouncement,Annotated by expert1_attorney
+1632,01:07:57,01:08:00,8155,8159,5,Judicial Pronouncement,Annotated by expert1_attorney
+1633,01:08:00,01:08:02,8160,8164,5,Judicial Pronouncement,Annotated by expert1_attorney
+1634,01:08:02,01:08:05,8165,8169,5,Judicial Pronouncement,Annotated by expert1_attorney
+1635,01:08:05,01:08:07,8170,8174,4,Judicial Pronouncement,Annotated by expert1_attorney
+1636,01:08:07,01:08:10,8175,8179,5,Judicial Pronouncement,Annotated by expert1_attorney
+1637,01:08:10,01:08:12,8180,8184,5,Judicial Pronouncement,Annotated by expert1_attorney
+1638,01:08:12,01:08:15,8185,8189,5,Judicial Pronouncement,Annotated by expert1_attorney
+1639,01:08:15,01:08:17,8190,8194,5,Judicial Pronouncement,Annotated by expert1_attorney
+1640,01:08:17,01:08:20,8195,8199,5,Judicial Pronouncement,Annotated by expert1_attorney
+1641,01:08:20,01:08:22,8200,8204,5,Judicial Pronouncement,Annotated by expert1_attorney
+1642,01:08:22,01:08:25,8205,8209,5,Judicial Pronouncement,Annotated by expert1_attorney
+1643,01:08:25,01:08:27,8210,8214,5,Judicial Pronouncement,Annotated by expert1_attorney
+1644,01:08:27,01:08:30,8215,8219,5,Judicial Pronouncement,Annotated by expert1_attorney
+1645,01:08:30,01:08:32,8220,8224,5,Judicial Pronouncement,Annotated by expert1_attorney
+1646,01:08:32,01:08:35,8225,8229,5,Judicial Pronouncement,Annotated by expert1_attorney
+1647,01:08:35,01:08:37,8230,8234,5,Judicial Pronouncement,Annotated by expert1_attorney
+1648,01:08:37,01:08:40,8235,8239,5,Judicial Pronouncement,Annotated by expert1_attorney
+1649,01:08:40,01:08:42,8240,8244,5,Judicial Pronouncement,Annotated by expert1_attorney
+1650,01:08:42,01:08:45,8245,8249,5,Judicial Pronouncement,Annotated by expert1_attorney
+1651,01:08:45,01:08:47,8250,8254,5,Judicial Pronouncement,Annotated by expert1_attorney
+1652,01:08:47,01:08:50,8255,8259,4,Judicial Pronouncement,Annotated by expert1_attorney
+1653,01:08:50,01:08:52,8260,8264,5,Judicial Pronouncement,Annotated by expert1_attorney
+1654,01:08:52,01:08:55,8265,8269,4,Judicial Pronouncement,Annotated by expert1_attorney
+1655,01:08:55,01:08:57,8270,8274,5,Judicial Pronouncement,Annotated by expert1_attorney
+1656,01:08:57,01:09:00,8275,8279,4,Judicial Pronouncement,Annotated by expert1_attorney
+1657,01:09:00,01:09:02,8280,8284,5,Judicial Pronouncement,Annotated by expert1_attorney
+1658,01:09:02,01:09:05,8285,8289,5,Judicial Pronouncement,Annotated by expert1_attorney
+1659,01:09:05,01:09:07,8290,8294,4,Judicial Pronouncement,Annotated by expert1_attorney
+1660,01:09:07,01:09:10,8295,8299,5,Judicial Pronouncement,Annotated by expert1_attorney
+1661,01:09:10,01:09:12,8300,8304,5,Judicial Pronouncement,Annotated by expert1_attorney
+1662,01:09:12,01:09:15,8305,8309,5,Judicial Pronouncement,Annotated by expert1_attorney
+1663,01:09:15,01:09:17,8310,8314,4,Judicial Pronouncement,Annotated by expert1_attorney
+1664,01:09:17,01:09:20,8315,8319,4,Judicial Pronouncement,Annotated by expert1_attorney
+1665,01:09:20,01:09:22,8320,8324,5,Judicial Pronouncement,Annotated by expert1_attorney
+1666,01:09:22,01:09:25,8325,8329,5,Judicial Pronouncement,Annotated by expert1_attorney
+1667,01:09:25,01:09:27,8330,8334,5,Judicial Pronouncement,Annotated by expert1_attorney
+1668,01:09:27,01:09:30,8335,8339,5,Judicial Pronouncement,Annotated by expert1_attorney
+1669,01:09:30,01:09:32,8340,8344,5,Judicial Pronouncement,Annotated by expert1_attorney
+1670,01:09:32,01:09:35,8345,8349,5,Judicial Pronouncement,Annotated by expert1_attorney
+1671,01:09:35,01:09:37,8350,8354,5,Judicial Pronouncement,Annotated by expert1_attorney
+1672,01:09:37,01:09:40,8355,8359,5,Judicial Pronouncement,Annotated by expert1_attorney
+1673,01:09:40,01:09:42,8360,8364,4,Judicial Pronouncement,Annotated by expert1_attorney
+1674,01:09:42,01:09:45,8365,8369,5,Judicial Pronouncement,Annotated by expert1_attorney
+1675,01:09:45,01:09:47,8370,8374,5,Judicial Pronouncement,Annotated by expert1_attorney
+1676,01:09:47,01:09:50,8375,8379,5,Judicial Pronouncement,Annotated by expert1_attorney
+1677,01:09:50,01:09:52,8380,8384,5,Judicial Pronouncement,Annotated by expert1_attorney
+1678,01:09:52,01:09:55,8385,8389,5,Judicial Pronouncement,Annotated by expert1_attorney
+1679,01:09:55,01:09:57,8390,8394,5,Judicial Pronouncement,Annotated by expert1_attorney
+1680,01:09:57,01:10:00,8395,8399,4,Judicial Pronouncement,Annotated by expert1_attorney
+1681,01:10:00,01:10:00,8400,8400,5,Judicial Pronouncement,Annotated by expert1_attorney

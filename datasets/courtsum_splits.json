@@ -1,0 +1,57 @@
+[
+  {
+    "train_keys": [
+      "video_2_23_15992_FTC_v_Microsoft_Corpo",
+      "video_3_23_55805_Virginia_Duncan_v_Rob",
+      "video_4_24_2036_Nguyen_et_al_v_Bonta_e",
+      "video_5_26_1304_State_of_Nevada_v_Kals"
+    ],
+    "test_keys": [
+      "video_1_21_16506_Epic_Games_Inc_v_Appl"
+    ]
+  },
+  {
+    "train_keys": [
+      "video_1_21_16506_Epic_Games_Inc_v_Appl",
+      "video_3_23_55805_Virginia_Duncan_v_Rob",
+      "video_4_24_2036_Nguyen_et_al_v_Bonta_e",
+      "video_5_26_1304_State_of_Nevada_v_Kals"
+    ],
+    "test_keys": [
+      "video_2_23_15992_FTC_v_Microsoft_Corpo"
+    ]
+  },
+  {
+    "train_keys": [
+      "video_1_21_16506_Epic_Games_Inc_v_Appl",
+      "video_2_23_15992_FTC_v_Microsoft_Corpo",
+      "video_4_24_2036_Nguyen_et_al_v_Bonta_e",
+      "video_5_26_1304_State_of_Nevada_v_Kals"
+    ],
+    "test_keys": [
+      "video_3_23_55805_Virginia_Duncan_v_Rob"
+    ]
+  },
+  {
+    "train_keys": [
+      "video_1_21_16506_Epic_Games_Inc_v_Appl",
+      "video_2_23_15992_FTC_v_Microsoft_Corpo",
+      "video_3_23_55805_Virginia_Duncan_v_Rob",
+      "video_5_26_1304_State_of_Nevada_v_Kals"
+    ],
+    "test_keys": [
+      "video_4_24_2036_Nguyen_et_al_v_Bonta_e"
+    ]
+  },
+  {
+    "train_keys": [
+      "video_1_21_16506_Epic_Games_Inc_v_Appl",
+      "video_2_23_15992_FTC_v_Microsoft_Corpo",
+      "video_3_23_55805_Virginia_Duncan_v_Rob",
+      "video_4_24_2036_Nguyen_et_al_v_Bonta_e"
+    ],
+    "test_keys": [
+      "video_5_26_1304_State_of_Nevada_v_Kals"
+    ]
+  }
+]

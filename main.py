@@ -912,6 +912,9 @@ def train_one_phase(model, optimizer, scheduler, dataset, train_keys,
                         else:
                             ppo_loss = -(log_probs_s * scalar_adv).mean()
                         ppo_loss.backward()
+            torch.nn.utils.clip_grad_norm_(model.parameters(), 5.0)
+            optimizer.step()
+
             try:
                 del cost, length_pen, entropy, probs, m
             except NameError:
